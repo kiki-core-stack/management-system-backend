@@ -2,10 +2,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production nitro build",
-    "dev": "NODE_ENV=development nitro dev",
-    "prepare": "NODE_ENV=development nitro prepare",
-    "preview": "bun run ./.output/server/index.mjs"
+    "build": "NODE_ENV=production bun --bun --env-file=./.env.production.local nitro build",
+    "dev": "NODE_ENV=development bun --bun --env-file=./.env.development.local nitro dev",
+    "prepare": "NODE_ENV=development bun --bun --env-file=./.env.development.local nitro prepare",
+    "preview": "NODE_ENV=production bun --env-file=./.env.production.local run ./.output/server/index.mjs"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
