@@ -8,12 +8,15 @@
     "preview": "NODE_ENV=production node --env-file=./.env.production.local ./.output/server/index.mjs"
   },
   "dependencies": {
+    "@kikiutils/el-plus-admin-pack": "^0.1.0",
     "@kikiutils/nitro-session": "^1.3.0",
     "@kikiutils/node": "^4.2.2",
+    "lodash-es": "^4.17.21",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
+    "@types/lodash-es": "^4.17.12",
     "dotenv-cli": "^7.4.2",
     "nitropack": "^2.9.7"
   },
