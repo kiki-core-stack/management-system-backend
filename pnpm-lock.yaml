@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/el-plus-admin-pack':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.3.0
+        version: 0.3.0
       '@kikiutils/nitro-session':
         specifier: ^1.3.0
         version: 1.3.0(ioredis@5.4.1)
@@ -222,8 +222,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/el-plus-admin-pack@0.1.0':
-    resolution: {integrity: sha512-Y2JmQpvMlQAsrKONFnahlBN2E4rFP0Yt4xkOHK958d923aOQTmqTrLM0uHM1hT21n0tztksLcMsQ/o8NbAnHEg==}
+  '@kikiutils/el-plus-admin-pack@0.3.0':
+    resolution: {integrity: sha512-e4H6Zof0ZYrSUmMS4hRnvrFatWGYbz75Xh4hZUQskFPJBINR4tHgMJjpg2zslU6QvJwXlQJ2X86+96vxDvwOyw==}
 
   '@kikiutils/mongoose@1.2.1':
     resolution: {integrity: sha512-2pABpW2QNtdymrFTLJOfwlzQOgt5WSmWc3bAoODlVRB6kWaW3oEG1CU83KruBFtR1/FqZrT+VN0Pdym9IMwiJA==}
@@ -536,8 +536,11 @@ packages:
   '@types/lodash@4.17.7':
     resolution: {integrity: sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==}
 
-  '@types/node@22.2.0':
-    resolution: {integrity: sha512-bm6EG6/pCpkxDf/0gDNDdtDILMOHgaQBVOJGdwsqClnxA3xL6jtMv76rLBc006RVMWbmaf0xbmom4Z/5o2nRkQ==}
+  '@types/node@22.3.0':
+    resolution: {integrity: sha512-nrWpWVaDZuaVc5X84xJ0vNrLvomM205oQyLsRt7OHNZbSHslcWsvgFR7O7hire2ZonjLrWBbedmotmIlJDVd6g==}
+
+  '@types/nodemailer@6.4.15':
+    resolution: {integrity: sha512-0EBJxawVNjPkng1zm2vopRctuWVCxk34JcIlRuXSf54habUWdz1FB7wHDqOqvDa8Mtpt0Q3LTXQkAs2LNyK5jQ==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -1479,6 +1482,10 @@ packages:
     resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
     hasBin: true
 
+  nodemailer@6.9.14:
+    resolution: {integrity: sha512-Dobp/ebDKBvz91sbtRKhcznLThrKxKt97GI2FAlAyy+fk19j73Uz3sBXolVtmcXjaorivqsbbbjDY+Jkt4/bQA==}
+    engines: {node: '>=6.0.0'}
+
   nopt@5.0.0:
     resolution: {integrity: sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ==}
     engines: {node: '>=6'}
@@ -1541,6 +1548,10 @@ packages:
   opentype.js@0.7.3:
     resolution: {integrity: sha512-Veui5vl2bLonFJ/SjX/WRWJT3SncgiZNnKUyahmXCc2sa1xXW15u3R/3TN5+JFiP7RsjK5ER4HA5eWaEmV9deA==}
     hasBin: true
+
+  otp-io@1.2.6:
+    resolution: {integrity: sha512-+xzN/hv2cZ+pxU8aCRKdKOqHigq3s3Tn5Ab0Ls03a9W7h3d/S2M9N/551KKamZy298mRSPsuk+wJbQl2Te5lEw==}
+    engines: {node: '>=14'}
 
   package-json-from-dist@1.0.0:
     resolution: {integrity: sha512-dATvCeZN/8wQsGywez1mzHtTlP22H8OEfPrVMLNr4/eGa+ijtLn/6M5f0dY8UKNrC2O9UCU6SSoG3qRKnt7STw==}
@@ -1944,8 +1955,8 @@ packages:
   unctx@2.3.1:
     resolution: {integrity: sha512-PhKke8ZYauiqh3FEMVNm7ljvzQiph0Mt3GBRve03IJm7ukfaON2OBK795tLwhbyfzknuRRkW0+Ze+CQUmzOZ+A==}
 
-  undici-types@6.13.0:
-    resolution: {integrity: sha512-xtFJHudx8S2DSoujjMd1WeWvn7KKWFRESZTMeL1RptAYERu29D6jphMjjY+vn96jvN3kVPDNxU/E13VTaXj6jg==}
+  undici-types@6.18.2:
+    resolution: {integrity: sha512-5ruQbENj95yDYJNS3TvcaxPMshV7aizdv/hWYjGIKoANWKjhWNBsr2YEuYZKodQulB1b8l7ILOuDQep3afowQQ==}
 
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
@@ -1965,8 +1976,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unplugin@1.12.1:
-    resolution: {integrity: sha512-aXEH9c5qi3uYZHo0niUtxDlT9ylG/luMW/dZslSCkbtC31wCyFkmM0kyoBBh+Grhn7CL+/kvKLfN61/EdxPxMQ==}
+  unplugin@1.12.2:
+    resolution: {integrity: sha512-bEqQxeC7rxtxPZ3M5V4Djcc4lQqKPgGe3mAWZvxcSmX5jhGxll19NliaRzQSQPrk4xJZSGniK3puLWpRuZN7VQ==}
     engines: {node: '>=14.0.0'}
 
   unstorage@1.10.2:
@@ -2216,17 +2227,22 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/el-plus-admin-pack@0.1.0':
+  '@kikiutils/el-plus-admin-pack@0.3.0':
     dependencies:
       '@kikiutils/mongoose': 1.2.1
       '@kikiutils/node': 4.2.2
       '@kikiutils/types': 2.0.0
+      '@types/nodemailer': 6.4.15
       ajv: 8.17.1
       ajv-formats: 3.0.1(ajv@8.17.1)
       ajv-keywords: 5.1.0(ajv@8.17.1)
       axios: 1.7.4
       h3: 1.12.0
+      ioredis: 5.4.1
       lodash-es: 4.17.21
+      nanoid: 5.0.7
+      nodemailer: 6.9.14
+      otp-io: 1.2.6
     transitivePeerDependencies:
       - '@aws-sdk/credential-providers'
       - '@mongodb-js/zstd'
@@ -2532,7 +2548,7 @@ snapshots:
 
   '@types/http-proxy@1.17.15':
     dependencies:
-      '@types/node': 22.2.0
+      '@types/node': 22.3.0
 
   '@types/lodash-es@4.17.12':
     dependencies:
@@ -2540,9 +2556,13 @@ snapshots:
 
   '@types/lodash@4.17.7': {}
 
-  '@types/node@22.2.0':
+  '@types/node@22.3.0':
     dependencies:
-      undici-types: 6.13.0
+      undici-types: 6.18.2
+
+  '@types/nodemailer@6.4.15':
+    dependencies:
+      '@types/node': 22.3.0
 
   '@types/resolve@1.20.2': {}
 
@@ -3509,6 +3529,8 @@ snapshots:
 
   node-gyp-build@4.8.1: {}
 
+  nodemailer@6.9.14: {}
+
   nopt@5.0.0:
     dependencies:
       abbrev: 1.1.1
@@ -3579,6 +3601,8 @@ snapshots:
   opentype.js@0.7.3:
     dependencies:
       tiny-inflate: 1.0.3
+
+  otp-io@1.2.6: {}
 
   package-json-from-dist@1.0.0: {}
 
@@ -4003,9 +4027,9 @@ snapshots:
       acorn: 8.12.1
       estree-walker: 3.0.3
       magic-string: 0.30.11
-      unplugin: 1.12.1
+      unplugin: 1.12.2
 
-  undici-types@6.13.0: {}
+  undici-types@6.18.2: {}
 
   undici@5.28.4:
     dependencies:
@@ -4035,13 +4059,13 @@ snapshots:
       pkg-types: 1.1.3
       scule: 1.3.0
       strip-literal: 2.1.0
-      unplugin: 1.12.1
+      unplugin: 1.12.2
     transitivePeerDependencies:
       - rollup
 
   universalify@2.0.1: {}
 
-  unplugin@1.12.1:
+  unplugin@1.12.2:
     dependencies:
       acorn: 8.12.1
       chokidar: 3.6.0
@@ -4078,7 +4102,7 @@ snapshots:
       mlly: 1.7.1
       pathe: 1.1.2
       pkg-types: 1.1.3
-      unplugin: 1.12.1
+      unplugin: 1.12.2
 
   uqr@0.1.2: {}
 
