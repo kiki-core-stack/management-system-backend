@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/el-plus-admin-pack':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
       '@kikiutils/nitro-session':
         specifier: ^1.3.0
         version: 1.3.0(ioredis@5.4.1)
@@ -222,8 +222,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/el-plus-admin-pack@0.3.0':
-    resolution: {integrity: sha512-e4H6Zof0ZYrSUmMS4hRnvrFatWGYbz75Xh4hZUQskFPJBINR4tHgMJjpg2zslU6QvJwXlQJ2X86+96vxDvwOyw==}
+  '@kikiutils/el-plus-admin-pack@0.4.0':
+    resolution: {integrity: sha512-IbxBqmalefJQ42AtLIpICAaKBMaUIuaR5v1cp7I7cxDsg9JDGohxLG//BcVXnoLhZwEGatGJ/iK+BWzXcjFpjA==}
 
   '@kikiutils/mongoose@1.2.1':
     resolution: {integrity: sha512-2pABpW2QNtdymrFTLJOfwlzQOgt5WSmWc3bAoODlVRB6kWaW3oEG1CU83KruBFtR1/FqZrT+VN0Pdym9IMwiJA==}
@@ -2227,7 +2227,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/el-plus-admin-pack@0.3.0':
+  '@kikiutils/el-plus-admin-pack@0.4.0':
     dependencies:
       '@kikiutils/mongoose': 1.2.1
       '@kikiutils/node': 4.2.2

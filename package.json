@@ -8,7 +8,7 @@
     "preview": "NODE_ENV=production node --env-file=./.env.production.local ./.output/server/index.mjs"
   },
   "dependencies": {
-    "@kikiutils/el-plus-admin-pack": "^0.3.0",
+    "@kikiutils/el-plus-admin-pack": "^0.4.0",
     "@kikiutils/nitro-session": "^1.3.0",
     "@kikiutils/node": "^4.2.2",
     "lodash-es": "^4.17.21",
