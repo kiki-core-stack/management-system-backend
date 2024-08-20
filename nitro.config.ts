@@ -31,7 +31,8 @@ export default defineNitroConfig({
 				noUncheckedIndexedAccess: true,
 				noUnusedLocals: true,
 				noUnusedParameters: true,
-				paths: { '@/*': ['./*'] }
+				paths: { '@/*': ['./*'] },
+				skipLibCheck: true
 			}
 		}
 	}
