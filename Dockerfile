@@ -1,0 +1,43 @@
+# Build stage
+FROM kikikanri/node22:base-alpine AS build-stage
+
+## Set args, envs and workdir
+ARG NPMRC_REGISTRY
+ARG SESSION_SECRET_KEY
+ARG SESSION_SECRET_KEY_ENCODING
+ENV NITRO_PRESET=node_cluster
+ENV NPMRC_REGISTRY=${NPMRC_REGISTRY}
+ENV SESSION_SECRET_KEY=${SESSION_SECRET_KEY}
+ENV SESSION_SECRET_KEY_ENCODING=${SESSION_SECRET_KEY_ENCODING}
+WORKDIR /app
+
+## Install packages
+COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
+RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
+
+## Set production env
+ENV NODE_ENV=production
+
+## Copy files and build
+COPY ./ ./
+RUN pnpm run prepare:production
+RUN pnpm run type-check
+RUN pnpm run build
+
+# Runtime stage
+FROM node:22-alpine
+
+## Set args, envs and workdir
+ENV NITRO_HOST=0.0.0.0
+ENV NITRO_PORT=8000
+WORKDIR /app
+
+## Set timezone and upgrade packages
+RUN apk update && apk upgrade --no-cache
+RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+
+## Copy files
+COPY --from=build-stage /app/.output ./
+
+## Set cmd
+CMD cd /app/server && node ./index.mjs
