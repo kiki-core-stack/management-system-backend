@@ -5,6 +5,7 @@
     "build": "NODE_ENV=production dotenv -e ./.env.production.local -- nitro build",
     "dev": "NODE_ENV=development dotenv -e ./.env.development.local -- nitro dev",
     "prepare": "NODE_ENV=development dotenv -e ./.env.development.local -- nitro prepare",
+    "prepare:production": "NODE_ENV=production dotenv -e ./.env.production.local -- nitro prepare",
     "preview": "NODE_ENV=production node --env-file=./.env.production.local ./.output/server/index.mjs",
     "type-check": "tsc --noEmit --skipLibCheck"
   },
