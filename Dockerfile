@@ -39,5 +39,6 @@ RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/
 ## Copy files
 COPY --from=build-stage /app/.output ./
 
-## Set cmd
-CMD cd /app/server && node ./index.mjs
+## Make entrypoint and set cmd
+RUN echo "cd /app/server && node ./index.mjs" > /entrypoint.sh
+CMD ["sh", "/entrypoint.sh"]
