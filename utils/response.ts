@@ -12,7 +12,7 @@ export const getModelDocumentByRouteIdAndChangeStatus = async <RawDocType, Query
 ) => {
 	const document = await model.findByRouteIdOrThrowNotFoundError(event, null, options);
 	const { field, value } = await readBody<{ field: string; value: boolean }>(event);
-	if (!allowedFields.includes(field)) createH3ErrorAndThrow(400);
+	if (!allowedFields.includes(field)) throw new ApiError(400);
 	// @ts-ignore
 	await beforeChange?.(document, field, !!value);
 	// @ts-ignore
