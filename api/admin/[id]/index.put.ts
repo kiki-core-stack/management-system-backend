@@ -11,5 +11,5 @@ export default defineEventHandler(async (event) => {
 	const updateQuery: UpdateQuery<AdminDocument> = data;
 	if (!data.email) updateQuery.$unset = { email: true };
 	await admin.updateOne(updateQuery);
-	return createResponseData();
+	return createApiSuccessResponseData();
 });

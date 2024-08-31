@@ -12,12 +12,12 @@ export const getModelDocumentByRouteIdAndChangeStatus = async <RawDocType, Query
 ) => {
 	const document = await model.findByRouteIdOrThrowNotFoundError(event, null, options);
 	const { field, value } = await readBody<{ field: string; value: boolean }>(event);
-	if (!allowedFields.includes(field)) throw new ApiError(400);
+	if (!allowedFields.includes(field)) createApiErrorAndThrow(400);
 	// @ts-ignore
 	await beforeChange?.(document, field, !!value);
 	// @ts-ignore
 	await document.updateOne({ [`${field}`]: !!value });
-	return createResponseData();
+	return createApiSuccessResponseData();
 };
 
 export const getModelDocumentByRouteIdAndDelete = async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
@@ -30,7 +30,7 @@ export const getModelDocumentByRouteIdAndDelete = async <RawDocType, QueryHelper
 	// @ts-ignore
 	await beforeDelete?.(document);
 	await document.deleteOne(options || undefined);
-	return createResponseData();
+	return createApiSuccessResponseData();
 };
 
 export const getModelToPaginatedResponseDataProcessedQueries = (event: H3RequestEvent, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]): ProcessedApiRequestQueries => {
@@ -88,7 +88,7 @@ export const queriesAndModelToPaginatedResponseData = async <RawDocType, QueryHe
 		sort: paginateOptions?.sort || { _id: -1 }
 	});
 
-	return createResponseData({ count: paginateResult.totalDocs, data: paginateResult.docs });
+	return createApiSuccessResponseData({ count: paginateResult.totalDocs, data: paginateResult.docs });
 };
 
 export const modelToPaginatedResponseData = async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(

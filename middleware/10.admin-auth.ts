@@ -16,6 +16,6 @@ export default defineEventHandler(async (event) => {
 
 	if (!event.context.session.adminId) {
 		const qMarkIndex = event.path.indexOf('?');
-		if (!allowNoAuthPaths.has(qMarkIndex === -1 ? event.path : event.path.substring(0, qMarkIndex))) throw new ApiError(401);
+		if (!allowNoAuthPaths.has(qMarkIndex === -1 ? event.path : event.path.substring(0, qMarkIndex))) createApiErrorAndThrow(401);
 	}
 });
