@@ -1,4 +1,4 @@
-import type { AdminLoginFormData } from '@/types/data/admin';
+import type { AdminLoginFormData } from '@kikiutils/el-plus-admin-pack/types/data/admin';
 
 const schema: AjvValidatorJSONSchema<AdminLoginFormData> = {
 	additionalProperties: false,
