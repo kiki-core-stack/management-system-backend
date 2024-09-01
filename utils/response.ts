@@ -13,9 +13,9 @@ export const getModelDocumentByRouteIdAndChangeStatus = async <RawDocType, Query
 	const document = await model.findByRouteIdOrThrowNotFoundError(event, null, options);
 	const { field, value } = await readBody<{ field: string; value: boolean }>(event);
 	if (!allowedFields.includes(field)) createApiErrorAndThrow(400);
-	// @ts-ignore
+	// @ts-expect-error
 	await beforeChange?.(document, field, !!value);
-	// @ts-ignore
+	// @ts-expect-error
 	await document.updateOne({ [`${field}`]: !!value });
 	return createApiSuccessResponseData();
 };
@@ -27,7 +27,7 @@ export const getModelDocumentByRouteIdAndDelete = async <RawDocType, QueryHelper
 	beforeDelete?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>) => any
 ) => {
 	const document = await model.findByRouteIdOrThrowNotFoundError(event, null, options);
-	// @ts-ignore
+	// @ts-expect-error
 	await beforeDelete?.(document);
 	await document.deleteOne(options || undefined);
 	return createApiSuccessResponseData();
