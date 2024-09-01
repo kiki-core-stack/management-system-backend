@@ -1,4 +1,4 @@
-import { AdminLogModel, AdminModel, mongooseConnections } from '@kikiutils/el-plus-admin-pack/models';
+import { AdminLogModel, AdminModel, mongooseConnections } from '@kikiutils/kiki-core-stack-pack/models';
 
 export default defineEventHandler(async (event) => {
 	return await mongooseConnections.default!.transaction(async (session) => {

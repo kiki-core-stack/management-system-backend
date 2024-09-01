@@ -1,4 +1,4 @@
-import type { AdminData } from '@kikiutils/el-plus-admin-pack/types/data/admin';
+import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
 const schema: AjvValidatorJSONSchema<AdminData, 'totpSecret'> = {
 	additionalProperties: false,

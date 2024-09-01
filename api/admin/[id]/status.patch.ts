@@ -1,4 +1,4 @@
-import { AdminModel } from '@kikiutils/el-plus-admin-pack/models';
+import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
 export default defineEventHandler(async (event) => {
 	return await getModelDocumentByRouteIdAndChangeStatus(

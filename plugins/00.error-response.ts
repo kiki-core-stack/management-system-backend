@@ -1,1 +1,1 @@
-export { default } from '@kikiutils/el-plus-admin-pack/nitropack/plugins/00.error-response';
+export { default } from '@kikiutils/kiki-core-stack-pack/nitropack/plugins/00.error-response';

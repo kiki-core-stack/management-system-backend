@@ -1,5 +1,5 @@
-import redisController from '@kikiutils/el-plus-admin-pack/controllers/redis';
-import { generateTotpSecretData } from '@kikiutils/el-plus-admin-pack/utils/two-factor-authentication';
+import redisController from '@kikiutils/kiki-core-stack-pack/controllers/redis';
+import { generateTotpSecretData } from '@kikiutils/kiki-core-stack-pack/utils/two-factor-authentication';
 
 export default defineEventHandler(async (event) => {
 	if (event.context.admin!.twoFactorAuthenticationStatus.totp) return createApiSuccessResponseData();

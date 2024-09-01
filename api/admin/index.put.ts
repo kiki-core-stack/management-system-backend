@@ -1,4 +1,4 @@
-import { AdminModel } from '@kikiutils/el-plus-admin-pack/models';
+import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
 import { saveAdminDataValidator } from '@/validators/admin';
 

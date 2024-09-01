@@ -1,4 +1,4 @@
-import type { AdminDocument } from '@kikiutils/el-plus-admin-pack/models';
+import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models';
 import type { H3Event } from 'h3';
 
 declare module 'h3' {

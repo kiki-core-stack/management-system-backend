@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name="el-plus-admin-backend"
+name="kiki-core-stack-admin-backend"
 
 if ! tmux ls | grep -q "^$name:"; then
 	tmux new-session -ds $name

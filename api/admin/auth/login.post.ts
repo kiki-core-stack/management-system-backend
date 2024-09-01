@@ -1,5 +1,5 @@
-import { AdminLogType } from '@kikiutils/el-plus-admin-pack/constants/admin';
-import { AdminLogModel, AdminModel } from '@kikiutils/el-plus-admin-pack/models';
+import { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
+import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
 import { adminLoginDataValidator } from '@/validators/admin/auth/login';
 

@@ -1,5 +1,5 @@
-import { AdminModel } from '@kikiutils/el-plus-admin-pack/models';
-import type { AdminDocument } from '@kikiutils/el-plus-admin-pack/models';
+import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
+import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models';
 import type { UpdateQuery } from 'mongoose';
 
 import { saveAdminDataValidator } from '@/validators/admin';

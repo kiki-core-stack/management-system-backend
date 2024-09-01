@@ -1,4 +1,4 @@
-import type { ProfileSecurityChangePasswordFormData } from '@kikiutils/el-plus-admin-pack/types/data/profile';
+import type { ProfileSecurityChangePasswordFormData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
 
 const schema: AjvValidatorJSONSchema<ProfileSecurityChangePasswordFormData> = {
 	additionalProperties: false,
