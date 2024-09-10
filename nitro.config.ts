@@ -25,15 +25,8 @@ export default defineNitroConfig({
 	typescript: {
 		strict: true,
 		tsConfig: {
-			compilerOptions: {
-				baseUrl: '../../',
-				noImplicitOverride: true,
-				noUncheckedIndexedAccess: true,
-				noUnusedLocals: true,
-				noUnusedParameters: true,
-				paths: { '@/*': ['./*'] },
-				skipLibCheck: true
-			}
+			compilerOptions: { baseUrl: '../../', paths: { '@/*': ['./*'] } },
+			extends: '@kikiutils/tsconfigs/esnext/esnext.json'
 		}
 	}
 });

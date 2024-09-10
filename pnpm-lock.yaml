@@ -21,6 +21,9 @@ importers:
       '@kikiutils/prettierrc':
         specifier: ^1.3.2
         version: 1.3.2
+      '@kikiutils/tsconfigs':
+        specifier: ^3.0.1
+        version: 3.0.1
       dotenv-cli:
         specifier: ^7.4.2
         version: 7.4.2
@@ -233,6 +236,9 @@ packages:
 
   '@kikiutils/prettierrc@1.3.2':
     resolution: {integrity: sha512-swvPqAf5VmXAKjngFywFw+ibsnwrkP1WJ9egH9ZAjjPNxZrBhVKCmk/X4a1baKUXXgSB3aMmsx0InqP3+pV2qQ==}
+
+  '@kikiutils/tsconfigs@3.0.1':
+    resolution: {integrity: sha512-euNfmx2S5chW92H7CMUWANerj7feZXs1ZMuNs4hZiOLxn/XSq46g1DcWEY7QnpbesURYQtPAQDGtkkzJzcLQtg==}
 
   '@kikiutils/types@2.0.1':
     resolution: {integrity: sha512-dfrtrzFFBGPfwo3Zfe6HVL7DqQZQS3uQyB0+0m2HtGGpVBX71sE4DjzwNKm5TRXFdp+2Q1JLApGoz5WVxRfMdg==}
@@ -2315,6 +2321,8 @@ snapshots:
     dependencies:
       prettier: 3.3.3
       prettier-plugin-multiline-arrays: 3.0.6(prettier@3.3.3)
+
+  '@kikiutils/tsconfigs@3.0.1': {}
 
   '@kikiutils/types@2.0.1': {}
 
