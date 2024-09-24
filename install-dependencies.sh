@@ -1,5 +1,5 @@
 #!/bin/bash
 
 . ./.env.development.local
-export NPMRC_REGISTRY=$NPMRC_REGISTRY
+export NPM_REGISTRY=$NPM_REGISTRY
 pnpm i
