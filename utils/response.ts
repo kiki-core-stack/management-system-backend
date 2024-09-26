@@ -3,23 +3,6 @@ import { Types } from 'mongoose';
 import type { PaginateOptions, PopulateOptions, QueryOptions } from 'mongoose';
 
 const baseFilterInFields = { states: 'state', types: 'type' } as const;
-export const getModelDocumentByRouteIdAndChangeStatus = async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
-	event: H3RequestEvent,
-	model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
-	allowedFields: string[],
-	options?: Nullable<QueryOptions<RawDocType>>,
-	beforeChange?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>, field: string, value: boolean) => any
-) => {
-	const document = await model.findByRouteIdOrThrowNotFoundError(event, null, options);
-	const { field, value } = await readBody<{ field: string; value: boolean }>(event);
-	if (!allowedFields.includes(field)) createApiErrorAndThrow(400);
-	// @ts-expect-error
-	await beforeChange?.(document, field, !!value);
-	// @ts-expect-error
-	await document.updateOne({ [`${field}`]: !!value });
-	return createApiSuccessResponseData();
-};
-
 export const getModelDocumentByRouteIdAndDelete = async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 	event: H3RequestEvent,
 	model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
@@ -30,6 +13,23 @@ export const getModelDocumentByRouteIdAndDelete = async <RawDocType, QueryHelper
 	// @ts-expect-error
 	await beforeDelete?.(document);
 	await document.deleteOne(options || undefined);
+	return createApiSuccessResponseData();
+};
+
+export const getModelDocumentByRouteIdAndUpdateBooleanField = async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+	event: H3RequestEvent,
+	model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+	allowedFields: string[],
+	options?: Nullable<QueryOptions<RawDocType>>,
+	beforeUpdate?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>, field: string, value: boolean) => any
+) => {
+	const document = await model.findByRouteIdOrThrowNotFoundError(event, null, options);
+	const { field, value } = await readBody<{ field: string; value: boolean }>(event);
+	if (!allowedFields.includes(field)) createApiErrorAndThrow(400);
+	// @ts-expect-error
+	await beforeUpdate?.(document, field, !!value);
+	// @ts-expect-error
+	await document.updateOne({ [`${field}`]: !!value });
 	return createApiSuccessResponseData();
 };
 
