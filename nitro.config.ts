@@ -4,6 +4,7 @@ import { checkAndGetEnvValue } from '@kikiutils/node/env';
 export default defineNitroConfig({
 	alias: { '@': '~/' },
 	compressPublicAssets: true,
+	errorHandler: '@kikiutils/kiki-core-stack-pack/nitropack/handlers/error',
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
 	runtimeConfig: {
@@ -22,6 +23,7 @@ export default defineNitroConfig({
 	},
 	serveStatic: false,
 	sourceMap: false,
+	timing: process.env.NODE_ENV === 'development',
 	typescript: {
 		strict: true,
 		tsConfig: {
