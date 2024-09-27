@@ -7,6 +7,7 @@ export default defineNitroConfig({
 	noPublicDir: true,
 	serveStatic: false,
 	sourceMap: false,
+	timing: process.env.NODE_ENV === 'development',
 	typescript: {
 		strict: true,
 		tsConfig: {
