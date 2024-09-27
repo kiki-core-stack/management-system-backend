@@ -4,7 +4,6 @@ export default defineNitroConfig({
 	compressPublicAssets: true,
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
-	runtimeConfig: {},
 	serveStatic: false,
 	sourceMap: false,
 	typescript: {
