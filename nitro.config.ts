@@ -3,6 +3,7 @@ import { checkAndGetEnvValue } from '@kikiutils/node/env';
 //https://nitro.unjs.io/config
 export default defineNitroConfig({
 	alias: { '@': '~/' },
+	compatibilityDate: '2100-01-01',
 	compressPublicAssets: true,
 	errorHandler: '@kikiutils/kiki-core-stack-pack/nitro/handlers/error',
 	minify: process.env.NODE_ENV !== 'development',
