@@ -11,7 +11,7 @@ export default defineNitroConfig({
 	typescript: {
 		strict: true,
 		tsConfig: {
-			compilerOptions: { baseUrl: '../../', paths: { '@/*': ['./*'] } },
+			compilerOptions: { paths: { '@/*': ['../../*'] } },
 			extends: '@kikiutils/tsconfigs/esnext/esnext.json'
 		}
 	}
