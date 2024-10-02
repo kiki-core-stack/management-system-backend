@@ -4,7 +4,7 @@ import { checkAndGetEnvValue } from '@kikiutils/node/env';
 export default defineNitroConfig({
 	alias: { '@': '~/' },
 	compressPublicAssets: true,
-	errorHandler: '@kikiutils/kiki-core-stack-pack/nitropack/handlers/error',
+	errorHandler: '@kikiutils/kiki-core-stack-pack/nitro/handlers/error',
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
 	runtimeConfig: {
@@ -27,7 +27,7 @@ export default defineNitroConfig({
 	typescript: {
 		strict: true,
 		tsConfig: {
-			compilerOptions: { baseUrl: '../../', paths: { '@/*': ['./*'] } },
+			compilerOptions: { paths: { '@/*': ['../../*'] } },
 			extends: '@kikiutils/tsconfigs/esnext/esnext.json'
 		}
 	}
