@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.15.0
-        version: 0.15.0
+        specifier: ^0.17.0
+        version: 0.17.0
     devDependencies:
       '@kikiutils/prettierrc':
         specifier: ^1.3.2
@@ -294,11 +294,11 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/kiki-core-stack-pack@0.15.0':
-    resolution: {integrity: sha512-/CzCi196iIHvLRMOUu1ERyV3iTSvyoh9MG+SliBH7Cw5nXHXx3A2kkaYarSHFK+fp09Q85KaRqzWp+AXKdigbQ==}
+  '@kikiutils/kiki-core-stack-pack@0.17.0':
+    resolution: {integrity: sha512-fiDtsfAf9bhEUqvvWMJz+IDZOAJAZy3xQGMZBBbRxHHQ1iTHn1Z+ZoQ8AYsNkbxF4bfkwdCfccjWJOQldD1UuA==}
 
-  '@kikiutils/mongoose@1.3.1':
-    resolution: {integrity: sha512-12IMR0tqvF7s+lAU8UBDfFI5LVV2p5dOVGeZ/OeS5Q9SVJAD5q1PPnA9HCHsc+jmKa7dPuK4OvLoM1WcEhHo5A==}
+  '@kikiutils/mongoose@1.4.0':
+    resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
     engines: {node: '>=18'}
 
   '@kikiutils/node@4.3.0':
@@ -1038,8 +1038,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.30:
-    resolution: {integrity: sha512-sXI35EBN4lYxzc/pIGorlymYNzDBOqkSlVRe6MkgBsW/hW1tpC/HDJ2fjG7XnjakzfLEuvdmux0Mjs6jHq4UOA==}
+  electron-to-chromium@1.5.31:
+    resolution: {integrity: sha512-QcDoBbQeYt0+3CWcK/rEbuHvwpbT/8SV9T3OSgs6cX1FlcUAkgrkqbg9zLnDrMM/rLamzQwal4LYFCiWk861Tg==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1372,8 +1372,8 @@ packages:
   jackspeak@3.4.3:
     resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
 
-  jiti@2.0.0:
-    resolution: {integrity: sha512-CJ7e7Abb779OTRv3lomfp7Mns/Sy1+U4pcAx5VbjxCZD5ZM/VJaXPpPjNKjtSvWQy/H86E49REXR34dl1JEz9w==}
+  jiti@2.1.0:
+    resolution: {integrity: sha512-Nftp80J8poC3u+93ZxpjstsgfQ5d0o5qyD6yStv32sgnWr74xRxBppEwsUoA/GIdrJpgGRkC1930YkLcAsFdSw==}
     hasBin: true
 
   joycon@3.1.1:
@@ -2541,9 +2541,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/kiki-core-stack-pack@0.15.0':
+  '@kikiutils/kiki-core-stack-pack@0.17.0':
     dependencies:
-      '@kikiutils/mongoose': 1.3.1
+      '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.3.0
       '@kikiutils/types': 2.2.1
       '@types/lodash-es': 4.17.12
@@ -2552,7 +2552,6 @@ snapshots:
       ajv-formats: 3.0.1(ajv@8.17.1)
       ajv-keywords: 5.1.0(ajv@8.17.1)
       axios: 1.7.7
-      h3: 1.12.0
       ioredis: 5.4.1
       lodash-es: 4.17.21
       nanoid: 5.0.7
@@ -2568,9 +2567,8 @@ snapshots:
       - snappy
       - socks
       - supports-color
-      - uWebSockets.js
 
-  '@kikiutils/mongoose@1.3.1':
+  '@kikiutils/mongoose@1.4.0':
     dependencies:
       decimal.js: 10.4.3
       lodash: 4.17.21
@@ -3049,7 +3047,7 @@ snapshots:
   browserslist@4.24.0:
     dependencies:
       caniuse-lite: 1.0.30001664
-      electron-to-chromium: 1.5.30
+      electron-to-chromium: 1.5.31
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.0)
 
@@ -3071,7 +3069,7 @@ snapshots:
       defu: 6.1.4
       dotenv: 16.4.5
       giget: 1.2.3
-      jiti: 2.0.0
+      jiti: 2.1.0
       mlly: 1.7.1
       ohash: 1.1.4
       pathe: 1.1.2
@@ -3257,7 +3255,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.30: {}
+  electron-to-chromium@1.5.31: {}
 
   emoji-regex@8.0.0: {}
 
@@ -3621,7 +3619,7 @@ snapshots:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
-  jiti@2.0.0: {}
+  jiti@2.1.0: {}
 
   joycon@3.1.1: {}
 
@@ -3669,7 +3667,7 @@ snapshots:
       get-port-please: 3.1.2
       h3: 1.12.0
       http-shutdown: 1.2.2
-      jiti: 2.0.0
+      jiti: 2.1.0
       mlly: 1.7.1
       node-forge: 1.3.1
       pathe: 1.1.2
@@ -3869,7 +3867,7 @@ snapshots:
       hookable: 5.5.3
       httpxy: 0.1.5
       ioredis: 5.4.1
-      jiti: 2.0.0
+      jiti: 2.1.0
       klona: 2.0.6
       knitwork: 1.1.0
       listhen: 1.8.0
@@ -4516,7 +4514,7 @@ snapshots:
       '@babel/standalone': 7.25.6
       '@babel/types': 7.25.6
       defu: 6.1.4
-      jiti: 2.0.0
+      jiti: 2.1.0
       mri: 1.2.0
       scule: 1.3.0
     transitivePeerDependencies:

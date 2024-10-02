@@ -2,7 +2,7 @@
 export default defineNitroConfig({
 	alias: { '@': '~/' },
 	compressPublicAssets: true,
-	errorHandler: '@kikiutils/kiki-core-stack-pack/nitropack/handlers/error',
+	errorHandler: '@kikiutils/kiki-core-stack-pack/nitro/handlers/error',
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
 	serveStatic: false,
