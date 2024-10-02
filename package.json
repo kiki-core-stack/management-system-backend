@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@kikiutils/kiki-core-stack-pack": "^0.17.1"
+    "@kikiutils/kiki-core-stack-pack": "^0.18.0"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
