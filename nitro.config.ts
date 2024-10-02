@@ -5,7 +5,7 @@ export default defineNitroConfig({
 	alias: { '@': '~/' },
 	compatibilityDate: '2100-01-01',
 	compressPublicAssets: true,
-	errorHandler: '@kikiutils/kiki-core-stack-pack/nitro/handlers/error',
+	errorHandler: '@/handlers/error',
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
 	runtimeConfig: {
