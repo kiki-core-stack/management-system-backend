@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@kikiutils/kiki-core-stack-pack": "^0.17.1",
+    "@kikiutils/kiki-core-stack-pack": "^0.18.0",
     "@kikiutils/nitro-session": "^1.4.0",
     "svg-captcha": "^1.4.0"
   },

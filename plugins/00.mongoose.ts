@@ -1,3 +1,1 @@
-import mongooseSetup from '@kikiutils/kiki-core-stack-pack/nitro/mongoose-setup';
-
-export default defineNitroPlugin(() => mongooseSetup);
+export { default } from '@kikiutils/kiki-core-stack-pack/nitro/plugins/00.mongoose';
