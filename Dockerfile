@@ -3,7 +3,7 @@ FROM kikikanri/node22:base-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_REGISTRY
-ENV NITRO_PRESET=node_cluster
+# ENV NITRO_PRESET=node_cluster
 ENV NPM_REGISTRY=${NPM_REGISTRY}
 WORKDIR /app
 
