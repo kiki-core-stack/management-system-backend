@@ -3,12 +3,8 @@ FROM kikikanri/node22:base-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_REGISTRY
-ARG SESSION_SECRET_KEY
-ARG SESSION_SECRET_KEY_ENCODING
 ENV NITRO_PRESET=node_cluster
 ENV NPM_REGISTRY=${NPM_REGISTRY}
-ENV SESSION_SECRET_KEY=${SESSION_SECRET_KEY}
-ENV SESSION_SECRET_KEY_ENCODING=${SESSION_SECRET_KEY_ENCODING}
 WORKDIR /app
 
 ## Install packages
@@ -40,5 +36,5 @@ RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/
 COPY --from=build-stage /app/.output ./
 
 ## Make entrypoint and set cmd
-RUN echo "cd /app/server && node ./index.mjs" > /entrypoint.sh
+RUN echo "cd /app/server && node ./index.mjs" >/entrypoint.sh
 CMD ["sh", "/entrypoint.sh"]

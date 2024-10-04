@@ -1,5 +1,10 @@
 import { checkAndGetEnvValue } from '@kikiutils/node/env';
 
+import nitroSessionConfig from './nitro-session.config.local';
+
+const nitroSessionEnvConfig = nitroSessionConfig[checkAndGetEnvValue('NODE_ENV') as keyof typeof nitroSessionConfig];
+if (!nitroSessionEnvConfig) throw new Error(`InvalidNitroSessionConfigError: No configuration found for NODE_ENV=${checkAndGetEnvValue('NODE_ENV')}`);
+
 //https://nitro.unjs.io/config
 export default defineNitroConfig({
 	alias: { '@': '~/' },
@@ -8,20 +13,7 @@ export default defineNitroConfig({
 	errorHandler: '@/handlers/error',
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
-	runtimeConfig: {
-		nitroSession: {
-			storage: {
-				data: {
-					driver: 'cookie/header',
-					options: {
-						encodingOptions: { key: (process.env.SESSION_SECRET_KEY_ENCODING || 'utf8') as BufferEncoding },
-						key: checkAndGetEnvValue('SESSION_SECRET_KEY')
-					}
-				}
-			},
-			strictIpValidation: true
-		}
-	},
+	runtimeConfig: { nitroSession: nitroSessionEnvConfig },
 	serveStatic: false,
 	sourceMap: false,
 	timing: process.env.NODE_ENV === 'development',
