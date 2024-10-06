@@ -3,7 +3,6 @@ FROM kikikanri/node22:base-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_REGISTRY
-# ENV NITRO_PRESET=node_cluster
 ENV NPM_REGISTRY=${NPM_REGISTRY}
 WORKDIR /app
 
@@ -33,8 +32,8 @@ RUN apk update && apk upgrade --no-cache
 RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## Copy files
-COPY --from=build-stage /app/.output ./
+COPY --from=build-stage /app/.output/server ./
+COPY ./production-run-cluster.mjs ./
 
-## Make entrypoint and set cmd
-RUN echo "cd /app/server && node ./index.mjs" >/entrypoint.sh
-CMD ["sh", "/entrypoint.sh"]
+## Set cmd
+CMD ["node", "./production-run-cluster.mjs"]
