@@ -8,6 +8,7 @@ export default defineNitroConfig({
 	minify: process.env.NODE_ENV !== 'development',
 	noPublicDir: true,
 	openAPI: { meta: { title: 'API Document', version: '0.1.0' } },
+	preset: 'node-listener',
 	serveStatic: false,
 	sourceMap: false,
 	timing: process.env.NODE_ENV === 'development',
