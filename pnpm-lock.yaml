@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.21.0
-        version: 0.21.0
+        specifier: ^0.22.0
+        version: 0.22.0
       '@kikiutils/nitro-session':
         specifier: ^2.0.0
         version: 2.0.0(ioredis@5.4.1)
@@ -312,8 +312,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/kiki-core-stack-pack@0.21.0':
-    resolution: {integrity: sha512-RBD+F6lzypOnammUKiIblxaxjVY+0dSahSTGEC9zqyn1AbDPNlmFZ02mVkRaImlxgZvKtoke3ClGBcj1PdH5Hw==}
+  '@kikiutils/kiki-core-stack-pack@0.22.0':
+    resolution: {integrity: sha512-UWmz5ui/6WwnGB2BLX+VFNg6VL9eqOZhJMld2IPLlErzzemSulbmYaclYyJDVcG81Bl5hPkxHKjLAwNO/hjn9g==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
@@ -1404,8 +1404,8 @@ packages:
   jackspeak@3.4.3:
     resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
 
-  jiti@2.3.1:
-    resolution: {integrity: sha512-xPZ6pPzUifI8XDBBxIL4OB1w1ZKmBpmNEeKwNt2d0Spn8XisAIZhWrlOHq5seBrFGTxVx9PbrWvEMyrk4IO5bA==}
+  jiti@2.3.2:
+    resolution: {integrity: sha512-9ZLDe7kYLCyWTAP6EIyg3B4ZuHy5W0gdy6y1rgrWrAOpTrUU+vKuKa1+OXB7MBkujyvm6a2b7i0ETHQDbgY98A==}
     hasBin: true
 
   joycon@3.1.1:
@@ -2616,7 +2616,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/kiki-core-stack-pack@0.21.0':
+  '@kikiutils/kiki-core-stack-pack@0.22.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.3.0
@@ -3168,7 +3168,7 @@ snapshots:
       defu: 6.1.4
       dotenv: 16.4.5
       giget: 1.2.3
-      jiti: 2.3.1
+      jiti: 2.3.2
       mlly: 1.7.2
       ohash: 1.1.4
       pathe: 1.1.2
@@ -3732,7 +3732,7 @@ snapshots:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
-  jiti@2.3.1: {}
+  jiti@2.3.2: {}
 
   joycon@3.1.1: {}
 
@@ -3780,7 +3780,7 @@ snapshots:
       get-port-please: 3.1.2
       h3: 1.13.0
       http-shutdown: 1.2.2
-      jiti: 2.3.1
+      jiti: 2.3.2
       mlly: 1.7.2
       node-forge: 1.3.1
       pathe: 1.1.2
@@ -3980,7 +3980,7 @@ snapshots:
       hookable: 5.5.3
       httpxy: 0.1.5
       ioredis: 5.4.1
-      jiti: 2.3.1
+      jiti: 2.3.2
       klona: 2.0.6
       knitwork: 1.1.0
       listhen: 1.9.0
@@ -4661,7 +4661,7 @@ snapshots:
       '@babel/standalone': 7.25.7
       '@babel/types': 7.25.7
       defu: 6.1.4
-      jiti: 2.3.1
+      jiti: 2.3.2
       mri: 1.2.0
       scule: 1.3.0
     transitivePeerDependencies:

@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@kikiutils/kiki-core-stack-pack": "^0.21.0",
+    "@kikiutils/kiki-core-stack-pack": "^0.22.0",
     "@kikiutils/nitro-session": "^2.0.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
