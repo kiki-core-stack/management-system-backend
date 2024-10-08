@@ -24,6 +24,8 @@ FROM oven/bun:alpine
 
 ## Set args, envs and workdir
 ENV NODE_ENV=production
+ENV SERVER_HOST=127.0.0.1
+ENV SERVER_PORT=8000
 WORKDIR /app
 
 ## Set timezone and upgrade packages
