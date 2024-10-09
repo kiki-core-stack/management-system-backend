@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.22.1
-        version: 0.22.1
+        specifier: ^0.23.0
+        version: 0.23.0
       hono:
         specifier: ^4.6.3
         version: 4.6.3
@@ -49,8 +49,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@kikiutils/kiki-core-stack-pack@0.22.1':
-    resolution: {integrity: sha512-YX9DOStcrpfDufsSGfhQmhZ5kGBCdtLlWBRac3PqglATX5aBRXUy6HtPq+9emCoWYHrXCQ0k3ygOyL51mESlRw==}
+  '@kikiutils/kiki-core-stack-pack@0.23.0':
+    resolution: {integrity: sha512-gr5UuKDFv9Vim9ElYABNqXyt/j3mL2DbEGyMFGkfX5rDBQO05+pVa84oAaeICTiJ8X8+PoPAaGmcNjC6/xoLbQ==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
@@ -682,7 +682,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kikiutils/kiki-core-stack-pack@0.22.1':
+  '@kikiutils/kiki-core-stack-pack@0.23.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.3.0
