@@ -1,2 +1,2 @@
-import './api-response';
+import './api-utils';
 import './classes/api-error';
