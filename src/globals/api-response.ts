@@ -1,5 +1,3 @@
-import ApiError from '../classes/api-error';
-
 declare global {
 	function createApiError<D extends object>(statusCode?: StatusCode, data?: D, message?: string): ApiError<D>;
 	function createApiError<D extends object>(statusCode?: StatusCode, message?: string, data?: D): ApiError<D>;
@@ -18,3 +16,5 @@ globalThis.createApiSuccessResponseData = (arg1: any, arg2?: any) => {
 	if (typeof arg1 === 'string') [arg1, arg2] = [arg2, arg1];
 	return { data: arg1 || {}, message: arg2 || '成功', success: true };
 };
+
+export {};

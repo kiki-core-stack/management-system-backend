@@ -1,8 +1,6 @@
 import logger from '@kikiutils/node/consola';
 import { mongo } from 'mongoose';
 
-import ApiError from '@/classes/api-error';
-
 const mongodbErrorCodeToHttpStatusCodeMap = Object.freeze<Dict<StatusCode>>({
 	2: 400, // BadValue -> Bad Request
 	4: 404, // NoSuchKey -> Not Found

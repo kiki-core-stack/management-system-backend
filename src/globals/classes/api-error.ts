@@ -1,3 +1,9 @@
+declare global {
+	type ApiError<D extends object = any> = _ApiError<D>;
+
+	var ApiError: typeof _ApiError;
+}
+
 const statusCodeToMessageMap = Object.freeze<Dict<string>>({
 	400: '資料格式錯誤或是非法操作！',
 	401: '尚未登入！',
@@ -6,7 +12,7 @@ const statusCodeToMessageMap = Object.freeze<Dict<string>>({
 	409: '欄位值重複或是該資料使用中！'
 });
 
-export class ApiError<D extends object> extends Error {
+class _ApiError<D extends object> extends Error {
 	data: D;
 	statusCode: StatusCode;
 
@@ -21,4 +27,4 @@ export class ApiError<D extends object> extends Error {
 	}
 }
 
-export default ApiError;
+globalThis.ApiError = _ApiError;
