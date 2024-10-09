@@ -17,7 +17,7 @@ globalThis.createApiErrorAndThrow = (statusCode: StatusCode = 500, arg1: any, ar
 
 globalThis.createApiSuccessResponseData = (arg1: any, arg2?: any) => {
 	if (typeof arg1 === 'string') [arg1, arg2] = [arg2, arg1];
-	return { data: arg1 || {}, message: arg2 || '成功', success: true };
+	return { data: arg1 || {}, message: arg2 ?? '成功', success: true };
 };
 
 globalThis.defineApiHandler = function (handler) {
