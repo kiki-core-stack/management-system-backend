@@ -1,7 +1,3 @@
-import type { Endpoint } from 'hono/types';
-
-type StatusCode = Endpoint['status'];
-
 const statusCodeToMessageMap = Object.freeze<Dict<string>>({
 	400: '資料格式錯誤或是非法操作！',
 	401: '尚未登入！',
