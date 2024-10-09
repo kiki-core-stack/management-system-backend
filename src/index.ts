@@ -8,4 +8,7 @@ import '@/globals';
 import { default as server } from '@/server';
 import '@/setups/server';
 
+// Scan and load apis routes
+import '@/setups/apis-routes';
+
 export default server;
