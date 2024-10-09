@@ -15,21 +15,20 @@ const allowedApiMethods = [
 const apiFileEntries = globSync('src/apis/**/*.ts', { withFileTypes: true });
 const honoAppWithApisBasePath = honoApp.basePath('/api');
 const resolvedApisDirPath = path.resolve('./src/apis');
-for (const apiFile of apiFileEntries) {
+for (const { name, parentPath } of apiFileEntries) {
 	try {
-		const modulePath = path.join(apiFile.parentPath, apiFile.name);
+		const modulePath = path.join(parentPath, name);
 		const apiModule = await import(modulePath);
 		if (!apiModule.default) continue;
-		const { name: apiBaseName } = path.parse(apiFile.name);
-		const apiNameParts = apiBaseName.split('.');
-		if (apiNameParts.length < 2) continue;
-		const httpMethod = apiNameParts.pop()?.toLowerCase() as AllowedApiMethod;
-		if (!allowedApiMethods.includes(httpMethod)) continue;
-		let routeEndpoint = apiNameParts.join('.').toLowerCase();
-		if (routeEndpoint === 'index') routeEndpoint = '';
-		const baseRoutePath = path.relative(resolvedApisDirPath, apiFile.parentPath);
-		honoAppWithApisBasePath[httpMethod](`${baseRoutePath}${routeEndpoint}`, apiModule.default);
+		const nameParts = path.parse(name).name.split('.');
+		if (nameParts.length < 2) continue;
+		const method = nameParts.pop()?.toLowerCase() as AllowedApiMethod;
+		if (!allowedApiMethods.includes(method)) continue;
+		let endpointName = nameParts.join('.').toLowerCase();
+		if (endpointName === 'index') endpointName = '';
+		const baseRoutePath = path.relative(resolvedApisDirPath, parentPath);
+		honoAppWithApisBasePath[method](`${baseRoutePath}${endpointName}`, apiModule.default);
 	} catch (error) {
-		logger.error(`Loading api file ${apiFile.parentPath}/${apiFile.name} error:`, error);
+		logger.error(`Loading api file ${parentPath}/${name} error:`, error);
 	}
 }
