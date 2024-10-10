@@ -1,17 +1,18 @@
 // Initialize Mongoose
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose';
+await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose');
 
 // Initialize global utilities
-import '@kikiutils/kiki-core-stack-pack/hono-backend/globals';
+await import('@kikiutils/kiki-core-stack-pack/hono-backend/globals');
 
 // Import and setup server
-import { default as server } from '@kikiutils/kiki-core-stack-pack/hono-backend/server';
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/server';
+const server = (await import('@kikiutils/kiki-core-stack-pack/hono-backend/server')).default;
+await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/server');
 
 // Load middlewares
-import '@/middlewares';
+await import('@/middlewares');
 
-// Scan and load apis routes
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/apis';
+// Begin loading API routes - do not change or remove this line
+await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/apis');
+// End loading API routes - do not change or remove this line
 
 export default server;
