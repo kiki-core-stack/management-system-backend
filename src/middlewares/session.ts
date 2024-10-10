@@ -22,7 +22,7 @@ declare module 'hono' {
 type PartialHonoContextSession = Partial<HonoContextSession>;
 type StoredData = [number, PartialHonoContextSession, ip?: string];
 
-interface HonoContextSession {}
+export interface HonoContextSession {}
 
 const sessionChangedSymbol = Symbol();
 const sessionClearedSymbol = Symbol();
