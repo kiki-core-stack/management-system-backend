@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.24.0
-        version: 0.24.0
+        specifier: ^0.26.1
+        version: 0.26.1
       hono:
         specifier: ^4.6.3
         version: 4.6.3
@@ -55,15 +55,15 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@kikiutils/kiki-core-stack-pack@0.24.0':
-    resolution: {integrity: sha512-qiuA18PC6v+o7usPYmifq67vSaZg/GvQVCsDmvdQZOMfPyvmTdg5zO5SbgIX0DSX/PVmHbHbxjU2kuyX0YANnA==}
+  '@kikiutils/kiki-core-stack-pack@0.26.1':
+    resolution: {integrity: sha512-54DdZTMYlhJ66JmLj8JGEYfEF73y8YCLJCnpx1lcUbK6jW0nwXM67UNiC2Fip/qZ6P8dX6NAVjqUW84nBT6WTQ==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
     engines: {node: '>=18'}
 
-  '@kikiutils/node@4.3.0':
-    resolution: {integrity: sha512-wnIYYF1YZEIwqCbSSU6ZgVWEq38GCX6iyCY2UMWLwu2SPBsqNRxSM1P5jCWTaR5G0wLh6e+szJhIVfvKAPakIQ==}
+  '@kikiutils/node@4.3.1':
+    resolution: {integrity: sha512-nt3Jxa06qly/YHV60leXqzW/7cacXvXm5VK5MCUBKS9t+8hx5VHjl5KNlpurC7X13dv6Gik2L8f25x8tVDiqFg==}
     engines: {node: '>=18'}
 
   '@kikiutils/prettierrc@1.3.2':
@@ -684,10 +684,10 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kikiutils/kiki-core-stack-pack@0.24.0':
+  '@kikiutils/kiki-core-stack-pack@0.26.1':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
-      '@kikiutils/node': 4.3.0
+      '@kikiutils/node': 4.3.1
       '@kikiutils/types': 2.2.1
       '@socket.io/component-emitter': 3.1.2
       '@types/lodash-es': 4.17.12
@@ -724,7 +724,7 @@ snapshots:
       - socks
       - supports-color
 
-  '@kikiutils/node@4.3.0':
+  '@kikiutils/node@4.3.1':
     dependencies:
       '@noble/hashes': 1.5.0
       axios: 1.7.7

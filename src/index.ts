@@ -1,16 +1,16 @@
 // Initialize Mongoose setup
-await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose');
+import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose';
 
 // Initialize global utilities
-await import('@kikiutils/kiki-core-stack-pack/hono-backend/globals');
+import '@kikiutils/kiki-core-stack-pack/hono-backend/globals';
 
 // Import and set up the server
-const server = (await import('@kikiutils/kiki-core-stack-pack/hono-backend/server')).default;
-await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/server');
+import { default as server } from '@kikiutils/kiki-core-stack-pack/hono-backend/server';
+import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/server';
 
 // Begin logger setup - block content can be changed but do not remove this block
-const { useHonoLogger } = await import('@kikiutils/node/hono');
-useHonoLogger(honoApp, false);
+import { useHonoLogger } from '@kikiutils/node/hono';
+useHonoLogger(honoApp);
 // End logger setup - block content can be changed but do not remove this block
 
 // Load middlewares
