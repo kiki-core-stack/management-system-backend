@@ -1,5 +1,5 @@
 #!/bin/bash
 
 . ./.env.development.local
-export NPM_REGISTRY
+export NPM_CONFIG_REGISTRY
 pnpm upgrade -L

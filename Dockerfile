@@ -2,8 +2,8 @@
 FROM kikikanri/node22:base-alpine AS build-stage
 
 ## Set args, envs and workdir
-ARG NPM_REGISTRY
-ENV NPM_REGISTRY=${NPM_REGISTRY}
+ARG NPM_CONFIG_REGISTRY
+ENV NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
 WORKDIR /app
 
 ## Install packages
