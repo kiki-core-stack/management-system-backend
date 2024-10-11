@@ -8,12 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@hono/zod-openapi':
+        specifier: ^0.16.4
+        version: 0.16.4(hono@4.6.4)(zod@3.23.8)
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.26.1
-        version: 0.26.1
-      hono:
-        specifier: ^4.6.3
-        version: 4.6.3
+        specifier: ^0.27.0
+        version: 0.27.0
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
@@ -39,6 +39,11 @@ importers:
 
 packages:
 
+  '@asteasolutions/zod-to-openapi@7.2.0':
+    resolution: {integrity: sha512-Va+Fq1QzKkSgmiYINSp3cASFhMsbdRH/kmCk2feijhC+yNjGoC056CRqihrVFhR8MY8HOZHdlYm2Ns2lmszCiw==}
+    peerDependencies:
+      zod: ^3.20.2
+
   '@augment-vir/common@23.4.0':
     resolution: {integrity: sha512-QIrJ1doD00TNbOzeVrk9KgPTzRlIjayxERnhtbQjK/AFPj5yElcB03GbnGdQZPzws/R+5gfMM5cZiH7QyBP+Kg==}
 
@@ -48,6 +53,19 @@ packages:
   '@augment-vir/common@29.3.0':
     resolution: {integrity: sha512-k3OX35/576thmGUzQUBcCKGarb7ONBfiu07+iV2vxmjl7VoB1rOB0vu8WqgB1ceJq2EMLDPXY18hHpJ9WeTHXQ==}
 
+  '@hono/zod-openapi@0.16.4':
+    resolution: {integrity: sha512-mnF6GthBaKex0D5PsY/4lYNtkaGJNE38bjeUI//EUqq7Ee4TNm2su35IUiFH4HcmJp5fWYMLyOJOpjnkClzEGw==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      hono: '>=4.3.6'
+      zod: 3.*
+
+  '@hono/zod-validator@0.3.0':
+    resolution: {integrity: sha512-7XcTk3yYyk6ldrO/VuqsroE7stvDZxHJQcpATRAyha8rUxJNBPV3+6waDrARfgEqxOVlzIadm3/6sE/dPseXgQ==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
+
   '@ioredis/commands@1.2.0':
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
 
@@ -55,8 +73,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@kikiutils/kiki-core-stack-pack@0.26.1':
-    resolution: {integrity: sha512-54DdZTMYlhJ66JmLj8JGEYfEF73y8YCLJCnpx1lcUbK6jW0nwXM67UNiC2Fip/qZ6P8dX6NAVjqUW84nBT6WTQ==}
+  '@kikiutils/kiki-core-stack-pack@0.27.0':
+    resolution: {integrity: sha512-ut5UaoPiuwQxlF5f6aEFiiFgE6M5R/x1/jPa/jxhpw7PFyR2gB+Xt54MqBVy9tfP358Sv39XxmIaCS2QEeUevA==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
@@ -290,8 +308,8 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.6.3:
-    resolution: {integrity: sha512-0LeEuBNFeSHGqZ9sNVVgZjB1V5fmhkBSB0hZrpqStSMLOWgfLy0dHOvrjbJh0H2khsjet6rbHfWTHY0kpYThKQ==}
+  hono@4.6.4:
+    resolution: {integrity: sha512-T5WqBkTOcIQblqBKB5mpzaH/A+dSpvVe938xZJCHOmOuYfF7DSwE/9/10+BMvwSPq9N/f6LiQ38HxrZSQOsXKw==}
     engines: {node: '>=16.9.0'}
 
   ieee754@1.2.1:
@@ -430,6 +448,9 @@ packages:
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
+
+  openapi3-ts@4.4.0:
+    resolution: {integrity: sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==}
 
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
@@ -645,6 +666,11 @@ packages:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
 
+  yaml@2.5.1:
+    resolution: {integrity: sha512-bLQOjaX/ADgQ20isPJRvF0iRUHIxVhYvr53Of7wGcWlO2jvtUlH5m87DsmulFVxRpNLOnI4tB6p/oh8D7kpn9Q==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
   yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
@@ -653,7 +679,15 @@ packages:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
+
+  '@asteasolutions/zod-to-openapi@7.2.0(zod@3.23.8)':
+    dependencies:
+      openapi3-ts: 4.4.0
+      zod: 3.23.8
 
   '@augment-vir/common@23.4.0':
     dependencies:
@@ -673,6 +707,18 @@ snapshots:
       run-time-assertions: 1.5.2
       type-fest: 4.26.1
 
+  '@hono/zod-openapi@0.16.4(hono@4.6.4)(zod@3.23.8)':
+    dependencies:
+      '@asteasolutions/zod-to-openapi': 7.2.0(zod@3.23.8)
+      '@hono/zod-validator': 0.3.0(hono@4.6.4)(zod@3.23.8)
+      hono: 4.6.4
+      zod: 3.23.8
+
+  '@hono/zod-validator@0.3.0(hono@4.6.4)(zod@3.23.8)':
+    dependencies:
+      hono: 4.6.4
+      zod: 3.23.8
+
   '@ioredis/commands@1.2.0': {}
 
   '@isaacs/cliui@8.0.2':
@@ -684,7 +730,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kikiutils/kiki-core-stack-pack@0.26.1':
+  '@kikiutils/kiki-core-stack-pack@0.27.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.3.1
@@ -936,7 +982,7 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono@4.6.3: {}
+  hono@4.6.4: {}
 
   ieee754@1.2.1: {}
 
@@ -1049,6 +1095,10 @@ snapshots:
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
+
+  openapi3-ts@4.4.0:
+    dependencies:
+      yaml: 2.5.1
 
   package-json-from-dist@1.0.1: {}
 
@@ -1265,6 +1315,8 @@ snapshots:
 
   y18n@5.0.8: {}
 
+  yaml@2.5.1: {}
+
   yargs-parser@21.1.1: {}
 
   yargs@17.7.2:
@@ -1276,3 +1328,5 @@ snapshots:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+
+  zod@3.23.8: {}
