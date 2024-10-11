@@ -1,6 +1,6 @@
 import type { StatusCode } from 'hono/utils/http-status';
 
-import { statusCodeToMessageMap } from '../../constants/response';
+import { statusCodeToMessageMap } from '@/constants/response';
 
 declare global {
 	type ApiError<D extends object = any> = _ApiError<D>;
