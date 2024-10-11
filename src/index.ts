@@ -1,23 +1,26 @@
 // Initialize Mongoose setup
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose';
+import '@/setups/mongoose';
 
 // Initialize global utilities
-import '@kikiutils/kiki-core-stack-pack/hono-backend/globals';
+await import('@/core/globals');
+await import('@/globals');
 
 // Import and set up the server
-import { default as server } from '@kikiutils/kiki-core-stack-pack/hono-backend/server';
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/server';
+const { default: server } = await import('@/server');
+await import('@/setups/error-handling');
 
 // Begin logger setup - block content can be changed but do not remove this block
-import { useHonoLogger } from '@kikiutils/node/hono';
+const { useHonoLogger } = await import('@kikiutils/node/hono');
 useHonoLogger(honoApp);
 // End logger setup - block content can be changed but do not remove this block
 
 // Load middlewares
 await import('@/middlewares');
 
-// Begin API routes setup - block content can be changed but do not remove this block
-await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/apis');
-// End API routes setup - block content can be changed but do not remove this block
+// Begin routes setup - block content can be changed but do not remove this block
+const { registerRoutesFromFiles } = await import('@/core/register-routes');
+await registerRoutesFromFiles(honoApp, 'src/apis', '/api');
+await registerRoutesFromFiles(honoApp, 'src/routes', '/');
+// End routes setup - block content can be changed but do not remove this block
 
 export default server;
