@@ -1,13 +1,12 @@
 // Initialize Mongoose setup
-import '@/setups/mongoose';
+import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
 
 // Initialize global utilities
-await import('@/core/globals');
 await import('@/globals');
 
 // Import and set up the server
 const { default: server } = await import('@/server');
-await import('@/setups/error-handling');
+await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling');
 
 // Begin logger setup - block content can be changed but do not remove this block
 const { useHonoLogger } = await import('@kikiutils/node/hono');
