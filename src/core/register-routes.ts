@@ -51,5 +51,5 @@ export const registerRoutesFromFiles = async (app: typeof honoApp, scanDirPath: 
 	}
 
 	if (showRoutes) showHonoAppRoutes(app);
-	logger.info(`Successfully registered ${totalRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms`);
+	logger.info(`Successfully registered ${totalRouteCount} routes from '${scanDirPath}' in ${(performance.now() - startTime).toFixed(2)}ms`);
 };
