@@ -1,1 +1,1 @@
-export default defineApiHandler(() => createApiSuccessResponseData('Hello World!'));
+export default defineApiRouteHandler(() => createApiSuccessResponseData('Hello World!'));

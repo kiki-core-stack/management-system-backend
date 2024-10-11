@@ -8,7 +8,7 @@ export const compileHonoRequestDataAjvValidator = <T>(schema: JSONSchemaType<T>,
 		let data;
 		if (isQuery) data = ctx.req.query();
 		else data = ctx.req.header('content-type') === 'application/json' ? await ctx.req.json() : await ctx.req.parseBody();
-		if (!validator(data)) createApiErrorAndThrow(400);
+		if (!validator(data)) throw new ApiError(400);
 		return data;
 	};
 };
