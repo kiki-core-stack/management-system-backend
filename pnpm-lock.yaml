@@ -12,8 +12,8 @@ importers:
         specifier: ^0.16.4
         version: 0.16.4(hono@4.6.4)(zod@3.23.8)
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.28.0
-        version: 0.28.0
+        specifier: ^0.29.0
+        version: 0.29.0
       defu:
         specifier: ^6.1.4
         version: 6.1.4
@@ -76,8 +76,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@kikiutils/kiki-core-stack-pack@0.28.0':
-    resolution: {integrity: sha512-zw6huk1at0JPRjki1v31PVYm/2QCO8GoJGnkm5Hx419UQUFDMv9YbImIrOxfnGpoTfcgylL+VKOCy24Vr2aBFg==}
+  '@kikiutils/kiki-core-stack-pack@0.29.0':
+    resolution: {integrity: sha512-2GRgAlghkHm5OlPlJ9QMNmROZ1qH7YVSWf5glDKzRuNmMXn40ZjL659Sd4yAK4Z9rl1gk0UvoOswjqnjkziCUQ==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
@@ -736,7 +736,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kikiutils/kiki-core-stack-pack@0.28.0':
+  '@kikiutils/kiki-core-stack-pack@0.29.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.3.1
