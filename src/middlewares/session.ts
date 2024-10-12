@@ -1,5 +1,6 @@
 import { redisInstance } from '@kikiutils/kiki-core-stack-pack/constants/redis';
 import type { Context, Next } from 'hono';
+import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import { nanoid } from 'nanoid';
 import onChange from 'on-change';
 
@@ -59,7 +60,7 @@ globalThis.popHonoContextSession = (ctx, key) => {
 
 export const session = () => {
 	return async (ctx: Context, next: Next) => {
-		const token = ctx.req.header('session');
+		const token = getCookie(ctx, 'session');
 		let sessionData: PartialHonoContextSession | undefined;
 		if (token) {
 			let storedData: StoredData | undefined;
@@ -68,8 +69,10 @@ export const session = () => {
 				if (storedDataString) storedData = JSON.parse(storedDataString);
 			} catch {}
 			if (storedData && storedData[0] + 86400000 >= Date.now()) sessionData = storedData[1];
-			if (!sessionData) await redisInstance.del(`session:${token}`);
-			else ctx[sessionTokenSymbol] = token;
+			if (!sessionData) {
+				await redisInstance.del(`session:${token}`);
+				deleteCookie(ctx, 'session');
+			} else ctx[sessionTokenSymbol] = token;
 		}
 
 		setSessionToHonoContext(ctx, sessionData || {});
@@ -77,11 +80,16 @@ export const session = () => {
 		if (!ctx[sessionChangedSymbol]) return;
 		if (ctx[sessionClearedSymbol]) {
 			if (ctx[sessionTokenSymbol]) await redisInstance.del(`session:${ctx[sessionTokenSymbol]}`);
-			ctx.header('set-session', '');
+			deleteCookie(ctx, 'session');
 		} else {
 			const toSetToken = ctx[sessionTokenSymbol] || nanoid(64);
 			await redisInstance.setex(`session:${toSetToken}`, 86400, JSON.stringify([Date.now(), ctx.session]));
-			ctx.header('set-session', toSetToken);
+			setCookie(ctx, 'session', toSetToken, {
+				httpOnly: true,
+				maxAge: 86400,
+				secure: true,
+				sameSite: 'strict'
+			});
 		}
 	};
 };
