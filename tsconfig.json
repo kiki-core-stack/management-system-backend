@@ -1,4 +1,10 @@
-// https://nitro.unjs.io/guide/typescript
 {
-  "extends": "./.nitro/types/tsconfig.json"
+  "extends": "@kikiutils/tsconfigs/bun.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": false,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["./src"]
 }
