@@ -43,11 +43,15 @@ export const registerRoutesFromFiles = async (app: typeof honoApp, scanDirPath: 
 					routeModule.default,
 					routeModule.zodOpenApiRouteHook
 				);
-			} else app.on(method, routeEndpoint, routeModule.default);
+			} else {
+				if (routeModule.validator && routeModule.validators) throw new Error('Cannot specify both validator and validators');
+				app.on(method, routeEndpoint, routeModule.validator, ...routeModule.validators, routeModule.default);
+			}
+
 			totalRouteCount++;
 		} catch (error) {
 			// @ts-expect-error
-			logger.error(`Failed to load route file: ${absoluteRouteFilePath}`, error?.message, error);
+			logger.error(`Failed to load route file: ${absoluteRouteFilePath}`, error?.message);
 		}
 	}
 
