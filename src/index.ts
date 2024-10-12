@@ -19,7 +19,6 @@ await import('@/middlewares');
 // Begin routes setup - block content can be changed but do not remove this block
 const { registerRoutesFromFiles } = await import('@/core/register-routes');
 await registerRoutesFromFiles(honoApp, 'src/apis', '/api');
-await registerRoutesFromFiles(honoApp, 'src/routes', '/');
 // End routes setup - block content can be changed but do not remove this block
 
 export default server;
