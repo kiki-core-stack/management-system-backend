@@ -27,7 +27,7 @@ export const registerRoutesFromFiles = async (app: typeof honoApp, scanDirPath: 
 		const absoluteRouteFilePath = resolve(routeFilePath);
 		try {
 			const routeModule = await import(absoluteRouteFilePath);
-			if (!routeModule.default) continue;
+			if (typeof routeModule.default !== 'function') continue;
 			const filePathMatches = routeFilePath.match(routeFilePathPattern);
 			if (!filePathMatches) continue;
 			const method = filePathMatches[3]!;
