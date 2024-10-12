@@ -8,8 +8,8 @@ export default createMiddleware(async (ctx, next) => {
 	}
 
 	if (!ctx.session.adminId) {
-		const latestRoute = ctx.req.matchedRoutes.at(-1) as RouteHandler | undefined;
-		if (latestRoute?.isRouteHandler && !latestRoute.noLoginRequired) throwApiError(401);
+		const latestRouteHandler = ctx.req.matchedRoutes.at(-1)?.handler as RouteHandler | undefined;
+		if (latestRouteHandler?.isRouteHandler && !latestRouteHandler.noLoginRequired) throwApiError(401);
 	}
 
 	await next();
