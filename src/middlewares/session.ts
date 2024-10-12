@@ -1,5 +1,5 @@
 import { redisInstance } from '@kikiutils/kiki-core-stack-pack/constants/redis';
-import type { Context, Next } from 'hono';
+import type { Next } from 'hono';
 import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import { nanoid } from 'nanoid';
 import onChange from 'on-change';

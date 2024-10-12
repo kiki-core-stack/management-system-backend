@@ -1,5 +1,3 @@
-import type { Context } from 'hono';
-
 declare global {
 	function getXForwardedForHeaderFirstValue(ctx: Context): string | undefined;
 }
