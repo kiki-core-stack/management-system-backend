@@ -32,7 +32,7 @@ export const registerRoutesFromFiles = async (app: typeof honoApp, scanDirPath: 
 			if (!filePathMatches) continue;
 			const method = filePathMatches[3]!;
 			const routeEndpoint = `${baseUrlPath}${filePathMatches[1]!}`;
-			Object.assign(routeModule.default, routeModule.handlerProperties);
+			Object.assign(routeModule.default, { ...routeModule.handlerProperties, isRouteHandler: true });
 			if (routeModule.zodOpenApiRouteConfig) {
 				app.openapi(
 					createRoute({
