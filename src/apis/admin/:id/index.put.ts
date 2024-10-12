@@ -3,7 +3,7 @@ import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models';
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 import type { UpdateQuery } from 'mongoose';
 
-export { zodOpenApiRouteConfig } from '../index.put';
+export { validator } from '../index.put';
 
 export default defineApiRouteHandler<{ out: { json: AdminData } }>(async (ctx) => {
 	const admin = await AdminModel.findByRouteIdOrThrowNotFoundError(ctx);

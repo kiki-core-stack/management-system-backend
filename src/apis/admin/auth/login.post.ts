@@ -3,21 +3,14 @@ import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/model
 import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
 export const handlerProperties = Object.freeze({ noLoginRequired: true });
-export const zodOpenApiRouteConfig = createApiZodOpenApiRouteConfig('adminLogin', '', ['admin'], {
-	request: {
-		body: {
-			content: {
-				'application/json': {
-					schema: z.object({
-						account: z.string().trim().min(1),
-						password: z.string().trim(),
-						verCode: z.string().trim().toLowerCase()
-					})
-				}
-			}
-		}
-	}
-});
+export const validator = zValidator(
+	'json',
+	z.object({
+		account: z.string().trim().min(1),
+		password: z.string().trim(),
+		verCode: z.string().trim().toLowerCase()
+	})
+);
 
 export default defineApiRouteHandler<{ out: { json: AdminLoginFormData } }>(async (ctx) => {
 	const data = ctx.req.valid('json');
