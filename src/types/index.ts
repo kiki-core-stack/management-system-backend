@@ -8,5 +8,14 @@ interface RouteHandlerProperties {
 }
 
 declare global {
+	interface ProcessedApiRequestQueries {
+		filterQuery: Dict<any>;
+		limit: number;
+		offset: number;
+		page: number;
+		selectFields: string[];
+		skip: number;
+	}
+
 	type RouteHandler = H & Partial<RouteHandlerProperties>;
 }
