@@ -1,4 +1,4 @@
-import type { Context, Env, Input } from 'hono';
+import type { Env, Input } from 'hono';
 import type { Promisable } from 'type-fest';
 
 declare global {

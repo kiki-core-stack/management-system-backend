@@ -1,5 +1,5 @@
 import { redisInstance } from '@kikiutils/kiki-core-stack-pack/constants/redis';
-import type { Context, Next } from 'hono';
+import type { Next } from 'hono';
 import { nanoid } from 'nanoid';
 import onChange from 'on-change';
 
