@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hono/zod-validator": "^0.4.1",
-    "@kikiutils/kiki-core-stack-pack": "^0.29.0",
+    "@kikiutils/kiki-core-stack-pack": "^0.29.1",
     "hono": "^4.6.4",
     "nanoid": "^5.0.7",
     "on-change": "^5.0.1",
