@@ -6,6 +6,6 @@ import '@/core/globals';
 import '@/core/globals/utils';
 // import '@/core/globals/zod-openapi';
 import './admin';
-// import './lodash-es';
+import './lodash-es';
 import './request';
 import './response';
