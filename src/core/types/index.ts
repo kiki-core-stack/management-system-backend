@@ -1,7 +1,7 @@
 import type { Context as _Context, Env, Input } from 'hono';
 import type { H, MiddlewareHandler } from 'hono/types';
 
-interface RouteHandlerProperties {
+export interface RouteHandlerProperties {
 	isRouteHandler?: boolean;
 }
 
