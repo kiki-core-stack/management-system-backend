@@ -1,4 +1,5 @@
 import { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
+import { requireTwoFactorAuthentication } from '@kikiutils/kiki-core-stack-pack/hono-backend/utils/two-factor-authentication';
 import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
@@ -18,7 +19,7 @@ export default defineApiRouteHandler<{ out: { json: AdminLoginFormData } }>(asyn
 	const admin = await AdminModel.findOne({ account: data.account, enabled: true });
 	if (!admin) throwApiError(404, '帳號不存在，未啟用或密碼錯誤！');
 	ctx.session.tempAdminIdForSendEmailOtpCode = admin.id;
-	// await requireTwoFactorAuthentication(event, true, true, admin, true);
+	await requireTwoFactorAuthentication(ctx, true, true, admin, true);
 	if (!admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼錯誤！');
 	cleanupAdminCachesAndEventSession(ctx, admin);
 	ctx.session.adminId = admin.id;
