@@ -9,11 +9,14 @@ importers:
   .:
     dependencies:
       '@kikiutils/hyper-express':
-        specifier: ^6.18.1
-        version: 6.18.1
+        specifier: ^6.19.1
+        version: 6.19.1
       '@kikiutils/kiki-core-stack-pack':
         specifier: ^0.30.0
         version: 0.30.0
+      '@kikiutils/node':
+        specifier: ^4.3.1
+        version: 4.3.1
       eventemitter3:
         specifier: ^5.0.1
         version: 5.0.1
@@ -205,8 +208,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
-  '@kikiutils/hyper-express@6.18.1':
-    resolution: {integrity: sha512-7CIeYX7vSBjkBlyVQI1qxPUPgRwOuQ0IcsMqw/YZ6rbw4dRWgeDi6fhqEbMoFXi8IdceueAh39b0PviOU6rWTQ==}
+  '@kikiutils/hyper-express@6.19.1':
+    resolution: {integrity: sha512-QtcZp9J0oXkuRS3adqQwOatQoXDdr2yo3+zzERlK69I2yqXHdFJQrrbx/xHU9QVGb0wLbSBGhEjCEGhdov78OA==}
 
   '@kikiutils/kiki-core-stack-pack@0.30.0':
     resolution: {integrity: sha512-0APzgFGucG359++qg4BfAsyoOiPNKUvfSQMEKDrDXeX7D0by5hStSQdgkd9O+MPI64z7bfXC6C1o1f/lFP3yPA==}
@@ -1029,9 +1032,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  uWebSockets.js@https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/51ae1d1fd92dff77cbbdc7c431021f85578da1a6:
-    resolution: {tarball: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/51ae1d1fd92dff77cbbdc7c431021f85578da1a6}
-    version: 20.48.0
+  uWebSockets.js@https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700:
+    resolution: {tarball: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700}
+    version: 20.49.0
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
@@ -1193,7 +1196,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
-  '@kikiutils/hyper-express@6.18.1':
+  '@kikiutils/hyper-express@6.19.1':
     dependencies:
       accepts: 1.3.8
       busboy: 1.6.0
@@ -1203,7 +1206,7 @@ snapshots:
       range-parser: 1.2.1
       type-is: 1.6.18
       typed-emitter: 2.1.0
-      uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/51ae1d1fd92dff77cbbdc7c431021f85578da1a6
+      uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700
 
   '@kikiutils/kiki-core-stack-pack@0.30.0':
     dependencies:
@@ -2029,7 +2032,7 @@ snapshots:
 
   typescript@5.6.3: {}
 
-  uWebSockets.js@https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/51ae1d1fd92dff77cbbdc7c431021f85578da1a6: {}
+  uWebSockets.js@https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700: {}
 
   undici-types@6.19.8: {}
 
