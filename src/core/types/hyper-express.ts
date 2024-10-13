@@ -1,4 +1,4 @@
-import type { RouteRecord, Server } from 'hyper-express';
+import type { RouteRecord, Server } from '@kikiutils/hyper-express';
 
 interface Route extends RouteRecord {
 	app: Server;
@@ -9,7 +9,7 @@ interface Route extends RouteRecord {
 	streaming: object;
 }
 
-declare module 'hyper-express' {
+declare module '@kikiutils/hyper-express' {
 	interface Request {
 		route?: Route;
 	}

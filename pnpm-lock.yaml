@@ -8,15 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@kikiutils/hyper-express':
+        specifier: ^6.18.1
+        version: 6.18.1
       '@kikiutils/kiki-core-stack-pack':
         specifier: ^0.30.0
         version: 0.30.0
       glob:
         specifier: ^11.0.0
         version: 11.0.0
-      hyper-express:
-        specifier: ^6.17.2
-        version: 6.17.2
     devDependencies:
       '@kikiutils/prettierrc':
         specifier: ^1.3.2
@@ -201,6 +201,9 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
+
+  '@kikiutils/hyper-express@6.18.1':
+    resolution: {integrity: sha512-7CIeYX7vSBjkBlyVQI1qxPUPgRwOuQ0IcsMqw/YZ6rbw4dRWgeDi6fhqEbMoFXi8IdceueAh39b0PviOU6rWTQ==}
 
   '@kikiutils/kiki-core-stack-pack@0.30.0':
     resolution: {integrity: sha512-0APzgFGucG359++qg4BfAsyoOiPNKUvfSQMEKDrDXeX7D0by5hStSQdgkd9O+MPI64z7bfXC6C1o1f/lFP3yPA==}
@@ -478,9 +481,9 @@ packages:
     resolution: {integrity: sha512-78KWk9T26NhzXtuL26cIJ8/qNHANyJ/ZYrmEXFzUmhZdjpBv+DlWlOANRTGBt48YcyslsLrj0bMLFTmXvLRCOw==}
     engines: {node: '>=6.6.0'}
 
-  cookie@0.4.2:
-    resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
-    engines: {node: '>= 0.6'}
+  cookie@1.0.1:
+    resolution: {integrity: sha512-Xd8lFX4LM9QEEwxQpF9J9NTUh8pmdJO0cyRJhFiDoLTk2eH8FXlRv2IFGYVadZpqI3j8fhNrSdKCeYPxiAhLXw==}
+    engines: {node: '>=18'}
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -622,9 +625,6 @@ packages:
 
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
-
-  hyper-express@6.17.2:
-    resolution: {integrity: sha512-zibRNaNA3ExaYIiypHPEbFCZ3fOT2zSCnn3v78lUOrvQGqeb7VVzKuQKmJUsbkzpp7tKZoDxM4l5avpQHm35dA==}
 
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -1187,6 +1187,18 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
+  '@kikiutils/hyper-express@6.18.1':
+    dependencies:
+      accepts: 1.3.8
+      busboy: 1.6.0
+      cookie: 1.0.1
+      cookie-signature: 1.2.1
+      mime-types: 2.1.35
+      range-parser: 1.2.1
+      type-is: 1.6.18
+      typed-emitter: 2.1.0
+      uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/51ae1d1fd92dff77cbbdc7c431021f85578da1a6
+
   '@kikiutils/kiki-core-stack-pack@0.30.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
@@ -1457,7 +1469,7 @@ snapshots:
 
   cookie-signature@1.2.1: {}
 
-  cookie@0.4.2: {}
+  cookie@1.0.1: {}
 
   cross-spawn@7.0.3:
     dependencies:
@@ -1592,18 +1604,6 @@ snapshots:
       function-bind: 1.1.2
 
   help-me@5.0.0: {}
-
-  hyper-express@6.17.2:
-    dependencies:
-      accepts: 1.3.8
-      busboy: 1.6.0
-      cookie: 0.4.2
-      cookie-signature: 1.2.1
-      mime-types: 2.1.35
-      range-parser: 1.2.1
-      type-is: 1.6.18
-      typed-emitter: 2.1.0
-      uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/51ae1d1fd92dff77cbbdc7c431021f85578da1a6
 
   ieee754@1.2.1: {}
 
