@@ -1,4 +1,5 @@
 import type { RouteRecord, Server } from '@kikiutils/hyper-express';
+import type { EventEmitter } from 'eventemitter3';
 
 interface Route extends RouteRecord {
 	app: Server;
@@ -12,5 +13,9 @@ interface Route extends RouteRecord {
 declare module '@kikiutils/hyper-express' {
 	interface Request {
 		route?: Route;
+	}
+
+	interface ServerLocals {
+		eventManager: EventEmitter;
 	}
 }
