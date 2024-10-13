@@ -29,6 +29,7 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 			if (!matches) continue;
 			const method = matches[3]!;
 			const routePath = `${baseUrlPath}${matches[1]!}`;
+			// @ts-expect-error
 			server[method as (typeof allowedHttpMethods)[number]](routePath, routeModule.default);
 			totalRouteCount++;
 		} catch (error) {
