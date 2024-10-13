@@ -6,7 +6,8 @@
     "dev": "tsx watch ./src/index.ts"
   },
   "dependencies": {
-    "@kikiutils/kiki-core-stack-pack": "^0.30.0"
+    "@kikiutils/kiki-core-stack-pack": "^0.30.0",
+    "hyper-express": "^6.17.2"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
