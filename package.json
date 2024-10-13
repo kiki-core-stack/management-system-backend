@@ -8,6 +8,7 @@
   "dependencies": {
     "@kikiutils/hyper-express": "^6.18.1",
     "@kikiutils/kiki-core-stack-pack": "^0.30.0",
+    "eventemitter3": "^5.0.1",
     "glob": "^11.0.0"
   },
   "devDependencies": {
