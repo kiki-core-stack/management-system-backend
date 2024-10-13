@@ -1,9 +1,10 @@
 import logger from '@kikiutils/node/consola';
+import type { Server } from '@kikiutils/hyper-express';
 import { glob } from 'glob';
-import type { Server } from 'hyper-express';
 import path from 'path';
 
 const allowedHttpMethods = [
+	'connect',
 	'delete',
 	'get',
 	'head',
