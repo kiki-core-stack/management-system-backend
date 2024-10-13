@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "build": "ts-project-builder './src/apis/**/*.ts' ./src/index.ts -mf esm --clean --preserve-modules",
-    "dev": "tsx watch ./src/index.ts"
+    "dev": "tsx watch --env-file=./.env.development.local ./src/index.ts"
   },
   "dependencies": {
     "@kikiutils/hyper-express": "^6.18.1",
