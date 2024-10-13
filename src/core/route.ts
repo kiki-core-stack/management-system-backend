@@ -1,7 +1,7 @@
 import logger from '@kikiutils/node/consola';
 import type { Server } from '@kikiutils/hyper-express';
 import { glob } from 'glob';
-import path from 'path';
+import { relative, resolve, sep } from 'path';
 
 const allowedHttpMethods = [
 	'connect',
@@ -16,7 +16,7 @@ const allowedHttpMethods = [
 ] as const;
 
 export const registerRoutesFromFiles = async (server: Server, scanDirPath: string, baseUrlPath: string) => {
-	scanDirPath = path.resolve(scanDirPath).replaceAll(path.sep, '/');
+	scanDirPath = resolve(scanDirPath).replaceAll(sep, '/');
 	const routeFilePathPattern = new RegExp(`^${scanDirPath}(.*?)(/index)?\\.(${allowedHttpMethods.join('|')})\\.(mj|t)s$`);
 	let totalRouteCount = 0;
 	const startTime = performance.now();
@@ -25,17 +25,16 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 		try {
 			const routeModule = await import(routeFilePath);
 			if (typeof routeModule.default !== 'function') continue;
-			const filePathMatches = routeFilePath.match(routeFilePathPattern);
-			if (!filePathMatches) continue;
-			const method = filePathMatches[3]!;
-			const routeEndpoint = `${baseUrlPath}${filePathMatches[1]!}`;
-			server[method as (typeof allowedHttpMethods)[number]](routeEndpoint, routeModule.default);
+			const matches = routeFilePath.match(routeFilePathPattern);
+			if (!matches) continue;
+			const method = matches[3]!;
+			const routePath = `${baseUrlPath}${matches[1]!}`;
+			server[method as (typeof allowedHttpMethods)[number]](routePath, routeModule.default);
 			totalRouteCount++;
 		} catch (error) {
-			// @ts-expect-error
-			logger.error(`Failed to load route file: ${routeFilePath}`, error?.message);
+			logger.error(`Failed to load route file: ${routeFilePath}`, (error as Error).message);
 		}
 	}
 
-	logger.info(`Successfully registered ${totalRouteCount} routes from '${path.relative(process.cwd(), scanDirPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
+	logger.info(`Successfully registered ${totalRouteCount} routes from '${relative(process.cwd(), scanDirPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
 };
