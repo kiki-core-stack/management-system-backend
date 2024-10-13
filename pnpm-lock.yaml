@@ -11,6 +11,9 @@ importers:
       '@kikiutils/kiki-core-stack-pack':
         specifier: ^0.30.0
         version: 0.30.0
+      glob:
+        specifier: ^11.0.0
+        version: 11.0.0
       hyper-express:
         specifier: ^6.17.2
         version: 6.17.2

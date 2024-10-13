@@ -2,11 +2,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "ts-project-builder ./src/index.ts -mf esm --preserve-modules",
+    "build": "ts-project-builder './src/apis/**/*.ts' ./src/index.ts -mf esm --clean --preserve-modules",
     "dev": "tsx watch ./src/index.ts"
   },
   "dependencies": {
     "@kikiutils/kiki-core-stack-pack": "^0.30.0",
+    "glob": "^11.0.0",
     "hyper-express": "^6.17.2"
   },
   "devDependencies": {
