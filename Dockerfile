@@ -1,26 +1,25 @@
 # Build stage
-FROM oven/bun:alpine AS build-stage
+FROM kikikanri/node22:base-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
-ENV NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
+ENV NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
 WORKDIR /app
 
-## Install packages
-COPY ./bun.lockb ./package.json ./
-RUN bun i --frozen-lockfile
+## Install dependencies
+COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
+RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
 
 ## Set production env
 ENV NODE_ENV=production
 
 ## Copy files and build
 COPY ./src ./src
-COPY ./tsconfig.json ./
-RUN bun run type-check
-RUN bun run compile
+COPY ./ts-project-builder.config.mjs ./tsconfig.json ./
+RUN pnpm run build
 
 # Runtime stage
-FROM oven/bun:alpine
+FROM kikikanri/node22:base-alpine
 
 ## Set args, envs and workdir
 ENV NODE_ENV=production
@@ -32,9 +31,12 @@ WORKDIR /app
 RUN apk update && apk upgrade --no-cache
 RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
+## Install dependencies
+COPY --from=build-stage /app/.npmrc /app/package.json /app/pnpm-lock.yaml ./
+RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
+
 ## Copy files and libraries
-COPY --from=build-stage /app/dist/index ./
-COPY ./.env.production.local ./.env
+COPY --from=build-stage /app/dist ./dist
 
 ## Set cmd
-CMD ["./index"]
+CMD ["node", "./dist/index.mjs"]

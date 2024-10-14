@@ -1,7 +1,6 @@
 {
-  "extends": "@kikiutils/tsconfigs/bun.json",
+  "extends": "@kikiutils/tsconfigs/esnext/esnext.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": false,
     "paths": {
       "@/*": ["./src/*"]
     }
