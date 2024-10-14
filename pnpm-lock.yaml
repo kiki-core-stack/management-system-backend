@@ -12,8 +12,8 @@ importers:
         specifier: ^6.19.2
         version: 6.19.2
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.30.0
-        version: 0.30.0
+        specifier: ^0.31.0
+        version: 0.31.0
       '@kikiutils/node':
         specifier: ^4.3.1
         version: 4.3.1
@@ -214,8 +214,8 @@ packages:
   '@kikiutils/hyper-express@6.19.2':
     resolution: {integrity: sha512-OPEXjqXzkzIo1ci2pjN1h+GV2tuTg1W/HayHFN716nLjKEnEsgge4HrdeBOqtKREAEsLXwu1l/fFEGkFw5vcKg==}
 
-  '@kikiutils/kiki-core-stack-pack@0.30.0':
-    resolution: {integrity: sha512-0APzgFGucG359++qg4BfAsyoOiPNKUvfSQMEKDrDXeX7D0by5hStSQdgkd9O+MPI64z7bfXC6C1o1f/lFP3yPA==}
+  '@kikiutils/kiki-core-stack-pack@0.31.0':
+    resolution: {integrity: sha512-JY6Z8qF546YiGNgOBh931cPoA87En3zQsTQ0pMAKYnrXOXyWIhECePap0fb/+3+W7ZRW5U5to2lth0wFzr2FEA==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
@@ -1214,7 +1214,7 @@ snapshots:
       typed-emitter: 2.1.0
       uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700
 
-  '@kikiutils/kiki-core-stack-pack@0.30.0':
+  '@kikiutils/kiki-core-stack-pack@0.31.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.3.1

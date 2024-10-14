@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@kikiutils/hyper-express": "^6.19.2",
-    "@kikiutils/kiki-core-stack-pack": "^0.30.0",
+    "@kikiutils/kiki-core-stack-pack": "^0.31.0",
     "@kikiutils/node": "^4.3.1",
     "eventemitter3": "^5.0.1",
     "glob": "^11.0.0",

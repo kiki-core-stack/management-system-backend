@@ -26,11 +26,11 @@ declare global {
 
 globalThis.defineRouteHandler = (...handlers) => handlers.flat() as MiddlewareHandler[];
 globalThis.defineRouteHandlerWithZodValidator = (schemas, ...handlers) => [
-	(request, _, next) => {
+	async (request, _, next) => {
 		// @ts-expect-error
 		request.locals.verifiedData = {};
 		if (schemas.params) request.locals.verifiedData.params = schemas.params.parse(request.params);
-		if (schemas.json) request.locals.verifiedData.json = schemas.json.parse(request.json());
+		if (schemas.json) request.locals.verifiedData.json = schemas.json.parse(await request.json());
 		if (schemas.query) request.locals.verifiedData.query = schemas.query.parse(request.query);
 		next();
 	},
