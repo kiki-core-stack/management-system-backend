@@ -24,13 +24,12 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 	for (const routeFilePath of routeFilePaths) {
 		try {
 			const routeModule = await import(routeFilePath);
-			if (typeof routeModule.default !== 'function') continue;
+			if (!routeModule.default) continue;
 			const matches = routeFilePath.match(routeFilePathPattern);
 			if (!matches) continue;
 			const method = matches[3]!;
 			const routePath = `${baseUrlPath}${matches[1]!}`;
-			// @ts-expect-error
-			server[method as (typeof allowedHttpMethods)[number]](routePath, routeModule.default);
+			server[method as (typeof allowedHttpMethods)[number]](routePath, ...routeModule.default);
 			totalRouteCount++;
 		} catch (error) {
 			logger.error(`Failed to load route file: ${routeFilePath}`, (error as Error).message);
