@@ -10,7 +10,8 @@
     "@kikiutils/kiki-core-stack-pack": "^0.30.0",
     "@kikiutils/node": "^4.3.1",
     "eventemitter3": "^5.0.1",
-    "glob": "^11.0.0"
+    "glob": "^11.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
