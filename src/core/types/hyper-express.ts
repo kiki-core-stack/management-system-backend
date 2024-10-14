@@ -1,7 +1,7 @@
 import type { DefaultRequestLocals, DefaultResponseLocals, MiddlewareNext, Request, Response, RouteRecord, Server, UserRouteHandler } from '@kikiutils/hyper-express';
 import type { EventEmitter } from 'eventemitter3';
 
-export type MiddlewareHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>, next: MiddlewareNext) => void;
+export type MiddlewareHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>, next: MiddlewareNext) => any;
 
 interface Route extends RouteRecord {
 	app: Server;
