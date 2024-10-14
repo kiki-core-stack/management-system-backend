@@ -1,5 +1,6 @@
 import logger from '@kikiutils/node/consola';
 
+import '@/core/globals/route';
 import { registerRoutesFromFiles } from '@/core/route';
 import { server } from '@/server';
 
