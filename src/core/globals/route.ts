@@ -2,7 +2,7 @@
 
 import type { infer as ZodInfer, ZodTypeAny } from 'zod';
 
-import type { MiddlewareHandler } from '@/core/types/hyper-express';
+import type { MiddlewareHandler, RouteHandlerProperties } from '@/core/types/hyper-express';
 
 type RouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas = {}> = MiddlewareHandler<{
 	verifiedData: { [key in keyof Schemas]: Schemas[key] extends ZodTypeAny ? ZodInfer<Schemas[key]> : never };
@@ -15,6 +15,8 @@ declare global {
 	function defineRouteHandler(handler: MiddlewareHandler, ...handlers: MiddlewareHandler[]): MiddlewareHandler[];
 	function defineRouteHandler(handlers: MiddlewareHandler[]): MiddlewareHandler[];
 
+	function defineRouteHandlerWithProperties<P extends Partial<RouteHandlerProperties>>(properties: P, handler: MiddlewareHandler): [MiddlewareHandler & P];
+
 	function defineRouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas>(schemas: Schemas, handler: RouteHandlerWithZodValidator<Schemas>): RouteHandlerWithZodValidator<Schemas>[];
 	function defineRouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas>(
 		schemas: Schemas,
@@ -25,6 +27,7 @@ declare global {
 }
 
 globalThis.defineRouteHandler = (...handlers) => handlers.flat() as MiddlewareHandler[];
+globalThis.defineRouteHandlerWithProperties = (properties, handler) => [Object.assign(handler, properties)];
 globalThis.defineRouteHandlerWithZodValidator = (schemas, ...handlers) => [
 	async (request, _, next) => {
 		// @ts-expect-error

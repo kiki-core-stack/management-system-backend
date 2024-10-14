@@ -1,4 +1,4 @@
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
+import '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/mongoose-model-statics';
 import logger from '@kikiutils/node/consola';
 
 import '@/core/globals/route';
