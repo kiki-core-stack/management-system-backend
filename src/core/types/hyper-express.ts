@@ -17,7 +17,9 @@ export interface RouteHandlerOptions extends UserRouteOptions {
 	properties?: RouteHandlerProperties;
 }
 
-export interface RouteHandlerProperties {}
+export interface RouteHandlerProperties {
+	readonly isHandler?: true;
+}
 
 declare module '@kikiutils/hyper-express' {
 	interface Request {
