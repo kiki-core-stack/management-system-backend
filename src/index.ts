@@ -3,6 +3,7 @@ import logger from '@kikiutils/node/consola';
 
 import '@/core/globals';
 import { registerRoutesFromFiles } from '@/core/route';
+import '@/globals';
 import { server } from '@/server';
 
 // Scan files and register routes
