@@ -3,6 +3,8 @@ import type { Server } from '@kikiutils/hyper-express';
 import { glob } from 'glob';
 import { relative, resolve, sep } from 'path';
 
+import type { RouteHandlerOptions } from '@/core/types/hyper-express';
+
 const allowedHttpMethods = [
 	'connect',
 	'delete',
@@ -29,7 +31,15 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 			if (!matches) continue;
 			const method = matches[3]!;
 			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\[([^\]]+)\]/g, ':$1');
-			Object.defineProperty(routeModule.default.at(-1), 'isHandler', {
+			const latestHandler = routeModule.default.at(-1);
+			const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
+			if (routeHandlerOptions) {
+				Object.assign(latestHandler, routeHandlerOptions.properties);
+				delete routeHandlerOptions.properties;
+				routeModule.default.unshift(routeHandlerOptions);
+			}
+
+			Object.defineProperty(latestHandler, 'isHandler', {
 				configurable: false,
 				value: true,
 				writable: false
