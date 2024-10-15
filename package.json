@@ -11,6 +11,8 @@
     "@kikiutils/node": "^4.3.1",
     "eventemitter3": "^5.0.1",
     "glob": "^11.0.0",
+    "nanoid": "^5.0.7",
+    "unstorage": "^1.12.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
