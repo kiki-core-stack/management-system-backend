@@ -1,5 +1,4 @@
 import type { DefaultRequestLocals, DefaultResponseLocals, MiddlewareNext, Request, Response, RouteRecord, Server, UserRouteHandler } from '@kikiutils/hyper-express';
-import type { EventEmitter } from 'eventemitter3';
 
 export type MiddlewareHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>, next: MiddlewareNext) => any;
 
@@ -18,9 +17,5 @@ export interface RouteHandlerProperties {}
 declare module '@kikiutils/hyper-express' {
 	interface Request {
 		route?: Route;
-	}
-
-	interface ServerLocals {
-		eventManager: EventEmitter;
 	}
 }
