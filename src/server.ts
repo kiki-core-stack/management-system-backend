@@ -1,3 +1,3 @@
-import { createServer } from '@/core/server';
+import { Server } from '@kikiutils/hyper-express';
 
-export const server = createServer();
+export const server = new Server();
