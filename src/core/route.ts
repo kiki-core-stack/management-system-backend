@@ -28,7 +28,7 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 			const matches = routeFilePath.match(routeFilePathPattern);
 			if (!matches) continue;
 			const method = matches[3]!;
-			const routePath = `${baseUrlPath}${matches[1]!}`;
+			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\[([^\]]+)\]/g, ':$1');
 			server[method as (typeof allowedHttpMethods)[number]](routePath, ...routeModule.default);
 			totalRouteCount++;
 		} catch (error) {
