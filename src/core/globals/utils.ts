@@ -5,7 +5,7 @@ declare global {
 }
 
 globalThis.getXForwardedForHeaderFirstValue = (request) => {
-	const xForwardedFor = request.header('x-forwarded-for');
+	const xForwardedFor = request.headers['x-forwarded-for'];
 	if (!xForwardedFor) return;
 	const firstCommaIndex = xForwardedFor.indexOf(',');
 	const value = firstCommaIndex === -1 ? xForwardedFor : xForwardedFor.substring(0, firstCommaIndex);
