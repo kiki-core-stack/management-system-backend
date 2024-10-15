@@ -10,5 +10,4 @@ globalThis.cleanupAdminCachesAndSession = async (request, response, admin) => {
 	await redisController.twoFactorAuthentication.emailOtpCode.del(admin);
 	await redisController.twoFactorAuthentication.tempTotpSecret.del(admin);
 	await clearRequestLocalsSession(request, response);
-	sendApiSuccessResponse(response);
 };
