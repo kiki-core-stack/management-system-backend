@@ -1,5 +1,5 @@
-declare module '../middlewares/session' {
-	interface HonoContextSession {
+declare module '../core/middlewares/session/types' {
+	interface RequestLocalsSession {
 		adminId: string;
 		tempAdminIdForSendEmailOtpCode: string;
 

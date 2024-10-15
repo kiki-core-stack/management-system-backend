@@ -1,5 +1,6 @@
-export const handlerProperties = Object.freeze({ noLoginRequired: true });
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
-export default defineApiRouteHandler((ctx) => {
-	if (ctx.session.adminId) return createApiSuccessResponseData({ id: ctx.session.adminId, twoFactorAuthenticationStatus: ctx.admin!.twoFactorAuthenticationStatus });
+export default defineRouteHandler((request, response) => {
+	if (request.locals.session.adminId) sendApiSuccessResponse(response, { id: request.locals.session.adminId, twoFactorAuthenticationStatus: request.locals.admin!.twoFactorAuthenticationStatus });
+	sendApiSuccessResponse(response);
 });

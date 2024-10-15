@@ -1,3 +1,3 @@
-export const handlerProperties = Object.freeze({ noLoginRequired: true });
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
-export default defineApiRouteHandler(async (ctx) => await cleanupAdminCachesAndEventSession(ctx, ctx.admin!));
+export default defineRouteHandler(async (request, response) => await cleanupAdminCachesAndSession(request, response, request.locals.admin!));

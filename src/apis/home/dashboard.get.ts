@@ -1,4 +1,4 @@
-export default defineApiRouteHandler(async (ctx) => {
-	const processedQueries = getProcessedApiRequestQueries(ctx);
-	processedQueries;
+export default defineRouteHandler((request, response) => {
+	const processedQueries = getProcessedApiRequestQueries(request);
+	sendApiSuccessResponse(response, processedQueries);
 });

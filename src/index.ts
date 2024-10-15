@@ -1,24 +1,25 @@
-// Initialize Mongoose setup
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
+import { setupServerErrorHandling } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/error-handling';
+import '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/mongoose-model-statics';
+import logger from '@kikiutils/node/consola';
 
-// Initialize global utilities
-await import('@/globals');
+import '@/core/globals';
+import { sessionMiddleware } from '@/core/middlewares/session';
+import { registerRoutesFromFiles } from '@/core/route';
+import '@/globals';
+import { adminMiddleware } from '@/middlewares/admin';
+import { server } from '@/server';
 
-// Import and set up the server
-const { default: server } = await import('@/server');
-await import('@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling');
+// Setup error handling
+setupServerErrorHandling(server);
 
-// Begin logger setup - block content can be changed but do not remove this block
-const { useHonoLogger } = await import('@kikiutils/node/hono');
-useHonoLogger(honoApp);
-// End logger setup - block content can be changed but do not remove this block
+// Setup middlewares
+server.use('/api', await sessionMiddleware(), adminMiddleware());
 
-// Load middlewares
-await import('@/middlewares');
+// Scan files and register routes
+await registerRoutesFromFiles(server, `${import.meta.dirname}/apis`, '/api');
 
-// Begin routes setup - block content can be changed but do not remove this block
-const { registerRoutesFromFiles } = await import('@/core/register-routes');
-await registerRoutesFromFiles(honoApp, 'src/apis', '/api');
-// End routes setup - block content can be changed but do not remove this block
-
-export default server;
+// Start server
+const serverHost = process.env.SERVER_HOST || '127.0.0.1';
+const serverPort = +(process.env.SERVER_PORT || 8000);
+await server.listen(serverPort, serverHost);
+logger.info(`Server started on http://${serverHost}:${serverPort}`);
