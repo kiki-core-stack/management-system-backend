@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "ts-project-builder './src/apis/**/*.ts' ./src/index.ts -mf esm --clean --preserve-modules",
+    "build": "ts-project-builder './src/apis/**/*.ts' './src/routes/**/*.ts' ./src/index.ts -mf esm --clean --preserve-modules",
     "dev": "NODE_ENV=development dotenv -e ./.env.development.local -- nodemon --ext json,ts --watch ./src --exec 'node ./build-development.mjs && node ./.development/index.mjs'"
   },
   "dependencies": {
