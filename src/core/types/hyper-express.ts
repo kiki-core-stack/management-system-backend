@@ -1,6 +1,7 @@
-import type { DefaultRequestLocals, DefaultResponseLocals, MiddlewareNext, Request, Response, RouteRecord, Server, UserRouteHandler, UserRouteOptions } from '@kikiutils/hyper-express';
+import type { DefaultRequestLocals, DefaultResponseLocals, MiddlewareNext, Request, Response, RouteRecord, Server, UserRouteOptions } from '@kikiutils/hyper-express';
 
 export type MiddlewareHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>, next: MiddlewareNext) => any;
+export type UserRouteHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>) => void;
 
 interface Route extends RouteRecord {
 	app: Server;
