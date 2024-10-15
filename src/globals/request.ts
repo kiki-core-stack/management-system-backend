@@ -1,15 +1,15 @@
-import type { Context } from 'hono';
+import type { Request } from '@kikiutils/hyper-express';
 import { escapeRegExp } from 'lodash-es';
 import { Types } from 'mongoose';
 
 declare global {
-	function getProcessedApiRequestQueries(ctx: Context, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]): ProcessedApiRequestQueries;
+	function getProcessedApiRequestQueries(request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]): ProcessedApiRequestQueries;
 }
 
-globalThis.getProcessedApiRequestQueries = (ctx, filterInFields, processObjectIdIgnoreFields) => {
+globalThis.getProcessedApiRequestQueries = (request, filterInFields, processObjectIdIgnoreFields) => {
 	let filterQuery: Dict<any> = {};
 	let selectFields: Nullable<Set<string>> = null;
-	const queries = ctx.req.query() as {
+	const queries = request.query as {
 		filterQuery?: string;
 		limit?: string;
 		page?: string;
