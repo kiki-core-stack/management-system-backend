@@ -10,6 +10,8 @@
     "@kikiutils/kiki-core-stack-pack": "^0.32.0",
     "@kikiutils/node": "^4.3.1",
     "glob": "^11.0.0",
+    "lodash-es": "^4.17.21",
+    "mongoose": "^8.7.1",
     "nanoid": "^5.0.7",
     "nodemailer": "^6.9.15",
     "otp-io": "^1.2.6",
