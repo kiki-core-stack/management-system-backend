@@ -8,7 +8,7 @@ type StoredData = [number, PartialRequestLocalsSession, ip?: string];
 export const sessionMiddleware = async (): Promise<MiddlewareHandler> => {
 	await import('./globals');
 	return async (request, response) => {
-		const token = request.headers['session'];
+		const token = request.headers.session;
 		let sessionData: PartialRequestLocalsSession | undefined;
 		if (token) {
 			let storedData: Nullable<StoredData> = null;

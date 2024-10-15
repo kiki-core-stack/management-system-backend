@@ -7,7 +7,7 @@ ENV NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
 WORKDIR /app
 
 ## Install dependencies
-COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
+COPY ./package.json ./pnpm-lock.yaml ./
 RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
 
 ## Set production env
@@ -19,24 +19,28 @@ COPY ./ts-project-builder.config.mjs ./tsconfig.json ./
 RUN pnpm run build
 
 # Runtime stage
-FROM kikikanri/node22:base-alpine
+FROM node:22-slim
 
 ## Set args, envs and workdir
 ENV NODE_ENV=production
-ENV SERVER_HOST=127.0.0.1
+ENV PNPM_HOME=/pnpm
+ENV SERVER_HOST=0.0.0.0
 ENV SERVER_PORT=8000
 WORKDIR /app
 
 ## Set timezone and upgrade packages
-RUN apk update && apk upgrade --no-cache
-RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+RUN apt-get update && apt-get upgrade -y
+RUN apt install -y --no-install-recommends tzdata
+RUN ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
+RUN apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 ## Install dependencies
-COPY --from=build-stage /app/.npmrc /app/package.json /app/pnpm-lock.yaml ./
+RUN npm i pnpm@latest -g
+COPY --from=build-stage /app/package.json /app/pnpm-lock.yaml ./
 RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
 
 ## Copy files and libraries
-COPY --from=build-stage /app/dist ./dist
+COPY --from=build-stage /app/dist ./
 
 ## Set cmd
-CMD ["node", "./dist/index.mjs"]
+CMD ["node", "./index.mjs"]
