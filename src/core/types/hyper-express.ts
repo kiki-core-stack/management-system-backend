@@ -14,7 +14,7 @@ interface Route extends RouteRecord {
 }
 
 export interface RouteHandlerOptions extends UserRouteOptions {
-	properties?: RouteHandlerProperties;
+	properties?: Omit<RouteHandlerProperties, 'isHandler'>;
 }
 
 export interface RouteHandlerProperties {
