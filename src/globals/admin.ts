@@ -1,13 +1,13 @@
+import type { Request, Response } from '@kikiutils/hyper-express';
 import redisController from '@kikiutils/kiki-core-stack-pack/controllers/redis';
 import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models';
-import type { Context } from 'hono';
 
 declare global {
-	function cleanupAdminCachesAndEventSession(ctx: Context, admin: AdminDocument): Promise<void>;
+	function cleanupAdminCachesAndEventSession(request: Request, response: Response, admin: AdminDocument): Promise<void>;
 }
 
-globalThis.cleanupAdminCachesAndEventSession = async (ctx, admin) => {
+globalThis.cleanupAdminCachesAndEventSession = async (request, response, admin) => {
 	await redisController.twoFactorAuthentication.emailOtpCode.del(admin);
 	await redisController.twoFactorAuthentication.tempTotpSecret.del(admin);
-	clearHonoContextSession(ctx);
+	await clearRequestLocalsSession(request, response);
 };
