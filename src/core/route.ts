@@ -30,7 +30,7 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 			const matches = routeFilePath.match(routeFilePathPattern);
 			if (!matches) continue;
 			const method = matches[3]!;
-			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\[([^\]]+)\]/g, ':$1');
+			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\[([^\/]+)\]/g, ':$1');
 			const latestHandler = routeModule.default.at(-1);
 			const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
 			if (routeHandlerOptions) {
