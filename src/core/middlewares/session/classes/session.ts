@@ -36,6 +36,7 @@ export class Session {
 		if (this.#token) await sessionStorage.removeItem(this.#token);
 		this.#request.locals.session = {};
 		this.#response.cookie('session', null);
+		this.#token = undefined;
 	}
 
 	get(key: keyof PartialRequestLocalsSession) {
@@ -50,7 +51,7 @@ export class Session {
 				storedData = await sessionStorage.getItem<StoredData>(this.#token);
 			} catch {}
 			if (storedData && storedData[0] + 86400000 >= Date.now()) sessionData = storedData[1];
-			if (!sessionData) return await this.clear();
+			else return await this.clear();
 		}
 
 		this.#request.locals.session = sessionData || {};
@@ -59,7 +60,7 @@ export class Session {
 	async pop(key: keyof PartialRequestLocalsSession) {
 		const value = this.#request.locals.session[key];
 		delete this.#request.locals.session[key];
-		await this.#save();
+		if (value !== undefined) await this.#save();
 		return value;
 	}
 
