@@ -1,4 +1,5 @@
 import type { Request, Response } from '@kikiutils/hyper-express';
+import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
 import type { PaginateOptions } from 'mongoose';
 
 declare global {
@@ -21,16 +22,16 @@ declare global {
 	};
 }
 
-Object.defineProperty(globalThis, 'sendPaginatedModelDataResponse', {
-	configurable: false,
-	async value<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+setReadonlyConstantToGlobalThis(
+	'sendPaginatedModelDataResponse',
+	async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		requestOrResponse: Request | Response,
 		modelOrResponse: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | Response,
 		modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedApiRequestQueries,
 		paginateOptions?: PaginateOptions,
 		filterInFields?: Dict<string>,
 		processObjectIdIgnoreFields?: string[]
-	) {
+	) => {
 		let paginatedData;
 		let response = requestOrResponse;
 		if ('json' in modelOrResponse) {
@@ -41,6 +42,5 @@ Object.defineProperty(globalThis, 'sendPaginatedModelDataResponse', {
 		}
 
 		sendApiSuccessResponse(response as Response, paginatedData);
-	},
-	writable: false
-});
+	}
+);
