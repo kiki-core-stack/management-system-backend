@@ -1,5 +1,5 @@
 import type { Request, Response } from '@kikiutils/hyper-express';
-import type { PaginateOptions, PopulateOptions, QueryOptions } from 'mongoose';
+import type { PaginateOptions, QueryOptions } from 'mongoose';
 
 declare global {
 	const getModelDocumentByRouteIdAndDelete: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
@@ -17,7 +17,7 @@ declare global {
 		beforeUpdate?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>, field: string, value: boolean) => any
 	) => Promise<void>;
 
-	const sendModelToPaginatedResponse: {
+	const sendPaginatedModelDataResponse: {
 		<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 			request: Request,
 			response: Response,
@@ -72,7 +72,7 @@ Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndUpdateBooleanFiel
 	writable: false
 });
 
-Object.defineProperty(globalThis, 'sendModelToPaginatedResponse', {
+Object.defineProperty(globalThis, 'sendPaginatedModelDataResponse', {
 	configurable: false,
 	async value<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		requestOrResponse: Request | Response,
@@ -82,32 +82,16 @@ Object.defineProperty(globalThis, 'sendModelToPaginatedResponse', {
 		filterInFields?: Dict<string>,
 		processObjectIdIgnoreFields?: string[]
 	) {
-		let model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
-		let queries: ProcessedApiRequestQueries;
-		let response: Response;
+		let paginatedData;
+		let response = requestOrResponse;
 		if ('json' in modelOrResponse) {
-			// @ts-expect-error
-			model = modelOrQueries;
-			queries = getProcessedApiRequestQueries(requestOrResponse as Request, filterInFields, processObjectIdIgnoreFields);
+			paginatedData = await modelToPaginatedData(requestOrResponse as Request, modelOrQueries as BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, paginateOptions, filterInFields, processObjectIdIgnoreFields);
 			response = modelOrResponse;
 		} else {
-			model = modelOrResponse;
-			// @ts-expect-error
-			queries = modelOrQueries;
-			// @ts-expect-error
-			response = requestOrResponse;
+			paginatedData = await modelToPaginatedData(modelOrResponse as BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, modelOrQueries as ProcessedApiRequestQueries, paginateOptions);
 		}
 
-		if (paginateOptions?.populate && queries.selectFields.length) paginateOptions.populate = [paginateOptions.populate].flat().filter((item) => queries.selectFields.includes(typeof item === 'object' ? item.path : item)) as PopulateOptions[] | string[];
-		const paginateResult = await model.paginate(queries.filterQuery, {
-			...paginateOptions,
-			limit: queries.limit,
-			page: queries.page,
-			select: queries.selectFields,
-			sort: paginateOptions?.sort || { _id: -1 }
-		});
-
-		sendApiSuccessResponse(response, { count: paginateResult.totalDocs, data: paginateResult.docs });
+		sendApiSuccessResponse(response as Response, paginatedData);
 	},
 	writable: false
 });
