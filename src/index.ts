@@ -6,14 +6,13 @@ import '@/core/globals';
 import { sessionMiddleware } from '@/core/middlewares/session';
 import { registerRoutesFromFiles } from '@/core/route';
 import '@/globals';
-import { apiResponseMiddleware } from '@/middlewares/api-response';
 import { server } from '@/server';
 
 // Setup error handling
 setupServerErrorHandling(server);
 
 // Setup middlewares
-server.use('/api', apiResponseMiddleware(), await sessionMiddleware());
+server.use('/api', await sessionMiddleware());
 
 // Scan files and register routes
 await registerRoutesFromFiles(server, `${import.meta.dirname}/apis`, '/api');
