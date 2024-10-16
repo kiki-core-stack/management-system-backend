@@ -12,7 +12,7 @@ import { server } from '@/server';
 setupServerErrorHandling(server);
 
 // Setup middlewares
-server.use('/api', await sessionMiddleware());
+server.use('/api', sessionMiddleware());
 
 // Scan files and register routes
 await registerRoutesFromFiles(server, `${import.meta.dirname}/apis`, '/api');
