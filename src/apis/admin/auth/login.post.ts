@@ -14,14 +14,14 @@ export default defineRouteHandlerWithZodValidator(
 	},
 	async (request, response) => {
 		const data = request.locals.verifiedData.json;
-		if (data.verCode !== (await popRequestLocalsSession(request, response, 'verCode'))?.toLowerCase()) throwApiError(400, '驗證碼錯誤！', { isVerCodeIncorrect: true });
+		if (data.verCode !== (await request.session.pop('verCode'))?.toLowerCase()) throwApiError(400, '驗證碼錯誤！', { isVerCodeIncorrect: true });
 		const admin = await AdminModel.findOne({ account: data.account, enabled: true });
 		if (!admin) throwApiError(404, '帳號不存在，未啟用或密碼錯誤！');
-		await setRequestLocalsSession(request, response, 'tempAdminIdForSendEmailOtpCode', admin.id);
+		await request.session.set('tempAdminIdForSendEmailOtpCode', admin.id);
 		await requireTwoFactorAuthentication(request, true, true, admin, true);
 		if (!admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼錯誤！');
-		await cleanupAdminCachesAndSession(request, response, admin);
-		await setRequestLocalsSession(request, response, 'adminId', admin.id);
+		await cleanupAdminCachesAndSession(request, admin);
+		await request.session.set('adminId', admin.id);
 		AdminLogModel.create({
 			admin,
 			ip: getXForwardedForHeaderFirstValue(request),

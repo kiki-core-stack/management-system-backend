@@ -15,7 +15,7 @@ export default defineRouteHandlerWithZodValidator(
 		if (!request.locals.admin!.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼錯誤！');
 		if (data.newPassword === data.oldPassword) throwApiError(400, '新密碼不能與舊密碼相同！');
 		await request.locals.admin!.updateOne({ password: data.newPassword });
-		await cleanupAdminCachesAndSession(request, response, request.locals.admin!);
+		await cleanupAdminCachesAndSession(request, request.locals.admin!);
 		sendApiSuccessResponse(response);
 	}
 );
