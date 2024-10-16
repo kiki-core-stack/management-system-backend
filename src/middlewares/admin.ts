@@ -10,5 +10,5 @@ export const adminMiddleware = (): MiddlewareHandler => async (request, response
 	}
 
 	if (request.route?.handler.noLoginRequired || request.locals.session.adminId) return;
-	response.header('Content-Type', 'application/json').status(401).send(statusCodeToApiResponseTextMap[401]);
+	response.header('content-type', 'application/json').status(401).send(statusCodeToApiResponseTextMap[401]);
 };
