@@ -23,6 +23,7 @@ export class Session {
 		this.#response.cookie('session', this.#token, undefined, {
 			httpOnly: true,
 			maxAge: 86400,
+			path: '/',
 			sameSite: 'strict',
 			secure: true
 		});
