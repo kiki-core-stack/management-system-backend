@@ -70,14 +70,17 @@ importers:
         specifier: ^3.1.7
         version: 3.1.7
       ts-project-builder:
-        specifier: ^3.1.1
-        version: 3.1.1(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3)
+        specifier: ^3.1.2
+        version: 3.1.2(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3)
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.10
       tslib:
         specifier: ^2.8.0
         version: 2.8.0
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
 
 packages:
 
@@ -532,8 +535,8 @@ packages:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
 
-  acorn@8.12.1:
-    resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
+  acorn@8.13.0:
+    resolution: {integrity: sha512-8zSiw54Oxrdym50NlZ9sUusyO1Z1ZchgRLWRaK6c86XJFClyCgFKetdowBg5bKxyp/u+CDBJG4Mpp0m3HLZl9w==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1485,8 +1488,8 @@ packages:
     resolution: {integrity: sha512-2lv/66T7e5yNyhAAC4NaKe5nVavzuGJQVVtRYLyQ2OI8tsJ61PMLlelehb0wi2Hx6+hT/OJUWZcw8MjlSRnxvw==}
     engines: {node: '>=14'}
 
-  ts-project-builder@3.1.1:
-    resolution: {integrity: sha512-pnsMZZ9h8NJxHfGcrhalPliKgm8dbRO+wsnm424u0IPfvWnB3FlUXbFWhs73KkKKz6GrlzLCF9hVK5G5fxlB4Q==}
+  ts-project-builder@3.1.2:
+    resolution: {integrity: sha512-8/Q2RaF4F9blnwtWeP48CmIQjvx0zgGva7k78P0b3nbQu9KIjtymvjIPbfQr79jfjsJNntlrMEsE2KCPFIKdjA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -2029,7 +2032,7 @@ snapshots:
       mime-types: 2.1.35
       negotiator: 0.6.3
 
-  acorn@8.12.1: {}
+  acorn@8.13.0: {}
 
   ansi-regex@5.0.1: {}
 
@@ -2534,7 +2537,7 @@ snapshots:
 
   mlly@1.7.2:
     dependencies:
-      acorn: 8.12.1
+      acorn: 8.13.0
       pathe: 1.1.2
       pkg-types: 1.2.1
       ufo: 1.5.4
@@ -2953,7 +2956,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  ts-project-builder@3.1.1(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3):
+  ts-project-builder@3.1.2(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3):
     dependencies:
       '@rollup/plugin-commonjs': 28.0.1(rollup@4.24.0)
       '@rollup/plugin-json': 6.1.0(rollup@4.24.0)
