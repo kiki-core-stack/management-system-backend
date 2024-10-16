@@ -8,5 +8,5 @@ declare module '@kikiutils/hyper-express' {
 
 export const apiResponseMiddleware = (): MiddlewareHandler => (_, response, next) => {
 	next();
-	if (!response._wrapped_request.received) sendApiSuccessResponse(response);
+	if (!response.sent) sendApiSuccessResponse(response);
 };
