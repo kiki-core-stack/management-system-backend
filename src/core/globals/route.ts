@@ -8,42 +8,58 @@ type MiddlewareHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValida
 	verifiedData: { [key in keyof Schemas]: Schemas[key] extends ZodTypeAny ? ZodInfer<Schemas[key]> : never };
 }>;
 
-type RouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas = {}> = MiddlewareHandler<{
+type RouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas = {}> = UserRouteHandler<{
 	verifiedData: { [key in keyof Schemas]: Schemas[key] extends ZodTypeAny ? ZodInfer<Schemas[key]> : never };
 }>;
 
 type RouteHandlerWithZodValidatorSchemas = Partial<Record<'params' | 'json' | 'query', ZodTypeAny>>;
 
 declare global {
-	function defineRouteHandler(handler: UserRouteHandler): [UserRouteHandler];
-	function defineRouteHandler(handler: MiddlewareHandler, ...handlers: [...MiddlewareHandler[], UserRouteHandler]): [...MiddlewareHandler[], UserRouteHandler];
-	function defineRouteHandler(handlers: [...MiddlewareHandler[], UserRouteHandler]): [...MiddlewareHandler[], UserRouteHandler];
+	const defineRouteHandler: {
+		(handler: UserRouteHandler): [UserRouteHandler];
+		(handler: MiddlewareHandler, ...handlers: [...MiddlewareHandler[], UserRouteHandler]): [...MiddlewareHandler[], UserRouteHandler];
+		(handlers: [...MiddlewareHandler[], UserRouteHandler]): [...MiddlewareHandler[], UserRouteHandler];
+	};
 
-	function defineRouteHandlerOptions(options: RouteHandlerOptions): RouteHandlerOptions;
+	const defineRouteHandlerOptions: (options: RouteHandlerOptions) => RouteHandlerOptions;
 
-	function defineRouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas>(schemas: Schemas, handler: RouteHandlerWithZodValidator<Schemas>): [RouteHandlerWithZodValidator<Schemas>, RouteHandlerWithZodValidator<Schemas>];
-	function defineRouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas>(
-		schemas: Schemas,
-		handler: MiddlewareHandlerWithZodValidator<Schemas>,
-		...handlers: [...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>]
-	): [RouteHandlerWithZodValidator<Schemas>, ...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>];
-	function defineRouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSchemas>(
-		schemas: Schemas,
-		handlers: [...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>]
-	): [RouteHandlerWithZodValidator<Schemas>, ...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>];
+	const defineRouteHandlerWithZodValidator: {
+		<Schemas extends RouteHandlerWithZodValidatorSchemas>(schemas: Schemas, handler: RouteHandlerWithZodValidator<Schemas>): [RouteHandlerWithZodValidator<Schemas>, RouteHandlerWithZodValidator<Schemas>];
+		<Schemas extends RouteHandlerWithZodValidatorSchemas>(
+			schemas: Schemas,
+			handler: MiddlewareHandlerWithZodValidator<Schemas>,
+			...handlers: [...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>]
+		): [RouteHandlerWithZodValidator<Schemas>, ...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>];
+		<Schemas extends RouteHandlerWithZodValidatorSchemas>(
+			schemas: Schemas,
+			handlers: [...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>]
+		): [RouteHandlerWithZodValidator<Schemas>, ...MiddlewareHandlerWithZodValidator<Schemas>[], RouteHandlerWithZodValidator<Schemas>];
+	};
 }
 
-// @ts-expect-error
-globalThis.defineRouteHandler = (...handlers) => handlers.flat();
-globalThis.defineRouteHandlerOptions = (options) => options;
-globalThis.defineRouteHandlerWithZodValidator = (schemas, ...handlers) => [
-	async (request) => {
-		// @ts-expect-error
-		request.locals.verifiedData = {};
-		if (schemas.params) request.locals.verifiedData.params = schemas.params.parse(request.params);
-		if (schemas.json) request.locals.verifiedData.json = schemas.json.parse(await request.json());
-		if (schemas.query) request.locals.verifiedData.query = schemas.query.parse(request.query);
-	},
-	// @ts-expect-error
-	...handlers.flat()
-];
+Object.defineProperty(globalThis, 'defineRouteHandler', {
+	configurable: false,
+	value: (...handlers: (MiddlewareHandler | UserRouteHandler)[]) => handlers.flat(),
+	writable: false
+});
+
+Object.defineProperty(globalThis, 'defineRouteHandlerOptions', {
+	configurable: false,
+	value: (options: RouteHandlerOptions) => options,
+	writable: false
+});
+
+Object.defineProperty(globalThis, 'defineRouteHandlerWithZodValidator', {
+	configurable: false,
+	value: <Schemas extends RouteHandlerWithZodValidatorSchemas>(schemas: Schemas, ...handlers: (MiddlewareHandler | UserRouteHandler)[]) => [
+		async (request: Parameters<RouteHandlerWithZodValidator<Schemas>>[0]) => {
+			// @ts-expect-error
+			request.locals.verifiedData = {};
+			if (schemas.params) request.locals.verifiedData.params = schemas.params.parse(request.params);
+			if (schemas.json) request.locals.verifiedData.json = schemas.json.parse(await request.json());
+			if (schemas.query) request.locals.verifiedData.query = schemas.query.parse(request.query);
+		},
+		...handlers.flat()
+	],
+	writable: false
+});
