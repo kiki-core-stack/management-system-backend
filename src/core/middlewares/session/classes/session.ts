@@ -14,13 +14,18 @@ export class Session {
 	constructor(request: Request, response: Response) {
 		this.#request = request;
 		this.#response = response;
-		this.#token = request.headers.session;
+		this.#token = request.cookies.session;
 	}
 
 	async #save() {
 		if (!this.#token) this.#token = nanoid(64);
 		await sessionStorage.setItem(this.#token, [Date.now(), this.#request.locals.session], { ttl: 86400 });
-		this.#response.header('set-session', this.#token, true);
+		this.#response.cookie('session', this.#token, undefined, {
+			httpOnly: true,
+			maxAge: 86400,
+			sameSite: 'strict',
+			secure: true
+		});
 	}
 
 	get token() {
@@ -30,7 +35,7 @@ export class Session {
 	async clear() {
 		if (this.#token) await sessionStorage.removeItem(this.#token);
 		this.#request.locals.session = {};
-		this.#response.header('set-session', '', true);
+		this.#response.cookie('session', null);
 	}
 
 	get(key: keyof PartialRequestLocalsSession) {
