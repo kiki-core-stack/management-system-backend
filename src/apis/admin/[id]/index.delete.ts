@@ -1,7 +1,7 @@
 import { mongooseConnections } from '@kikiutils/kiki-core-stack-pack/constants/mongoose';
 import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
-export default defineRouteHandler(async (request) => {
+export default defineRouteHandler(async (request, response) => {
 	await mongooseConnections.default!.transaction(async (session) => {
 		await getModelDocumentByRouteIdAndDelete(request, AdminModel, { session }, async (admin) => {
 			if (admin.id === request.locals.session.adminId) throwApiError(409, '無法刪除自己！');
@@ -9,4 +9,6 @@ export default defineRouteHandler(async (request) => {
 			await AdminLogModel.deleteMany({ admin }, { session });
 		});
 	});
+
+	sendApiSuccessResponse(response);
 });

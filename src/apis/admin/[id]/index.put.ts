@@ -4,10 +4,11 @@ import type { UpdateQuery } from 'mongoose';
 
 import { jsonSchema } from '../index.put';
 
-export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request) => {
+export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request, response) => {
 	const admin = await AdminModel.findByRouteIdOrThrowNotFoundError(request);
 	const updateQuery: UpdateQuery<AdminDocument> = request.locals.verifiedData.json;
 	updateQuery.enabled = updateQuery.enabled || admin.id === request.locals.session.adminId;
 	if (!updateQuery.email) updateQuery.$unset = { email: true };
 	await admin.updateOne(updateQuery);
+	sendApiSuccessResponse(response);
 });

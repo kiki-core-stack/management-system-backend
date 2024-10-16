@@ -11,8 +11,9 @@ export const jsonSchema = z.object({
 	twoFactorAuthenticationStatus: z.object({ emailOtp: z.boolean(), totp: z.boolean() })
 }) satisfies ZodType<OmitMongooseTimestampAndOtherFields<AdminData, 'id'>>;
 
-export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request) => {
+export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request, response) => {
 	const data = request.locals.verifiedData.json;
 	if (data.password?.length !== 128) throwApiError(400);
 	await AdminModel.create(data);
+	sendApiSuccessResponse(response);
 });
