@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@kikiutils/hyper-express": "^6.21.0",
-    "@kikiutils/kiki-core-stack-pack": "^0.33.0",
-    "@kikiutils/node": "^4.3.1",
+    "@kikiutils/kiki-core-stack-pack": "^0.34.0",
+    "@kikiutils/node": "^4.4.0",
     "glob": "^11.0.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.0.7",

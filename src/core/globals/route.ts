@@ -1,5 +1,6 @@
 // prettier-multiline-arrays-set-threshold: 3
 
+import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
 import type { infer as ZodInfer, ZodTypeAny } from 'zod';
 
 import type { MiddlewareHandler, RouteHandlerOptions, UserRouteHandler } from '@/core/types/hyper-express';
@@ -37,29 +38,15 @@ declare global {
 	};
 }
 
-Object.defineProperty(globalThis, 'defineRouteHandler', {
-	configurable: false,
-	value: (...handlers: (MiddlewareHandler | UserRouteHandler)[]) => handlers.flat(),
-	writable: false
-});
-
-Object.defineProperty(globalThis, 'defineRouteHandlerOptions', {
-	configurable: false,
-	value: (options: RouteHandlerOptions) => options,
-	writable: false
-});
-
-Object.defineProperty(globalThis, 'defineRouteHandlerWithZodValidator', {
-	configurable: false,
-	value: <Schemas extends RouteHandlerWithZodValidatorSchemas>(schemas: Schemas, ...handlers: (MiddlewareHandler | UserRouteHandler)[]) => [
-		async (request: Parameters<RouteHandlerWithZodValidator<Schemas>>[0]) => {
-			// @ts-expect-error
-			request.locals.verifiedData = {};
-			if (schemas.params) request.locals.verifiedData.params = schemas.params.parse(request.params);
-			if (schemas.json) request.locals.verifiedData.json = schemas.json.parse(await request.json());
-			if (schemas.query) request.locals.verifiedData.query = schemas.query.parse(request.query);
-		},
-		...handlers.flat()
-	],
-	writable: false
-});
+setReadonlyConstantToGlobalThis('defineRouteHandler', (...handlers: (MiddlewareHandler | UserRouteHandler)[]) => handlers.flat());
+setReadonlyConstantToGlobalThis('defineRouteHandlerOptions', (options: RouteHandlerOptions) => options);
+setReadonlyConstantToGlobalThis('defineRouteHandlerWithZodValidator', <Schemas extends RouteHandlerWithZodValidatorSchemas>(schemas: Schemas, ...handlers: (MiddlewareHandler | UserRouteHandler)[]) => [
+	async (request: Parameters<RouteHandlerWithZodValidator<Schemas>>[0]) => {
+		// @ts-expect-error
+		request.locals.verifiedData = {};
+		if (schemas.params) request.locals.verifiedData.params = schemas.params.parse(request.params);
+		if (schemas.json) request.locals.verifiedData.json = schemas.json.parse(await request.json());
+		if (schemas.query) request.locals.verifiedData.query = schemas.query.parse(request.query);
+	},
+	...handlers.flat()
+]);

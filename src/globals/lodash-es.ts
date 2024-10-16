@@ -1,3 +1,4 @@
+import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
 import { cloneDeep as _cloneDeep, merge as _merge, omit as _omit, pick as _pick } from 'lodash-es';
 
 declare global {
@@ -7,8 +8,7 @@ declare global {
 	const pick: typeof _pick;
 }
 
-const definePropertyAttributes: PropertyDescriptor = { configurable: false, writable: false };
-Object.defineProperty(globalThis, 'cloneDeep', { ...definePropertyAttributes, value: _cloneDeep });
-Object.defineProperty(globalThis, 'merge', { ...definePropertyAttributes, value: _merge });
-Object.defineProperty(globalThis, 'omit', { ...definePropertyAttributes, value: _omit });
-Object.defineProperty(globalThis, 'pick', { ...definePropertyAttributes, value: _pick });
+setReadonlyConstantToGlobalThis('cloneDeep', _cloneDeep);
+setReadonlyConstantToGlobalThis('merge', _merge);
+setReadonlyConstantToGlobalThis('omit', _omit);
+setReadonlyConstantToGlobalThis('pick', _pick);
