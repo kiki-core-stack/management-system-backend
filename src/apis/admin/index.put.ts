@@ -15,5 +15,4 @@ export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (r
 	const data = request.locals.verifiedData.json;
 	if (data.password?.length !== 128) throwApiError(400);
 	await AdminModel.create(data);
-	sendApiSuccessResponse(response);
 });

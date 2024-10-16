@@ -13,5 +13,4 @@ export default defineRouteHandler(async (request, response) => {
 	else updateQuery.totpSecret = admin.totpSecret;
 	await admin.updateOne(updateQuery);
 	await redisController.twoFactorAuthentication.tempTotpSecret.del(admin);
-	sendApiSuccessResponse(response);
 });

@@ -28,7 +28,5 @@ export default defineRouteHandlerWithZodValidator(
 			ip: getXForwardedForHeaderFirstValue(request),
 			type: AdminLogType.LoginSuccess
 		});
-
-		sendApiSuccessResponse(response);
 	}
 );

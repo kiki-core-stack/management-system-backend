@@ -10,5 +10,4 @@ export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (r
 	updateQuery.enabled = updateQuery.enabled || admin.id === request.locals.session.adminId;
 	if (!updateQuery.email) updateQuery.$unset = { email: true };
 	await admin.updateOne(updateQuery);
-	sendApiSuccessResponse(response);
 });
