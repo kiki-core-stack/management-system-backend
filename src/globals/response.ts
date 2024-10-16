@@ -4,7 +4,6 @@ import type { PaginateOptions, PopulateOptions, QueryOptions } from 'mongoose';
 declare global {
 	const getModelDocumentByRouteIdAndDelete: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		request: Request,
-		response: Response,
 		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
 		options?: Nullable<QueryOptions<RawDocType>>,
 		beforeDelete?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>) => any
@@ -12,7 +11,6 @@ declare global {
 
 	const getModelDocumentByRouteIdAndUpdateBooleanField: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		request: Request,
-		response: Response,
 		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
 		allowedFields: string[],
 		options?: Nullable<QueryOptions<RawDocType>>,
@@ -42,7 +40,6 @@ Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndDelete', {
 	configurable: false,
 	async value<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		request: Request,
-		response: Response,
 		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
 		options?: Nullable<QueryOptions<RawDocType>>,
 		beforeDelete?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>) => any
@@ -51,7 +48,6 @@ Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndDelete', {
 		// @ts-expect-error
 		await beforeDelete?.(document);
 		await document.deleteOne(options || undefined);
-		sendApiSuccessResponse(response);
 	},
 	writable: false
 });
@@ -60,7 +56,6 @@ Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndUpdateBooleanFiel
 	configurable: false,
 	async value<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		request: Request,
-		response: Response,
 		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
 		allowedFields: string[],
 		options?: Nullable<QueryOptions<RawDocType>>,
@@ -73,7 +68,6 @@ Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndUpdateBooleanFiel
 		await beforeUpdate?.(document, field, !!value);
 		// @ts-expect-error
 		await document.updateOne({ [`${field}`]: !!value });
-		sendApiSuccessResponse(response);
 	},
 	writable: false
 });
