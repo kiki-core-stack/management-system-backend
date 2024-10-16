@@ -1,7 +1,22 @@
 import type { Request } from '@kikiutils/hyper-express';
-import type { PaginateOptions, PopulateOptions } from 'mongoose';
+import type { QueryOptions, PaginateOptions, PopulateOptions } from 'mongoose';
 
 declare global {
+	const getModelDocumentByRouteIdAndDelete: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+		request: Request,
+		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+		options?: Nullable<QueryOptions<RawDocType>>,
+		beforeDelete?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>) => any
+	) => Promise<void>;
+
+	const getModelDocumentByRouteIdAndUpdateBooleanField: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+		request: Request,
+		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+		allowedFields: string[],
+		options?: Nullable<QueryOptions<RawDocType>>,
+		beforeUpdate?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>, field: string, value: boolean) => any
+	) => Promise<void>;
+
 	const modelToPaginatedData: {
 		<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 			request: Request,
@@ -14,6 +29,42 @@ declare global {
 		<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, queries: ProcessedApiRequestQueries, paginateOptions?: PaginateOptions): Promise<any>;
 	};
 }
+
+Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndDelete', {
+	configurable: false,
+	async value<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+		request: Request,
+		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+		options?: Nullable<QueryOptions<RawDocType>>,
+		beforeDelete?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>) => any
+	) {
+		const document = await model.findByRouteIdOrThrowNotFoundError(request, undefined, null, options);
+		// @ts-expect-error
+		await beforeDelete?.(document);
+		await document.deleteOne(options || undefined);
+	},
+	writable: false
+});
+
+Object.defineProperty(globalThis, 'getModelDocumentByRouteIdAndUpdateBooleanField', {
+	configurable: false,
+	async value<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+		request: Request,
+		model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+		allowedFields: string[],
+		options?: Nullable<QueryOptions<RawDocType>>,
+		beforeUpdate?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>, field: string, value: boolean) => any
+	) {
+		const document = await model.findByRouteIdOrThrowNotFoundError(request, undefined, null, options);
+		const { field, value } = await request.json<{ field: string; value: boolean }>();
+		if (!allowedFields.includes(field)) throwApiError(400);
+		// @ts-expect-error
+		await beforeUpdate?.(document, field, !!value);
+		// @ts-expect-error
+		await document.updateOne({ [`${field}`]: !!value });
+	},
+	writable: false
+});
 
 Object.defineProperty(globalThis, 'modelToPaginatedData', {
 	configurable: false,
