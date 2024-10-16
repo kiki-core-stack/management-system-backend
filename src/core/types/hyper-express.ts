@@ -23,6 +23,6 @@ export interface RouteHandlerProperties {
 
 declare module '@kikiutils/hyper-express' {
 	interface Request {
-		route?: Route;
+		route: Route;
 	}
 }
