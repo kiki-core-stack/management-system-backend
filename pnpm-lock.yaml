@@ -55,14 +55,17 @@ importers:
         specifier: ^3.1.7
         version: 3.1.7
       ts-project-builder:
-        specifier: ^3.1.1
-        version: 3.1.1(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3)
+        specifier: ^3.1.2
+        version: 3.1.2(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3)
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.10
       tslib:
         specifier: ^2.8.0
         version: 2.8.0
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
 
 packages:
 
@@ -353,8 +356,8 @@ packages:
     resolution: {integrity: sha512-HNjmfLQEVRZmHRET336f20H/8kOozUGwk7yajvsonjNxbj2wBTK1WsQuHkD5yYh9RxFGL2EyDHryOihOwUoKDA==}
     engines: {node: '>= 10.0.0'}
 
-  '@rollup/plugin-commonjs@28.0.0':
-    resolution: {integrity: sha512-BJcu+a+Mpq476DMXG+hevgPSl56bkUoi88dKT8t3RyUp8kGuOh+2bU8Gs7zXDlu+fyZggnJ+iOBGrb/O1SorYg==}
+  '@rollup/plugin-commonjs@28.0.1':
+    resolution: {integrity: sha512-+tNWdlWKbpB3WgBN7ijjYkq9X5uhjmcvyjEght4NmH5fAU++zfQzAJ6wumLS+dNcvwEZhKx2Z+skY8m7v0wGSA==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0||^4.0.0
@@ -380,8 +383,8 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/plugin-typescript@12.1.0':
-    resolution: {integrity: sha512-Kzs8KGJofe7cfTRODsnG1jNGxSvU8gVoNNd7Z/QaY25AYwe2LSSUpx/kPxqF38NYkpR8de3m51r9uwJpDlz6dg==}
+  '@rollup/plugin-typescript@12.1.1':
+    resolution: {integrity: sha512-t7O653DpfB5MbFrqPe/VcKFFkvRuFNp9qId3xq4Eth5xlyymzxNpye2z8Hrl0RIMuXTSr5GGcFpkdlMeacUiFQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.14.0||^3.0.0||^4.0.0
@@ -514,8 +517,8 @@ packages:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
 
-  acorn@8.12.1:
-    resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
+  acorn@8.13.0:
+    resolution: {integrity: sha512-8zSiw54Oxrdym50NlZ9sUusyO1Z1ZchgRLWRaK6c86XJFClyCgFKetdowBg5bKxyp/u+CDBJG4Mpp0m3HLZl9w==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1183,6 +1186,10 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  picomatch@4.0.2:
+    resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
+    engines: {node: '>=12'}
+
   pino-abstract-transport@2.0.0:
     resolution: {integrity: sha512-F63x5tizV6WCh4R6RHyi2Ml+M70DNRXt/+HANowMflpgGFMAym/VKm6G7ZOQRjqN7XbGxK1Lg9t6ZrtzOaivMw==}
 
@@ -1444,8 +1451,8 @@ packages:
     resolution: {integrity: sha512-2lv/66T7e5yNyhAAC4NaKe5nVavzuGJQVVtRYLyQ2OI8tsJ61PMLlelehb0wi2Hx6+hT/OJUWZcw8MjlSRnxvw==}
     engines: {node: '>=14'}
 
-  ts-project-builder@3.1.1:
-    resolution: {integrity: sha512-pnsMZZ9h8NJxHfGcrhalPliKgm8dbRO+wsnm424u0IPfvWnB3FlUXbFWhs73KkKKz6GrlzLCF9hVK5G5fxlB4Q==}
+  ts-project-builder@3.1.2:
+    resolution: {integrity: sha512-8/Q2RaF4F9blnwtWeP48CmIQjvx0zgGva7k78P0b3nbQu9KIjtymvjIPbfQr79jfjsJNntlrMEsE2KCPFIKdjA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -1860,15 +1867,15 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
-  '@rollup/plugin-commonjs@28.0.0(rollup@4.24.0)':
+  '@rollup/plugin-commonjs@28.0.1(rollup@4.24.0)':
     dependencies:
       '@rollup/pluginutils': 5.1.2(rollup@4.24.0)
       commondir: 1.0.1
       estree-walker: 2.0.2
-      fdir: 6.4.0(picomatch@2.3.1)
+      fdir: 6.4.0(picomatch@4.0.2)
       is-reference: 1.2.1
       magic-string: 0.30.12
-      picomatch: 2.3.1
+      picomatch: 4.0.2
     optionalDependencies:
       rollup: 4.24.0
 
@@ -1888,7 +1895,7 @@ snapshots:
     optionalDependencies:
       rollup: 4.24.0
 
-  '@rollup/plugin-typescript@12.1.0(rollup@4.24.0)(tslib@2.8.0)(typescript@5.6.3)':
+  '@rollup/plugin-typescript@12.1.1(rollup@4.24.0)(tslib@2.8.0)(typescript@5.6.3)':
     dependencies:
       '@rollup/pluginutils': 5.1.2(rollup@4.24.0)
       resolve: 1.22.8
@@ -1984,7 +1991,7 @@ snapshots:
       mime-types: 2.1.35
       negotiator: 0.6.3
 
-  acorn@8.12.1: {}
+  acorn@8.13.0: {}
 
   ansi-regex@5.0.1: {}
 
@@ -2254,9 +2261,9 @@ snapshots:
     dependencies:
       reusify: 1.0.4
 
-  fdir@6.4.0(picomatch@2.3.1):
+  fdir@6.4.0(picomatch@4.0.2):
     optionalDependencies:
-      picomatch: 2.3.1
+      picomatch: 4.0.2
 
   fill-range@7.1.1:
     dependencies:
@@ -2489,7 +2496,7 @@ snapshots:
 
   mlly@1.7.2:
     dependencies:
-      acorn: 8.12.1
+      acorn: 8.13.0
       pathe: 1.1.2
       pkg-types: 1.2.1
       ufo: 1.5.4
@@ -2609,6 +2616,8 @@ snapshots:
   pathe@1.1.2: {}
 
   picomatch@2.3.1: {}
+
+  picomatch@4.0.2: {}
 
   pino-abstract-transport@2.0.0:
     dependencies:
@@ -2892,12 +2901,12 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  ts-project-builder@3.1.1(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3):
+  ts-project-builder@3.1.2(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3):
     dependencies:
-      '@rollup/plugin-commonjs': 28.0.0(rollup@4.24.0)
+      '@rollup/plugin-commonjs': 28.0.1(rollup@4.24.0)
       '@rollup/plugin-json': 6.1.0(rollup@4.24.0)
       '@rollup/plugin-node-resolve': 15.3.0(rollup@4.24.0)
-      '@rollup/plugin-typescript': 12.1.0(rollup@4.24.0)(tslib@2.8.0)(typescript@5.6.3)
+      '@rollup/plugin-typescript': 12.1.1(rollup@4.24.0)(tslib@2.8.0)(typescript@5.6.3)
       cleye: 1.3.2
       colorette: 2.0.20
       glob: 11.0.0
