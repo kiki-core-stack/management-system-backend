@@ -1,7 +1,6 @@
 import { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
 import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
-import type { ZodType } from 'zod';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
@@ -11,7 +10,7 @@ export default defineRouteHandlerWithZodValidator(
 			account: z.string().trim().min(1),
 			password: z.string().trim(),
 			verCode: z.string().trim().toLowerCase()
-		}) satisfies ZodType<AdminLoginFormData>
+		}) satisfies ZodValidatorType<AdminLoginFormData>
 	},
 	async (request, response) => {
 		const data = request.locals.verifiedData.json;

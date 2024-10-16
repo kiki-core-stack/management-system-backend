@@ -1,6 +1,5 @@
 import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
-import type { ZodType } from 'zod';
 
 export const jsonSchema = z.object({
 	account: z.string().trim().max(16).min(1),
@@ -9,7 +8,7 @@ export const jsonSchema = z.object({
 	name: z.string().trim().max(16).min(1),
 	password: z.string().trim().length(128).optional(),
 	twoFactorAuthenticationStatus: z.object({ emailOtp: z.boolean(), totp: z.boolean() })
-}) satisfies ZodType<OmitMongooseTimestampAndOtherFields<AdminData, 'id'>>;
+}) satisfies ZodValidatorType<AdminData>;
 
 export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request, response) => {
 	const data = request.locals.verifiedData.json;
