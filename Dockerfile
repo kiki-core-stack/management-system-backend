@@ -41,6 +41,7 @@ RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
+COPY ./docker-run-cluster.mjs ./
 
 ## Set cmd
-CMD ["node", "./index.mjs"]
+CMD ["node", "./docker-run-cluster.mjs"]
