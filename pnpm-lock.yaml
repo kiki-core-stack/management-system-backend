@@ -12,11 +12,11 @@ importers:
         specifier: ^6.21.0
         version: 6.21.0
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.33.0
-        version: 0.33.0
+        specifier: ^0.34.0
+        version: 0.34.0
       '@kikiutils/node':
-        specifier: ^4.3.1
-        version: 4.3.1
+        specifier: ^4.4.0
+        version: 4.4.0
       glob:
         specifier: ^11.0.0
         version: 11.0.0
@@ -250,15 +250,15 @@ packages:
   '@kikiutils/hyper-express@6.21.0':
     resolution: {integrity: sha512-RiHjv8LJv6qx+4nLg+gL6OT8vSIIxi5MEu/t/FEi+ubyy8/42/sq0RueWuXDWzZqhTbnS6n59RjcYEzCI5pCfA==}
 
-  '@kikiutils/kiki-core-stack-pack@0.33.0':
-    resolution: {integrity: sha512-e2Wh/dpE0zChZ/FX92ZMv8BcKyjNXdWtstrf4hgQBl0da+4SWFNvai+8CG4Zj9LQcpVtSQpNXcCn3CzK/xdRPQ==}
+  '@kikiutils/kiki-core-stack-pack@0.34.0':
+    resolution: {integrity: sha512-jrufNHrwUUyrjPzXL7X8s6nUooT3DVEzusXGJHzfRgzEpS2GGX0adrWoyVOsMUXdOM1DPkwndZug+mwncQo4SA==}
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
     engines: {node: '>=18'}
 
-  '@kikiutils/node@4.3.1':
-    resolution: {integrity: sha512-nt3Jxa06qly/YHV60leXqzW/7cacXvXm5VK5MCUBKS9t+8hx5VHjl5KNlpurC7X13dv6Gik2L8f25x8tVDiqFg==}
+  '@kikiutils/node@4.4.0':
+    resolution: {integrity: sha512-l8tCH3TAvyszDgw0Smw0Ivyz8irWhRXagrcVfPYRj+OXj8pAGelwro96pbrY3VK9vBCbASk+JODdg0NeSmlUYQ==}
     engines: {node: '>=18'}
 
   '@kikiutils/prettierrc@1.3.2':
@@ -1761,10 +1761,10 @@ snapshots:
       typed-emitter: 2.1.0
       uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700
 
-  '@kikiutils/kiki-core-stack-pack@0.33.0':
+  '@kikiutils/kiki-core-stack-pack@0.34.0':
     dependencies:
       '@kikiutils/mongoose': 1.4.0
-      '@kikiutils/node': 4.3.1
+      '@kikiutils/node': 4.4.0
       '@kikiutils/types': 2.2.1
       '@socket.io/component-emitter': 3.1.2
       '@types/lodash-es': 4.17.12
@@ -1801,7 +1801,7 @@ snapshots:
       - socks
       - supports-color
 
-  '@kikiutils/node@4.3.1':
+  '@kikiutils/node@4.4.0':
     dependencies:
       '@noble/hashes': 1.5.0
       axios: 1.7.7
