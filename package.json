@@ -6,7 +6,7 @@
     "dev": "NODE_ENV=development dotenv -e ./.env.development.local -- nodemon --ext json,ts --watch ./src --exec 'node ./build-development.mjs && node ./.development/index.mjs'"
   },
   "dependencies": {
-    "@kikiutils/hyper-express": "^6.19.4",
+    "@kikiutils/hyper-express": "^6.20.0",
     "@kikiutils/kiki-core-stack-pack": "^0.32.0",
     "@kikiutils/node": "^4.3.1",
     "glob": "^11.0.0",
@@ -30,7 +30,7 @@
     "nodemon": "^3.1.7",
     "ts-project-builder": "^3.1.1",
     "tsc-alias": "^1.8.10",
-    "tslib": "^2.7.0"
+    "tslib": "^2.8.0"
   },
   "prettier": "@kikiutils/prettierrc"
 }

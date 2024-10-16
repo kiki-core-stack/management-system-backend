@@ -17,6 +17,7 @@ server.use('/api', await sessionMiddleware(), adminMiddleware());
 
 // Scan files and register routes
 await registerRoutesFromFiles(server, `${import.meta.dirname}/apis`, '/api');
+await registerRoutesFromFiles(server, `${import.meta.dirname}/routes`, '/');
 
 // Start server
 const serverHost = process.env.SERVER_HOST || '127.0.0.1';

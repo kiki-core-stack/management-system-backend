@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/hyper-express':
-        specifier: ^6.19.4
-        version: 6.19.4
+        specifier: ^6.20.0
+        version: 6.20.0
       '@kikiutils/kiki-core-stack-pack':
         specifier: ^0.32.0
         version: 0.32.0
@@ -71,13 +71,13 @@ importers:
         version: 3.1.7
       ts-project-builder:
         specifier: ^3.1.1
-        version: 3.1.1(esbuild@0.24.0)(tslib@2.7.0)(typescript@5.6.3)
+        version: 3.1.1(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3)
       tsc-alias:
         specifier: ^1.8.10
         version: 1.8.10
       tslib:
-        specifier: ^2.7.0
-        version: 2.7.0
+        specifier: ^2.8.0
+        version: 2.8.0
 
 packages:
 
@@ -244,8 +244,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
-  '@kikiutils/hyper-express@6.19.4':
-    resolution: {integrity: sha512-OZ3yIvOava1mtPsDiOa9gcQk+jDdh4k8y0YKXZRzMnmBCfOSzILjCLHu4MDDgvRCtZxzlmTtZaWA0O1SDAg8Xw==}
+  '@kikiutils/hyper-express@6.20.0':
+    resolution: {integrity: sha512-8himsq32+qIhJ3w/aQifs8jihibbpWBejDlTAsFALt/p1yMzD3o+nKESqiNBhhlBeyUBPOTOlgO2e/G1sDhsTA==}
 
   '@kikiutils/kiki-core-stack-pack@0.32.0':
     resolution: {integrity: sha512-BpqU/W2tWinawOUm8ijF8cvaIXE82UDJUOVe0au47slNhbETuAfy8GCl0Jz9y9GbBi3oN93rHkXX5v5j3CatEA==}
@@ -1490,8 +1490,8 @@ packages:
     resolution: {integrity: sha512-Ibv4KAWfFkFdKJxnWfVtdOmB0Zi1RJVxcbPGiCDsFpCQSsmpWyuzHG3rQyI5YkobWwxFPEyQfu1hdo4qLG2zPw==}
     hasBin: true
 
-  tslib@2.7.0:
-    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
+  tslib@2.8.0:
+    resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
 
   type-fest@4.26.1:
     resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
@@ -1742,7 +1742,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
-  '@kikiutils/hyper-express@6.19.4':
+  '@kikiutils/hyper-express@6.20.0':
     dependencies:
       accepts: 1.3.8
       busboy: 1.6.0
@@ -1925,14 +1925,14 @@ snapshots:
     optionalDependencies:
       rollup: 4.24.0
 
-  '@rollup/plugin-typescript@12.1.0(rollup@4.24.0)(tslib@2.7.0)(typescript@5.6.3)':
+  '@rollup/plugin-typescript@12.1.0(rollup@4.24.0)(tslib@2.8.0)(typescript@5.6.3)':
     dependencies:
       '@rollup/pluginutils': 5.1.2(rollup@4.24.0)
       resolve: 1.22.8
       typescript: 5.6.3
     optionalDependencies:
       rollup: 4.24.0
-      tslib: 2.7.0
+      tslib: 2.8.0
 
   '@rollup/pluginutils@5.1.2(rollup@4.24.0)':
     dependencies:
@@ -2828,7 +2828,7 @@ snapshots:
 
   rxjs@7.8.1:
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.8.0
     optional: true
 
   safe-buffer@5.2.1: {}
@@ -2947,12 +2947,12 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  ts-project-builder@3.1.1(esbuild@0.24.0)(tslib@2.7.0)(typescript@5.6.3):
+  ts-project-builder@3.1.1(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3):
     dependencies:
       '@rollup/plugin-commonjs': 28.0.0(rollup@4.24.0)
       '@rollup/plugin-json': 6.1.0(rollup@4.24.0)
       '@rollup/plugin-node-resolve': 15.3.0(rollup@4.24.0)
-      '@rollup/plugin-typescript': 12.1.0(rollup@4.24.0)(tslib@2.7.0)(typescript@5.6.3)
+      '@rollup/plugin-typescript': 12.1.0(rollup@4.24.0)(tslib@2.8.0)(typescript@5.6.3)
       cleye: 1.3.2
       colorette: 2.0.20
       glob: 11.0.0
@@ -2976,7 +2976,7 @@ snapshots:
       normalize-path: 3.0.0
       plimit-lit: 1.6.1
 
-  tslib@2.7.0: {}
+  tslib@2.8.0: {}
 
   type-fest@4.26.1: {}
 
