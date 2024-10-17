@@ -12,13 +12,8 @@ importers:
         specifier: ^6.22.0
         version: 6.22.0
       '@kikiutils/kiki-core-stack-pack':
-<<<<<<< HEAD
-        specifier: ^0.34.1
-        version: 0.34.1
-=======
         specifier: ^0.35.0
         version: 0.35.0
->>>>>>> ac5154f1f428dec53c015f01d2193c2384bb5f6b
       '@kikiutils/node':
         specifier: ^4.4.0
         version: 4.4.0
@@ -62,12 +57,9 @@ importers:
       '@types/node':
         specifier: ^22.7.6
         version: 22.7.6
-<<<<<<< HEAD
       '@types/nodemailer':
         specifier: ^6.4.16
         version: 6.4.16
-=======
->>>>>>> ac5154f1f428dec53c015f01d2193c2384bb5f6b
       dotenv-cli:
         specifier: ^7.4.2
         version: 7.4.2
@@ -258,13 +250,8 @@ packages:
   '@kikiutils/hyper-express@6.22.0':
     resolution: {integrity: sha512-oAS9ewJ86U//054QiHRKIoJ8KMt0DFjfqGVTHYlQJE2Yj5GuUx20v7coVf6MXtPCkTtk4wcFfLSPVfWN/mVmBQ==}
 
-<<<<<<< HEAD
-  '@kikiutils/kiki-core-stack-pack@0.34.1':
-    resolution: {integrity: sha512-MHt70ajv77dUPQaBwU9MqzmqVQ0f+vJCISjACQ6kbOxQpsLh7neyFbe/N28RGvpuIcFONIkybXERrHTJ7Kw2ug==}
-=======
   '@kikiutils/kiki-core-stack-pack@0.35.0':
     resolution: {integrity: sha512-m7erKuZuTUOztV4cNyW1YWcrA9vNkG8/BWNJaT/3yQvCJK5KJlALFHob8Y3Ll9Cdx4Kghju5MwaLbyg+X5VWhQ==}
->>>>>>> ac5154f1f428dec53c015f01d2193c2384bb5f6b
 
   '@kikiutils/mongoose@1.4.0':
     resolution: {integrity: sha512-rdI+tAq4z7nFKKrShxVBJS2DSaPc6xHAJU/Q4kxTc2HpmgFZejOrQHr1h+e63mYedrirI0PWWpXb4+LtWrSfzQ==}
@@ -527,12 +514,9 @@ packages:
 
   '@types/node@22.7.6':
     resolution: {integrity: sha512-/d7Rnj0/ExXDMcioS78/kf1lMzYk4BZV8MZGTBKzTGZ6/406ukkbYlIsZmMPhcR5KlkunDHQLrtAVmSq7r+mSw==}
-<<<<<<< HEAD
 
   '@types/nodemailer@6.4.16':
     resolution: {integrity: sha512-uz6hN6Pp0upXMcilM61CoKyjT7sskBoOWpptkjjJp8jIMlTdc3xG01U7proKkXzruMS4hS0zqtHNkNPFB20rKQ==}
-=======
->>>>>>> ac5154f1f428dec53c015f01d2193c2384bb5f6b
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -1777,11 +1761,7 @@ snapshots:
       typed-emitter: 2.1.0
       uWebSockets.js: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/442087c0a01bf146acb7386910739ec81df06700
 
-<<<<<<< HEAD
-  '@kikiutils/kiki-core-stack-pack@0.34.1':
-=======
   '@kikiutils/kiki-core-stack-pack@0.35.0':
->>>>>>> ac5154f1f428dec53c015f01d2193c2384bb5f6b
     dependencies:
       '@kikiutils/mongoose': 1.4.0
       '@kikiutils/node': 4.4.0

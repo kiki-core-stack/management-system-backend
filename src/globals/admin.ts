@@ -1,5 +1,5 @@
 import type { Request } from '@kikiutils/hyper-express';
-import redisController from '@kikiutils/kiki-core-stack-pack/controllers/redis';
+import { redisController } from '@kikiutils/kiki-core-stack-pack/controllers/redis';
 import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
 

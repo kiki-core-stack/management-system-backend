@@ -1,4 +1,4 @@
-import redisController from '@kikiutils/kiki-core-stack-pack/controllers/redis';
+import { redisController } from '@kikiutils/kiki-core-stack-pack/controllers/redis';
 import { generateTotpSecretData } from '@kikiutils/kiki-core-stack-pack/utils/two-factor-authentication';
 
 export default defineRouteHandler(async (request, response) => {
