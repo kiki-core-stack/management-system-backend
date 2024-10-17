@@ -2,7 +2,7 @@ import cluster from 'cluster';
 
 if (cluster.isPrimary) {
 	console.log(`Primary process ${process.pid} is running`);
-	const workerCount = process.env.CLUSTER_WORKERS || 4;
+	const workerCount = Number(process.env.CLUSTER_WORKERS) || 4;
 	console.log(`Starting ${workerCount} worker processes`);
 	for (let i = 0; i < workerCount; i++) cluster.fork();
 	cluster.on('exit', (worker, code, signal) => {
