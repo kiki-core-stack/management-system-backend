@@ -5,5 +5,5 @@ export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noL
 export default defineRouteHandler(async (request, response) => {
 	const captcha = create({ background: 'transparent', noise: Math.floor(Math.random() * 3) + 2 });
 	await request.session.set('verCode', captcha.text);
-	response.header('content-type', 'image/svg+xml').send(captcha.data);
+	response.svg(captcha.data);
 });
