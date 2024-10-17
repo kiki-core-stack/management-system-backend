@@ -1,6 +1,6 @@
 import type { MiddlewareHandler } from '@kikiutils/hyper-express';
 
-import Session from './classes/session';
+import { Session } from './classes/session';
 
 export const sessionMiddleware = (): MiddlewareHandler => {
 	return async (request, response) => {
