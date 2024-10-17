@@ -64,5 +64,3 @@ export class Session {
 		await this.#save();
 	}
 }
-
-export default Session;
