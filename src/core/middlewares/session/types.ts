@@ -1,4 +1,4 @@
-import type Session from './classes/session';
+import type { Session } from './classes/session';
 
 export type PartialRequestLocalsSession = Partial<RequestLocalsSession>;
 
