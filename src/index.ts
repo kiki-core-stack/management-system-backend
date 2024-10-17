@@ -8,6 +8,7 @@ import { registerRoutesFromFiles } from '@/core/route';
 import '@/globals';
 import { adminMiddleware } from '@/middlewares/admin';
 import { server } from '@/server';
+import '@/shutdown-handler';
 
 // Setup error handling
 setupServerErrorHandling(server);
