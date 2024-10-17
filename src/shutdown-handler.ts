@@ -13,6 +13,7 @@ async function handleShutdown() {
 	await sessionStorage.dispose();
 	await Promise.all(Object.values(mongooseConnections).map((connection: Connection) => connection.close()));
 	logger.success('Server shutdown complete');
+	process.exit(0);
 }
 
 process.on('SIGINT', handleShutdown);
