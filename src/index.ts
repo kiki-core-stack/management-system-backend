@@ -7,6 +7,7 @@ import { sessionMiddleware } from '@/core/middlewares/session';
 import { registerRoutesFromFiles } from '@/core/route';
 import '@/globals';
 import { server } from '@/server';
+import '@/shutdown-handler';
 
 // Setup error handling
 setupServerErrorHandling(server);
