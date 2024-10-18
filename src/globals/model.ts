@@ -27,7 +27,7 @@ declare global {
 			processObjectIdIgnoreFields?: string[]
 		): Promise<any>;
 
-		<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, queries: ProcessedApiRequestQueries, paginateOptions?: PaginateOptions): Promise<any>;
+		<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, queries: ProcessedAPIRequestQueries, paginateOptions?: PaginateOptions): Promise<any>;
 	};
 }
 
@@ -57,7 +57,7 @@ setReadonlyConstantToGlobalThis(
 	) => {
 		const document = await model.findByRouteIdOrThrowNotFoundError(request, undefined, null, options);
 		const { field, value } = await request.json<{ field: string; value: boolean }>();
-		if (!allowedFields.includes(field)) throwApiError(400);
+		if (!allowedFields.includes(field)) throwAPIError(400);
 		// @ts-expect-error
 		await beforeUpdate?.(document, field, !!value);
 		// @ts-expect-error
@@ -69,17 +69,17 @@ setReadonlyConstantToGlobalThis(
 	'modelToPaginatedData',
 	async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		modelOrRequest: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | Request,
-		modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedApiRequestQueries,
+		modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedAPIRequestQueries,
 		paginateOptions?: PaginateOptions,
 		filterInFields?: Dict<string>,
 		processObjectIdIgnoreFields?: string[]
 	) => {
 		let model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
-		let queries: ProcessedApiRequestQueries;
+		let queries: ProcessedAPIRequestQueries;
 		if ('json' in modelOrRequest) {
 			// @ts-expect-error
 			model = modelOrQueries;
-			queries = getProcessedApiRequestQueries(modelOrRequest as Request, filterInFields, processObjectIdIgnoreFields);
+			queries = getProcessedAPIRequestQueries(modelOrRequest as Request, filterInFields, processObjectIdIgnoreFields);
 		} else {
 			model = modelOrRequest;
 			// @ts-expect-error

@@ -16,7 +16,7 @@ declare global {
 		<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 			response: Response,
 			model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
-			queries: ProcessedApiRequestQueries,
+			queries: ProcessedAPIRequestQueries,
 			paginateOptions?: PaginateOptions
 		): Promise<void>;
 	};
@@ -27,7 +27,7 @@ setReadonlyConstantToGlobalThis(
 	async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
 		requestOrResponse: Request | Response,
 		modelOrResponse: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | Response,
-		modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedApiRequestQueries,
+		modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedAPIRequestQueries,
 		paginateOptions?: PaginateOptions,
 		filterInFields?: Dict<string>,
 		processObjectIdIgnoreFields?: string[]
@@ -38,9 +38,9 @@ setReadonlyConstantToGlobalThis(
 			paginatedData = await modelToPaginatedData(requestOrResponse as Request, modelOrQueries as BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, paginateOptions, filterInFields, processObjectIdIgnoreFields);
 			response = modelOrResponse;
 		} else {
-			paginatedData = await modelToPaginatedData(modelOrResponse as BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, modelOrQueries as ProcessedApiRequestQueries, paginateOptions);
+			paginatedData = await modelToPaginatedData(modelOrResponse as BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, modelOrQueries as ProcessedAPIRequestQueries, paginateOptions);
 		}
 
-		sendApiSuccessResponse(response as Response, paginatedData);
+		sendAPISuccessResponse(response as Response, paginatedData);
 	}
 );

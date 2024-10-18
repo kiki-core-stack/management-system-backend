@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from '@kikiutils/hyper-express';
-import { statusCodeToApiResponseTextMap } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/constants/response';
+import { statusCodeToAPIResponseTextMap } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/constants/response';
 import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
 export const adminMiddleware = (): MiddlewareHandler => async (request, response) => {
@@ -10,5 +10,5 @@ export const adminMiddleware = (): MiddlewareHandler => async (request, response
 	}
 
 	if (request.route.handler.noLoginRequired || request.locals.session.adminId) return;
-	response.header('content-type', 'application/json').status(401).send(statusCodeToApiResponseTextMap[401]);
+	response.header('content-type', 'application/json').status(401).send(statusCodeToAPIResponseTextMap[401]);
 };

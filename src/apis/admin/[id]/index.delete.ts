@@ -4,11 +4,11 @@ import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/model
 export default defineRouteHandler(async (request, response) => {
 	await mongooseConnections.default!.transaction(async (session) => {
 		await getModelDocumentByRouteIdAndDelete(request, AdminModel, { session }, async (admin) => {
-			if (admin.id === request.locals.session.adminId) throwApiError(409, '無法刪除自己！');
-			if ((await AdminModel.countDocuments()) === 1) throwApiError(409, '無法刪除最後一位管理員！');
+			if (admin.id === request.locals.session.adminId) throwAPIError(409, '無法刪除自己！');
+			if ((await AdminModel.countDocuments()) === 1) throwAPIError(409, '無法刪除最後一位管理員！');
 			await AdminLogModel.deleteMany({ admin }, { session });
 		});
 	});
 
-	sendApiSuccessResponse(response);
+	sendAPISuccessResponse(response);
 });

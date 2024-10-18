@@ -6,14 +6,14 @@ export default defineRouteHandler(async (request, response) => {
 		AdminModel,
 		[
 			'enabled',
-			'twoFactorAuthenticationStatus.emailOtp',
+			'twoFactorAuthenticationStatus.emailOTP',
 			'twoFactorAuthenticationStatus.totp'
 		],
 		null,
 		(admin, field) => {
-			if (field === 'enabled' && admin.id === request.locals.session.adminId) throwApiError(400, '無法變更自己的啟用狀態！');
+			if (field === 'enabled' && admin.id === request.locals.session.adminId) throwAPIError(400, '無法變更自己的啟用狀態！');
 		}
 	);
 
-	sendApiSuccessResponse(response);
+	sendAPISuccessResponse(response);
 });

@@ -8,7 +8,7 @@ declare global {
 }
 
 setReadonlyConstantToGlobalThis('cleanupAdminCachesAndSession', async (request: Request, admin: AdminDocument) => {
-	await redisController.twoFactorAuthentication.emailOtpCode.del(admin);
-	await redisController.twoFactorAuthentication.tempTotpSecret.del(admin);
+	await redisController.twoFactorAuthentication.emailOTPCode.del(admin);
+	await redisController.twoFactorAuthentication.tempTOTPSecret.del(admin);
 	await request.session.clear();
 });

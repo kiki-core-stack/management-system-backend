@@ -2,5 +2,5 @@ export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noL
 
 export default defineRouteHandler(async (request, response) => {
 	await cleanupAdminCachesAndSession(request, request.locals.admin!);
-	sendApiSuccessResponse(response);
+	sendAPISuccessResponse(response);
 });

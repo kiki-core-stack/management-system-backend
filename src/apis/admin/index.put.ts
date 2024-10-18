@@ -7,12 +7,12 @@ export const jsonSchema = z.object({
 	enabled: z.boolean(),
 	name: z.string().trim().max(16).min(1),
 	password: z.string().trim().length(128).optional(),
-	twoFactorAuthenticationStatus: z.object({ emailOtp: z.boolean(), totp: z.boolean() })
+	twoFactorAuthenticationStatus: z.object({ emailOTP: z.boolean(), totp: z.boolean() })
 }) satisfies ZodValidatorType<AdminData>;
 
 export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request, response) => {
 	const data = request.locals.verifiedData.json;
-	if (data.password?.length !== 128) throwApiError(400);
+	if (data.password?.length !== 128) throwAPIError(400);
 	await AdminModel.create(data);
-	sendApiSuccessResponse(response);
+	sendAPISuccessResponse(response);
 });

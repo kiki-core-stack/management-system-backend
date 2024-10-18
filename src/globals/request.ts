@@ -4,7 +4,7 @@ import { escapeRegExp } from 'lodash-es';
 import { Types } from 'mongoose';
 
 declare global {
-	const getProcessedApiRequestQueries: (request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => ProcessedApiRequestQueries;
+	const getProcessedAPIRequestQueries: (request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => ProcessedAPIRequestQueries;
 }
 
 const baseFilterInFields = { states: 'state', types: 'type' } as const;
@@ -20,7 +20,7 @@ function processRegexString(value: string) {
 	}
 }
 
-setReadonlyConstantToGlobalThis('getProcessedApiRequestQueries', (request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => {
+setReadonlyConstantToGlobalThis('getProcessedAPIRequestQueries', (request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => {
 	let filterQuery: Dict<any> = {};
 	let selectFields: Nullable<Set<string>> = null;
 	const queries = request.query as {
