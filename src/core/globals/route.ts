@@ -13,7 +13,7 @@ type RouteHandlerWithZodValidator<Schemas extends RouteHandlerWithZodValidatorSc
 	verifiedData: { [key in keyof Schemas]: Schemas[key] extends ZodTypeAny ? ZodInfer<Schemas[key]> : never };
 }>;
 
-type RouteHandlerWithZodValidatorSchemas = Partial<Record<'params' | 'json' | 'query', ZodTypeAny>>;
+type RouteHandlerWithZodValidatorSchemas = PartialRecord<'params' | 'json' | 'query', ZodTypeAny>;
 
 declare global {
 	const defineRouteHandler: {
