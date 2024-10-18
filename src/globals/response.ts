@@ -1,5 +1,5 @@
 import type { Request, Response } from '@kikiutils/hyper-express';
-import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
+import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { PaginateOptions } from 'mongoose';
 
 declare global {

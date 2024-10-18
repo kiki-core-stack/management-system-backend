@@ -1,5 +1,5 @@
 import type { Request } from '@kikiutils/hyper-express';
-import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
+import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import { escapeRegExp } from 'lodash-es';
 import { Types } from 'mongoose';
 
