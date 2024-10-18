@@ -1,6 +1,6 @@
 // prettier-multiline-arrays-set-threshold: 3
 
-import { setReadonlyConstantToGlobalThis } from '@kikiutils/node/object';
+import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { infer as ZodInfer, ZodTypeAny } from 'zod';
 
 import type { MiddlewareHandler, RouteHandlerOptions, UserRouteHandler } from '@/core/types/hyper-express';
