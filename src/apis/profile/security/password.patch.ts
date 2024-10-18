@@ -12,7 +12,7 @@ export default defineRouteHandlerWithZodValidator(
 		const data = request.locals.verifiedData.json;
 		if (data.newPassword !== data.conformPassword) throwAPIError(400, '確認密碼不符！');
 		await requireTwoFactorAuthentication(request);
-		if (!request.locals.admin!.verifyPassword(data.oldPassword)) throwAPIError(400, '舊密碼錯誤！');
+		if (!request.locals.admin!.verifyPassword(data.oldPassword)) throwAPIError(400, '舊密碼不正確！');
 		if (data.newPassword === data.oldPassword) throwAPIError(400, '新密碼不能與舊密碼相同！');
 		await request.locals.admin!.updateOne({ password: data.newPassword });
 		await cleanupAdminCachesAndSession(request, request.locals.admin!);
