@@ -3,7 +3,8 @@ import type { Server } from '@kikiutils/hyper-express';
 import { glob } from 'glob';
 import { relative, resolve, sep } from 'path';
 
-import type { RouteHandlerOptions } from '@/core/types/hyper-express';
+import { zodOpenAPIRegistry } from './constants/zod-openapi';
+import type { RouteHandlerOptions } from './types/hyper-express';
 
 const allowedHttpMethods = [
 	'connect',
@@ -30,7 +31,7 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 			const matches = routeFilePath.match(routeFilePathPattern);
 			if (!matches) continue;
 			const method = matches[3]!;
-			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\[([^/]+)\]/g, ':$1').replaceAll(/\/+/g, '/');
+			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\/+/g, '/');
 			const latestHandler = routeModule.default.at(-1);
 			const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
 			if (routeHandlerOptions) {
@@ -44,13 +45,21 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 				routeModule.default.unshift(routeHandlerOptions);
 			}
 
+			if (routeModule.zodOpenAPIConfig) {
+				zodOpenAPIRegistry.registerPath({
+					...routeModule.zodOpenAPIConfig,
+					method,
+					path: routePath.replaceAll(/\[([^/]+)\]/g, '{$1}')
+				});
+			}
+
 			Object.defineProperty(latestHandler, 'isHandler', {
 				configurable: false,
 				value: true,
 				writable: false
 			});
 
-			server[method as (typeof allowedHttpMethods)[number]](routePath, ...routeModule.default);
+			server[method as (typeof allowedHttpMethods)[number]](routePath.replaceAll(/\[([^/]+)\]/g, ':$1'), ...routeModule.default);
 			totalRouteCount++;
 		} catch (error) {
 			logger.error(`Failed to load route file: ${routeFilePath}`, (error as Error).message);
