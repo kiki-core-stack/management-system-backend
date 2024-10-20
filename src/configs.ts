@@ -1,9 +1,12 @@
 import { checkAndGetEnvValue } from '@kikiutils/node/env';
+import type { ReadonlyDeep } from 'type-fest';
 
-export interface Configs {
+export type Configs = ReadonlyDeep<{
 	redisUri: string;
-}
+}>;
 
-export default {
+export const configs: Configs = {
 	redisUri: checkAndGetEnvValue('REDIS_URI')
-} satisfies Configs;
+};
+
+export default configs;
