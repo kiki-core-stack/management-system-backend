@@ -1,3 +1,4 @@
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { setupServerErrorHandling } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/error-handling';
 import '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/mongoose-model-statics';
 import logger from '@kikiutils/node/consola';
@@ -8,6 +9,9 @@ import { registerRoutesFromFiles } from '@/core/route';
 import '@/globals';
 import { server } from '@/server';
 import '@/shutdown-handler';
+
+// Extend Zod with OpenAPI
+extendZodWithOpenApi(z);
 
 // Setup error handling
 setupServerErrorHandling(server);

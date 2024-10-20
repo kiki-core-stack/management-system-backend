@@ -7,6 +7,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.2.0",
     "@kikiutils/hyper-express": "^6.22.0",
     "@kikiutils/kiki-core-stack-pack": "^0.37.0",
     "@kikiutils/mongoose": "^1.4.1",
