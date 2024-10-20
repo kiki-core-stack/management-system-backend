@@ -1,5 +1,6 @@
 import type { DefaultRequestLocals, DefaultResponseLocals, MiddlewareNext, Request, Response, RouteRecord, Server, UserRouteOptions } from '@kikiutils/hyper-express';
 
+type MaybeArray<T> = T | T[];
 export type MiddlewareHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>, next: MiddlewareNext) => any;
 export type UserRouteHandler<RequestLocals extends {} = {}, ResponseLocals extends {} = {}> = (request: Request<RequestLocals & DefaultRequestLocals>, response: Response<ResponseLocals & DefaultResponseLocals>) => void;
 
@@ -14,6 +15,7 @@ interface Route extends RouteRecord {
 }
 
 export interface RouteHandlerOptions extends UserRouteOptions {
+	environment?: MaybeArray<'development' | 'production' | 'test'>;
 	properties?: Omit<RouteHandlerProperties, 'isHandler'>;
 }
 
