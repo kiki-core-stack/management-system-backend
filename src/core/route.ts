@@ -34,6 +34,11 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 			const latestHandler = routeModule.default.at(-1);
 			const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
 			if (routeHandlerOptions) {
+				if (routeHandlerOptions.environment) {
+					const environments = [routeHandlerOptions.environment].flat() as string[];
+					if (environments.length && process.env.NODE_ENV && !environments.includes(process.env.NODE_ENV)) continue;
+				}
+
 				Object.assign(latestHandler, routeHandlerOptions.properties);
 				delete routeHandlerOptions.properties;
 				routeModule.default.unshift(routeHandlerOptions);
