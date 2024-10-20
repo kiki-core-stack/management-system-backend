@@ -29,6 +29,7 @@
     "dotenv-cli": "^7.4.2",
     "esbuild": "^0.24.0",
     "nodemon": "^3.1.7",
+    "openapi3-ts": "^4.4.0",
     "ts-project-builder": "^3.3.0",
     "tsc-alias": "^1.8.10",
     "type-fest": "^4.26.1",
