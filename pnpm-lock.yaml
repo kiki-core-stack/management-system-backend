@@ -11,12 +11,18 @@ importers:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.2.0
         version: 7.2.0(zod@3.23.8)
+      '@hono/swagger-ui':
+        specifier: ^0.4.1
+        version: 0.4.1(hono@4.6.5)
       '@kikiutils/kiki-core-stack-pack':
         specifier: ^0.38.0
         version: 0.38.0
       '@kikiutils/mongoose':
         specifier: ^1.4.1
         version: 1.4.1
+      '@scalar/hono-api-reference':
+        specifier: ^0.5.156
+        version: 0.5.156(hono@4.6.5)
       consola:
         specifier: ^3.2.3
         version: 3.2.3
@@ -62,6 +68,11 @@ packages:
   '@augment-vir/common@29.3.0':
     resolution: {integrity: sha512-k3OX35/576thmGUzQUBcCKGarb7ONBfiu07+iV2vxmjl7VoB1rOB0vu8WqgB1ceJq2EMLDPXY18hHpJ9WeTHXQ==}
 
+  '@hono/swagger-ui@0.4.1':
+    resolution: {integrity: sha512-kPaJatHffeYQ3yVkHo878hCqwfapqx54FczJVJ+eRWt8J4biyVVMIdCAJb6MyA8bcnHUoTmUpPc7OJAV1VTg2g==}
+    peerDependencies:
+      hono: '*'
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -89,6 +100,20 @@ packages:
   '@mongodb-js/saslprep@1.1.9':
     resolution: {integrity: sha512-tVkljjeEaAhCqTzajSdgbQ6gE6f3oneVwa3iXR6csiEwXXOFsiC6Uh9iAjAhXPtqa/XMDHWjjeNH/77m/Yq2dw==}
 
+  '@scalar/hono-api-reference@0.5.156':
+    resolution: {integrity: sha512-/byPVH0rs40qxuOInnikDeq+19wQZ0NIq0K3WJMNBeZvr0lpGqsBf4frj0soon8UAVq/uZnOMcK6jwcC50a0bg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      hono: ^4.0.0
+
+  '@scalar/openapi-types@0.1.4':
+    resolution: {integrity: sha512-+wRXgmqzgDnj8Dxqf4OOPMPo4or/LRd1Bsy4pnrIW0yBt8rKSdtBb+jH/aRnhgDDmKVjWxJ+KFk7WlSKvZwNTw==}
+    engines: {node: '>=18'}
+
+  '@scalar/types@0.0.17':
+    resolution: {integrity: sha512-wUrvNnYFMULsHENX/9TP3oyECRTtZsP06mOZU+RlWg9sRtzWVTjlBCahkgUETL93J+Bz2RLFSKVgPyNN4fpIpA==}
+    engines: {node: '>=18'}
+
   '@types/bun@1.1.11':
     resolution: {integrity: sha512-0N7D/H/8sbf9JMkaG5F3+I/cB4TlhKTkO9EskEWP8XDr8aVcDe4EywSnU4cnyZy6tar1dq70NeFNkqMEUigthw==}
 
@@ -109,6 +134,9 @@ packages:
 
   '@types/ws@8.5.12':
     resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
+
+  '@unhead/schema@1.11.10':
+    resolution: {integrity: sha512-lXh7cm5XtFaw3gc+ZVXTSfIHXiBpAywbjtEiOsz5TR4GxOjj2rtfOAl4C3Difk1yupP6L2otYmOZdn/i8EXSJg==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -199,6 +227,9 @@ packages:
   hono@4.6.5:
     resolution: {integrity: sha512-qsmN3V5fgtwdKARGLgwwHvcdLKursMd+YOt69eGpl1dUCJb8mCd7hZfyZnBYjxCegBG7qkJRQRUy2oO25yHcyQ==}
     engines: {node: '>=16.9.0'}
+
+  hookable@5.5.3:
+    resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
 
   is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
@@ -400,6 +431,9 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
 
+  zhead@2.2.4:
+    resolution: {integrity: sha512-8F0OI5dpWIA5IGG5NHUg9staDwz/ZPxZtvGVf01j7vHqSyZ0raHY+78atOVxRqb73AotX22uV1pXt3gYSstGag==}
+
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
@@ -427,6 +461,10 @@ snapshots:
       browser-or-node: 3.0.0
       run-time-assertions: 1.5.2
       type-fest: 4.26.1
+
+  '@hono/swagger-ui@0.4.1(hono@4.6.5)':
+    dependencies:
+      hono: 4.6.5
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -478,6 +516,18 @@ snapshots:
     dependencies:
       sparse-bitfield: 3.0.3
 
+  '@scalar/hono-api-reference@0.5.156(hono@4.6.5)':
+    dependencies:
+      '@scalar/types': 0.0.17
+      hono: 4.6.5
+
+  '@scalar/openapi-types@0.1.4': {}
+
+  '@scalar/types@0.0.17':
+    dependencies:
+      '@scalar/openapi-types': 0.1.4
+      '@unhead/schema': 1.11.10
+
   '@types/bun@1.1.11':
     dependencies:
       bun-types: 1.1.30
@@ -501,6 +551,11 @@ snapshots:
   '@types/ws@8.5.12':
     dependencies:
       '@types/node': 20.12.14
+
+  '@unhead/schema@1.11.10':
+    dependencies:
+      hookable: 5.5.3
+      zhead: 2.2.4
 
   ansi-regex@5.0.1: {}
 
@@ -574,6 +629,8 @@ snapshots:
       path-scurry: 2.0.0
 
   hono@4.6.5: {}
+
+  hookable@5.5.3: {}
 
   is-fullwidth-code-point@3.0.0: {}
 
@@ -744,5 +801,7 @@ snapshots:
       strip-ansi: 7.1.0
 
   yaml@2.6.0: {}
+
+  zhead@2.2.4: {}
 
   zod@3.23.8: {}

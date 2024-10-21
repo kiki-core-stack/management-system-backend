@@ -7,8 +7,10 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.2.0",
+    "@hono/swagger-ui": "^0.4.1",
     "@kikiutils/kiki-core-stack-pack": "^0.38.0",
     "@kikiutils/mongoose": "^1.4.1",
+    "@scalar/hono-api-reference": "^0.5.156",
     "consola": "^3.2.3",
     "defu": "^6.1.4",
     "glob": "^11.0.0",
