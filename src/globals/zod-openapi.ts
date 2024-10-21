@@ -31,7 +31,7 @@ setReadonlyConstantToGlobalThis('defineAPIRouteZodOpenAPIJsonResponseConfig', (d
 		'application/json': {
 			schema: z.object({
 				data: dataSchema || z.object({}),
-				message: z.literal(message),
+				message: z.string().describe(message),
 				success: z.literal(!isError)
 			})
 		}
