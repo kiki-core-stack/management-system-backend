@@ -5,7 +5,7 @@ import type { Serve } from 'bun';
 
 import { honoApp } from '@/app';
 import '@/core/globals';
-import { registerRoutesFromFiles } from '@/core/route';
+import { registerRoutesFromFiles } from '@/core/libs/route';
 import '@/globals';
 
 // Extend Zod with OpenAPI
