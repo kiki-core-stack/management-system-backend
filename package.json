@@ -15,7 +15,8 @@
     "defu": "^6.1.4",
     "glob": "^11.0.0",
     "hono": "^4.6.5",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "node-ciphers": "^1.1.3"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
