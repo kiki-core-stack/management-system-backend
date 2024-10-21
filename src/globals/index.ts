@@ -1,4 +1,4 @@
-import '@kikiutils/kiki-core-stack-pack/hyper-express-backend/globals';
+import '@kikiutils/kiki-core-stack-pack/hono-backend/globals';
 
 import './lodash-es';
 import './zod-openapi';

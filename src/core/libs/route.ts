@@ -1,24 +1,23 @@
 import logger from '@kikiutils/node/consola';
-import type { Server } from '@kikiutils/hyper-express';
 import { glob } from 'glob';
+import type { Hono } from 'hono';
 import { relative, resolve, sep } from 'path';
 
-import { zodOpenAPIRegistry } from './constants/zod-openapi';
-import type { RouteHandlerOptions } from './types/hyper-express';
+import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
+import type { RouteHandlerOptions } from '@/core/types/route';
 
 const allowedHttpMethods = [
-	'connect',
 	'delete',
 	'get',
 	'head',
 	'options',
 	'patch',
 	'post',
-	'put',
-	'trace'
+	'purge',
+	'put'
 ] as const;
 
-export const registerRoutesFromFiles = async (server: Server, scanDirPath: string, baseUrlPath: string) => {
+export const registerRoutesFromFiles = async (honoApp: Hono, scanDirPath: string, baseUrlPath: string) => {
 	scanDirPath = resolve(scanDirPath).replaceAll(sep, '/');
 	const routeFilePathPattern = new RegExp(`^${scanDirPath}(.*?)(/index)?\\.(${allowedHttpMethods.join('|')})\\.(mj|t)s$`);
 	let totalRouteCount = 0;
@@ -27,12 +26,13 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 	for (const routeFilePath of routeFilePaths) {
 		try {
 			const routeModule = await import(routeFilePath);
-			if (!routeModule.default) continue;
+			const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
+			if (!handlers.length) continue;
 			const matches = routeFilePath.match(routeFilePathPattern);
 			if (!matches) continue;
 			const method = matches[3]!;
 			const routePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\/+/g, '/');
-			const latestHandler = routeModule.default.at(-1);
+			const latestHandler = handlers.at(-1);
 			const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
 			if (routeHandlerOptions) {
 				if (routeHandlerOptions.environment) {
@@ -41,8 +41,6 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 				}
 
 				Object.assign(latestHandler, routeHandlerOptions.properties);
-				delete routeHandlerOptions.properties;
-				routeModule.default.unshift(routeHandlerOptions);
 			}
 
 			if (routeModule.zodOpenAPIConfig) {
@@ -59,7 +57,7 @@ export const registerRoutesFromFiles = async (server: Server, scanDirPath: strin
 				writable: false
 			});
 
-			server[method as (typeof allowedHttpMethods)[number]](routePath.replaceAll(/\[([^/]+)\]/g, ':$1'), ...routeModule.default);
+			honoApp.on(method, routePath.replaceAll(/\[([^/]+)\]/g, ':$1'), ...handlers);
 			totalRouteCount++;
 		} catch (error) {
 			logger.error(`Failed to load route file: ${routeFilePath}`, (error as Error).message);
