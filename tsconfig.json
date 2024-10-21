@@ -1,5 +1,5 @@
 {
-  "extends": "@kikiutils/tsconfigs/esnext/esnext.json",
+  "extends": "@kikiutils/tsconfigs/bun.json",
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
