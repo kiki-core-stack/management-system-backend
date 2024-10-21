@@ -5,6 +5,7 @@ import type { Serve } from 'bun';
 
 import { honoApp } from '@/app';
 import '@/core/globals';
+import { registerRoutesFromFiles } from '@/core/route';
 import '@/globals';
 
 // Extend Zod with OpenAPI
@@ -12,6 +13,10 @@ extendZodWithOpenApi(z);
 
 // Setup error handling
 setupHonoAppErrorHandling(honoApp);
+
+// Scan files and register routes
+await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/apis`, '/api');
+await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/routes`, '/');
 
 // Start server
 const serveConfig: Serve = {
