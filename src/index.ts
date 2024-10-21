@@ -1,15 +1,18 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
+import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
 import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
 import type { Serve } from 'bun';
 
 import { honoApp } from '@/app';
-import '@/core/globals';
 import { registerRoutesFromFiles } from '@/core/libs/route';
-import '@/globals';
 
 // Extend Zod with OpenAPI
-extendZodWithOpenApi(z);
+extendZodWithOpenApi(zod);
+
+// Import global constants and utilities
+await import('@/core/globals');
+await import('@/globals');
 
 // Setup error handling
 setupHonoAppErrorHandling(honoApp);
