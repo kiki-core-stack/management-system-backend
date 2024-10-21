@@ -6,3 +6,4 @@ import './model';
 import './lodash-es';
 import './request';
 import './response';
+import './zod-openapi';
