@@ -4,7 +4,6 @@ import type { ReadonlyDeep } from 'type-fest';
 
 export type Configs = ReadonlyDeep<{
 	openAPI: Omit<OpenAPIObject, 'components' | 'paths' | 'webhooks'>;
-	redisUri: string;
 	sessionDataEncryptionKey: Buffer;
 }>;
 
@@ -15,7 +14,6 @@ export const configs: Configs = {
 		info: { title: 'API Document', version: '0.1.0' },
 		openapi: '3.1.0'
 	},
-	redisUri: checkAndGetEnvValue('REDIS_URI'),
 	sessionDataEncryptionKey
 };
 
