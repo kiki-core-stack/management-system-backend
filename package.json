@@ -6,7 +6,11 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.2.0",
     "@kikiutils/kiki-core-stack-pack": "^0.38.0",
+    "@kikiutils/mongoose": "^1.4.1",
+    "consola": "^3.2.3",
+    "defu": "^6.1.4",
     "hono": "^4.6.5",
     "lodash-es": "^4.17.21"
   },
