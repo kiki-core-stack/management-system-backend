@@ -13,6 +13,7 @@
     "@kikiutils/mongoose": "^1.4.1",
     "@kikiutils/node": "^5.0.1",
     "@scalar/express-api-reference": "^0.4.164",
+    "defu": "^6.1.4",
     "glob": "^11.0.0",
     "ioredis": "^5.4.1",
     "lodash-es": "^4.17.21",

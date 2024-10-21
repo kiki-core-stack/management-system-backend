@@ -26,6 +26,9 @@ importers:
       '@scalar/express-api-reference':
         specifier: ^0.4.164
         version: 0.4.164
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       glob:
         specifier: ^11.0.0
         version: 11.0.0
