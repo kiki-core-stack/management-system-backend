@@ -18,6 +18,9 @@ await import('@/globals');
 // Setup error handling
 setupHonoAppErrorHandling(honoApp);
 
+// Load middlewares
+await import('@/middlewares');
+
 // Scan files and register routes
 await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/apis`, '/api');
 await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/routes`, '/');
