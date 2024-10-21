@@ -1,0 +1,225 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@kikiutils/kiki-core-stack-pack':
+        specifier: ^0.38.0
+        version: 0.38.0
+      hono:
+        specifier: ^4.6.5
+        version: 4.6.5
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+    devDependencies:
+      '@kikiutils/prettierrc':
+        specifier: ^1.3.2
+        version: 1.3.2
+      '@kikiutils/tsconfigs':
+        specifier: ^3.0.1
+        version: 3.0.1
+      '@types/bun':
+        specifier: ^1.1.11
+        version: 1.1.11
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
+
+packages:
+
+  '@augment-vir/common@23.4.0':
+    resolution: {integrity: sha512-QIrJ1doD00TNbOzeVrk9KgPTzRlIjayxERnhtbQjK/AFPj5yElcB03GbnGdQZPzws/R+5gfMM5cZiH7QyBP+Kg==}
+
+  '@augment-vir/common@28.2.4':
+    resolution: {integrity: sha512-5Ib0OX7YlxAuFrG+MAoTsz6RlKMcbdMdoNGcEEKH/ezc/ZKMy/IHZ9Z/ZcCHYopZ4ocGXzVY4KUOiJ8+CXXvTA==}
+
+  '@augment-vir/common@29.3.0':
+    resolution: {integrity: sha512-k3OX35/576thmGUzQUBcCKGarb7ONBfiu07+iV2vxmjl7VoB1rOB0vu8WqgB1ceJq2EMLDPXY18hHpJ9WeTHXQ==}
+
+  '@kikiutils/kiki-core-stack-pack@0.38.0':
+    resolution: {integrity: sha512-QB79sqtvuEGBR3IXn9ZayI4xaRI/SjSOvUSOCa7DhDBSW2dCPUzw+rgw0NTwISe4fqvVgkP0+kL26+zrVaylSw==}
+
+  '@kikiutils/node@5.0.1':
+    resolution: {integrity: sha512-TZLLVVCMdEY8Sz1iAiBsBmGaBKeavjce3brPnJDbnifVfelUXif5MuNCJdoob0odninGBMDUUKn5N759pH1goQ==}
+    engines: {node: '>=18'}
+
+  '@kikiutils/prettierrc@1.3.2':
+    resolution: {integrity: sha512-swvPqAf5VmXAKjngFywFw+ibsnwrkP1WJ9egH9ZAjjPNxZrBhVKCmk/X4a1baKUXXgSB3aMmsx0InqP3+pV2qQ==}
+
+  '@kikiutils/tsconfigs@3.0.1':
+    resolution: {integrity: sha512-euNfmx2S5chW92H7CMUWANerj7feZXs1ZMuNs4hZiOLxn/XSq46g1DcWEY7QnpbesURYQtPAQDGtkkzJzcLQtg==}
+
+  '@kikiutils/types@3.0.0':
+    resolution: {integrity: sha512-wpQ8/TNsKDfGmeKYY9Aa4v9niz+eFyZU5kn0W2jbP4WJ4EG8FrnPuw2pUaq1k8z4gionBsMfqBh/W9i0QTgBRA==}
+
+  '@types/bun@1.1.11':
+    resolution: {integrity: sha512-0N7D/H/8sbf9JMkaG5F3+I/cB4TlhKTkO9EskEWP8XDr8aVcDe4EywSnU4cnyZy6tar1dq70NeFNkqMEUigthw==}
+
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
+
+  '@types/lodash@4.17.12':
+    resolution: {integrity: sha512-sviUmCE8AYdaF/KIHLDJBQgeYzPBI0vf/17NaYehBJfYD1j6/L95Slh07NlyK2iNyBNaEkb3En2jRt+a8y3xZQ==}
+
+  '@types/node@20.12.14':
+    resolution: {integrity: sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==}
+
+  '@types/ws@8.5.12':
+    resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
+
+  browser-or-node@2.1.1:
+    resolution: {integrity: sha512-8CVjaLJGuSKMVTxJ2DpBl5XnlNDiT4cQFeuCJJrvJmts9YrTZDizTX7PjC2s6W4x+MBGZeEY6dGMrF04/6Hgqg==}
+
+  browser-or-node@3.0.0:
+    resolution: {integrity: sha512-iczIdVJzGEYhP5DqQxYM9Hh7Ztpqqi+CXZpSmX8ALFs9ecXkQIeqRyM6TfxEfMVpwhl3dSuDvxdzzo9sUOIVBQ==}
+
+  bson@6.8.0:
+    resolution: {integrity: sha512-iOJg8pr7wq2tg/zSlCCHMi3hMm5JTOxLTagf3zxhcenHsFp+c6uOs6K7W5UE7A4QIJGtqh/ZovFNMP4mOPJynQ==}
+    engines: {node: '>=16.20.1'}
+
+  bun-types@1.1.30:
+    resolution: {integrity: sha512-mGh7NLisOXskBU62DxLS+/nwmLlCYHYAkCzdo4DZ9+fzrpP41hAdOqaN4DO6tQfenHb4pYb0/shw29k4/6I2yQ==}
+
+  expect-type@0.15.0:
+    resolution: {integrity: sha512-yWnriYB4e8G54M5/fAFj7rCIBiKs1HAACaY13kCz6Ku0dezjS9aMcfcdVK2X8Tv2tEV1BPz/wKfQ7WA4S/d8aA==}
+
+  hono@4.6.5:
+    resolution: {integrity: sha512-qsmN3V5fgtwdKARGLgwwHvcdLKursMd+YOt69eGpl1dUCJb8mCd7hZfyZnBYjxCegBG7qkJRQRUy2oO25yHcyQ==}
+    engines: {node: '>=16.9.0'}
+
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+
+  prettier-plugin-multiline-arrays@3.0.6:
+    resolution: {integrity: sha512-FrWVa7MoDQo9b5XoLPrqIDClb0k+O8wOIsIr1DutRXhcerLY8PfIe/yYeTVD/vpRISkSXCBEYmj5Voe0wb5dEQ==}
+    peerDependencies:
+      prettier: '>=3.0.0'
+
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  proxy-vir@1.0.0:
+    resolution: {integrity: sha512-WV1gkBxUOwLSz0Bn09tisIqLK7leAqtFm/474t3L0hQKJw7/gdrkGcWw0/OT1PhSy+TDS6swfq7Niuoq3XJhkQ==}
+
+  run-time-assertions@1.5.2:
+    resolution: {integrity: sha512-ccfwvjGuNU14cSSXLlmPRiqEgMfA7w3J2TViO79zMnzXGvE6FJ0dxnhIQGwe5r/vwySOJ4sqZksexo9wyAlA8g==}
+    deprecated: Use @augment-vir/assert instead.
+
+  type-fest@4.26.1:
+    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
+    engines: {node: '>=16'}
+
+  typescript@5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+snapshots:
+
+  '@augment-vir/common@23.4.0':
+    dependencies:
+      browser-or-node: 2.1.1
+      run-time-assertions: 1.5.2
+      type-fest: 4.26.1
+
+  '@augment-vir/common@28.2.4':
+    dependencies:
+      browser-or-node: 3.0.0
+      run-time-assertions: 1.5.2
+      type-fest: 4.26.1
+
+  '@augment-vir/common@29.3.0':
+    dependencies:
+      browser-or-node: 3.0.0
+      run-time-assertions: 1.5.2
+      type-fest: 4.26.1
+
+  '@kikiutils/kiki-core-stack-pack@0.38.0':
+    dependencies:
+      '@kikiutils/node': 5.0.1
+      '@kikiutils/types': 3.0.0
+      '@types/lodash-es': 4.17.12
+      lodash-es: 4.17.21
+
+  '@kikiutils/node@5.0.1': {}
+
+  '@kikiutils/prettierrc@1.3.2':
+    dependencies:
+      prettier: 3.3.3
+      prettier-plugin-multiline-arrays: 3.0.6(prettier@3.3.3)
+
+  '@kikiutils/tsconfigs@3.0.1': {}
+
+  '@kikiutils/types@3.0.0':
+    dependencies:
+      bson: 6.8.0
+
+  '@types/bun@1.1.11':
+    dependencies:
+      bun-types: 1.1.30
+
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.12
+
+  '@types/lodash@4.17.12': {}
+
+  '@types/node@20.12.14':
+    dependencies:
+      undici-types: 5.26.5
+
+  '@types/ws@8.5.12':
+    dependencies:
+      '@types/node': 20.12.14
+
+  browser-or-node@2.1.1: {}
+
+  browser-or-node@3.0.0: {}
+
+  bson@6.8.0: {}
+
+  bun-types@1.1.30:
+    dependencies:
+      '@types/node': 20.12.14
+      '@types/ws': 8.5.12
+
+  expect-type@0.15.0: {}
+
+  hono@4.6.5: {}
+
+  lodash-es@4.17.21: {}
+
+  prettier-plugin-multiline-arrays@3.0.6(prettier@3.3.3):
+    dependencies:
+      '@augment-vir/common': 28.2.4
+      prettier: 3.3.3
+      proxy-vir: 1.0.0
+
+  prettier@3.3.3: {}
+
+  proxy-vir@1.0.0:
+    dependencies:
+      '@augment-vir/common': 23.4.0
+
+  run-time-assertions@1.5.2:
+    dependencies:
+      '@augment-vir/common': 29.3.0
+      expect-type: 0.15.0
+      type-fest: 4.26.1
+
+  type-fest@4.26.1: {}
+
+  typescript@5.6.3: {}
+
+  undici-types@5.26.5: {}

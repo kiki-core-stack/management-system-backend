@@ -8,7 +8,11 @@
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "type-check": "tsc"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@kikiutils/kiki-core-stack-pack": "^0.38.0",
+    "hono": "^4.6.5",
+    "lodash-es": "^4.17.21"
+  },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
     "@kikiutils/tsconfigs": "^3.0.1",
