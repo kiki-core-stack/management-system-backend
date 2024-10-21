@@ -3,8 +3,8 @@ import { glob } from 'glob';
 import type { Hono } from 'hono';
 import { relative, resolve, sep } from 'path';
 
-import { zodOpenAPIRegistry } from './constants/zod-openapi';
-import type { RouteHandlerOptions } from './types/route';
+import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
+import type { RouteHandlerOptions } from '@/core/types/route';
 
 const allowedHttpMethods = [
 	'delete',
