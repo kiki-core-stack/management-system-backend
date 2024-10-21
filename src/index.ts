@@ -6,6 +6,7 @@ import type { Serve } from 'bun';
 
 import { honoApp } from '@/app';
 import { registerRoutesFromFiles } from '@/core/libs/route';
+import '@/configs';
 
 // Extend Zod with OpenAPI
 extendZodWithOpenApi(zod);
