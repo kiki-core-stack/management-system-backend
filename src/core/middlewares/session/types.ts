@@ -1,5 +1,7 @@
 import type { Context } from 'hono';
 
+import type { sessionChangedSymbol, sessionClearedSymbol } from './constants';
+
 export type PartialContextSessionData = Partial<ContextSessionData>;
 export type SessionTokenHandler = Readonly<{
 	delete(ctx: Context): void;
@@ -11,6 +13,8 @@ export interface ContextSessionData {}
 
 declare module 'hono' {
 	interface Context {
+		[sessionChangedSymbol]?: true;
+		[sessionClearedSymbol]?: true;
 		session: PartialContextSessionData;
 	}
 }
