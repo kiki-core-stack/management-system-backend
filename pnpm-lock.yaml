@@ -44,6 +44,9 @@ importers:
       node-ciphers:
         specifier: ^1.1.3
         version: 1.1.3
+      on-change:
+        specifier: ^5.0.1
+        version: 5.0.1
       pino:
         specifier: ^9.5.0
         version: 9.5.0
@@ -195,8 +198,8 @@ packages:
   browser-or-node@3.0.0:
     resolution: {integrity: sha512-iczIdVJzGEYhP5DqQxYM9Hh7Ztpqqi+CXZpSmX8ALFs9ecXkQIeqRyM6TfxEfMVpwhl3dSuDvxdzzo9sUOIVBQ==}
 
-  bson@6.8.0:
-    resolution: {integrity: sha512-iOJg8pr7wq2tg/zSlCCHMi3hMm5JTOxLTagf3zxhcenHsFp+c6uOs6K7W5UE7A4QIJGtqh/ZovFNMP4mOPJynQ==}
+  bson@6.9.0:
+    resolution: {integrity: sha512-X9hJeyeM0//Fus+0pc5dSUMhhrrmWwQUtdavaQeF3Ta6m69matZkGWV/MrBcnwUeLC8W9kwwc2hfkZgUuCX3Ig==}
     engines: {node: '>=16.20.1'}
 
   buffer@6.0.3:
@@ -395,6 +398,10 @@ packages:
   node-ciphers@1.1.3:
     resolution: {integrity: sha512-3vgERf7TFU/P2CySSFyUSmSRIIpU4y8ys0dxlBBDi1VbhTmBLfDpkqX+hBknYEycgL4bV5I01BduoTofDM2t0g==}
     engines: {node: '>=18.12.1'}
+
+  on-change@5.0.1:
+    resolution: {integrity: sha512-n7THCP7RkyReRSLkJb8kUWoNsxUIBxTkIp3JKno+sEz6o/9AJ3w3P9fzQkITEkMwyTKJjZciF3v/pVoouxZZMg==}
+    engines: {node: '>=18'}
 
   on-exit-leak-free@2.1.2:
     resolution: {integrity: sha512-0eJJY6hXLGf1udHwfNftBqH+g73EU4B504nZeKpz1sYRKafAghwxEJunB2O7rDZkL4PGfsMVnTXZ2EjibbqcsA==}
@@ -663,7 +670,7 @@ snapshots:
 
   '@kikiutils/types@3.0.0':
     dependencies:
-      bson: 6.8.0
+      bson: 6.9.0
 
   '@mongodb-js/saslprep@1.1.9':
     dependencies:
@@ -738,7 +745,7 @@ snapshots:
 
   browser-or-node@3.0.0: {}
 
-  bson@6.8.0: {}
+  bson@6.9.0: {}
 
   buffer@6.0.3:
     dependencies:
@@ -856,7 +863,7 @@ snapshots:
   mongodb@6.9.0:
     dependencies:
       '@mongodb-js/saslprep': 1.1.9
-      bson: 6.8.0
+      bson: 6.9.0
       mongodb-connection-string-url: 3.0.1
 
   mongoose-aggregate-paginate-v2@1.1.2: {}
@@ -865,7 +872,7 @@ snapshots:
 
   mongoose@8.7.2:
     dependencies:
-      bson: 6.8.0
+      bson: 6.9.0
       kareem: 2.6.3
       mongodb: 6.9.0
       mpath: 0.9.0
@@ -895,6 +902,8 @@ snapshots:
   node-ciphers@1.1.3:
     dependencies:
       type-fest: 4.26.1
+
+  on-change@5.0.1: {}
 
   on-exit-leak-free@2.1.2: {}
 
