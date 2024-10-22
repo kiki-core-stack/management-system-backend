@@ -11,6 +11,6 @@ export default defaultHonoFactory.createMiddleware(async (ctx, next) => {
 		if (!ctx.admin?.enabled) delete ctx.session.adminId;
 	}
 
-	if (routeHandler?.noLoginRequired || ctx.session.adminId) return await next();
+	if (routeHandler.noLoginRequired || ctx.session.adminId) return await next();
 	throwAPIError(401);
 });

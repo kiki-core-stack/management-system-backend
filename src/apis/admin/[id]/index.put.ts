@@ -4,11 +4,11 @@ import type { UpdateQuery } from 'mongoose';
 
 import { jsonSchema } from '../index.put';
 
-export default defineRouteHandlerWithZodValidator({ json: jsonSchema }, async (request, response) => {
-	const admin = await AdminModel.findByRouteIdOrThrowNotFoundError(request);
-	const updateQuery: UpdateQuery<AdminDocument> = request.locals.verifiedData.json;
-	updateQuery.enabled = updateQuery.enabled || admin.id === request.locals.session.adminId;
+export default defaultHonoFactory.createHandlers(apiZValidator('json', jsonSchema), async (ctx) => {
+	const admin = await AdminModel.findByRouteIdOrThrowNotFoundError(ctx);
+	const updateQuery: UpdateQuery<AdminDocument> = ctx.req.valid('json');
+	updateQuery.enabled = updateQuery.enabled || admin.id === ctx.session.adminId;
 	if (!updateQuery.email) updateQuery.$unset = { email: true };
 	await admin.updateOne(updateQuery);
-	sendAPISuccessResponse(response);
+	return ctx.json(createAPISuccessResponseData());
 });

@@ -1,6 +1,7 @@
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
-export default defineRouteHandler(async (request, response) => {
-	await cleanupAdminCachesAndSession(request, request.locals.admin!);
-	sendAPISuccessResponse(response);
+export default defaultHonoFactory.createHandlers(async (ctx) => {
+	if (ctx.admin) await cleanupAdminCachesAndSession(ctx, ctx.admin);
+	else ctx.clearSession();
+	return ctx.json(createAPISuccessResponseData());
 });

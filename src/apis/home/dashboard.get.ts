@@ -1,4 +1,4 @@
-export default defineRouteHandler((request, response) => {
-	const processedQueries = getProcessedAPIRequestQueries(request);
-	sendAPISuccessResponse(response, processedQueries);
+export default defaultHonoFactory.createHandlers((ctx) => {
+	const processedQueries = getProcessedAPIRequestQueries(ctx);
+	return ctx.json(createAPISuccessResponseData(processedQueries));
 });
