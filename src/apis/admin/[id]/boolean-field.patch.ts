@@ -1,8 +1,8 @@
 import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
-export default defineRouteHandler(async (request, response) => {
+export default defaultHonoFactory.createHandlers(async (ctx) => {
 	await getModelDocumentByRouteIdAndUpdateBooleanField(
-		request,
+		ctx,
 		AdminModel,
 		[
 			'enabled',
@@ -11,9 +11,9 @@ export default defineRouteHandler(async (request, response) => {
 		],
 		null,
 		(admin, field) => {
-			if (field === 'enabled' && admin.id === request.locals.session.adminId) throwAPIError(400, '無法變更自己的啟用狀態！');
+			if (field === 'enabled' && admin.id === ctx.session.adminId) throwAPIError(400, '無法變更自己的啟用狀態！');
 		}
 	);
 
-	sendAPISuccessResponse(response);
+	return ctx.json(createAPISuccessResponseData());
 });

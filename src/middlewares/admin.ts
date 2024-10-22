@@ -1,14 +1,16 @@
-import type { MiddlewareHandler } from '@kikiutils/hyper-express';
-import { statusCodeToAPIResponseTextMap } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/constants/response';
 import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
+import type { H } from 'hono/types';
 
-export const adminMiddleware = (): MiddlewareHandler => async (request, response) => {
-	if (!request.route.handler.isHandler) return;
-	if (request.locals.session.adminId) {
-		request.locals.admin = await AdminModel.findById(request.locals.session.adminId);
-		if (!request.locals.admin?.enabled) delete request.locals.session.adminId;
+import type { RouteHandlerProperties } from '@/core/types/route';
+
+export default defaultHonoFactory.createMiddleware(async (ctx, next) => {
+	const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as UndefinedAble<H & RouteHandlerProperties>;
+	if (!routeHandler?.isHandler) return await next();
+	if (ctx.session.adminId) {
+		ctx.admin = await AdminModel.findById(ctx.session.adminId);
+		if (!ctx.admin?.enabled) delete ctx.session.adminId;
 	}
 
-	if (request.route.handler.noLoginRequired || request.locals.session.adminId) return;
-	response.header('content-type', 'application/json').status(401).send(statusCodeToAPIResponseTextMap[401]);
-};
+	if (routeHandler.noLoginRequired || ctx.session.adminId) return await next();
+	throwAPIError(401);
+});

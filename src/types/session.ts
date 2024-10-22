@@ -1,5 +1,5 @@
 declare module '../core/middlewares/session/types' {
-	interface RequestLocalsSession {
+	interface ContextSessionData {
 		adminId: string;
 		tempAdminIdForSendEmailOTPCode: string;
 

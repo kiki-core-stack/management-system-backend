@@ -1,14 +1,14 @@
 import { mongooseConnections } from '@kikiutils/kiki-core-stack-pack/constants/mongoose';
 import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
 
-export default defineRouteHandler(async (request, response) => {
+export default defaultHonoFactory.createHandlers(async (ctx) => {
 	await mongooseConnections.default!.transaction(async (session) => {
-		await getModelDocumentByRouteIdAndDelete(request, AdminModel, { session }, async (admin) => {
-			if (admin.id === request.locals.session.adminId) throwAPIError(409, '無法刪除自己！');
+		await getModelDocumentByRouteIdAndDelete(ctx, AdminModel, { session }, async (admin) => {
+			if (admin.id === ctx.session.adminId) throwAPIError(409, '無法刪除自己！');
 			if ((await AdminModel.countDocuments()) === 1) throwAPIError(409, '無法刪除最後一位管理員！');
 			await AdminLogModel.deleteMany({ admin }, { session });
 		});
 	});
 
-	sendAPISuccessResponse(response);
+	return ctx.json(createAPISuccessResponseData());
 });

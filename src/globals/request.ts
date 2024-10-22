@@ -1,10 +1,10 @@
-import type { Request } from '@kikiutils/hyper-express';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
+import type { Context } from 'hono';
 import { escapeRegExp } from 'lodash-es';
 import { Types } from 'mongoose';
 
 declare global {
-	const getProcessedAPIRequestQueries: (request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => ProcessedAPIRequestQueries;
+	const getProcessedAPIRequestQueries: (ctx: Context, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => ProcessedAPIRequestQueries;
 }
 
 const baseFilterInFields = { states: 'state', types: 'type' } as const;
@@ -20,15 +20,15 @@ function processRegexString(value: string) {
 	}
 }
 
-setReadonlyConstantToGlobalThis('getProcessedAPIRequestQueries', (request: Request, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => {
+setReadonlyConstantToGlobalThis('getProcessedAPIRequestQueries', (ctx: Context, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => {
 	let filterQuery: Dict<any> = {};
 	let selectFields: Nullable<Set<string>> = null;
-	const queries = request.query as {
+	const queries: {
 		filterQuery?: string;
 		limit?: string;
 		page?: string;
 		selectFields?: string;
-	};
+	} = ctx.req.query();
 
 	// TODO: 重構與資料驗證並移除不該出現的搜尋條件
 	if (queries.filterQuery) {
