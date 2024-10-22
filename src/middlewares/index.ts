@@ -6,4 +6,4 @@ import session from '@/core/middlewares/session';
 import { cookieSessionTokenHandler } from '@/core/middlewares/session/handlers/token';
 
 useHonoLogger(honoApp);
-honoApp.use('/api', session(configs.sessionDataEncryptionKey, cookieSessionTokenHandler));
+honoApp.use('/api', session(configs.sessionEncryptionKey, cookieSessionTokenHandler));
