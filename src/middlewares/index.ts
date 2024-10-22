@@ -8,6 +8,6 @@ import admin from './admin';
 import api from './api';
 
 useHonoLogger(honoApp);
-honoApp.use('/api/*', session(configs.sessionEncryptionKey, cookieSessionTokenHandler));
+honoApp.use('/api/*', session(configs.sessionCipherKey, cookieSessionTokenHandler));
 honoApp.use('/api/*', admin);
 honoApp.use('/api/*', api);
