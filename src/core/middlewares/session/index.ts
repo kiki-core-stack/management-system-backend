@@ -25,8 +25,8 @@ export default (dataCipherKey: BinaryLike, tokenHandler: SessionTokenHandler) =>
 			else tokenHandler.delete(ctx);
 		}
 
-		ctx.clearSession = clearSession;
-		ctx.popSession = popSession;
+		ctx.clearSession = clearSession.bind(ctx);
+		ctx.popSession = popSession.bind(ctx);
 		ctx.session = onChange(
 			sessionData,
 			() => {
