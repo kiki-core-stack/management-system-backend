@@ -28,7 +28,7 @@ export default (dataCipherKey: BinaryLike, tokenHandler: SessionTokenHandler) =>
 		await next();
 		if (ctx[sessionClearedSymbol]) return tokenHandler.delete(ctx);
 		if (!ctx[sessionChangedSymbol]) return;
-		const encryptResult = dataCipher.encryptJSON([Date.now(), sessionData]);
+		const encryptResult = dataCipher.encryptJSON([Date.now(), ctx.session]);
 		if (encryptResult) tokenHandler.set(ctx, `${encryptResult.authTag}${encryptResult.iv}${encryptResult.data}`);
 	});
 };
