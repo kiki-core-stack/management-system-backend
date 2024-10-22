@@ -6,5 +6,4 @@ import session from '@/core/middlewares/session';
 import { cookieSessionTokenHandler } from '@/core/middlewares/session/handlers/token';
 
 useHonoLogger(honoApp);
-// @ts-expect-error
 honoApp.use('/api', session(configs.sessionDataEncryptionKey, cookieSessionTokenHandler));
