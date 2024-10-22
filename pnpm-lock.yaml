@@ -13,19 +13,19 @@ importers:
         version: 7.2.0(zod@3.23.8)
       '@hono/swagger-ui':
         specifier: ^0.4.1
-        version: 0.4.1(hono@4.6.5)
+        version: 0.4.1(hono@4.6.6)
       '@hono/zod-validator':
         specifier: ^0.4.1
-        version: 0.4.1(hono@4.6.5)(zod@3.23.8)
+        version: 0.4.1(hono@4.6.6)(zod@3.23.8)
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.38.0
-        version: 0.38.0
+        specifier: ^0.38.2
+        version: 0.38.2
       '@kikiutils/mongoose':
         specifier: ^1.4.1
         version: 1.4.1
       '@scalar/hono-api-reference':
         specifier: ^0.5.156
-        version: 0.5.156(hono@4.6.5)
+        version: 0.5.156(hono@4.6.6)
       consola:
         specifier: ^3.2.3
         version: 3.2.3
@@ -36,8 +36,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.0
       hono:
-        specifier: ^4.6.5
-        version: 4.6.5
+        specifier: ^4.6.6
+        version: 4.6.6
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -98,8 +98,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@kikiutils/kiki-core-stack-pack@0.38.0':
-    resolution: {integrity: sha512-QB79sqtvuEGBR3IXn9ZayI4xaRI/SjSOvUSOCa7DhDBSW2dCPUzw+rgw0NTwISe4fqvVgkP0+kL26+zrVaylSw==}
+  '@kikiutils/kiki-core-stack-pack@0.38.2':
+    resolution: {integrity: sha512-r3Eh6RnPEH1iFEqFKfyTKqHUWTldZZOcrNNDShi1vIozvkgi+NxO37uqVrl+J2eOEWJ79TbJyiJdhpnNbaXYGw==}
 
   '@kikiutils/mongoose@1.4.1':
     resolution: {integrity: sha512-A72YJW0dmvs5L8ATkf8OsB3CcdoTqw03vUG2PZoN87fnNPF69VSN2VXaMPdyoY0IsnmQjzPQVmb2cEVAuU+Xqw==}
@@ -289,8 +289,8 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.6.5:
-    resolution: {integrity: sha512-qsmN3V5fgtwdKARGLgwwHvcdLKursMd+YOt69eGpl1dUCJb8mCd7hZfyZnBYjxCegBG7qkJRQRUy2oO25yHcyQ==}
+  hono@4.6.6:
+    resolution: {integrity: sha512-euUj5qwvtkG+p38GFs0LYacwaoS2hYRAGn9ysAggiwT2QBcPnT1XYUCW3hatW4C1KzAXTYuQ08BlVDJtAGuhlg==}
     engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
@@ -617,13 +617,13 @@ snapshots:
       run-time-assertions: 1.5.2
       type-fest: 4.26.1
 
-  '@hono/swagger-ui@0.4.1(hono@4.6.5)':
+  '@hono/swagger-ui@0.4.1(hono@4.6.6)':
     dependencies:
-      hono: 4.6.5
+      hono: 4.6.6
 
-  '@hono/zod-validator@0.4.1(hono@4.6.5)(zod@3.23.8)':
+  '@hono/zod-validator@0.4.1(hono@4.6.6)(zod@3.23.8)':
     dependencies:
-      hono: 4.6.5
+      hono: 4.6.6
       zod: 3.23.8
 
   '@isaacs/cliui@8.0.2':
@@ -635,7 +635,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@kikiutils/kiki-core-stack-pack@0.38.0':
+  '@kikiutils/kiki-core-stack-pack@0.38.2':
     dependencies:
       '@kikiutils/node': 5.0.1
       '@kikiutils/types': 3.0.0
@@ -676,10 +676,10 @@ snapshots:
     dependencies:
       sparse-bitfield: 3.0.3
 
-  '@scalar/hono-api-reference@0.5.156(hono@4.6.5)':
+  '@scalar/hono-api-reference@0.5.156(hono@4.6.6)':
     dependencies:
       '@scalar/types': 0.0.17
-      hono: 4.6.5
+      hono: 4.6.6
 
   '@scalar/openapi-types@0.1.4': {}
 
@@ -821,7 +821,7 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono@4.6.5: {}
+  hono@4.6.6: {}
 
   hookable@5.5.3: {}
 
