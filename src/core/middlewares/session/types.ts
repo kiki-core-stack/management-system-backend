@@ -15,6 +15,8 @@ declare module 'hono' {
 	interface Context {
 		[sessionChangedSymbol]?: true;
 		[sessionClearedSymbol]?: true;
+		clearSession(): void;
+		popSession<K extends keyof ContextSessionData>(key: K): ContextSessionData[K] | undefined;
 		session: PartialContextSessionData;
 	}
 }

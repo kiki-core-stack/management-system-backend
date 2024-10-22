@@ -4,6 +4,7 @@ import onChange from 'on-change';
 
 import { sessionChangedSymbol, sessionClearedSymbol } from './constants';
 import type { PartialContextSessionData, SessionTokenHandler } from './types';
+import { clearSession, popSession } from './utils';
 
 type StoredData = [number, PartialContextSessionData];
 
@@ -24,7 +25,17 @@ export default (dataCipherKey: BinaryLike, tokenHandler: SessionTokenHandler) =>
 			else tokenHandler.delete(ctx);
 		}
 
-		ctx.session = onChange(sessionData, () => (ctx[sessionChangedSymbol] = true), { ignoreSymbols: true });
+		ctx.clearSession = clearSession;
+		ctx.popSession = popSession;
+		ctx.session = onChange(
+			sessionData,
+			() => {
+				onChange.unsubscribe(ctx.session);
+				ctx[sessionChangedSymbol] = true;
+			},
+			{ ignoreSymbols: true }
+		);
+
 		await next();
 		if (ctx[sessionClearedSymbol]) return tokenHandler.delete(ctx);
 		if (!ctx[sessionChangedSymbol]) return;
