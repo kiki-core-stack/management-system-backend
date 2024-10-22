@@ -8,5 +8,6 @@ export const routeHandlerOptions = defineRouteHandlerOptions({ environment: 'dev
 export default defaultHonoFactory.createHandlers((ctx) => {
 	const generator = new OpenApiGeneratorV31(zodOpenAPIRegistry.definitions);
 	ctx.header('content-type', 'application/json');
-	return ctx.body(JSON.stringify(generator.generateDocument(configs.openAPI as any), null, 2));
+	// @ts-expect-error
+	return ctx.body(JSON.stringify(generator.generateDocument(configs.openAPI), null, 2));
 });
