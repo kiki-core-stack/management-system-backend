@@ -8,8 +8,8 @@ import { clearSession, popSession } from './utils';
 
 type StoredData = [number, PartialContextSessionData];
 
-export default (dataCipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
-	const dataCipher = new AESCipher.GCM(dataCipherKey, {
+export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
+	const cipher = new AESCipher.GCM(cipherKey, {
 		authTag: 'base64',
 		decryptInput: 'base64',
 		encryptOutput: 'base64',
@@ -20,7 +20,7 @@ export default (dataCipherKey: BinaryLike, tokenHandler: SessionTokenHandler) =>
 		let sessionData = {};
 		const sessionToken = tokenHandler.get(ctx);
 		if (sessionToken) {
-			const storedData = dataCipher.decryptToJSON<StoredData>(sessionToken.substring(40), sessionToken.substring(24, 40), sessionToken.substring(0, 24));
+			const storedData = cipher.decryptToJSON<StoredData>(sessionToken.substring(40), sessionToken.substring(24, 40), sessionToken.substring(0, 24));
 			if (storedData && storedData[0] + 86400000 > Date.now()) sessionData = storedData[1];
 			else tokenHandler.delete(ctx);
 		}
@@ -39,7 +39,7 @@ export default (dataCipherKey: BinaryLike, tokenHandler: SessionTokenHandler) =>
 		await next();
 		if (ctx[sessionClearedSymbol]) return tokenHandler.delete(ctx);
 		if (!ctx[sessionChangedSymbol]) return;
-		const encryptResult = dataCipher.encryptJSON([Date.now(), ctx.session]);
+		const encryptResult = cipher.encryptJSON([Date.now(), ctx.session]);
 		if (encryptResult) tokenHandler.set(ctx, `${encryptResult.authTag}${encryptResult.iv}${encryptResult.data}`);
 	});
 };
