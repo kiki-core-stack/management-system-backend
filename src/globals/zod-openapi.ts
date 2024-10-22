@@ -1,5 +1,5 @@
 import type { ResponseConfig, ZodRequestBody } from '@asteasolutions/zod-to-openapi';
-import { statusCodeToResponseMessageMap } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/constants/response';
+import { statusCodeToResponseMessageMap } from '@kikiutils/kiki-core-stack-pack/hono-backend/constants/response';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import { defu } from 'defu';
 import { mapValues } from 'lodash-es';
@@ -30,8 +30,8 @@ setReadonlyConstantToGlobalThis('defineAPIRouteZodOpenAPIJsonResponseConfig', (d
 	content: {
 		'application/json': {
 			schema: z.object({
-				data: dataSchema || z.object({}),
-				message: z.literal(message),
+				data: dataSchema ? dataSchema : z.object({}).optional(),
+				message: z.string().describe(message),
 				success: z.literal(!isError)
 			})
 		}

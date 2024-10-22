@@ -5,7 +5,9 @@ import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ environment: 'development' });
 
-export default defineRouteHandler((_, response) => {
+export default defaultHonoFactory.createHandlers((ctx) => {
 	const generator = new OpenApiGeneratorV31(zodOpenAPIRegistry.definitions);
-	response.header('content-type', 'application/json').send(JSON.stringify(generator.generateDocument(configs.openAPI as any), null, 2));
+	ctx.header('content-type', 'application/json');
+	// @ts-expect-error
+	return ctx.body(JSON.stringify(generator.generateDocument(configs.openAPI), null, 2));
 });

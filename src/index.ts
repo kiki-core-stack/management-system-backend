@@ -1,31 +1,36 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import { setupServerErrorHandling } from '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/error-handling';
-import '@kikiutils/kiki-core-stack-pack/hyper-express-backend/setups/mongoose-model-statics';
-import logger from '@kikiutils/node/consola';
+import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
+import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
+import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
+import type { Serve } from 'bun';
 
-import '@/core/globals';
-import { sessionMiddleware } from '@/core/middlewares/session';
-import { registerRoutesFromFiles } from '@/core/route';
-import '@/globals';
-import { adminMiddleware } from '@/middlewares/admin';
-import { server } from '@/server';
-import '@/shutdown-handler';
+import { honoApp } from '@/app';
+import { registerRoutesFromFiles } from '@/core/libs/route';
+import '@/configs';
 
 // Extend Zod with OpenAPI
-extendZodWithOpenApi(z);
+extendZodWithOpenApi(zod);
+
+// Import global constants and utilities
+await import('@/core/globals');
+await import('@/globals');
 
 // Setup error handling
-setupServerErrorHandling(server);
+setupHonoAppErrorHandling(honoApp);
 
-// Setup middlewares
-server.use('/api', sessionMiddleware(), adminMiddleware());
+// Load middlewares
+await import('@/middlewares');
 
 // Scan files and register routes
-await registerRoutesFromFiles(server, `${import.meta.dirname}/apis`, '/api');
-await registerRoutesFromFiles(server, `${import.meta.dirname}/routes`, '/');
+await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/apis`, '/api');
+await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/routes`, '/');
 
 // Start server
-const serverHost = process.env.SERVER_HOST || '127.0.0.1';
-const serverPort = Number(process.env.SERVER_PORT) || 8000;
-await server.listen(serverPort, serverHost);
-logger.info(`Server started on http://${serverHost}:${serverPort}`);
+const serveConfig: Serve = {
+	fetch: honoApp.fetch,
+	hostname: process.env.SERVER_HOST || '127.0.0.1',
+	port: Number(process.env.SERVER_PORT) || 8000,
+	reusePort: true
+};
+
+export default serveConfig;
