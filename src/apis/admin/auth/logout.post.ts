@@ -3,5 +3,5 @@ export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noL
 export default defaultHonoFactory.createHandlers(async (ctx) => {
 	if (ctx.admin) await cleanupAdminCachesAndSession(ctx, ctx.admin);
 	else ctx.clearSession();
-	return ctx.json(createAPISuccessResponseData());
+	return ctx.createAPISuccessResponse();
 });

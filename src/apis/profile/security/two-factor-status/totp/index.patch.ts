@@ -13,5 +13,5 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
 	else updateQuery.totpSecret = admin.totpSecret;
 	await admin.updateOne(updateQuery);
 	await redisController.twoFactorAuthentication.tempTOTPSecret.del(admin);
-	return ctx.json(createAPISuccessResponseData());
+	return ctx.createAPISuccessResponse();
 });

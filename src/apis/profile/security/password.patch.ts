@@ -17,6 +17,6 @@ export default defaultHonoFactory.createHandlers(
 		if (data.newPassword === data.oldPassword) throwAPIError(400, '新密碼不能與舊密碼相同！');
 		await ctx.admin!.updateOne({ password: data.newPassword });
 		await cleanupAdminCachesAndSession(ctx, ctx.admin!);
-		return ctx.json(createAPISuccessResponseData());
+		return ctx.createAPISuccessResponse();
 	}
 );

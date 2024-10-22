@@ -10,5 +10,5 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
 		});
 	});
 
-	return ctx.json(createAPISuccessResponseData());
+	return ctx.createAPISuccessResponse();
 });

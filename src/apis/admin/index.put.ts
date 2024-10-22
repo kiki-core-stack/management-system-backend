@@ -14,5 +14,5 @@ export default defaultHonoFactory.createHandlers(apiZValidator('json', jsonSchem
 	const data = ctx.req.valid('json');
 	if (data.password!.length !== 128) throwAPIError(400);
 	await AdminModel.create(data);
-	return ctx.json(createAPISuccessResponseData());
+	return ctx.createAPISuccessResponse();
 });

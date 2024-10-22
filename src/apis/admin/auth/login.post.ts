@@ -29,6 +29,6 @@ export default defaultHonoFactory.createHandlers(
 			type: AdminLogType.LoginSuccess
 		});
 
-		return ctx.json(createAPISuccessResponseData());
+		return ctx.createAPISuccessResponse();
 	}
 );

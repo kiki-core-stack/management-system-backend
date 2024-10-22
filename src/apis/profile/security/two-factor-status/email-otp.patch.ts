@@ -4,5 +4,5 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
 	admin.twoFactorAuthenticationStatus.emailOTP = true;
 	await requireTwoFactorAuthentication(ctx, true, true, admin);
 	await admin.updateOne({ 'twoFactorAuthenticationStatus.emailOTP': !isEnabled });
-	return ctx.json(createAPISuccessResponseData());
+	return ctx.createAPISuccessResponse();
 });

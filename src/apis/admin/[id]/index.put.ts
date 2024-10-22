@@ -10,5 +10,5 @@ export default defaultHonoFactory.createHandlers(apiZValidator('json', jsonSchem
 	updateQuery.enabled = updateQuery.enabled || admin.id === ctx.session.adminId;
 	if (!updateQuery.email) updateQuery.$unset = { email: true };
 	await admin.updateOne(updateQuery);
-	return ctx.json(createAPISuccessResponseData());
+	return ctx.createAPISuccessResponse();
 });
