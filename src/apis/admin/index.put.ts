@@ -1,4 +1,4 @@
-import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
+import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
 export const jsonSchema = z.object({

@@ -1,4 +1,4 @@
-import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
+import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
 import type { H } from 'hono/types';
 
 import type { RouteHandlerProperties } from '@/core/types/route';

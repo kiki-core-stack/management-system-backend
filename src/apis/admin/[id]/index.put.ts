@@ -1,5 +1,5 @@
-import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models';
-import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models';
+import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
+import type { AdminDocument } from '@kikiutils/kiki-core-stack-pack/models/admin';
 import type { UpdateQuery } from 'mongoose';
 
 import { jsonSchema } from '../index.put';
