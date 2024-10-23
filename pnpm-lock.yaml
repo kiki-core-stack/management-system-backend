@@ -18,11 +18,11 @@ importers:
         specifier: ^0.4.1
         version: 0.4.1(hono@4.6.6)(zod@3.23.8)
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.39.1
-        version: 0.39.1
+        specifier: ^0.40.0
+        version: 0.40.0
       '@kikiutils/mongoose':
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^1.6.0
+        version: 1.6.0
       '@scalar/hono-api-reference':
         specifier: ^0.5.156
         version: 0.5.156(hono@4.6.6)
@@ -123,11 +123,11 @@ packages:
     resolution: {integrity: sha512-AVBw8lAQWrv+vckBOIa5qRAlM9oabjHgJ2VK6H+aMtMRUjXcyW3fjGbEXc3qFj77IAhASrTJ9vErpoWPuT9Mog==}
     engines: {node: '>=18'}
 
-  '@kikiutils/kiki-core-stack-pack@0.39.1':
-    resolution: {integrity: sha512-9vdQh7cjUS6P7Ggof383jX9GjfncKxDQyAc8OocAtZ4G0IFcCsutzfjqawe8WBkO4+iOymqbHqRwb2VnTyOrTA==}
+  '@kikiutils/kiki-core-stack-pack@0.40.0':
+    resolution: {integrity: sha512-WuPcEi0A9w+xPesm1Nb0yNLY4pWx6CGcj53zgf4tGfy6gfer6KdVjFjV4LzeEoF8l3smhYK28tXEWqnQDjq1tA==}
 
-  '@kikiutils/mongoose@1.5.0':
-    resolution: {integrity: sha512-EnudjybrfCsk88JfEzTXlg9l0aOrlUN1BZEa+1EtJKCHx4WLONI4ld6O6uy6r5TpRZJXfOAjPhtOiFFzmReqlw==}
+  '@kikiutils/mongoose@1.6.0':
+    resolution: {integrity: sha512-ZWpw/5/oK3VXzTrK/PQuPIM4HD/lzFaZqCYOQ4hREV9H5diPQ3qZFENNlDSbndvvpl62KxySpH8cd8j8qskxFg==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/node@5.0.1':
@@ -724,7 +724,7 @@ snapshots:
 
   '@kikiutils/classes@4.0.0': {}
 
-  '@kikiutils/kiki-core-stack-pack@0.39.1':
+  '@kikiutils/kiki-core-stack-pack@0.40.0':
     dependencies:
       '@kikiutils/classes': 4.0.0
       '@kikiutils/node': 5.0.1
@@ -732,7 +732,7 @@ snapshots:
       '@types/lodash-es': 4.17.12
       lodash-es: 4.17.21
 
-  '@kikiutils/mongoose@1.5.0':
+  '@kikiutils/mongoose@1.6.0':
     dependencies:
       decimal.js: 10.4.3
       lodash: 4.17.21

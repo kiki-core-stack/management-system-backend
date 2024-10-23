@@ -1,4 +1,4 @@
-import { AdminLogModel } from '@kikiutils/kiki-core-stack-pack/models/admin/log';
+import { AdminLogModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
 	return ctx.createAPISuccessResponse(
