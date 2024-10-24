@@ -48,8 +48,8 @@ setReadonlyConstantToGlobalThis('getProcessedAPIRequestQueries', (ctx: Context, 
 	}
 
 	if (queries.selectFields) selectFields = new Set(JSON.parse(queries.selectFields));
-	const limit = Math.min(+(queries.limit || 10) || 10, 1000);
-	const page = +(queries.page || 1) || 1;
+	const limit = Math.min(Math.abs(Number(queries.limit) || 10), 1000);
+	const page = Math.abs(Number(queries.page) || 1);
 	const offset = limit * page;
 	return {
 		filterQuery,
