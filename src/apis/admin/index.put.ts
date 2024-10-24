@@ -2,10 +2,10 @@ import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
 export const jsonSchema = z.object({
-	account: z.string().trim().max(16).min(1),
+	account: z.string().trim().min(1).max(16),
 	email: z.string().trim().email().toLowerCase().optional(),
 	enabled: z.boolean(),
-	name: z.string().trim().max(16).min(1),
+	name: z.string().trim().min(1).max(16),
 	password: z.string().trim().length(128).optional(),
 	twoFactorAuthenticationStatus: z.object({ emailOTP: z.boolean(), totp: z.boolean() })
 }) satisfies ZodValidatorType<AdminData>;
