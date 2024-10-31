@@ -13,19 +13,19 @@ importers:
         version: 7.2.0(zod@3.23.8)
       '@hono/swagger-ui':
         specifier: ^0.4.1
-        version: 0.4.1(hono@4.6.6)
+        version: 0.4.1(hono@4.6.8)
       '@hono/zod-validator':
         specifier: ^0.4.1
-        version: 0.4.1(hono@4.6.6)(zod@3.23.8)
+        version: 0.4.1(hono@4.6.8)(zod@3.23.8)
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.41.0
-        version: 0.41.0
+        specifier: ^0.41.2
+        version: 0.41.2
       '@kikiutils/mongoose':
-        specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0
+        specifier: ^2.0.0
+        version: 2.0.0
       '@scalar/hono-api-reference':
-        specifier: ^0.5.156
-        version: 0.5.156(hono@4.6.6)
+        specifier: ^0.5.158
+        version: 0.5.158(hono@4.6.8)
       consola:
         specifier: ^3.2.3
         version: 3.2.3
@@ -36,14 +36,11 @@ importers:
         specifier: ^11.0.0
         version: 11.0.0
       hono:
-        specifier: ^4.6.6
-        version: 4.6.6
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^4.6.8
+        version: 4.6.8
       node-ciphers:
-        specifier: ^1.1.3
-        version: 1.1.3
+        specifier: ^1.1.4
+        version: 1.1.4
       on-change:
         specifier: ^5.0.1
         version: 5.0.1
@@ -58,8 +55,8 @@ importers:
         specifier: ^1.3.2
         version: 1.3.2
       '@kikiutils/tsconfigs':
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^3.0.2
+        version: 3.0.2
       '@types/bun':
         specifier: ^1.1.12
         version: 1.1.12
@@ -102,11 +99,11 @@ packages:
     resolution: {integrity: sha512-AVBw8lAQWrv+vckBOIa5qRAlM9oabjHgJ2VK6H+aMtMRUjXcyW3fjGbEXc3qFj77IAhASrTJ9vErpoWPuT9Mog==}
     engines: {node: '>=18'}
 
-  '@kikiutils/kiki-core-stack-pack@0.41.0':
-    resolution: {integrity: sha512-kLGPACq+X5uLi3crjE8ZDJTPzCfCvUyLvXJ1g+cT0Mjy3Z38mZ3lwc+QELLBJlpZs6A0a8IxYrnGZskrkE8O/w==}
+  '@kikiutils/kiki-core-stack-pack@0.41.2':
+    resolution: {integrity: sha512-3rZwO7SC+vgC7gqL+z6SUAPN+d9+W8vbX9tL+nWu0jbpL36aprr0LlkZsNBsvxyQqYohX3RAskxug1I7hdL7JQ==}
 
-  '@kikiutils/mongoose@2.0.0-rc.0':
-    resolution: {integrity: sha512-/I1tdwZNoWCCLf6MXQLFV6dcvZTemRReb7Qg2OEBXMFFXcD6s0cG6edTR1A8QAquUvUu9VW3RFc2owUxOaglbQ==}
+  '@kikiutils/mongoose@2.0.0':
+    resolution: {integrity: sha512-Tdycv9xNxNnrq1iInHyUI8prVaT7fWZsr7SvJ32qFUTTn57QVKFzpKh667an96QCGh0kFZ9+/KoA1fMCdTQg+g==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/node@5.0.1':
@@ -116,17 +113,17 @@ packages:
   '@kikiutils/prettierrc@1.3.2':
     resolution: {integrity: sha512-swvPqAf5VmXAKjngFywFw+ibsnwrkP1WJ9egH9ZAjjPNxZrBhVKCmk/X4a1baKUXXgSB3aMmsx0InqP3+pV2qQ==}
 
-  '@kikiutils/tsconfigs@3.0.1':
-    resolution: {integrity: sha512-euNfmx2S5chW92H7CMUWANerj7feZXs1ZMuNs4hZiOLxn/XSq46g1DcWEY7QnpbesURYQtPAQDGtkkzJzcLQtg==}
+  '@kikiutils/tsconfigs@3.0.2':
+    resolution: {integrity: sha512-SlmtTi4svk85ZkssXYscLBgTRAtWA48szJ3E3we9fk89j6wrWPH3Il2FkQTyoQK7VSeFVJ1KO1jvlcaUmu6n8Q==}
 
-  '@kikiutils/types@3.0.0':
-    resolution: {integrity: sha512-wpQ8/TNsKDfGmeKYY9Aa4v9niz+eFyZU5kn0W2jbP4WJ4EG8FrnPuw2pUaq1k8z4gionBsMfqBh/W9i0QTgBRA==}
+  '@kikiutils/types@3.1.1':
+    resolution: {integrity: sha512-sXpsJqdInZmdhFk4hL/RG5k15whucaKyI59BhorWf+HFF34ailjvsUDfiKl0LXw8PV+W0NmB3Iheq4IbJmKngw==}
 
   '@mongodb-js/saslprep@1.1.9':
     resolution: {integrity: sha512-tVkljjeEaAhCqTzajSdgbQ6gE6f3oneVwa3iXR6csiEwXXOFsiC6Uh9iAjAhXPtqa/XMDHWjjeNH/77m/Yq2dw==}
 
-  '@scalar/hono-api-reference@0.5.156':
-    resolution: {integrity: sha512-/byPVH0rs40qxuOInnikDeq+19wQZ0NIq0K3WJMNBeZvr0lpGqsBf4frj0soon8UAVq/uZnOMcK6jwcC50a0bg==}
+  '@scalar/hono-api-reference@0.5.158':
+    resolution: {integrity: sha512-2P7l/ivuC/RWpAKddLtkqIZ89TA5/QlpfEBrdpH9/yjn4NpR5XkbtT+/8uZVELCyjfUMpGcaNXrxuJERFJ3sxA==}
     engines: {node: '>=18'}
     peerDependencies:
       hono: ^4.0.0
@@ -135,8 +132,8 @@ packages:
     resolution: {integrity: sha512-+wRXgmqzgDnj8Dxqf4OOPMPo4or/LRd1Bsy4pnrIW0yBt8rKSdtBb+jH/aRnhgDDmKVjWxJ+KFk7WlSKvZwNTw==}
     engines: {node: '>=18'}
 
-  '@scalar/types@0.0.17':
-    resolution: {integrity: sha512-wUrvNnYFMULsHENX/9TP3oyECRTtZsP06mOZU+RlWg9sRtzWVTjlBCahkgUETL93J+Bz2RLFSKVgPyNN4fpIpA==}
+  '@scalar/types@0.0.18':
+    resolution: {integrity: sha512-gfJB/e9Rq/vjsiWlNwBkaIAZVb9v5guHQB5uVoVFcU0gdAuXni0KVxFxl3gGTu2zhBdB+DkixjyPcNzpqwksmA==}
     engines: {node: '>=18'}
 
   '@types/bun@1.1.12':
@@ -145,8 +142,8 @@ packages:
   '@types/lodash-es@4.17.12':
     resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
 
-  '@types/lodash@4.17.12':
-    resolution: {integrity: sha512-sviUmCE8AYdaF/KIHLDJBQgeYzPBI0vf/17NaYehBJfYD1j6/L95Slh07NlyK2iNyBNaEkb3En2jRt+a8y3xZQ==}
+  '@types/lodash@4.17.13':
+    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
   '@types/node@20.12.14':
     resolution: {integrity: sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==}
@@ -293,8 +290,8 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.6.6:
-    resolution: {integrity: sha512-euUj5qwvtkG+p38GFs0LYacwaoS2hYRAGn9ysAggiwT2QBcPnT1XYUCW3hatW4C1KzAXTYuQ08BlVDJtAGuhlg==}
+  hono@4.6.8:
+    resolution: {integrity: sha512-f+2Ec9JAzabT61pglDiLJcF/DjiSefZkjCn9bzm1cYLGkD5ExJ3Jnv93ax9h0bn7UPLHF81KktoyjdQfWI2n1Q==}
     engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
@@ -349,8 +346,8 @@ packages:
   mongodb-connection-string-url@3.0.1:
     resolution: {integrity: sha512-XqMGwRX0Lgn05TDB4PyG2h2kKO/FfWJyCzYQbIhXUxz7ETt0I/FqHjUeqj37irJ+Dl1ZtU82uYyj14u2XsZKfg==}
 
-  mongodb@6.9.0:
-    resolution: {integrity: sha512-UMopBVx1LmEUbW/QE0Hw18u583PEDVQmUmVzzBRH0o/xtE9DBRA5ZYLOjpLIa03i8FXjzvQECJcqoMvCXftTUA==}
+  mongodb@6.10.0:
+    resolution: {integrity: sha512-gP9vduuYWb9ZkDM546M+MP2qKVk5ZG2wPF63OvSRuUbqCR+11ZCAE1mOfllhlAG0wcoJY5yDL/rV3OmYEwXIzg==}
     engines: {node: '>=16.20.1'}
     peerDependencies:
       '@aws-sdk/credential-providers': ^3.188.0
@@ -384,8 +381,8 @@ packages:
     resolution: {integrity: sha512-kFxhot+yw9KmpAGSSrF/o+f00aC2uawgNUbhyaM0USS9L7dln1NA77/pLg4lgOaRgXMtfgCENamjqZwIM1Zrig==}
     engines: {node: '>=4.0.0'}
 
-  mongoose@8.7.2:
-    resolution: {integrity: sha512-Ok4VzMds9p5G3ZSUhmvBm1GdxanbzhS29jpSn02SPj+IXEVFnIdfwAlHHXWkyNscZKlcn8GuMi68FH++jo0flg==}
+  mongoose@8.8.0:
+    resolution: {integrity: sha512-KluvgwnQB1GPOYZZXUHJRjS1TW6xxwTlf/YgjWExuuNanIe3W7VcR7dDXQVCIRk8L7NYge8EnoTcu2grWtN+XQ==}
     engines: {node: '>=16.20.1'}
 
   mpath@0.9.0:
@@ -399,8 +396,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  node-ciphers@1.1.3:
-    resolution: {integrity: sha512-3vgERf7TFU/P2CySSFyUSmSRIIpU4y8ys0dxlBBDi1VbhTmBLfDpkqX+hBknYEycgL4bV5I01BduoTofDM2t0g==}
+  node-ciphers@1.1.4:
+    resolution: {integrity: sha512-90VauRrfmRbkmzQL49ASKA5/QMNsSHvT+DrF881JCt0C94MF8drzLCTc4Um4Q3USitA4htNlhBVLCqNnA7nt/Q==}
     engines: {node: '>=18.12.1'}
 
   on-change@5.0.1:
@@ -621,13 +618,13 @@ snapshots:
       run-time-assertions: 1.5.2
       type-fest: 4.26.1
 
-  '@hono/swagger-ui@0.4.1(hono@4.6.6)':
+  '@hono/swagger-ui@0.4.1(hono@4.6.8)':
     dependencies:
-      hono: 4.6.6
+      hono: 4.6.8
 
-  '@hono/zod-validator@0.4.1(hono@4.6.6)(zod@3.23.8)':
+  '@hono/zod-validator@0.4.1(hono@4.6.8)(zod@3.23.8)':
     dependencies:
-      hono: 4.6.6
+      hono: 4.6.8
       zod: 3.23.8
 
   '@isaacs/cliui@8.0.2':
@@ -641,19 +638,19 @@ snapshots:
 
   '@kikiutils/classes@4.0.0': {}
 
-  '@kikiutils/kiki-core-stack-pack@0.41.0':
+  '@kikiutils/kiki-core-stack-pack@0.41.2':
     dependencies:
       '@kikiutils/classes': 4.0.0
       '@kikiutils/node': 5.0.1
-      '@kikiutils/types': 3.0.0
+      '@kikiutils/types': 3.1.1
       '@types/lodash-es': 4.17.12
       lodash-es: 4.17.21
 
-  '@kikiutils/mongoose@2.0.0-rc.0':
+  '@kikiutils/mongoose@2.0.0':
     dependencies:
       decimal.js: 10.4.3
       lodash: 4.17.21
-      mongoose: 8.7.2
+      mongoose: 8.8.0
       mongoose-aggregate-paginate-v2: 1.1.2
       mongoose-paginate-v2: 1.8.5
     transitivePeerDependencies:
@@ -673,9 +670,9 @@ snapshots:
       prettier: 3.3.3
       prettier-plugin-multiline-arrays: 3.0.6(prettier@3.3.3)
 
-  '@kikiutils/tsconfigs@3.0.1': {}
+  '@kikiutils/tsconfigs@3.0.2': {}
 
-  '@kikiutils/types@3.0.0':
+  '@kikiutils/types@3.1.1':
     dependencies:
       bson: 6.9.0
 
@@ -683,14 +680,14 @@ snapshots:
     dependencies:
       sparse-bitfield: 3.0.3
 
-  '@scalar/hono-api-reference@0.5.156(hono@4.6.6)':
+  '@scalar/hono-api-reference@0.5.158(hono@4.6.8)':
     dependencies:
-      '@scalar/types': 0.0.17
-      hono: 4.6.6
+      '@scalar/types': 0.0.18
+      hono: 4.6.8
 
   '@scalar/openapi-types@0.1.4': {}
 
-  '@scalar/types@0.0.17':
+  '@scalar/types@0.0.18':
     dependencies:
       '@scalar/openapi-types': 0.1.4
       '@unhead/schema': 1.11.10
@@ -701,9 +698,9 @@ snapshots:
 
   '@types/lodash-es@4.17.12':
     dependencies:
-      '@types/lodash': 4.17.12
+      '@types/lodash': 4.17.13
 
-  '@types/lodash@4.17.12': {}
+  '@types/lodash@4.17.13': {}
 
   '@types/node@20.12.14':
     dependencies:
@@ -828,7 +825,7 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono@4.6.6: {}
+  hono@4.6.8: {}
 
   hookable@5.5.3: {}
 
@@ -867,7 +864,7 @@ snapshots:
       '@types/whatwg-url': 11.0.5
       whatwg-url: 13.0.0
 
-  mongodb@6.9.0:
+  mongodb@6.10.0:
     dependencies:
       '@mongodb-js/saslprep': 1.1.9
       bson: 6.9.0
@@ -877,11 +874,11 @@ snapshots:
 
   mongoose-paginate-v2@1.8.5: {}
 
-  mongoose@8.7.2:
+  mongoose@8.8.0:
     dependencies:
       bson: 6.9.0
       kareem: 2.6.3
-      mongodb: 6.9.0
+      mongodb: 6.10.0
       mpath: 0.9.0
       mquery: 5.0.0
       ms: 2.1.3
@@ -906,7 +903,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  node-ciphers@1.1.3:
+  node-ciphers@1.1.4:
     dependencies:
       type-fest: 4.26.1
 
