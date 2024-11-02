@@ -20,7 +20,7 @@ function processRegexString(value: string) {
 	}
 }
 
-setReadonlyConstantToGlobalThis('getProcessedAPIRequestQueries', (ctx: Context, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => {
+setReadonlyConstantToGlobalThis<typeof getProcessedAPIRequestQueries>('getProcessedAPIRequestQueries', (ctx, filterInFields, processObjectIdIgnoreFields) => {
 	let filterQuery: Dict<any> = {};
 	let selectFields: Nullable<Set<string>> = null;
 	const queries: {

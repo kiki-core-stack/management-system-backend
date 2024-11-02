@@ -7,7 +7,7 @@ declare global {
 	const cleanupAdminCachesAndSession: (ctx: Context, admin: AdminDocument) => Promise<void>;
 }
 
-setReadonlyConstantToGlobalThis('cleanupAdminCachesAndSession', async (ctx: Context, admin: AdminDocument) => {
+setReadonlyConstantToGlobalThis<typeof cleanupAdminCachesAndSession>('cleanupAdminCachesAndSession', async (ctx, admin) => {
 	await redisController.twoFactorAuthentication.emailOTPCode.del(admin);
 	await redisController.twoFactorAuthentication.tempTOTPSecret.del(admin);
 	ctx.clearSession();
