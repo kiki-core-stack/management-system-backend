@@ -7,4 +7,4 @@ declare global {
 	const defineRouteZodOpenAPIConfig: (operationId: string, description: string, config: RouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
 }
 
-setReadonlyConstantToGlobalThis('defineRouteZodOpenAPIConfig', (operationId: string, description: string, config: RouteZodOpenAPIConfig) => ({ ...config, description, operationId }));
+setReadonlyConstantToGlobalThis<typeof defineRouteZodOpenAPIConfig>('defineRouteZodOpenAPIConfig', (operationId, description, config) => ({ ...config, description, operationId }));

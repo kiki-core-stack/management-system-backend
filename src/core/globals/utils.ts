@@ -5,7 +5,7 @@ declare global {
 	const getXForwardedForHeaderFirstValue: (ctx: Context) => string | undefined;
 }
 
-setReadonlyConstantToGlobalThis('getXForwardedForHeaderFirstValue', (ctx: Context) => {
+setReadonlyConstantToGlobalThis<typeof getXForwardedForHeaderFirstValue>('getXForwardedForHeaderFirstValue', (ctx) => {
 	const xForwardedFor = ctx.req.header('x-forwarded-for');
 	if (!xForwardedFor) return;
 	const firstCommaIndex = xForwardedFor.indexOf(',');

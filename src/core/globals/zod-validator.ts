@@ -5,4 +5,4 @@ declare global {
 	const zValidator: typeof _zValidator;
 }
 
-setReadonlyConstantToGlobalThis('zValidator', _zValidator);
+setReadonlyConstantToGlobalThis<typeof zValidator>('zValidator', _zValidator);
