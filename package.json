@@ -10,7 +10,7 @@
     "@hono/swagger-ui": "^0.4.1",
     "@hono/zod-validator": "^0.4.1",
     "@kikiutils/kiki-core-stack-pack": "^0.41.2",
-    "@kikiutils/mongoose": "^2.0.0",
+    "@kikiutils/mongoose": "^2.1.0",
     "@scalar/hono-api-reference": "^0.5.158",
     "consola": "^3.2.3",
     "defu": "^6.1.4",
