@@ -18,8 +18,8 @@ importers:
         specifier: ^0.4.1
         version: 0.4.1(hono@4.6.8)(zod@3.23.8)
       '@kikiutils/kiki-core-stack-pack':
-        specifier: ^0.41.2
-        version: 0.41.2
+        specifier: ^0.42.0
+        version: 0.42.0
       '@kikiutils/mongoose':
         specifier: ^2.1.0
         version: 2.1.0
@@ -99,8 +99,8 @@ packages:
     resolution: {integrity: sha512-AVBw8lAQWrv+vckBOIa5qRAlM9oabjHgJ2VK6H+aMtMRUjXcyW3fjGbEXc3qFj77IAhASrTJ9vErpoWPuT9Mog==}
     engines: {node: '>=18'}
 
-  '@kikiutils/kiki-core-stack-pack@0.41.2':
-    resolution: {integrity: sha512-3rZwO7SC+vgC7gqL+z6SUAPN+d9+W8vbX9tL+nWu0jbpL36aprr0LlkZsNBsvxyQqYohX3RAskxug1I7hdL7JQ==}
+  '@kikiutils/kiki-core-stack-pack@0.42.0':
+    resolution: {integrity: sha512-l2LQRobJxILrowiYKTvzVUMOGRELzdpzpwGCyilbWMR3l5ZR5dJKKgogKlcwsxqXQIHb6sM6lkT8GDjOeVqLXQ==}
 
   '@kikiutils/mongoose@2.1.0':
     resolution: {integrity: sha512-qmQMVsss04V2DUu+lDizEi0+0hoSAEJ8WzMhX4vWzwdf2Nr045sMxnUhoRkE1k9qMJooZ+MJGu+I3tS3mocN/A==}
@@ -638,7 +638,7 @@ snapshots:
 
   '@kikiutils/classes@4.0.0': {}
 
-  '@kikiutils/kiki-core-stack-pack@0.41.2':
+  '@kikiutils/kiki-core-stack-pack@0.42.0':
     dependencies:
       '@kikiutils/classes': 4.0.0
       '@kikiutils/node': 5.1.0

@@ -3,7 +3,7 @@ import type { OpenAPIObject } from 'openapi3-ts/oas31';
 import type { ReadonlyDeep } from 'type-fest';
 
 export type Configs = ReadonlyDeep<{
-	openAPI: Omit<OpenAPIObject, 'components' | 'paths' | 'webhooks'>;
+	openAPI: Except<OpenAPIObject, 'components' | 'paths' | 'webhooks'>;
 	sessionCipherKey: string;
 }>;
 

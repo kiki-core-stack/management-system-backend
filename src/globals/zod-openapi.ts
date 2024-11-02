@@ -6,7 +6,7 @@ import { mapValues } from 'lodash-es';
 import type { SetOptional } from 'type-fest';
 
 declare global {
-	type APIRouteZodOpenAPIConfig = SetOptional<Omit<RouteZodOpenAPIConfig, 'description'>, 'responses'>;
+	type APIRouteZodOpenAPIConfig = SetOptional<RouteZodOpenAPIConfig, 'responses'>;
 
 	const defineAPIRouteZodOpenAPIConfig: (operationId: string, description: string, config?: APIRouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
 	const defineAPIRouteZodOpenAPIJsonRequestConfig: (schema: ReturnType<(typeof z)['object']>, description?: string) => ZodRequestBody;
