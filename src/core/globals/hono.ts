@@ -6,4 +6,4 @@ declare global {
 	const defaultHonoFactory: Factory<{}, '/'>;
 }
 
-setReadonlyConstantToGlobalThis('defaultHonoFactory', createFactory());
+setReadonlyConstantToGlobalThis<typeof defaultHonoFactory>('defaultHonoFactory', createFactory());

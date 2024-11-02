@@ -6,4 +6,4 @@ declare global {
 	const defineRouteHandlerOptions: (options: RouteHandlerOptions) => RouteHandlerOptions;
 }
 
-setReadonlyConstantToGlobalThis('defineRouteHandlerOptions', (options: RouteHandlerOptions) => options);
+setReadonlyConstantToGlobalThis<typeof defineRouteHandlerOptions>('defineRouteHandlerOptions', (options) => options);

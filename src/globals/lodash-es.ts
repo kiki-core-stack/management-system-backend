@@ -8,7 +8,7 @@ declare global {
 	const pick: typeof _pick;
 }
 
-setReadonlyConstantToGlobalThis('cloneDeep', _cloneDeep);
-setReadonlyConstantToGlobalThis('merge', _merge);
-setReadonlyConstantToGlobalThis('omit', _omit);
-setReadonlyConstantToGlobalThis('pick', _pick);
+setReadonlyConstantToGlobalThis<typeof cloneDeep>('cloneDeep', _cloneDeep);
+setReadonlyConstantToGlobalThis<typeof merge>('merge', _merge);
+setReadonlyConstantToGlobalThis<typeof omit>('omit', _omit);
+setReadonlyConstantToGlobalThis<typeof pick>('pick', _pick);
