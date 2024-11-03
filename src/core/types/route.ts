@@ -1,5 +1,4 @@
 export interface RouteHandlerOptions {
-	environment?: Arrayable<'development' | 'production' | 'test'>;
 	properties?: Except<RouteHandlerProperties, 'isHandler'>;
 }
 

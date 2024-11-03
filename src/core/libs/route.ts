@@ -16,16 +16,8 @@ export const registerRoutesFromFiles = async (honoApp: Hono, directoryPath: stri
 			const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
 			if (!handlers.length) continue;
 			const latestHandler = handlers.at(-1);
-			const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
-			if (routeHandlerOptions) {
-				if (routeHandlerOptions.environment) {
-					const environments = [routeHandlerOptions.environment].flat() as string[];
-					if (environments.length && process.env.NODE_ENV && !environments.includes(process.env.NODE_ENV)) continue;
-				}
-
-				Object.assign(latestHandler, routeHandlerOptions.properties);
-			}
-
+			const routeHandlerOptions: Undefinedable<RouteHandlerOptions> = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
+			if (routeHandlerOptions) Object.assign(latestHandler, routeHandlerOptions.properties);
 			if (routeModule.zodOpenAPIConfig) {
 				zodOpenAPIRegistry.registerPath({
 					...routeModule.zodOpenAPIConfig,
