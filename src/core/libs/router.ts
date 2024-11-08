@@ -42,12 +42,6 @@ function filePathSegmentToRankValue(segment: string, isLast: boolean) {
 }
 
 function filePathToRank(path: string) {
-	let rank = '';
 	const segments = path.split('/');
-	for (let i = 0; i < segments.length; i++) {
-		const isLast = i === segments.length - 1;
-		rank += filePathSegmentToRankValue(segments[i]!, isLast);
-	}
-
-	return +rank;
+	return +segments.map((segment, index) => filePathSegmentToRankValue(segment, index === segments.length - 1)).join('');
 }
