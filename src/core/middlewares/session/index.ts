@@ -1,4 +1,4 @@
-import type { BinaryLike } from 'crypto';
+import type { BinaryLike } from 'node:crypto';
 import { AESCipher } from 'node-ciphers';
 import onChange from 'on-change';
 
@@ -13,7 +13,7 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
 		authTag: 'base64',
 		decryptInput: 'base64',
 		encryptOutput: 'base64',
-		iv: 'base64'
+		iv: 'base64',
 	});
 
 	return defaultHonoFactory.createMiddleware(async (ctx, next) => {
@@ -33,7 +33,7 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
 				onChange.unsubscribe(ctx.session);
 				ctx[sessionChangedSymbol] = true;
 			},
-			{ ignoreSymbols: true }
+			{ ignoreSymbols: true },
 		);
 
 		await next();
