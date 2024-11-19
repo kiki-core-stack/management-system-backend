@@ -1,12 +1,14 @@
 import logger from '@kikiutils/node/consola';
 import type { Hono } from 'hono';
-import { relative } from 'path';
+import { relative } from 'node:path';
+import { cwd } from 'node:process';
 
 import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
 import type { RouteHandlerOptions } from '@/core/types/route';
+
 import { scanDirectoryForRoutes } from './router';
 
-export const registerRoutesFromFiles = async (honoApp: Hono, directoryPath: string, baseUrlPath: string) => {
+export async function registerRoutesFromFiles(honoApp: Hono, directoryPath: string, baseUrlPath: string) {
 	let totalRouteCount = 0;
 	const startTime = performance.now();
 	const scannedRoutes = await scanDirectoryForRoutes(directoryPath, baseUrlPath);
@@ -22,14 +24,14 @@ export const registerRoutesFromFiles = async (honoApp: Hono, directoryPath: stri
 				zodOpenAPIRegistry.registerPath({
 					...routeModule.zodOpenAPIConfig,
 					method: scannedRoute.method,
-					path: scannedRoute.openAPIPath
+					path: scannedRoute.openAPIPath,
 				});
 			}
 
 			Object.defineProperty(latestHandler, 'isHandler', {
 				configurable: false,
 				value: true,
-				writable: false
+				writable: false,
 			});
 
 			honoApp.on(scannedRoute.method, scannedRoute.path, ...handlers);
@@ -39,5 +41,5 @@ export const registerRoutesFromFiles = async (honoApp: Hono, directoryPath: stri
 		}
 	}
 
-	logger.info(`Successfully registered ${totalRouteCount} routes from '${relative(process.cwd(), directoryPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
-};
+	logger.info(`Successfully registered ${totalRouteCount} routes from '${relative(cwd(), directoryPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
+}

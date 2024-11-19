@@ -14,7 +14,7 @@ export function clearSession(this: Context) {
 			delete this[sessionClearedSymbol];
 			this[sessionChangedSymbol] = true;
 		},
-		{ ignoreSymbols: true }
+		{ ignoreSymbols: true },
 	);
 }
 

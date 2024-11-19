@@ -2,8 +2,10 @@ import type { Context } from 'hono';
 
 declare module 'hono' {
 	interface Context {
-		createAPISuccessResponse<D extends object>(data?: D, message?: string): Response;
-		createAPISuccessResponse<D extends object>(message?: string, data?: D): Response;
+		createAPISuccessResponse: {
+			<D extends object>(data?: D, message?: string): Response;
+			<D extends object>(message?: string, data?: D): Response;
+		};
 	}
 }
 

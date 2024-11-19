@@ -6,7 +6,7 @@ declare global {
 	const apiZValidator: typeof zValidator;
 }
 
-const hook: Hook<any, Env, string, any, {}> = (result) => {
+const hook: Hook<any, Env, string, any, object> = (result) => {
 	if (!result.success) throw result.error;
 };
 

@@ -13,29 +13,29 @@ declare global {
 	const defineAPIRouteZodOpenAPIJsonResponseConfig: (dataSchema?: ReturnType<(typeof z)['object']>, message?: string, isError?: boolean) => ResponseConfig;
 }
 
-setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAPIRouteZodOpenAPIConfig', (operationId, description, config) => {
-	return defu(
-		{
-			...config,
-			description,
-			operationId
-		},
-		defaultAPIRouteZodOpenAPIConfig
-	);
-});
-
-setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({ description, content: { 'application/json': { schema } } }));
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfig>('defineAPIRouteZodOpenAPIJsonResponseConfig', (dataSchema, message = '成功', isError = false) => ({
-	description: message,
 	content: {
 		'application/json': {
 			schema: z.object({
 				data: dataSchema || z.object({}).optional(),
 				message: z.string().describe(message),
-				success: z.literal(!isError)
-			})
-		}
-	}
+				success: z.literal(!isError),
+			}),
+		},
+	},
+	description: message,
 }));
 
 const defaultAPIRouteZodOpenAPIConfig = { responses: mapValues(statusCodeToResponseMessageMap, (message, code) => defineAPIRouteZodOpenAPIJsonResponseConfig(undefined, message, +code >= 400)) };
+setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAPIRouteZodOpenAPIConfig', (operationId, description, config) => {
+	return defu(
+		{
+			...config,
+			description,
+			operationId,
+		},
+		defaultAPIRouteZodOpenAPIConfig,
+	);
+});
+
+setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({ content: { 'application/json': { schema } }, description }));
