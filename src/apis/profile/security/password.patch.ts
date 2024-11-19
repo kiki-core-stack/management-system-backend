@@ -5,9 +5,9 @@ export default defaultHonoFactory.createHandlers(
 		'json',
 		z.object({
 			conformPassword: z.string().trim().length(128),
+			newPassword: z.string().trim().length(128),
 			oldPassword: z.string().trim().length(128),
-			newPassword: z.string().trim().length(128)
-		}) satisfies ZodValidatorType<ProfileSecurityChangePasswordFormData>
+		}) satisfies ZodValidatorType<ProfileSecurityChangePasswordFormData>,
 	),
 	async (ctx) => {
 		const data = ctx.req.valid('json');
@@ -18,5 +18,5 @@ export default defaultHonoFactory.createHandlers(
 		await ctx.admin!.updateOne({ password: data.newPassword });
 		await cleanupAdminCachesAndSession(ctx, ctx.admin!);
 		return ctx.createAPISuccessResponse();
-	}
+	},
 );

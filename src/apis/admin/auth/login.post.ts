@@ -10,8 +10,8 @@ export default defaultHonoFactory.createHandlers(
 		z.object({
 			account: z.string().trim().min(1),
 			password: z.string().trim().min(1),
-			verCode: z.string().trim().min(1).toLowerCase()
-		}) satisfies ZodValidatorType<AdminLoginFormData>
+			verCode: z.string().trim().min(1).toLowerCase(),
+		}) satisfies ZodValidatorType<AdminLoginFormData>,
 	),
 	async (ctx) => {
 		const data = ctx.req.valid('json');
@@ -26,9 +26,9 @@ export default defaultHonoFactory.createHandlers(
 		AdminLogModel.create({
 			admin,
 			ip: getXForwardedForHeaderFirstValue(ctx),
-			type: AdminLogType.LoginSuccess
+			type: AdminLogType.LoginSuccess,
 		});
 
 		return ctx.createAPISuccessResponse();
-	}
+	},
 );

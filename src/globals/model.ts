@@ -1,6 +1,6 @@
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { Context } from 'hono';
-import type { FilterQuery, QueryOptions, PaginateOptions, PopulateOptions } from 'mongoose';
+import type { FilterQuery, PaginateOptions, PopulateOptions, QueryOptions } from 'mongoose';
 
 declare global {
 	const getModelDocumentByRouteIdAndDelete: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
@@ -33,7 +33,7 @@ declare global {
 
 setReadonlyConstantToGlobalThis<typeof getModelDocumentByRouteIdAndDelete>('getModelDocumentByRouteIdAndDelete', async (ctx, model, options, beforeDelete) => {
 	const document = await model.findByRouteIdOrThrowNotFoundError(ctx, undefined, null, options);
-	// @ts-expect-error
+	// @ts-expect-error Ignore this error.
 	await beforeDelete?.(document);
 	await document.deleteOne(options || undefined);
 });
@@ -42,30 +42,30 @@ setReadonlyConstantToGlobalThis<typeof getModelDocumentByRouteIdAndUpdateBoolean
 	const document = await model.findByRouteIdOrThrowNotFoundError(ctx, undefined, null, options);
 	const { field, value } = await ctx.req.json<{ field: string; value: boolean }>();
 	if (!allowedFields.includes(field)) throwAPIError(400);
-	// @ts-expect-error
+	// @ts-expect-error Ignore this error.
 	await beforeUpdate?.(document, field, !!value);
-	// @ts-expect-error
+	// @ts-expect-error Ignore this error.
 	await document.updateOne({ [`${field}`]: !!value });
 });
 
 setReadonlyConstantToGlobalThis<typeof modelToPaginatedData>(
 	'modelToPaginatedData',
 	async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
-		ctxOrModel: Context | BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+		ctxOrModel: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | Context,
 		modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedAPIRequestQueries,
 		paginateOptions?: PaginateOptions,
 		filterInFields?: Dict<string>,
-		processObjectIdIgnoreFields?: string[]
+		processObjectIdIgnoreFields?: string[],
 	) => {
 		let model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
 		let queries: ProcessedAPIRequestQueries;
 		if ('json' in ctxOrModel) {
-			// @ts-expect-error
+			// @ts-expect-error Ignore this error.
 			model = modelOrQueries;
 			queries = getProcessedAPIRequestQueries(ctxOrModel, filterInFields, processObjectIdIgnoreFields);
 		} else {
 			model = ctxOrModel;
-			// @ts-expect-error
+			// @ts-expect-error Ignore this error.
 			queries = modelOrQueries;
 		}
 
@@ -75,9 +75,9 @@ setReadonlyConstantToGlobalThis<typeof modelToPaginatedData>(
 			limit: queries.limit,
 			page: queries.page,
 			select: queries.selectFields,
-			sort: paginateOptions?.sort || { _id: -1 }
+			sort: paginateOptions?.sort || { _id: -1 },
 		});
 
 		return { count: paginateResult.totalDocs, data: paginateResult.docs };
-	}
+	},
 );

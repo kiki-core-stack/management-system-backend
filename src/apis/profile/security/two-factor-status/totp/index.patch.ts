@@ -4,7 +4,8 @@ import type { UpdateQuery } from 'mongoose';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
 	const admin = ctx.admin!.$clone();
-	if (!(admin.totpSecret = (await redisController.twoFactorAuthentication.tempTOTPSecret.get(admin)) || admin.totpSecret)) throwAPIError(500, '系統錯誤，請重整頁面後再試！');
+	admin.totpSecret = await redisController.twoFactorAuthentication.tempTOTPSecret.get(admin) || admin.totpSecret;
+	if (!admin.totpSecret) throwAPIError(500, '系統錯誤，請重整頁面後再試！');
 	const isEnabled = admin.twoFactorAuthenticationStatus.totp;
 	admin.twoFactorAuthenticationStatus.totp = true;
 	await requireTwoFactorAuthentication(ctx, true, true, admin);

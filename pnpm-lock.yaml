@@ -67,8 +67,8 @@ importers:
         version: 1.4.0
     devDependencies:
       '@kikiutils/eslint-config':
-        specifier: ^0.4.0
-        version: 0.4.0(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(typescript@5.6.3)
+        specifier: ^0.4.1
+        version: 0.4.1(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(typescript@5.6.3)
       '@kikiutils/tsconfigs':
         specifier: ^3.0.2
         version: 3.0.2
@@ -276,8 +276,8 @@ packages:
     resolution: {integrity: sha512-8Zcy6T/8iRIl2nw55w6OVGfiiFzZ1DeWkwNVYiie7tOge7CDnYeFiWlWsSjUMF02Z8XP48IDCh4uqdBMZuvXqQ==}
     engines: {node: '>=18.12.1'}
 
-  '@kikiutils/eslint-config@0.4.0':
-    resolution: {integrity: sha512-VVhsh6xRd7WevmJj2z4B9C2dgfbIx7AS44G9pRHTqRLYOFBa2iOg2x13OkP89skxTCAvVlY9CA6YMj41lY7P2g==}
+  '@kikiutils/eslint-config@0.4.1':
+    resolution: {integrity: sha512-8k3CkBWxtftR/q1vKRwInBCg1eLCU13u5z2J3ZzYOjaZ0bi0sTOJ0aIrfrHCzi/eVUpwfOTxg+zCzp3NJWL3xA==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/kiki-core-stack-pack@0.42.1':
@@ -330,8 +330,8 @@ packages:
     resolution: {integrity: sha512-wOxtXd35BS0DaVhBopQUB8c8hfLQ+/PKEr99GbOZW+4DWCrEB8JfWJgvpJyxHU6by7LHNVY4fvpFQR7Ezh1IIw==}
     engines: {node: '>=18'}
 
-  '@stylistic/eslint-plugin@2.10.1':
-    resolution: {integrity: sha512-U+4yzNXElTf9q0kEfnloI9XbOyD4cnEQCxjUI94q0+W++0GAEQvJ/slwEj9lwjDHfGADRSr+Tco/z0XJvmDfCQ==}
+  '@stylistic/eslint-plugin@2.11.0':
+    resolution: {integrity: sha512-PNRHbydNG5EH8NK4c+izdJlxajIR6GxcUhzsYNRsn6Myep4dsZt0qFCz3rCPnkvgO5FYibDcMqgNHUT+zvjYZw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.40.0'
@@ -1913,7 +1913,7 @@ snapshots:
       '@clack/prompts': 0.8.1
       '@eslint-community/eslint-plugin-eslint-comments': 4.4.1(eslint@9.15.0)
       '@eslint/markdown': 6.2.1
-      '@stylistic/eslint-plugin': 2.10.1(eslint@9.15.0)(typescript@5.6.3)
+      '@stylistic/eslint-plugin': 2.11.0(eslint@9.15.0)(typescript@5.6.3)
       '@typescript-eslint/eslint-plugin': 8.15.0(@typescript-eslint/parser@8.15.0(eslint@9.15.0)(typescript@5.6.3))(eslint@9.15.0)(typescript@5.6.3)
       '@typescript-eslint/parser': 8.15.0(eslint@9.15.0)(typescript@5.6.3)
       '@vitest/eslint-plugin': 1.1.10(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.6.3))(eslint@9.15.0)(typescript@5.6.3)
@@ -2103,7 +2103,7 @@ snapshots:
 
   '@kikiutils/classes@4.0.1': {}
 
-  '@kikiutils/eslint-config@0.4.0(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(typescript@5.6.3)':
+  '@kikiutils/eslint-config@0.4.1(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(typescript@5.6.3)':
     dependencies:
       '@antfu/eslint-config': 3.9.2(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(eslint@9.15.0)(typescript@5.6.3)
       eslint: 9.15.0
@@ -2196,7 +2196,7 @@ snapshots:
       '@scalar/openapi-types': 0.1.5
       '@unhead/schema': 1.11.11
 
-  '@stylistic/eslint-plugin@2.10.1(eslint@9.15.0)(typescript@5.6.3)':
+  '@stylistic/eslint-plugin@2.11.0(eslint@9.15.0)(typescript@5.6.3)':
     dependencies:
       '@typescript-eslint/utils': 8.15.0(eslint@9.15.0)(typescript@5.6.3)
       eslint: 9.15.0

@@ -8,12 +8,13 @@ declare global {
 }
 
 const baseFilterInFields = { states: 'state', types: 'type' } as const;
-const convertToObjectIdArray = (array: any[]) => array.map((item) => convertToObjectIdIfValid(item));
 const convertToObjectIdIfValid = (value: any) => (typeof value === 'string' && Types.ObjectId.isValid(value) ? new Types.ObjectId(value) : value);
+const convertToObjectIdArray = (array: any[]) => array.map((item) => convertToObjectIdIfValid(item));
 
 function processRegexString(value: string) {
 	try {
-		new RegExp(value);
+		// eslint-disable-next-line unicorn/new-for-builtins
+		RegExp(value);
 		return value;
 	} catch {
 		return escapeRegExp(value);
@@ -21,7 +22,7 @@ function processRegexString(value: string) {
 }
 
 setReadonlyConstantToGlobalThis<typeof getProcessedAPIRequestQueries>('getProcessedAPIRequestQueries', (ctx, filterInFields, processObjectIdIgnoreFields) => {
-	let filterQuery: Dict<any> = {};
+	const filterQuery: Dict<any> = {};
 	let selectFields: Nullable<Set<string>> = null;
 	const queries: {
 		filterQuery?: string;
@@ -57,6 +58,6 @@ setReadonlyConstantToGlobalThis<typeof getProcessedAPIRequestQueries>('getProces
 		offset,
 		page,
 		selectFields: [...(selectFields || [])],
-		skip: (page - 1) * limit
+		skip: (page - 1) * limit,
 	};
 });

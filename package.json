@@ -29,7 +29,7 @@
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
-    "@kikiutils/eslint-config": "^0.4.0",
+    "@kikiutils/eslint-config": "^0.4.1",
     "@kikiutils/tsconfigs": "^3.0.2",
     "@types/bun": "^1.1.13",
     "@types/nodemailer": "^6.4.16",
