@@ -6,7 +6,6 @@ import type { Serve } from 'bun';
 import { env } from 'node:process';
 
 import { honoApp } from '@/core/app';
-import { registerRoutesFromFiles } from '@/core/libs/route';
 import '@/configs';
 
 // Extend Zod with OpenAPI
@@ -23,8 +22,8 @@ setupHonoAppErrorHandling(honoApp);
 await import('@/middlewares');
 
 // Scan files and register routes
-await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/apis`, '/api');
-await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/routes`, '/');
+// eslint-disable-next-line node/prefer-global/process
+await import(`@/core/libs/routes-loader/${process.env.NODE_ENV}`);
 
 // Start server
 const serveConfig: Serve = {
