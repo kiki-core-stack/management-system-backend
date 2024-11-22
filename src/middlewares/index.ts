@@ -1,7 +1,7 @@
 import { useHonoLogger } from '@kikiutils/node/hono';
 
-import { honoApp } from '@/app';
 import configs from '@/configs';
+import { honoApp } from '@/core/app';
 import session from '@/core/middlewares/session';
 import { cookieSessionTokenHandler } from '@/core/middlewares/session/handlers/token';
 

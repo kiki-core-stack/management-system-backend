@@ -5,7 +5,7 @@ import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-stati
 import type { Serve } from 'bun';
 import { env } from 'node:process';
 
-import { honoApp } from '@/app';
+import { honoApp } from '@/core/app';
 import { registerRoutesFromFiles } from '@/core/libs/route';
 import '@/configs';
 
