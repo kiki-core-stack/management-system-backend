@@ -158,3 +158,6 @@ dist
 
 # Generated production routes
 src/core/routes-loader/production.ts
+
+# svg-captcha fonts
+!./node_modules/svg-captcha/fonts

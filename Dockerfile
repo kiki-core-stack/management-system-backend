@@ -34,6 +34,7 @@ RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist/index ./
+COPY ./node_modules/svg-captcha/fonts ./node_modules/svg-captcha/fonts
 COPY ./run-production-cluster.ts ./
 
 ## Set cmd
