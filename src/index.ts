@@ -23,7 +23,7 @@ await import('@/middlewares');
 
 // Scan files and register routes
 // eslint-disable-next-line node/prefer-global/process
-await import(`@/core/libs/routes-loader/${process.env.NODE_ENV}`);
+await import(`@/core/routes-loader/${process.env.NODE_ENV}`);
 
 // Start server
 export default {
