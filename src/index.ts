@@ -26,11 +26,9 @@ await import('@/middlewares');
 await import(`@/core/libs/routes-loader/${process.env.NODE_ENV}`);
 
 // Start server
-const serveConfig: Serve = {
+export default {
 	fetch: honoApp.fetch,
 	hostname: env.SERVER_HOST || '127.0.0.1',
 	port: Number(env.SERVER_PORT) || 8000,
 	reusePort: true,
-};
-
-export default serveConfig;
+} satisfies Serve;
