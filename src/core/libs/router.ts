@@ -1,6 +1,10 @@
 import { glob } from 'glob';
+import type { Hono } from 'hono';
 import { resolve, sep } from 'node:path';
 import { env } from 'node:process';
+
+import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
+import type { RouteHandlerOptions } from '@/core/types/route';
 
 const allowedHttpMethods = [
 	'delete',
@@ -24,6 +28,29 @@ function filePathSegmentToRankValue(segment: string, isLast: boolean) {
 function filePathToRank(path: string) {
 	const segments = path.split('/');
 	return +segments.map((segment, index) => filePathSegmentToRankValue(segment, index === segments.length - 1)).join('');
+}
+
+export function loadRouteModule(honoApp: Hono, routeModule: any, scannedRoute: Awaited<ReturnType<typeof scanDirectoryForRoutes>>[number]) {
+	const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
+	if (!handlers.length) return;
+	const latestHandler = handlers.at(-1);
+	const routeHandlerOptions: Undefinedable<RouteHandlerOptions> = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
+	if (routeHandlerOptions) Object.assign(latestHandler, routeHandlerOptions.properties);
+	if (routeModule.zodOpenAPIConfig) {
+		zodOpenAPIRegistry.registerPath({
+			...routeModule.zodOpenAPIConfig,
+			method: scannedRoute.method,
+			path: scannedRoute.openAPIPath,
+		});
+	}
+
+	Object.defineProperty(latestHandler, 'isHandler', {
+		configurable: false,
+		value: true,
+		writable: false,
+	});
+
+	honoApp.on(scannedRoute.method, scannedRoute.path, ...handlers);
 }
 
 export async function scanDirectoryForRoutes(directoryPath: string, baseUrlPath: string) {
