@@ -5,8 +5,7 @@ import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-stati
 import type { Serve } from 'bun';
 import { env } from 'node:process';
 
-import { honoApp } from '@/app';
-import { registerRoutesFromFiles } from '@/core/libs/route';
+import { honoApp } from '@/core/app';
 import '@/configs';
 
 // Extend Zod with OpenAPI
@@ -23,15 +22,13 @@ setupHonoAppErrorHandling(honoApp);
 await import('@/middlewares');
 
 // Scan files and register routes
-await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/apis`, '/api');
-await registerRoutesFromFiles(honoApp, `${import.meta.dirname}/routes`, '/');
+// eslint-disable-next-line node/prefer-global/process
+await import(`@/core/routes-loader/${process.env.NODE_ENV}`);
 
 // Start server
-const serveConfig: Serve = {
+export default {
 	fetch: honoApp.fetch,
 	hostname: env.SERVER_HOST || '127.0.0.1',
 	port: Number(env.SERVER_PORT) || 8000,
 	reusePort: true,
-};
-
-export default serveConfig;
+} satisfies Serve;

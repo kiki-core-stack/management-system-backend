@@ -30,7 +30,7 @@ function filePathToRank(path: string) {
 	return +segments.map((segment, index) => filePathSegmentToRankValue(segment, index === segments.length - 1)).join('');
 }
 
-export function loadRouteModule(honoApp: Hono, routeModule: any, scannedRoute: Awaited<ReturnType<typeof scanDirectoryForRoutes>>[number]) {
+export function loadRouteModule(honoApp: Hono, routeModule: any, scannedRoute: Except<Awaited<ReturnType<typeof scanDirectoryForRoutes>>[number], 'filePath'>) {
 	const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
 	if (!handlers.length) return;
 	const latestHandler = handlers.at(-1);

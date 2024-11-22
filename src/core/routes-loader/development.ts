@@ -1,14 +1,16 @@
 import logger from '@kikiutils/node/consola';
-import type { Hono } from 'hono';
-import { relative } from 'node:path';
+import { join, relative } from 'node:path';
 import { cwd } from 'node:process';
 
-import { loadRouteModule, scanDirectoryForRoutes } from './router';
+import { honoApp } from '../app';
+import { projectSrcDirectoryPath } from '../constants';
+import { loadRouteModule, scanDirectoryForRoutes } from '../libs/router';
 
-export async function registerRoutesFromFiles(honoApp: Hono, directoryPath: string, baseUrlPath: string) {
-	let totalRouteCount = 0;
+(async () => {
+	const directoryPath = join(projectSrcDirectoryPath, 'routes');
 	const startTime = performance.now();
-	const scannedRoutes = await scanDirectoryForRoutes(directoryPath, baseUrlPath);
+	const scannedRoutes = await scanDirectoryForRoutes(directoryPath, '/');
+	let totalRouteCount = 0;
 	for (const scannedRoute of scannedRoutes) {
 		try {
 			loadRouteModule(honoApp, await import(scannedRoute.filePath), scannedRoute);
@@ -19,4 +21,4 @@ export async function registerRoutesFromFiles(honoApp: Hono, directoryPath: stri
 	}
 
 	logger.info(`Successfully registered ${totalRouteCount} routes from '${relative(cwd(), directoryPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
-}
+})();
