@@ -28,10 +28,10 @@ await import(`@/core/routes-loader/${process.env.NODE_ENV}`);
 
 // Start server
 export default {
-	fetch: honoApp.fetch,
-	hostname: env.SERVER_HOST || '127.0.0.1',
-	port: Number(env.SERVER_PORT) || 8000,
-	reusePort: true,
+    fetch: honoApp.fetch,
+    hostname: env.SERVER_HOST || '127.0.0.1',
+    port: Number(env.SERVER_PORT) || 8000,
+    reusePort: true,
 } satisfies Serve;
 
 // Log that subprocess has started
