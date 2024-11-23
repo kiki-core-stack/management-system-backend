@@ -34,6 +34,7 @@ import logger from '@/core/libs/logger';
         workerProcesses[index] = { logPrefix: colorize('cyan', `[Worker ${index} (${subprocess.pid})]`), subprocess };
     };
 
+    logger.info(`Starting ${workersCount} workers...`);
     for (let i = 0; i < workersCount; i++) createAndSetWorker(i);
     const shutdown = async (exitCode?: NodeJS.Signals | number) => {
         if (isShuttingDown) return;
