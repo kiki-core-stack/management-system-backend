@@ -18,7 +18,7 @@ COPY ./src ./src
 COPY ./eslint.config.mjs ./tsconfig.json ./
 RUN bun run lint
 RUN bun run type-check
-RUN bun run compile
+RUN bun run build
 
 # Runtime stage
 FROM oven/bun:alpine
@@ -33,8 +33,7 @@ RUN apk update && apk upgrade --no-cache
 RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## Copy files and libraries
-COPY --from=build-stage /app/dist/index ./
-COPY ./run-production-cluster.ts ./
+COPY --from=build-stage /app/dist ./
 
 ## Set cmd
-CMD ["bun", "run", "./run-production-cluster.ts"]
+CMD ["bun", "run", "./production-entrypoint.js"]
