@@ -2,7 +2,6 @@ import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
 import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
-import type { Serve } from 'bun';
 import { env } from 'node:process';
 
 import { honoApp } from '@/core/app';
@@ -26,9 +25,9 @@ await import('@/middlewares');
 await import(`@/core/routes-loader/${process.env.NODE_ENV}`);
 
 // Start server
-export default {
+Bun.serve({
 	fetch: honoApp.fetch,
 	hostname: env.SERVER_HOST || '127.0.0.1',
 	port: Number(env.SERVER_PORT) || 8000,
 	reusePort: true,
-} satisfies Serve;
+});
