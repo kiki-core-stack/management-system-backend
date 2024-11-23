@@ -25,11 +25,12 @@ nodeProcess.once('SIGTERM', async () => await gracefulExit(server));
     setupHonoAppErrorHandling(honoApp);
 
     // Load middlewares
-    await import('@/middlewares');
+    // eslint-disable-next-line node/prefer-global/process
+    await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default();
 
     // Scan files and register routes
     // eslint-disable-next-line node/prefer-global/process
-    await (await import(`@/core/routes-loader/${process.env.NODE_ENV}`)).default();
+    await (await import(`@/core/loaders/routes/${process.env.NODE_ENV}`)).default();
 
     // Start server
     server = Bun.serve({

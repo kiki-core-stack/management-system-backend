@@ -156,8 +156,9 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-# Generated production routes
-src/core/routes-loader/production.ts
+# Generated production loaders
+src/core/loaders/middlewares/production.ts
+src/core/loaders/routes/production.ts
 
 # svg-captcha fonts
 !./node_modules/svg-captcha/fonts

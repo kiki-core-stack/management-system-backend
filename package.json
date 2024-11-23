@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "NODE_ENV=production bun run build:exec --outdir=./dist",
-    "build:exec": "bun run ./src/core/generate-production-routes-loader.ts && bun --env-file=./.env.production.local build ./src/index.ts ./src/production-entrypoint.ts --bytecode --minify --target bun",
+    "build:exec": "bun run ./src/core/generate-production-loaders.ts && bun --env-file=./.env.production.local build ./src/index.ts ./src/production-entrypoint.ts --bytecode --minify --target bun",
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
