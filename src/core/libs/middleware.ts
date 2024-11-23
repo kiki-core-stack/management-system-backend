@@ -7,7 +7,7 @@ import { projectSrcDirectoryPath } from '../constants';
 export async function getMiddlewareFilePaths() {
     const directoryPath = resolve(join(projectSrcDirectoryPath, 'middlewares')).replaceAll(sep, '/');
     const allFilePaths = await glob(`${directoryPath}/**/*.{mj,t}s`);
-    const environment = env.NODE_ENV === 'production' ? 'prod' : 'dev';
-    const filePattern = new RegExp(`^${directoryPath}(.*?)(\\.${environment})?\\.(mj|t)s$`);
+    const excludedEnvSuffix = env.NODE_ENV === 'production' ? 'dev' : 'prod';
+    const filePattern = new RegExp(`^.*(?<!\\.${excludedEnvSuffix})\\.(mj|t)s$`);
     return allFilePaths.filter((filePath) => filePattern.test(filePath)).sort();
 }
