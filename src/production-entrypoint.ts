@@ -23,7 +23,7 @@ import logger from '@/core/libs/logger';
                     logger.error(logPrefix, `Exited with exitCode ${exitCode} and error:`, error);
                     if (isShuttingDown) return logger.info(logPrefix, 'Main process is shutting down. Do not restart.');
                     logger.info(logPrefix, 'Restarting in 1 second...');
-                    setTimeout(() => createAndSetWorker(index), 1000);
+                    setTimeout(() => !isShuttingDown && createAndSetWorker(index), 1000);
                 } else if (exitCode !== null) logger.info(logPrefix, `Exited with code: ${exitCode}.`);
                 else if (signalCode !== null) logger.info(logPrefix, `Exited with signal: ${signalCode}.`);
                 else logger.info(logPrefix, `Exited.`);
