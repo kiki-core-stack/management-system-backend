@@ -14,28 +14,28 @@ declare global {
 }
 
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfig>('defineAPIRouteZodOpenAPIJsonResponseConfig', (dataSchema, message = '成功', isError = false) => ({
-	content: {
-		'application/json': {
-			schema: z.object({
-				data: dataSchema || z.object({}).optional(),
-				message: z.string().describe(message),
-				success: z.literal(!isError),
-			}),
-		},
-	},
-	description: message,
+    content: {
+        'application/json': {
+            schema: z.object({
+                data: dataSchema || z.object({}).optional(),
+                message: z.string().describe(message),
+                success: z.literal(!isError),
+            }),
+        },
+    },
+    description: message,
 }));
 
 const defaultAPIRouteZodOpenAPIConfig = { responses: mapValues(statusCodeToResponseMessageMap, (message, code) => defineAPIRouteZodOpenAPIJsonResponseConfig(undefined, message, +code >= 400)) };
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAPIRouteZodOpenAPIConfig', (operationId, description, config) => {
-	return defu(
-		{
-			...config,
-			description,
-			operationId,
-		},
-		defaultAPIRouteZodOpenAPIConfig,
-	);
+    return defu(
+        {
+            ...config,
+            description,
+            operationId,
+        },
+        defaultAPIRouteZodOpenAPIConfig,
+    );
 });
 
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({ content: { 'application/json': { schema } }, description }));
