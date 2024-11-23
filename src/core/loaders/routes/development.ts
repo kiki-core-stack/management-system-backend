@@ -2,9 +2,9 @@ import { join } from 'node:path';
 
 import logger from '@/core/libs/logger';
 
-import { honoApp } from '../app';
-import { projectSrcDirectoryPath } from '../constants';
-import { loadRouteModule, scanDirectoryForRoutes } from '../libs/router';
+import { honoApp } from '../../app';
+import { projectSrcDirectoryPath } from '../../constants';
+import { loadRouteModule, scanDirectoryForRoutes } from '../../libs/router';
 
 export default async function () {
     const directoryPath = join(projectSrcDirectoryPath, 'routes');

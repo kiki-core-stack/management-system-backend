@@ -157,4 +157,4 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node
 
 # Generated production routes
-src/core/routes-loader/production.ts
+src/core/loaders/routes/production.ts
