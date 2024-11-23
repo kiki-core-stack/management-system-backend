@@ -3,10 +3,10 @@ import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
 import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
 import type { Server } from 'bun';
-import logger from 'consola';
-import { env, once, pid } from 'node:process';
+import { env, once } from 'node:process';
 
 import { honoApp } from '@/core/app';
+import logger from '@/core/libs/logger';
 import '@/configs';
 import { gracefulExit } from '@/graceful-exit';
 
@@ -40,6 +40,4 @@ once('SIGTERM', async () => await gracefulExit(server));
     });
 
     logger.success(`Started server http://${server.hostname}:${server.port}.`);
-    // Log that subprocess has started
-    if (Bun.argv.includes('--is-subprocess')) logger.success(`[Worker ${Bun.argv[2]} (${pid})] Started.`);
 })();

@@ -1,5 +1,6 @@
-import logger from '@kikiutils/node/consola';
 import { join } from 'node:path';
+
+import logger from '@/core/libs/logger';
 
 import { honoApp } from '../app';
 import { projectSrcDirectoryPath } from '../constants';
