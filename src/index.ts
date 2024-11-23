@@ -3,16 +3,16 @@ import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
 import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
 import type { Server } from 'bun';
-import logger from 'consola';
-import { env, once, pid } from 'node:process';
+import nodeProcess from 'node:process';
 
 import { honoApp } from '@/core/app';
+import logger from '@/core/libs/logger';
 import '@/configs';
 import { gracefulExit } from '@/graceful-exit';
 
 let server: Server | undefined;
-once('SIGINT', async () => await gracefulExit(server));
-once('SIGTERM', async () => await gracefulExit(server));
+nodeProcess.once('SIGINT', async () => await gracefulExit(server));
+nodeProcess.once('SIGTERM', async () => await gracefulExit(server));
 (async () => {
     // Extend Zod with OpenAPI
     extendZodWithOpenApi(zod);
@@ -34,12 +34,10 @@ once('SIGTERM', async () => await gracefulExit(server));
     // Start server
     server = Bun.serve({
         fetch: honoApp.fetch,
-        hostname: env.SERVER_HOST || '127.0.0.1',
-        port: Number(env.SERVER_PORT) || 8000,
+        hostname: nodeProcess.env.SERVER_HOST || '127.0.0.1',
+        port: Number(nodeProcess.env.SERVER_PORT) || 8000,
         reusePort: true,
     });
 
     logger.success(`Started server http://${server.hostname}:${server.port}.`);
-    // Log that subprocess has started
-    if (Bun.argv.includes('--is-subprocess')) logger.success(`[Worker ${Bun.argv[2]} (${pid})] Started.`);
 })();

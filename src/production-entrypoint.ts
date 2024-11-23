@@ -1,13 +1,15 @@
 import type { Subprocess } from 'bun';
-import logger from 'consola';
-import { env, once, pid } from 'node:process';
+import { colorize } from 'consola/utils';
+import process from 'node:process';
+
+import logger from '@/core/libs/logger';
 
 (() => {
     let isShuttingDown = false;
-    const workersCount = Number(env.CLUSTER_WORKERS) || 4;
-    const subprocesses: Subprocess[] = Array.from({ length: workersCount });
-    const createAndSetSubprocess = (index: number) => {
-        subprocesses[index] = Bun.spawn({
+    const workersCount = Number(process.env.CLUSTER_WORKERS) || 4;
+    const workerProcesses: { logPrefix: string; subprocess: Subprocess }[] = Array.from({ length: workersCount });
+    const createAndSetWorker = (index: number) => {
+        const subprocess = Bun.spawn({
             cmd: [
                 'bun',
                 'run',
@@ -16,37 +18,41 @@ import { env, once, pid } from 'node:process';
                 '--is-subprocess',
             ],
             onExit(_subprocess, exitCode, signalCode, error) {
+                const logPrefix = workerProcesses[index]!.logPrefix;
                 if (error || exitCode) {
-                    logger.error(`[Worker ${index} (${pid})] Exited with exitCode ${exitCode} and error:`, error);
-                    if (isShuttingDown) return logger.info(`[Worker ${index} (${pid})] Main process is shutting down. Do not restart.`);
-                    logger.info(`[Worker ${index} (${pid})] Restarting in 1 second...`);
-                    setTimeout(() => createAndSetSubprocess(index), 1000);
-                } else if (exitCode !== null) logger.info(`[Worker ${index} (${pid})] Exited with code: ${exitCode}.`);
-                else if (signalCode !== null) logger.info(`[Worker ${index} (${pid})] Exited with signal: ${signalCode}.`);
-                else logger.info(`[Worker ${index} (${pid})] Exited.`);
+                    logger.error(logPrefix, `Exited with exitCode ${exitCode} and error:`, error);
+                    if (isShuttingDown) return logger.info(logPrefix, 'Main process is shutting down. Do not restart.');
+                    logger.info(logPrefix, 'Restarting in 1 second...');
+                    setTimeout(() => !isShuttingDown && createAndSetWorker(index), 1000);
+                } else if (exitCode !== null) logger.info(logPrefix, `Exited with code: ${exitCode}.`);
+                else if (signalCode !== null) logger.info(logPrefix, `Exited with signal: ${signalCode}.`);
+                else logger.info(logPrefix, `Exited.`);
             },
             stdio: ['inherit', 'inherit', 'inherit'],
         });
+
+        workerProcesses[index] = { logPrefix: colorize('cyan', `[Worker ${index} (${subprocess.pid})]`), subprocess };
     };
 
-    for (let i = 0; i < workersCount; i++) createAndSetSubprocess(i);
+    logger.info(`Starting ${workersCount} workers...`);
+    for (let i = 0; i < workersCount; i++) createAndSetWorker(i);
     const shutdown = async (exitCode?: NodeJS.Signals | number) => {
         if (isShuttingDown) return;
         isShuttingDown = true;
-        logger.info('[Main worker] Shutting down all subprocesses...');
+        logger.info('Shutting down all workers...');
         await Promise.all(
-            subprocesses.map(async (subprocess, index) => {
-                logger.info(`[Worker ${index} (${subprocess.pid})] Killing...`);
+            workerProcesses.map(async ({ logPrefix, subprocess }) => {
+                logger.info(logPrefix, 'Killing...');
                 subprocess.kill(exitCode);
                 await subprocess.exited;
-                logger.success(`[Worker ${index} (${subprocess.pid})] Exited.`);
+                logger.success(logPrefix, 'Exited.');
             }),
         );
 
-        logger.info('[Main worker] All subprocesses terminated.');
+        logger.info('All workers terminated.');
     };
 
-    once('SIGINT', shutdown);
-    once('SIGTERM', shutdown);
-    once('exit', shutdown);
+    process.once('SIGINT', shutdown);
+    process.once('SIGTERM', shutdown);
+    process.once('exit', shutdown);
 })();

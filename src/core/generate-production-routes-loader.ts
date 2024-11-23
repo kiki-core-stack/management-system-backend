@@ -1,5 +1,6 @@
-import logger from 'consola';
 import { join } from 'node:path';
+
+import logger from '@/core/libs/logger';
 
 import { projectSrcDirectoryPath } from './constants';
 import { scanDirectoryForRoutes } from './libs/router';
