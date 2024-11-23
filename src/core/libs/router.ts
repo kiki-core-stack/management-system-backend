@@ -1,10 +1,12 @@
 import { glob } from 'glob';
-import type { Hono } from 'hono';
-import { resolve, sep } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { env } from 'node:process';
 
 import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
 import type { RouteHandlerOptions } from '@/core/types/route';
+
+import { honoApp } from '../app';
+import { projectSrcDirectoryPath } from '../constants';
 
 const allowedHttpMethods = [
     'delete',
@@ -30,7 +32,28 @@ function filePathToRank(path: string) {
     return +segments.map((segment, index) => filePathSegmentToRankValue(segment, index === segments.length - 1)).join('');
 }
 
-export function loadRouteModule(honoApp: Hono, routeModule: any, scannedRoute: Except<Awaited<ReturnType<typeof scanDirectoryForRoutes>>[number], 'filePath'>) {
+export async function getRouteDefinitions() {
+    const directoryPath = resolve(join(projectSrcDirectoryPath, 'routes')).replaceAll(sep, '/');
+    const allFilePaths = await glob(`${directoryPath}/**/*.{mj,t}s`);
+    const environment = env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    const filePattern = new RegExp(`^${directoryPath}(.*?)(\/index)?\\.(${allowedHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
+    const routeDefinitions = [];
+    for (const filePath of allFilePaths) {
+        const matches = filePath.match(filePattern);
+        if (!matches) continue;
+        const normalizedRoutePath = matches[1]!.replaceAll(/\/+/g, '/');
+        routeDefinitions.push({
+            filePath,
+            method: matches[3]!,
+            openAPIPath: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, '{$1}'),
+            path: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, ':$1'),
+        });
+    }
+
+    return routeDefinitions.sort((a, b) => filePathToRank(a.path) - filePathToRank(b.path));
+}
+
+export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaited<ReturnType<typeof getRouteDefinitions>>[number], 'filePath'>) {
     const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
     if (!handlers.length) return;
     const latestHandler = handlers.at(-1);
@@ -39,8 +62,8 @@ export function loadRouteModule(honoApp: Hono, routeModule: any, scannedRoute: E
     if (routeModule.zodOpenAPIConfig) {
         zodOpenAPIRegistry.registerPath({
             ...routeModule.zodOpenAPIConfig,
-            method: scannedRoute.method,
-            path: scannedRoute.openAPIPath,
+            method: routeDefinition.method,
+            path: routeDefinition.openAPIPath,
         });
     }
 
@@ -50,26 +73,5 @@ export function loadRouteModule(honoApp: Hono, routeModule: any, scannedRoute: E
         writable: false,
     });
 
-    honoApp.on(scannedRoute.method, scannedRoute.path, ...handlers);
-}
-
-export async function scanDirectoryForRoutes(directoryPath: string, baseUrlPath: string) {
-    directoryPath = resolve(directoryPath).replaceAll(sep, '/');
-    const allFilePaths = await glob(`${directoryPath}/**/*.{mj,t}s`);
-    const environment = env.NODE_ENV === 'production' ? 'prod' : 'dev';
-    const filePattern = new RegExp(`^${directoryPath}(.*?)(\/index)?\\.(${allowedHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
-    const matchedRoutes = [];
-    for (const filePath of allFilePaths) {
-        const matches = filePath.match(filePattern);
-        if (!matches) continue;
-        const normalizedRoutePath = `${baseUrlPath}${matches[1]!}`.replaceAll(/\/+/g, '/');
-        matchedRoutes.push({
-            filePath,
-            method: matches[3]!,
-            openAPIPath: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, '{$1}'),
-            path: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, ':$1'),
-        });
-    }
-
-    return matchedRoutes.sort((a, b) => filePathToRank(a.path) - filePathToRank(b.path));
+    honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
 }

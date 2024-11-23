@@ -1,22 +1,17 @@
-import { join } from 'node:path';
-
 import logger from '@/core/libs/logger';
 
-import { honoApp } from '../../app';
-import { projectSrcDirectoryPath } from '../../constants';
-import { loadRouteModule, scanDirectoryForRoutes } from '../../libs/router';
+import { getRouteDefinitions, loadRouteModule } from '../../libs/router';
 
 export default async function () {
-    const directoryPath = join(projectSrcDirectoryPath, 'routes');
     const startTime = performance.now();
-    const scannedRoutes = await scanDirectoryForRoutes(directoryPath, '/');
+    const routeDefinitions = await getRouteDefinitions();
     let totalRouteCount = 0;
-    for (const scannedRoute of scannedRoutes) {
+    for (const routeDefinition of routeDefinitions) {
         try {
-            loadRouteModule(honoApp, await import(scannedRoute.filePath), scannedRoute);
+            loadRouteModule(await import(routeDefinition.filePath), routeDefinition);
             totalRouteCount++;
         } catch (error) {
-            logger.error(`Failed to load route file ${scannedRoute.filePath}. Error:`, (error as Error).message);
+            logger.error(`Failed to load route file ${routeDefinition.filePath}. Error:`, (error as Error).message);
         }
     }
 

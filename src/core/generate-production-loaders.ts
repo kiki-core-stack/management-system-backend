@@ -4,7 +4,7 @@ import logger from '@/core/libs/logger';
 
 import { projectSrcDirectoryPath } from './constants';
 import { getMiddlewareFilePaths } from './libs/middleware';
-import { scanDirectoryForRoutes } from './libs/router';
+import { getRouteDefinitions } from './libs/router';
 
 async function generateMiddlewaresLoader() {
     const fileLines = ['export default async function () {'];
@@ -19,18 +19,17 @@ async function generateMiddlewaresLoader() {
 
 async function generateRoutesLoader() {
     const fileLines = [
-        `import { honoApp } from '@/core/app';`,
         `import { loadRouteModule } from '../libs/router';`,
         'export default async function () {',
     ];
 
     const startTime = performance.now();
     logger.info('Starting to generate production routes...');
-    const scannedRoutes = await scanDirectoryForRoutes(join(projectSrcDirectoryPath, 'routes'), '/');
-    for (const { filePath, ...scannedRoute } of scannedRoutes) fileLines.push(`    loadRouteModule(honoApp, await import('${filePath}'), ${JSON.stringify(scannedRoute)});`);
+    const routeDefinitions = await getRouteDefinitions();
+    for (const { filePath, ...routeDefinition } of routeDefinitions) fileLines.push(`    loadRouteModule(await import('${filePath}'), ${JSON.stringify(routeDefinition)});`);
     fileLines.push('}');
     await Bun.write(join(projectSrcDirectoryPath, 'core/loaders/routes/production.ts'), `${fileLines.join('\n')}\n`);
-    logger.success(`Generated production ${scannedRoutes.length} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
+    logger.success(`Generated production ${routeDefinitions.length} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
 
 (async () => await Promise.all([generateMiddlewaresLoader(), generateRoutesLoader()]))();
