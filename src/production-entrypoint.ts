@@ -2,17 +2,19 @@ import type { Subprocess } from 'bun';
 import logger from 'consola';
 import process from 'node:process';
 
-if (Bun.argv.includes('--is-subprocess')) {
-	logger.info(`[Worker ${Bun.argv[2]} (${process.pid})] Starting...`);
-	await import('@/index');
-	logger.success(`[Worker ${Bun.argv[2]} (${process.pid})] Started.`);
-} else {
+(() => {
 	let isShuttingDown = false;
 	const workersCount = Number(process.env.CLUSTER_WORKERS) || 4;
 	const subprocesses: Subprocess[] = Array.from({ length: workersCount });
 	const createAndSetSubprocess = (index: number) => {
 		subprocesses[index] = Bun.spawn({
-			cmd: [process.execPath, index.toString(), '--is-subprocess'],
+			cmd: [
+				'bun',
+				'run',
+				'./index.js',
+				index.toString(),
+				'--is-subprocess',
+			],
 			onExit(_subprocess, exitCode, signalCode, error) {
 				if (error || exitCode) {
 					logger.error(`[Worker ${index} (${process.pid})] Exited with exitCode ${exitCode} and error:`, error);
@@ -47,4 +49,4 @@ if (Bun.argv.includes('--is-subprocess')) {
 	process.once('SIGINT', shutdown);
 	process.once('SIGTERM', shutdown);
 	process.once('exit', shutdown);
-}
+})();
