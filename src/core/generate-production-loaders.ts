@@ -2,7 +2,6 @@ import { join } from 'node:path';
 
 import logger from '@/core/libs/logger';
 
-import { projectSrcDirectoryPath } from './constants';
 import { getMiddlewareFilePaths } from './libs/middleware';
 import { getRouteDefinitions } from './libs/router';
 
@@ -13,7 +12,7 @@ async function generateMiddlewaresLoader() {
     const middlewareFilePaths = await getMiddlewareFilePaths();
     for (const filePath of middlewareFilePaths) fileLines.push(`    await import('${filePath}');`);
     fileLines.push('}');
-    await Bun.write(join(projectSrcDirectoryPath, 'core/loaders/middlewares/production.ts'), `${fileLines.join('\n')}\n`);
+    await Bun.write(join(import.meta.dirname, 'loaders/middlewares/production.ts'), `${fileLines.join('\n')}\n`);
     logger.success(`Generated production ${middlewareFilePaths.length} middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
 
@@ -28,7 +27,7 @@ async function generateRoutesLoader() {
     const routeDefinitions = await getRouteDefinitions();
     for (const { filePath, ...routeDefinition } of routeDefinitions) fileLines.push(`    loadRouteModule(await import('${filePath}'), ${JSON.stringify(routeDefinition)});`);
     fileLines.push('}');
-    await Bun.write(join(projectSrcDirectoryPath, 'core/loaders/routes/production.ts'), `${fileLines.join('\n')}\n`);
+    await Bun.write(join(import.meta.dirname, 'loaders/routes/production.ts'), `${fileLines.join('\n')}\n`);
     logger.success(`Generated production ${routeDefinitions.length} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
 

@@ -6,7 +6,6 @@ import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
 import type { RouteHandlerOptions } from '@/core/types/route';
 
 import { honoApp } from '../app';
-import { projectSrcDirectoryPath } from '../constants';
 
 const allowedHttpMethods = [
     'delete',
@@ -33,7 +32,7 @@ function filePathToRank(path: string) {
 }
 
 export async function getRouteDefinitions() {
-    const directoryPath = resolve(join(projectSrcDirectoryPath, 'routes')).replaceAll(sep, '/');
+    const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
     const allFilePaths = await glob(`${directoryPath}/**/*.{mj,t}s`);
     const environment = env.NODE_ENV === 'production' ? 'prod' : 'dev';
     const filePattern = new RegExp(`^${directoryPath}(.*?)(\/index)?\\.(${allowedHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
