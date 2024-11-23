@@ -6,7 +6,7 @@ import { honoApp } from '../app';
 import { projectSrcDirectoryPath } from '../constants';
 import { loadRouteModule, scanDirectoryForRoutes } from '../libs/router';
 
-(async () => {
+export default async function () {
     const directoryPath = join(projectSrcDirectoryPath, 'routes');
     const startTime = performance.now();
     const scannedRoutes = await scanDirectoryForRoutes(directoryPath, '/');
@@ -21,4 +21,4 @@ import { loadRouteModule, scanDirectoryForRoutes } from '../libs/router';
     }
 
     logger.info(`Successfully registered ${totalRouteCount} routes from '${relative(cwd(), directoryPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
-})();
+}
