@@ -1,6 +1,5 @@
 import logger from '@kikiutils/node/consola';
-import { join, relative } from 'node:path';
-import { cwd } from 'node:process';
+import { join } from 'node:path';
 
 import { honoApp } from '../app';
 import { projectSrcDirectoryPath } from '../constants';
@@ -16,9 +15,9 @@ export default async function () {
             loadRouteModule(honoApp, await import(scannedRoute.filePath), scannedRoute);
             totalRouteCount++;
         } catch (error) {
-            logger.error(`Failed to load route file: ${scannedRoute.filePath}`, (error as Error).message);
+            logger.error(`Failed to load route file ${scannedRoute.filePath}. Error:`, (error as Error).message);
         }
     }
 
-    logger.info(`Successfully registered ${totalRouteCount} routes from '${relative(cwd(), directoryPath)}' in ${(performance.now() - startTime).toFixed(2)}ms`);
+    logger.info(`Successfully loaded ${totalRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
