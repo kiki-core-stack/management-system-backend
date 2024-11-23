@@ -19,7 +19,7 @@ async function generateMiddlewaresLoader() {
 
 async function generateRoutesLoader() {
     const fileLines = [
-        `import { loadRouteModule } from '../libs/router';`,
+        `import { loadRouteModule } from '../../libs/router';`,
         'export default async function () {',
     ];
 
