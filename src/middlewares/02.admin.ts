@@ -1,9 +1,10 @@
 import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
 import type { H } from 'hono/types';
 
+import { honoApp } from '@/core/app';
 import type { RouteHandlerProperties } from '@/core/types/route';
 
-export default defaultHonoFactory.createMiddleware(async (ctx, next) => {
+honoApp.use('/api/*', async (ctx, next) => {
     const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as UndefinedAble<H & RouteHandlerProperties>;
     if (!routeHandler?.isHandler) return await next();
     if (ctx.session.adminId) {
