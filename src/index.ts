@@ -24,7 +24,7 @@ import '@/configs';
 
     // Scan files and register routes
     // eslint-disable-next-line node/prefer-global/process
-    await import(`@/core/routes-loader/${process.env.NODE_ENV}`);
+    await (await import(`@/core/routes-loader/${process.env.NODE_ENV}`)).default();
 
     // Start server
     const server = Bun.serve({
