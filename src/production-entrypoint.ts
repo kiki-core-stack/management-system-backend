@@ -1,12 +1,12 @@
 import type { Subprocess } from 'bun';
 import { colorize } from 'consola/utils';
-import { env, once } from 'node:process';
+import process from 'node:process';
 
 import logger from '@/core/libs/logger';
 
 (() => {
     let isShuttingDown = false;
-    const workersCount = Number(env.CLUSTER_WORKERS) || 4;
+    const workersCount = Number(process.env.CLUSTER_WORKERS) || 4;
     const workerProcesses: { logPrefix: string; subprocess: Subprocess }[] = Array.from({ length: workersCount });
     const createAndSetWorker = (index: number) => {
         const subprocess = Bun.spawn({
@@ -52,7 +52,7 @@ import logger from '@/core/libs/logger';
         logger.info('All workers terminated.');
     };
 
-    once('SIGINT', shutdown);
-    once('SIGTERM', shutdown);
-    once('exit', shutdown);
+    process.once('SIGINT', shutdown);
+    process.once('SIGTERM', shutdown);
+    process.once('exit', shutdown);
 })();
