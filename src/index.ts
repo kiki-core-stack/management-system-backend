@@ -2,12 +2,17 @@ import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
 import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
+import type { Server } from 'bun';
 import logger from 'consola';
-import { env, pid } from 'node:process';
+import { env, once, pid } from 'node:process';
 
 import { honoApp } from '@/core/app';
 import '@/configs';
+import { gracefulExit } from '@/graceful-exit';
 
+let server: Server | undefined;
+once('SIGINT', async () => await gracefulExit(server));
+once('SIGTERM', async () => await gracefulExit(server));
 (async () => {
     // Extend Zod with OpenAPI
     extendZodWithOpenApi(zod);
@@ -27,7 +32,7 @@ import '@/configs';
     await (await import(`@/core/routes-loader/${process.env.NODE_ENV}`)).default();
 
     // Start server
-    const server = Bun.serve({
+    server = Bun.serve({
         fetch: honoApp.fetch,
         hostname: env.SERVER_HOST || '127.0.0.1',
         port: Number(env.SERVER_PORT) || 8000,
