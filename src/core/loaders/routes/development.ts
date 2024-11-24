@@ -15,5 +15,5 @@ export default async function () {
         }
     }
 
-    logger.info(`Successfully loaded ${totalRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
+    logger.success(`Successfully loaded ${totalRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
