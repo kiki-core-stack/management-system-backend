@@ -2,7 +2,7 @@ import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
 
 zodOpenAPIRegistry.register('defaultAPISuccessResponseContent', z.object({
     data: z.object({}).optional(),
-    message: z.literal('成功'),
+    message: z.string().describe('成功'),
     success: z.literal(true),
 }));
 
