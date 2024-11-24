@@ -11,9 +11,6 @@ importers:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.2.0
         version: 7.2.0(zod@3.23.8)
-      '@hono/swagger-ui':
-        specifier: ^0.4.1
-        version: 0.4.1(hono@4.6.11)
       '@hono/zod-validator':
         specifier: ^0.4.1
         version: 0.4.1(hono@4.6.11)(zod@3.23.8)
@@ -23,18 +20,12 @@ importers:
       '@kikiutils/mongoose':
         specifier: ^2.1.1
         version: 2.1.1
-      '@scalar/hono-api-reference':
-        specifier: ^0.5.161
-        version: 0.5.161(hono@4.6.11)
       consola:
         specifier: ^3.2.3
         version: 3.2.3
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
-      glob:
-        specifier: ^11.0.0
-        version: 11.0.0
       hono:
         specifier: ^4.6.11
         version: 4.6.11
@@ -63,18 +54,27 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
     devDependencies:
+      '@hono/swagger-ui':
+        specifier: ^0.4.1
+        version: 0.4.1(hono@4.6.11)
       '@kikiutils/eslint-config':
         specifier: ^0.5.0
         version: 0.5.0(@typescript-eslint/utils@8.15.0(eslint@9.15.0)(typescript@5.7.2))(@vue/compiler-sfc@3.5.13)(typescript@5.7.2)
       '@kikiutils/tsconfigs':
         specifier: ^3.0.2
         version: 3.0.2
+      '@scalar/hono-api-reference':
+        specifier: ^0.5.161
+        version: 0.5.161(hono@4.6.11)
       '@types/bun':
         specifier: ^1.1.13
         version: 1.1.13
       '@types/nodemailer':
         specifier: ^6.4.17
         version: 6.4.17
+      glob:
+        specifier: ^11.0.0
+        version: 11.0.0
       openapi3-ts:
         specifier: ^4.4.0
         version: 4.4.0
