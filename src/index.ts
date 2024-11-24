@@ -28,7 +28,7 @@ nodeProcess.once('SIGTERM', async () => await gracefulExit(server));
     // eslint-disable-next-line node/prefer-global/process
     await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default();
 
-    // Scan files and register routes
+    // Load routes
     // eslint-disable-next-line node/prefer-global/process
     await (await import(`@/core/loaders/routes/${process.env.NODE_ENV}`)).default();
 
