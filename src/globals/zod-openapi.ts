@@ -1,8 +1,5 @@
 import type { ResponseConfig, ZodRequestBody } from '@asteasolutions/zod-to-openapi';
-import { statusCodeToResponseMessageMap } from '@kikiutils/kiki-core-stack-pack/hono-backend/constants/response';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
-import { defu } from 'defu';
-import { mapValues } from 'lodash-es';
 import type { SetOptional } from 'type-fest';
 
 declare global {
@@ -26,16 +23,11 @@ setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfi
     description: message,
 }));
 
-const defaultAPIRouteZodOpenAPIConfig = { responses: mapValues(statusCodeToResponseMessageMap, (message, code) => defineAPIRouteZodOpenAPIJsonResponseConfig(undefined, message, +code >= 400)) };
-setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAPIRouteZodOpenAPIConfig', (operationId, description, config) => {
-    return defu(
-        {
-            ...config,
-            description,
-            operationId,
-        },
-        defaultAPIRouteZodOpenAPIConfig,
-    );
-});
+setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAPIRouteZodOpenAPIConfig', (operationId, description, config) => ({
+    responses: {},
+    ...config,
+    description,
+    operationId,
+}));
 
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({ content: { 'application/json': { schema } }, description }));
