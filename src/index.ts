@@ -6,7 +6,7 @@ import type { Server } from 'bun';
 import nodeProcess from 'node:process';
 
 import { honoApp } from '@/core/app';
-import logger from '@/core/libs/logger';
+import logger from '@/core/utils/logger';
 import '@/configs';
 import { gracefulExit } from '@/graceful-exit';
 
