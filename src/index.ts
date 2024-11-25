@@ -24,9 +24,6 @@ nodeProcess.once('SIGTERM', async () => await gracefulExit(server));
     // Setup error handling
     setupHonoAppErrorHandling(honoApp);
 
-    // Register zod-openapi components
-    await import('@/initializations/register-zod-openapi-components');
-
     // Load middlewares
     // eslint-disable-next-line node/prefer-global/process
     await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default();
