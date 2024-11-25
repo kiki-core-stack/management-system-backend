@@ -28,7 +28,7 @@ setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAP
     ...config,
     description,
     operationId,
-    responses: { ...defaultAPIRouteZodOpenAPIResponsesConfig as any, ...config?.responses },
+    responses: { ...defaultAPIRouteZodOpenAPIResponsesConfig, ...config?.responses },
 }));
 
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({ content: { 'application/json': { schema } }, description }));
