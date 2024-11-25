@@ -10,7 +10,6 @@ declare global {
 	const defineAPIRouteZodOpenAPIJsonResponseConfig: (dataSchema?: ReturnType<(typeof z)['object']>, message?: string, isError?: boolean) => ResponseConfig;
 }
 
-const defaultAPIRouteZodOpenAPIResponsesConfig = Object.freeze({ 200: { $ref: '#/components/responses/defaultAPISuccess' } });
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfig>('defineAPIRouteZodOpenAPIJsonResponseConfig', (dataSchema, message = '成功', isError = false) => ({
     content: {
         'application/json': {
@@ -24,6 +23,7 @@ setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfi
     description: message,
 }));
 
+const defaultAPIRouteZodOpenAPIResponsesConfig = Object.freeze({ 200: defineAPIRouteZodOpenAPIJsonResponseConfig(undefined, '成功') });
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAPIRouteZodOpenAPIConfig', (operationId, description, config) => ({
     ...config,
     description,
