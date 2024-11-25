@@ -1,4 +1,4 @@
-import logger from '@/core/libs/logger';
+import logger from '@/core/utils/logger';
 
 import { getMiddlewareFilePaths } from '../../libs/middleware';
 

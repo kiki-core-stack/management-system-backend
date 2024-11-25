@@ -2,7 +2,7 @@ import type { Subprocess } from 'bun';
 import { colorize } from 'consola/utils';
 import process from 'node:process';
 
-import logger from '@/core/libs/logger';
+import logger from '@/core/utils/logger';
 
 (() => {
     let isShuttingDown = false;
