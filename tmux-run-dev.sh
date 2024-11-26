@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name='bun-project'
+name='auto-hono'
 
 if ! tmux ls | grep -q "^$name:"; then
     tmux new-session -ds "$name"
