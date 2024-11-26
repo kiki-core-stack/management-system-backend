@@ -11,8 +11,8 @@ import '@/configs';
 import { gracefulExit } from '@/graceful-exit';
 
 let server: Server | undefined;
-nodeProcess.once('SIGINT', async () => await gracefulExit(server));
-nodeProcess.once('SIGTERM', async () => await gracefulExit(server));
+nodeProcess.once('SIGINT', () => gracefulExit(server));
+nodeProcess.once('SIGTERM', () => gracefulExit(server));
 (async () => {
     // Extend Zod with OpenAPI
     extendZodWithOpenApi(zod);
