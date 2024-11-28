@@ -15,24 +15,25 @@ ENV NODE_ENV=production
 
 ## Copy files and build
 COPY ./src ./src
-COPY ./tsconfig.json ./
+COPY ./eslint.config.mjs ./tsconfig.json ./
+RUN bun run lint
 RUN bun run type-check
-RUN bun run compile
+RUN bun run build
 
 # Runtime stage
 FROM oven/bun:alpine
 
 ## Set args, envs and workdir
 ENV NODE_ENV=production
+ENV SERVER_HOST=0.0.0.0
 WORKDIR /app
 
-## Set timezone and upgrade packages
+## Upgrade packages and set timezone
 RUN apk update && apk upgrade --no-cache
-RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+# RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## Copy files and libraries
-COPY --from=build-stage /app/dist/index ./
-COPY ./.env.production.local ./.env
+COPY --from=build-stage /app/dist ./
 
 ## Set cmd
-CMD ["./index"]
+CMD ["bun", "run", "./production-entrypoint.js"]
