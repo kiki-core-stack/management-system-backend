@@ -4,10 +4,10 @@ import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 
 declare global {
-	type RouteZodOpenAPIConfig = Except<RouteConfig, 'description' | 'method' | 'path'>;
+    type RouteZodOpenAPIConfig = Except<RouteConfig, 'description' | 'method' | 'path'>;
 
-	const defineRouteZodOpenAPIConfig: (operationId: string, description: string, config: RouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
-	const zodSchemaToOpenAPISchema: (schema: ReturnType<(typeof z)['object']>, description?: string) => SchemaObject;
+    const defineRouteZodOpenAPIConfig: (operationId: string, description: string, config: RouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
+    const zodSchemaToOpenAPISchema: (schema: ReturnType<(typeof z)['object']>, description?: string) => SchemaObject;
 }
 
 setReadonlyConstantToGlobalThis<typeof defineRouteZodOpenAPIConfig>('defineRouteZodOpenAPIConfig', (operationId, description, config) => ({ ...config, description, operationId }));
