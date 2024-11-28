@@ -1,5 +1,5 @@
-import type { BinaryLike } from 'node:crypto';
 import { AESCipher } from 'node-ciphers';
+import type { BinaryLike } from 'node:crypto';
 import onChange from 'on-change';
 
 import { sessionChangedSymbol, sessionClearedSymbol } from './constants';
