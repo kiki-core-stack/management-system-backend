@@ -2,9 +2,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "bun run build:exec --outdir=./dist",
-    "build:exec": "NODE_ENV=production bun --env-file=./.env.production.local build ./src/index.ts --bytecode --minify --target bun",
-    "compile": "bun run build:exec --compile --outfile ./dist/index",
+    "build": "NODE_ENV=production bun run build:exec --outdir=./dist",
+    "build:exec": "bun run ./src/core/generate-production-loaders.ts && bun --env-file=./.env.production.local build ./src/index.ts ./src/production-entrypoint.ts --bytecode --minify --target bun",
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
