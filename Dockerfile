@@ -28,9 +28,9 @@ ENV NODE_ENV=production
 ENV SERVER_HOST=0.0.0.0
 WORKDIR /app
 
-## Set timezone and upgrade packages
+## Upgrade packages and set timezone
 RUN apk update && apk upgrade --no-cache
-RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+# RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./

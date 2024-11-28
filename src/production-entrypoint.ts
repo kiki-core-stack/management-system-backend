@@ -6,7 +6,7 @@ import logger from '@/core/utils/logger';
 
 (() => {
     let isShuttingDown = false;
-    const workersCount = Number(process.env.CLUSTER_WORKERS) || 4;
+    const workersCount = Number(process.env.SERVER_WORKERS) || 4;
     const workerProcesses: { logPrefix: string; subprocess: Subprocess }[] = Array.from({ length: workersCount });
     const createAndSetWorker = (index: number) => {
         const subprocess = Bun.spawn({
