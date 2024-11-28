@@ -7,7 +7,6 @@ import nodeProcess from 'node:process';
 
 import { honoApp } from '@/core/app';
 import logger from '@/core/utils/logger';
-import '@/configs';
 import { gracefulExit } from '@/graceful-exit';
 
 let server: Server | undefined;
