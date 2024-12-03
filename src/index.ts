@@ -5,6 +5,7 @@ import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-stati
 import type { Server } from 'bun';
 import nodeProcess from 'node:process';
 
+import '@/configs';
 import { honoApp } from '@/core/app';
 import logger from '@/core/utils/logger';
 import { gracefulExit } from '@/graceful-exit';
