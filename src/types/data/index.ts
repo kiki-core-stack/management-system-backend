@@ -1,1 +1,1 @@
-export type {} from '@kikiutils/kiki-core-stack-pack/types/data';
+export type {} from '@kiki-core-stack/pack/types/data';

@@ -1,5 +1,5 @@
-import { mongooseConnections } from '@kikiutils/kiki-core-stack-pack/constants/mongoose';
-import { redisInstance } from '@kikiutils/kiki-core-stack-pack/constants/redis';
+import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
+import { redisInstance } from '@kiki-core-stack/pack/constants/redis';
 import type { Server } from 'bun';
 import { exit } from 'node:process';
 
