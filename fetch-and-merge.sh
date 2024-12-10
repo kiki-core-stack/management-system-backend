@@ -1,5 +1,5 @@
 #!/bin/bash
 
 set -e
-git fetch https://github.com/kiki-kanri/bun-template main
+git fetch https://github.com/kiki-kanri/auto-hono main
 git merge FETCH_HEAD
