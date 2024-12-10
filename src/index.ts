@@ -1,7 +1,7 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import { z as zod } from '@kikiutils/kiki-core-stack-pack/constants/zod';
-import { setupHonoAppErrorHandling } from '@kikiutils/kiki-core-stack-pack/hono-backend/setups/error-handling';
-import '@kikiutils/kiki-core-stack-pack/hono-backend/setups/mongoose-model-statics';
+import { z as zod } from '@kiki-core-stack/pack/constants/zod';
+import { setupHonoAppErrorHandling } from '@kiki-core-stack/pack/hono-backend/setups/error-handling';
+import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics';
 import type { Server } from 'bun';
 import nodeProcess from 'node:process';
 

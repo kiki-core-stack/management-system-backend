@@ -1,4 +1,4 @@
-export type {} from '@kikiutils/kiki-core-stack-pack/types';
+export type {} from '@kiki-core-stack/pack/types';
 
 declare global {
     interface ProcessedAPIRequestQueries {
