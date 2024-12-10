@@ -1,5 +1,5 @@
-import { redisController } from '@kikiutils/kiki-core-stack-pack/controllers/redis';
-import { generateTOTPSecretData } from '@kikiutils/kiki-core-stack-pack/utils/two-factor-authentication';
+import { redisController } from '@kiki-core-stack/pack/controllers/redis';
+import { generateTOTPSecretData } from '@kiki-core-stack/pack/utils/two-factor-authentication';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     if (ctx.admin!.twoFactorAuthenticationStatus.totp) return ctx.createAPISuccessResponse();

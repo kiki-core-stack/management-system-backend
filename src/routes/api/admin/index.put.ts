@@ -1,5 +1,5 @@
-import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
-import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
+import { AdminModel } from '@kiki-core-stack/pack/models/admin';
+import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
 export const jsonSchema = z.object({
     account: z.string().trim().min(1).max(16),

@@ -1,6 +1,6 @@
-import { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
-import { AdminLogModel, AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
-import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
+import { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
+import { AdminLogModel, AdminModel } from '@kiki-core-stack/pack/models/admin';
+import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 

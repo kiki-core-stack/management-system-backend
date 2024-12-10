@@ -1,4 +1,4 @@
-import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
+import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     const admin = ctx.admin || await AdminModel.findById(ctx.session.tempAdminIdForSendEmailOTPCode);

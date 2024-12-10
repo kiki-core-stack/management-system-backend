@@ -1,4 +1,4 @@
-import { AdminModel } from '@kikiutils/kiki-core-stack-pack/models/admin';
+import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { H } from 'hono/types';
 
 import { honoApp } from '@/core/app';

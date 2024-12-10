@@ -1,4 +1,4 @@
-import type { ProfileSecurityChangePasswordFormData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
+import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator(
