@@ -25,9 +25,9 @@ declare global {
             paginateOptions?: PaginateOptions,
             filterInFields?: Dict<string>,
             processObjectIdIgnoreFields?: string[]
-        ): Promise<any>;
+        ): Promise<{ count: number; list: any[] }>;
 
-        <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, queries: ProcessedAPIRequestQueries, paginateOptions?: PaginateOptions): Promise<any>;
+        <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, queries: ProcessedAPIRequestQueries, paginateOptions?: PaginateOptions): Promise<{ count: number; list: any[] }>;
     };
 }
 
@@ -78,6 +78,6 @@ setReadonlyConstantToGlobalThis<typeof modelToPaginatedData>(
             sort: paginateOptions?.sort || { _id: -1 },
         });
 
-        return { count: paginateResult.totalDocs, data: paginateResult.docs };
+        return { count: paginateResult.totalDocs, list: paginateResult.docs };
     },
 );
