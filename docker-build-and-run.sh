@@ -2,7 +2,7 @@
 
 set -e
 . ./.env.production.local
-name='bun-project'
+name='auto-hono'
 user='user'
 image_name="$user/$name:latest"
 docker pull oven/bun:alpine
