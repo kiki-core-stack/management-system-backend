@@ -4,9 +4,8 @@ import { getRouteDefinitions, loadRouteModule } from '../../libs/router';
 
 export default async function () {
     const startTime = performance.now();
-    const routeDefinitions = await getRouteDefinitions();
     let totalRouteCount = 0;
-    for (const routeDefinition of routeDefinitions) {
+    for (const routeDefinition of await getRouteDefinitions()) {
         try {
             loadRouteModule(await import(routeDefinition.filePath), routeDefinition);
             totalRouteCount++;
