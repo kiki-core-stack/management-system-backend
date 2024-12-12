@@ -6,16 +6,18 @@ ARG NPM_CONFIG_REGISTRY
 ENV NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
 WORKDIR /app
 
-## Install packages
+## Install dependencies
 COPY ./bun.lockb ./package.json ./
 RUN bun i --frozen-lockfile
 
 ## Set production env
 ENV NODE_ENV=production
 
-## Copy files and build
+## Copy files
 COPY ./src ./src
 COPY ./eslint.config.mjs ./tsconfig.json ./
+
+## Build
 RUN bun run lint
 RUN bun run type-check
 RUN bun run build
@@ -23,7 +25,7 @@ RUN bun run build
 # Runtime stage
 FROM oven/bun:alpine
 
-## Set args, envs and workdir
+## Set envs and workdir
 ENV NODE_ENV=production
 ENV SERVER_HOST=0.0.0.0
 WORKDIR /app
@@ -34,6 +36,7 @@ RUN apk update && apk upgrade --no-cache
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
+COPY ./.env.production.local ./.env
 
 ## Set cmd
 CMD ["bun", "run", "./production-entrypoint.js"]
