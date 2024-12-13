@@ -18,12 +18,15 @@ import {
 type StoredData = [number, PartialContextSessionData];
 
 export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
-    const cipher = new AESCipher.GCM(cipherKey, {
-        authTag: 'base64',
-        decryptInput: 'base64',
-        encryptOutput: 'base64',
-        iv: 'base64',
-    });
+    const cipher = new AESCipher.GCM(
+        cipherKey,
+        {
+            authTag: 'base64',
+            decryptInput: 'base64',
+            encryptOutput: 'base64',
+            iv: 'base64',
+        },
+    );
 
     return defaultHonoFactory.createMiddleware(async (ctx, next) => {
         let sessionData = {};

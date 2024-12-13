@@ -69,11 +69,15 @@ export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaite
         });
     }
 
-    Object.defineProperty(latestHandler, 'isHandler', {
-        configurable: false,
-        value: true,
-        writable: false,
-    });
+    Object.defineProperty(
+        latestHandler,
+        'isHandler',
+        {
+            configurable: false,
+            value: true,
+            writable: false,
+        },
+    );
 
     honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
 }
