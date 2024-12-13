@@ -1,6 +1,9 @@
 import type { Context } from 'hono';
 
-import type { sessionChangedSymbol, sessionClearedSymbol } from './constants';
+import type {
+    sessionChangedSymbol,
+    sessionClearedSymbol,
+} from './constants';
 
 declare module 'hono' {
     interface Context {

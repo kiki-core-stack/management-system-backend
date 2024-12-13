@@ -1,4 +1,7 @@
-import type { ResponseConfig, ZodRequestBody } from '@asteasolutions/zod-to-openapi';
+import type {
+    ResponseConfig,
+    ZodRequestBody,
+} from '@asteasolutions/zod-to-openapi';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { SetOptional } from 'type-fest';
 
@@ -28,7 +31,13 @@ setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIConfig>('defineAP
     ...config,
     description,
     operationId,
-    responses: { ...defaultAPIRouteZodOpenAPIResponsesConfig, ...config?.responses },
+    responses: {
+        ...defaultAPIRouteZodOpenAPIResponsesConfig,
+        ...config?.responses,
+    },
 }));
 
-setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({ content: { 'application/json': { schema } }, description }));
+setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig>('defineAPIRouteZodOpenAPIJsonRequestConfig', (schema, description) => ({
+    content: { 'application/json': { schema } },
+    description,
+}));

@@ -10,7 +10,10 @@ export type Configs = ReadonlyDeep<{
 
 export const configs: Configs = {
     openAPI: {
-        info: { title: 'API Document', version: '0.1.0' },
+        info: {
+            title: 'API Document',
+            version: '0.1.0',
+        },
         openapi: '3.1.0',
     },
     sessionCipherKey: (() => {

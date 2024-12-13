@@ -1,5 +1,9 @@
 import { glob } from 'glob';
-import { join, resolve, sep } from 'node:path';
+import {
+    join,
+    resolve,
+    sep,
+} from 'node:path';
 import { env } from 'node:process';
 
 import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';

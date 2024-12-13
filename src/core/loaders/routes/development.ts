@@ -1,6 +1,9 @@
 import logger from '@/core/utils/logger';
 
-import { getRouteDefinitions, loadRouteModule } from '../../libs/router';
+import {
+    getRouteDefinitions,
+    loadRouteModule,
+} from '../../libs/router';
 
 export default async function () {
     const startTime = performance.now();
