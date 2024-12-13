@@ -27,10 +27,17 @@ import logger from '@/core/utils/logger';
                 logger.info(logPrefix, 'Restarting in 1 second...');
                 setTimeout(() => !isShuttingDown && createAndSetWorker(index), 1000);
             },
-            stdio: ['inherit', 'inherit', 'inherit'],
+            stdio: [
+                'inherit',
+                'inherit',
+                'inherit',
+            ],
         });
 
-        workerProcesses[index] = { logPrefix: colorize('cyan', `[Worker ${index} (${subprocess.pid})]`), subprocess };
+        workerProcesses[index] = {
+            logPrefix: colorize('cyan', `[Worker ${index} (${subprocess.pid})]`),
+            subprocess,
+        };
     };
 
     logger.info(`Starting ${workersCount} workers...`);
@@ -40,7 +47,10 @@ import logger from '@/core/utils/logger';
         isShuttingDown = true;
         logger.info('Shutting down all workers...');
         await Promise.all(
-            workerProcesses.map(async ({ logPrefix, subprocess }) => {
+            workerProcesses.map(async ({
+                logPrefix,
+                subprocess,
+            }) => {
                 logger.info(logPrefix, 'Killing...');
                 subprocess.kill(exitCode);
                 await subprocess.exited;
