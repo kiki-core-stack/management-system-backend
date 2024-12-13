@@ -1,5 +1,10 @@
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
-import { cloneDeep as _cloneDeep, merge as _merge, omit as _omit, pick as _pick } from 'lodash-es';
+import {
+    cloneDeep as _cloneDeep,
+    merge as _merge,
+    omit as _omit,
+    pick as _pick,
+} from 'lodash-es';
 
 declare global {
     const cloneDeep: typeof _cloneDeep;

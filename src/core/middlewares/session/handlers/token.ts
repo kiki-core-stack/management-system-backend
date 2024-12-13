@@ -1,4 +1,8 @@
-import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
+import {
+    deleteCookie,
+    getCookie,
+    setCookie,
+} from 'hono/cookie';
 
 import type { SessionTokenHandler } from '../types';
 

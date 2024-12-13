@@ -2,9 +2,18 @@ import { AESCipher } from 'node-ciphers';
 import type { BinaryLike } from 'node:crypto';
 import onChange from 'on-change';
 
-import { sessionChangedSymbol, sessionClearedSymbol } from './constants';
-import type { PartialContextSessionData, SessionTokenHandler } from './types';
-import { clearSession, popSession } from './utils';
+import {
+    sessionChangedSymbol,
+    sessionClearedSymbol,
+} from './constants';
+import type {
+    PartialContextSessionData,
+    SessionTokenHandler,
+} from './types';
+import {
+    clearSession,
+    popSession,
+} from './utils';
 
 type StoredData = [number, PartialContextSessionData];
 
@@ -39,7 +48,11 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
         await next();
         if (ctx[sessionClearedSymbol]) return tokenHandler.delete(ctx);
         if (!ctx[sessionChangedSymbol]) return;
-        const encryptResult = cipher.encryptJSON([Date.now(), ctx.session]);
+        const encryptResult = cipher.encryptJSON([
+            Date.now(),
+            ctx.session,
+        ]);
+
         if (encryptResult) tokenHandler.set(ctx, `${encryptResult.authTag}${encryptResult.iv}${encryptResult.data}`);
     });
 };

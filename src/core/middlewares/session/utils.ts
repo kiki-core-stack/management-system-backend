@@ -1,7 +1,10 @@
 import type { Context } from 'hono';
 import onChange from 'on-change';
 
-import { sessionChangedSymbol, sessionClearedSymbol } from './constants';
+import {
+    sessionChangedSymbol,
+    sessionClearedSymbol,
+} from './constants';
 import type { ContextSessionData } from './types';
 
 export function clearSession(this: Context) {
