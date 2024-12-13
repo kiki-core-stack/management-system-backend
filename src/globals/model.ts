@@ -78,13 +78,16 @@ setReadonlyConstantToGlobalThis<typeof modelToPaginatedData>(
         }
 
         if (paginateOptions?.populate && queries.selectFields.length) paginateOptions.populate = [paginateOptions.populate].flat().filter((item) => queries.selectFields.includes(typeof item === 'object' ? item.path : item)) as PopulateOptions[] | string[];
-        const paginateResult = await model.paginate(queries.filterQuery as FilterQuery<RawDocType>, {
-            ...paginateOptions,
-            limit: queries.limit,
-            page: queries.page,
-            select: queries.selectFields,
-            sort: paginateOptions?.sort || { _id: -1 },
-        });
+        const paginateResult = await model.paginate(
+            queries.filterQuery as FilterQuery<RawDocType>,
+            {
+                ...paginateOptions,
+                limit: queries.limit,
+                page: queries.page,
+                select: queries.selectFields,
+                sort: paginateOptions?.sort || { _id: -1 },
+            },
+        );
 
         return {
             count: paginateResult.totalDocs,
