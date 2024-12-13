@@ -8,7 +8,10 @@ export default defaultHonoFactory.createHandlers((ctx) => {
     return ctx.body(
         JSON.stringify(
             generator.generateDocument({
-                info: { title: 'API Document', version: '0.1.0' },
+                info: {
+                    title: 'API Document',
+                    version: '0.1.0',
+                },
                 openapi: '3.1.0',
             }),
             null,

@@ -1,4 +1,7 @@
-import { OpenApiGeneratorV31, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import {
+    OpenApiGeneratorV31,
+    OpenAPIRegistry,
+} from '@asteasolutions/zod-to-openapi';
 import type { RouteConfig } from '@asteasolutions/zod-to-openapi';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { SchemaObject } from 'openapi3-ts/oas31';
@@ -12,9 +15,17 @@ declare global {
     const zodSchemaToOpenAPISchema: (schema: ReturnType<(typeof z)['object']>, description?: string) => SchemaObject;
 }
 
-setReadonlyConstantToGlobalThis<typeof defineRouteZodOpenAPIConfig>('defineRouteZodOpenAPIConfig', (operationId, description, config) => ({ ...config, description, operationId }));
+setReadonlyConstantToGlobalThis<typeof defineRouteZodOpenAPIConfig>('defineRouteZodOpenAPIConfig', (operationId, description, config) => ({
+    ...config,
+    description,
+    operationId,
+}));
+
 setReadonlyConstantToGlobalThis<typeof zodSchemaToOpenAPISchema>('zodSchemaToOpenAPISchema', (schema, description) => {
     const registry = new OpenAPIRegistry();
     registry.register('schema', schema);
-    return { ...new OpenApiGeneratorV31(registry.definitions).generateComponents().components!.schemas!.schema as SchemaObject, description };
+    return {
+        ...new OpenApiGeneratorV31(registry.definitions).generateComponents().components!.schemas!.schema as SchemaObject,
+        description,
+    };
 });
