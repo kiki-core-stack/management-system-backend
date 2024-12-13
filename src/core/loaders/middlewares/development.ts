@@ -4,9 +4,8 @@ import { getMiddlewareFilePaths } from '../../libs/middleware';
 
 export default async function () {
     const startTime = performance.now();
-    const middlewareFilePaths = await getMiddlewareFilePaths();
     let totalMiddlewareCount = 0;
-    for (const middlewareFilePath of middlewareFilePaths) {
+    for (const middlewareFilePath of await getMiddlewareFilePaths()) {
         try {
             await import(middlewareFilePath);
             totalMiddlewareCount++;
