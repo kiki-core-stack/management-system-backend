@@ -32,7 +32,11 @@ declare global {
             processObjectIdIgnoreFields?: string[]
         ): Promise<{ count: number; list: any[] }>;
 
-        <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>, queries: ProcessedAPIRequestQueries, paginateOptions?: PaginateOptions): Promise<{ count: number; list: any[] }>;
+        <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+            model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+            queries: ProcessedAPIRequestQueries,
+            paginateOptions?: PaginateOptions
+        ): Promise<{ count: number; list: any[] }>;
     };
 }
 

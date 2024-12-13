@@ -5,7 +5,7 @@ import { honoApp } from '@/core/app';
 import type { RouteHandlerProperties } from '@/core/types/route';
 
 honoApp.use('/api/*', async (ctx, next) => {
-    const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as UndefinedAble<H & RouteHandlerProperties>;
+    const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as Undefinedable<H & RouteHandlerProperties>;
     if (!routeHandler?.isHandler) return await next();
     if (ctx.session.adminId) {
         ctx.admin = await AdminModel.findById(ctx.session.adminId);
