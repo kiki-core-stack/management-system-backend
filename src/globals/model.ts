@@ -1,6 +1,11 @@
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { Context } from 'hono';
-import type { FilterQuery, PaginateOptions, PopulateOptions, QueryOptions } from 'mongoose';
+import type {
+    FilterQuery,
+    PaginateOptions,
+    PopulateOptions,
+    QueryOptions,
+} from 'mongoose';
 
 declare global {
     const getModelDocumentByRouteIdAndDelete: <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
@@ -40,7 +45,10 @@ setReadonlyConstantToGlobalThis<typeof getModelDocumentByRouteIdAndDelete>('getM
 
 setReadonlyConstantToGlobalThis<typeof getModelDocumentByRouteIdAndUpdateBooleanField>('getModelDocumentByRouteIdAndUpdateBooleanField', async (ctx, model, allowedFields, options, beforeUpdate) => {
     const document = await model.findByRouteIdOrThrowNotFoundError(ctx, undefined, null, options);
-    const { field, value } = await ctx.req.json<{ field: string; value: boolean }>();
+    const {
+        field,
+        value,
+    } = await ctx.req.json<{ field: string; value: boolean }>();
     if (!allowedFields.includes(field)) throwAPIError(400);
     // @ts-expect-error Ignore this error.
     await beforeUpdate?.(document, field, !!value);
@@ -78,6 +86,9 @@ setReadonlyConstantToGlobalThis<typeof modelToPaginatedData>(
             sort: paginateOptions?.sort || { _id: -1 },
         });
 
-        return { count: paginateResult.totalDocs, list: paginateResult.docs };
+        return {
+            count: paginateResult.totalDocs,
+            list: paginateResult.docs,
+        };
     },
 );

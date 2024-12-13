@@ -7,7 +7,10 @@ export const jsonSchema = z.object({
     enabled: z.boolean(),
     name: z.string().trim().min(1).max(16),
     password: z.string().trim().length(128).optional(),
-    twoFactorAuthenticationStatus: z.object({ emailOTP: z.boolean(), totp: z.boolean() }),
+    twoFactorAuthenticationStatus: z.object({
+        emailOTP: z.boolean(),
+        totp: z.boolean(),
+    }),
 }) satisfies ZodValidatorType<AdminData>;
 
 export default defaultHonoFactory.createHandlers(apiZValidator('json', jsonSchema), async (ctx) => {

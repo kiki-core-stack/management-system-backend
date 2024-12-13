@@ -1,5 +1,8 @@
 import { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
-import { AdminLogModel, AdminModel } from '@kiki-core-stack/pack/models/admin';
+import {
+    AdminLogModel,
+    AdminModel,
+} from '@kiki-core-stack/pack/models/admin';
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
@@ -16,7 +19,11 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const data = ctx.req.valid('json');
         if (data.verCode !== ctx.popSession('verCode')?.toLowerCase()) throwAPIError(400, '驗證碼不正確！', { isVerCodeIncorrect: true });
-        const admin = await AdminModel.findOne({ account: data.account, enabled: true });
+        const admin = await AdminModel.findOne({
+            account: data.account,
+            enabled: true,
+        });
+
         if (!admin) throwAPIError(404, '帳號不存在，未啟用或密碼不正確！');
         ctx.session.tempAdminIdForSendEmailOTPCode = admin.id;
         await requireTwoFactorAuthentication(ctx, true, true, admin, true);

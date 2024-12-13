@@ -7,7 +7,11 @@ declare global {
     const getProcessedAPIRequestQueries: (ctx: Context, filterInFields?: Dict<string>, processObjectIdIgnoreFields?: string[]) => ProcessedAPIRequestQueries;
 }
 
-const baseFilterInFields = { states: 'state', types: 'type' } as const;
+const baseFilterInFields = {
+    states: 'state',
+    types: 'type',
+} as const;
+
 const convertToObjectIdIfValid = (value: any) => typeof value === 'string' && Types.ObjectId.isValid(value) ? new Types.ObjectId(value) : value;
 const convertToObjectIdArray = (array: any[]) => array.map((item) => convertToObjectIdIfValid(item));
 
@@ -36,11 +40,20 @@ setReadonlyConstantToGlobalThis<typeof getProcessedAPIRequestQueries>('getProces
         let filterQueryData = JSON.parse(queries.filterQuery);
         if (filterQueryData.endAt) merge(filterQuery, { createdAt: { $lt: new Date(filterQueryData.endAt) } });
         if (filterQueryData.startAt) merge(filterQuery, { createdAt: { $gte: new Date(filterQueryData.startAt) } });
-        Object.entries(filterQueryData = omit(filterQueryData, 'endAt', 'startAt')).forEach(([key, value]) => {
+        Object.entries(filterQueryData = omit(filterQueryData, 'endAt', 'startAt')).forEach(([
+            key,
+            value,
+        ]) => {
             if (key.endsWith('Id') && !processObjectIdIgnoreFields?.includes(key) && delete filterQueryData[key]) filterQuery[key.slice(0, -2)] = convertToObjectIdIfValid(value);
             if (key.endsWith('Ids') && !filterInFields?.[key] && delete filterQueryData[key] && Array.isArray(value) && value.length) merge(filterQuery, { [key.slice(0, -3)]: { $in: convertToObjectIdArray(value) } });
             if (value?.$regex !== undefined && delete filterQueryData[key] && value.$regex) filterQuery[key] = (value.$regex = processRegexString(value.$regex), value);
-            Object.entries({ ...baseFilterInFields, ...filterInFields }).forEach(([toCheckField, filterField]) => {
+            Object.entries({
+                ...baseFilterInFields,
+                ...filterInFields,
+            }).forEach(([
+                toCheckField,
+                filterField,
+            ]) => {
                 if (key === toCheckField && delete filterQueryData[toCheckField] && Array.isArray(value) && value.length) merge(filterQuery, { [filterField]: { $in: convertToObjectIdArray(value) } });
             });
         });
