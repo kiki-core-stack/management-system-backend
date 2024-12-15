@@ -1,5 +1,4 @@
 import type { Server } from 'bun';
-import { exit } from 'node:process';
 
 import logger from '@/core/utils/logger';
 
@@ -8,5 +7,5 @@ export async function gracefulExit(server?: Server) {
     await server?.stop(true);
     // Perform operations such as closing the database connection here.
     logger.success('Graceful shutdown completed.');
-    exit(0);
+    process.exit(0);
 }

@@ -4,7 +4,6 @@ import {
     resolve,
     sep,
 } from 'node:path';
-import { env } from 'node:process';
 import type { Except } from 'type-fest';
 
 import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
@@ -38,7 +37,7 @@ function filePathToRank(path: string) {
 
 export async function getRouteDefinitions() {
     const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
-    const environment = env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    const environment = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     const filePattern = new RegExp(`^${directoryPath}(.*?)(\/index)?\\.(${allowedHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
     const routeDefinitions = [];
     for (const filePath of await glob(`${directoryPath}/**/*.{mj,t}s`)) {
