@@ -1,6 +1,9 @@
 # Build stage
 FROM oven/bun:alpine AS build-stage
 
+## Upgrade packages
+RUN apk update && apk upgrade --no-cache
+
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
 ENV NODE_ENV=production
@@ -26,8 +29,8 @@ ENV NODE_ENV=production
 ENV SERVER_HOST=0.0.0.0
 WORKDIR /app
 
-## Upgrade packages and set timezone
-RUN apk update && apk upgrade --no-cache
+## Install packages and set timezone
+RUN apk update && apk upgrade --no-cache && apk add -lu --no-cache tini
 # RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## Copy files and libraries
@@ -35,4 +38,5 @@ COPY --from=build-stage /app/dist ./
 COPY ./.env.production.local ./.env
 
 ## Set cmd
-CMD ["bun", "run", "./production-entrypoint.js"]
+COPY ./docker-entrypoint.sh ./
+CMD ["tini", "--", "./docker-entrypoint.sh"]
