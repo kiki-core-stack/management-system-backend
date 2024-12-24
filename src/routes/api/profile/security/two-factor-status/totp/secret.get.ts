@@ -4,6 +4,6 @@ import { generateTOTPSecretData } from '@kiki-core-stack/pack/utils/two-factor-a
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     if (ctx.admin!.twoFactorAuthenticationStatus.totp) return ctx.createAPISuccessResponse();
     const totpSecretData = generateTOTPSecretData('後台管理系統', ctx.admin!.account);
-    await redisController.twoFactorAuthentication.tempTOTPSecret.set(ctx.admin!, totpSecretData.secret);
+    await redisController.twoFactorAuthentication.tempTOTPSecret.set(totpSecretData.secret, ctx.admin!);
     return ctx.createAPISuccessResponse(totpSecretData);
 });
