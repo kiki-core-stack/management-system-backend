@@ -18,6 +18,7 @@ async function generateMiddlewaresLoader() {
 
 async function generateRoutesLoader() {
     const fileLines = [
+        '// @ts-ignore',
         `import { loadRouteModule } from '../../libs/router';`,
         'export default async function () {',
     ];
