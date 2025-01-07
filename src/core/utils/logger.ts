@@ -1,5 +1,4 @@
 import { createConsola } from 'consola';
-import type { InputLogObject } from 'consola';
 import { colorize } from 'consola/utils';
 
 const consola = createConsola({ formatOptions: { date: false } });
