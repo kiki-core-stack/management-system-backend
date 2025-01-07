@@ -7,10 +7,10 @@ const formatDate = (date: Date) => `${date.getFullYear()}-${(date.getMonth() + 1
 const createLogDateTimePrefix = () => `[${formatDate(new Date())}]`;
 const logPrefix = Bun.argv.includes('--is-subprocess') ? colorize('cyan', `[Worker ${Bun.argv[2]} (${process.pid})]`) : colorize('green', '[Main worker]');
 export const logger = {
-    error: (message: InputLogObject | { toString: () => string }, ...args: any[]) => consola.error(createLogDateTimePrefix(), logPrefix, message, ...args),
-    info: (message: InputLogObject | { toString: () => string }, ...args: any[]) => consola.info(createLogDateTimePrefix(), logPrefix, message, ...args),
-    success: (message: InputLogObject | { toString: () => string }, ...args: any[]) => consola.success(createLogDateTimePrefix(), logPrefix, message, ...args),
-    warn: (message: InputLogObject | { toString: () => string }, ...args: any[]) => consola.warn(createLogDateTimePrefix(), logPrefix, message, ...args),
+    error: (...args: any[]) => consola.error(createLogDateTimePrefix(), logPrefix, ...args),
+    info: (...args: any[]) => consola.info(createLogDateTimePrefix(), logPrefix, ...args),
+    success: (...args: any[]) => consola.success(createLogDateTimePrefix(), logPrefix, ...args),
+    warn: (...args: any[]) => consola.warn(createLogDateTimePrefix(), logPrefix, ...args),
 };
 
 export default logger;
