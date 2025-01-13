@@ -13,9 +13,12 @@ export const jsonSchema = z.object({
     }),
 }) satisfies ZodValidatorType<AdminData>;
 
-export default defaultHonoFactory.createHandlers(apiZValidator('json', jsonSchema), async (ctx) => {
-    const data = ctx.req.valid('json');
-    if (data.password!.length !== 128) throwAPIError(400);
-    await AdminModel.create(data);
-    return ctx.createAPISuccessResponse();
-});
+export default defaultHonoFactory.createHandlers(
+    apiZValidator('json', jsonSchema),
+    async (ctx) => {
+        const data = ctx.req.valid('json');
+        if (data.password!.length !== 128) throwAPIError(400);
+        await AdminModel.create(data);
+        return ctx.createAPISuccessResponse();
+    },
+);
