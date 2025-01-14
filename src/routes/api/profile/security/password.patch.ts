@@ -12,7 +12,8 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const data = ctx.req.valid('json');
         if (data.newPassword !== data.conformPassword) throwAPIError(400, '確認密碼不符！');
-        await requireTwoFactorAuthentication(ctx);
+        await requireEmailOTPTwoFactorAuthentication(ctx, ctx.admin!, 'adminChangePassword');
+        await requireTOTPTwoFactorAuthentication(ctx, ctx.admin!);
         if (!ctx.admin!.verifyPassword(data.oldPassword)) throwAPIError(400, '舊密碼不正確！');
         if (data.newPassword === data.oldPassword) throwAPIError(400, '新密碼不能與舊密碼相同！');
         await ctx.admin!.updateOne({ password: data.newPassword });

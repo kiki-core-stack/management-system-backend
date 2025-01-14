@@ -8,7 +8,15 @@ declare global {
 }
 
 setReadonlyConstantToGlobalThis<typeof cleanupAdminCachesAndSession>('cleanupAdminCachesAndSession', async (ctx, admin) => {
-    await redisController.twoFactorAuthentication.emailOTPCode.del(admin);
-    await redisController.twoFactorAuthentication.tempTOTPSecret.del(admin);
+    const promises = [redisController.tempTOTPSecret.del(admin.id)];
+    if (admin.email) {
+        promises.push(...[
+            redisController.emailOTPCode.del('adminChangePassword', admin.email, admin.id),
+            redisController.emailOTPCode.del('adminLogin', admin.email, admin.id),
+            redisController.emailOTPCode.del('adminToggleTwoFactorAuthenticationStatus', admin.email, admin.id),
+        ]);
+    }
+
+    await Promise.all(promises);
     ctx.clearSession();
 });

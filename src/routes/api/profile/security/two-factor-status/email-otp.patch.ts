@@ -1,8 +1,6 @@
 export default defaultHonoFactory.createHandlers(async (ctx) => {
-    const admin = ctx.admin!.$clone();
-    const isEnabled = admin.twoFactorAuthenticationStatus.emailOTP;
-    admin.twoFactorAuthenticationStatus.emailOTP = true;
-    await requireTwoFactorAuthentication(ctx, true, true, admin);
-    await admin.updateOne({ 'twoFactorAuthenticationStatus.emailOTP': !isEnabled });
+    await requireEmailOTPTwoFactorAuthentication(ctx, ctx.admin!, 'adminToggleTwoFactorAuthenticationStatus', true);
+    await requireTOTPTwoFactorAuthentication(ctx, ctx.admin!);
+    await ctx.admin!.updateOne({ 'twoFactorAuthenticationStatus.emailOTP': !ctx.admin!.twoFactorAuthenticationStatus.emailOTP });
     return ctx.createAPISuccessResponse();
 });
