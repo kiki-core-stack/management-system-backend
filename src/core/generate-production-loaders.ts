@@ -6,7 +6,11 @@ import { getMiddlewareFilePaths } from './libs/middleware';
 import { getRouteDefinitions } from './libs/router';
 
 async function generateMiddlewaresLoader() {
-    const fileLines = ['export default async function () {'];
+    const fileLines = [
+        '// @ts-nocheck',
+        'export default async function () {',
+    ];
+
     const startTime = performance.now();
     logger.info('Starting to generate production middlewares...');
     const middlewareFilePaths = await getMiddlewareFilePaths();
@@ -18,7 +22,7 @@ async function generateMiddlewaresLoader() {
 
 async function generateRoutesLoader() {
     const fileLines = [
-        '// @ts-ignore',
+        '// @ts-nocheck',
         `import { loadRouteModule } from '../../libs/router';`,
         'export default async function () {',
     ];
