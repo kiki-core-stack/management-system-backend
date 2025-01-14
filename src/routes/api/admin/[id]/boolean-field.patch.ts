@@ -11,7 +11,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
         ],
         null,
         (admin, field) => {
-            if (field === 'enabled' && admin.id === ctx.session.adminId) throwAPIError(400, '無法變更自己的啟用狀態！');
+            if (field === 'enabled' && admin.id === ctx.admin!.id) throwAPIError(400, '無法變更自己的啟用狀態！');
         },
     );
 

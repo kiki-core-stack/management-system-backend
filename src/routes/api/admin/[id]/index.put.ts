@@ -9,7 +9,7 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const admin = await AdminModel.findByRouteIdOrThrowNotFoundError(ctx);
         const updateQuery: UpdateQuery<AdminDocument> = ctx.req.valid('json');
-        updateQuery.enabled = updateQuery.enabled || admin.id === ctx.session.adminId;
+        updateQuery.enabled = updateQuery.enabled || admin.id === ctx.admin!.id;
         if (!updateQuery.email) updateQuery.$unset = { email: true };
         await admin.updateOne(updateQuery);
         return ctx.createAPISuccessResponse();
