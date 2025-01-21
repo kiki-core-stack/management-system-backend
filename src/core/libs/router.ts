@@ -4,23 +4,18 @@ import {
     resolve,
     sep,
 } from 'node:path';
-import type { Except } from 'type-fest';
-
-import { zodOpenAPIRegistry } from '@/core/constants/zod-openapi';
-import type { RouteHandlerOptions } from '@/core/types/route';
+import type {
+    Except,
+    Writable,
+} from 'type-fest';
 
 import { honoApp } from '../app';
-
-const allowedHttpMethods = [
-    'delete',
-    'get',
-    'head',
-    'options',
-    'patch',
-    'post',
-    'purge',
-    'put',
-] as const;
+import {
+    allowedRouteHttpMethods,
+    allRoutes,
+} from '../constants/route';
+import { zodOpenAPIRegistry } from '../constants/zod-openapi';
+import type { RouteHandlerOptions } from '../types/route';
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
@@ -38,7 +33,7 @@ function filePathToRank(path: string) {
 export async function getRouteDefinitions() {
     const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
     const environment = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
-    const filePattern = new RegExp(`^${directoryPath}(.*?)(/index)?\\.(${allowedHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
+    const filePattern = new RegExp(`^${directoryPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
     const routeDefinitions = [];
     for (const filePath of await glob(`${directoryPath}/**/*.{mj,t}s`)) {
         const matches = filePath.match(filePattern);
@@ -46,7 +41,7 @@ export async function getRouteDefinitions() {
         const normalizedRoutePath = matches[1]!.replaceAll(/\/+/g, '/');
         routeDefinitions.push({
             filePath,
-            method: matches[3]!,
+            method: matches[3]! as typeof allowedRouteHttpMethods[number],
             openAPIPath: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, '{$1}'),
             path: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, ':$1'),
         });
@@ -60,7 +55,7 @@ export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaite
     if (!handlers.length) return;
     const latestHandler = handlers.at(-1);
     const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
-    if (routeHandlerOptions) Object.assign(latestHandler, routeHandlerOptions.properties);
+    Object.assign(latestHandler, routeHandlerOptions?.properties);
     if (routeModule.zodOpenAPIConfig) {
         zodOpenAPIRegistry.registerPath({
             ...routeModule.zodOpenAPIConfig,
@@ -80,4 +75,5 @@ export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaite
     );
 
     honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
+    (allRoutes as Writable<typeof allRoutes>)[routeDefinition.method][routeDefinition.path] = { handlerProperties: routeHandlerOptions?.properties };
 }
