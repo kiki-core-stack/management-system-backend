@@ -1,6 +1,6 @@
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 
-import type { RouteHandlerOptions } from '@/core/types/route';
+import type { RouteHandlerOptions } from '../types/route';
 
 declare global {
     const defineRouteHandlerOptions: (options: RouteHandlerOptions) => RouteHandlerOptions;
