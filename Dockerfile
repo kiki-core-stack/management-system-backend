@@ -11,7 +11,7 @@ ENV NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
 WORKDIR /app
 
 ## Install dependencies
-COPY ./bun.lockb ./package.json ./
+COPY ./bun.lock ./package.json ./
 RUN bun i --frozen-lockfile
 
 ## Copy files
