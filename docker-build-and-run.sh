@@ -5,7 +5,7 @@ set -e
 name='bun-project'
 user='user'
 image_name="$user/$name:latest"
-docker pull oven/bun:alpine
+docker pull oven/bun:slim
 docker build "$@" -t "$image_name" --build-arg "NPM_REGISTRY=$NPM_REGISTRY" . || exit 1
 [ "$(docker ps | grep "$name")" ] && docker kill "$name"
 [ "$(docker ps -a | grep "$name")" ] && docker rm "$name"
