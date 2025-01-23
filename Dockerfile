@@ -33,10 +33,10 @@ WORKDIR /app
 ## Install required runtime dependencies and set timezone in one step
 RUN apt-get update && \
     apt-get install -y --no-install-recommends tini tzdata && \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime && \
     echo $TZ > /etc/timezone && \
     apt-get clean && \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+    rm -rf /var/cache/apt/{.,}* /var/lib/apt/lists/*
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
