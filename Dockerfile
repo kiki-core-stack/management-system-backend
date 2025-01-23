@@ -1,43 +1,49 @@
 # Build stage
-FROM oven/bun:alpine AS build-stage
+FROM oven/bun:slim AS build-stage
 
 ## Upgrade packages
-RUN apk update && apk upgrade --no-cache
+RUN apt-get update && apt-get upgrade -y
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
-ENV NODE_ENV=production
-ENV NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
+ENV NODE_ENV=production \
+    NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
+
 WORKDIR /app
 
-## Install dependencies
+## Copy package-related files and install dependencies
 COPY ./bun.lock ./package.json ./
 RUN bun i --frozen-lockfile
 
-## Copy files
+## Copy source files and build-related files, then build the app
 COPY ./src ./src
 COPY ./.env.production.local ./eslint.config.mjs ./tsconfig.json ./
-
-## Build
 RUN bun run lint && bun run type-check && bun run build
 
 # Runtime stage
-FROM oven/bun:alpine
+FROM oven/bun:slim
 
 ## Set envs and workdir
-ENV NODE_ENV=production
-ENV SERVER_HOST=0.0.0.0
+ENV NODE_ENV=production \
+    SERVER_HOST=0.0.0.0 \
+    TZ=Asia/Taipei
+
 WORKDIR /app
 
-## Install packages and set timezone
-RUN apk update && apk upgrade --no-cache && apk add -lu --no-cache tini
-RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+## Install required runtime dependencies and set timezone in one step
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends tini tzdata && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
+    apt-get clean && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
 COPY ./.env.production.local ./.env
 COPY ./node_modules/svg-captcha/fonts ./node_modules/svg-captcha/fonts
 
-## Set cmd
+## Copy and set the entrypoint script
 COPY ./docker-entrypoint.sh ./
-CMD ["tini", "--", "./docker-entrypoint.sh"]
+ENTRYPOINT ["tini", "--"]
+CMD ["./docker-entrypoint.sh"]
