@@ -1,4 +1,4 @@
-import { glob } from 'glob';
+import { glob } from 'node:fs/promises';
 import {
     join,
     resolve,
@@ -35,7 +35,7 @@ export async function getRouteDefinitions() {
     const environment = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     const filePattern = new RegExp(`^${directoryPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
     const routeDefinitions = [];
-    for (const filePath of await glob(`${directoryPath}/**/*.{mj,t}s`)) {
+    for await (const filePath of glob(`${directoryPath}/**/*.{mj,t}s`, {})) {
         const matches = filePath.match(filePattern);
         if (!matches) continue;
         const normalizedRoutePath = matches[1]!.replaceAll(/\/+/g, '/');
