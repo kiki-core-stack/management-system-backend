@@ -1,16 +1,16 @@
 # Build stage
 FROM oven/bun:slim AS build-stage
 
-## Upgrade packages
-RUN apt-get update && \
-    apt-get upgrade -y
-
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
 ENV NODE_ENV=production \
     NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
 
 WORKDIR /app
+
+## Upgrade packages
+RUN apt-get update && \
+    apt-get upgrade -y
 
 ## Copy package-related files and install dependencies
 COPY ./bun.lock ./package.json ./
