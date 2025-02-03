@@ -2,7 +2,8 @@
 FROM oven/bun:slim AS build-stage
 
 ## Upgrade packages
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && \
+    apt-get upgrade -y
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
@@ -18,7 +19,9 @@ RUN bun i --frozen-lockfile
 ## Copy source files and build-related files, then build the app
 COPY ./src ./src
 COPY ./.env.production.local ./eslint.config.mjs ./tsconfig.json ./
-RUN bun run lint && bun run type-check && bun run build
+RUN bun run lint && \
+    bun run type-check && \
+    bun run build
 
 # Runtime stage
 FROM oven/bun:slim
@@ -35,7 +38,7 @@ RUN apt-get update && \
     ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime && \
     echo $TZ > /etc/timezone && \
     apt-get clean && \
-    rm -rf /var/cache/apt/{.,}* /var/lib/apt/lists/*
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
