@@ -3,6 +3,7 @@ import type {
     ZodRequestBody,
 } from '@asteasolutions/zod-to-openapi';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
+import { getEnumNumberValues } from '@kikiutils/node/enum';
 import type { SetOptional } from 'type-fest';
 import type {
     EnumLike,
@@ -15,7 +16,7 @@ declare global {
     const defineAPIRouteZodOpenAPIConfig: (operationId: string, description: string, config?: APIRouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
     const defineAPIRouteZodOpenAPIJsonRequestConfig: (schema: ReturnType<(typeof z)['object']>, description?: string) => ZodRequestBody;
     const defineAPIRouteZodOpenAPIJsonResponseConfig: (dataSchema?: ReturnType<(typeof z)['object']>, message?: string, isError?: boolean) => ResponseConfig;
-    const numberEnumToZodOpenAPISchema: (enumObject: EnumLike, enumName: string) => ZodNativeEnum<EnumLike>;
+    const numberEnumToZodOpenAPISchema: (enumName: string, enumObject: EnumLike, toTextMap?: Record<number | string, string>) => ZodNativeEnum<EnumLike>;
 }
 
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfig>('defineAPIRouteZodOpenAPIJsonResponseConfig', (dataSchema, message = '成功', isError = false) => ({
@@ -47,4 +48,12 @@ setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig
     description,
 }));
 
-setReadonlyConstantToGlobalThis<typeof numberEnumToZodOpenAPISchema>('numberEnumToZodOpenAPISchema', (enumObject, enumName) => z.nativeEnum(enumObject).openapi(enumName, { 'x-enum-varnames': Object.keys(enumObject).filter((key) => !Number.isFinite(+key)) }));
+setReadonlyConstantToGlobalThis<typeof numberEnumToZodOpenAPISchema>('numberEnumToZodOpenAPISchema', (enumName, enumObject, toTextMap) => {
+    return z.nativeEnum(enumObject).openapi(
+        enumName,
+        {
+            'x-enum-descriptions': toTextMap ? getEnumNumberValues(enumObject).map((key: number) => toTextMap[key]) : undefined,
+            'x-enum-varnames': Object.keys(enumObject).filter((key) => !Number.isFinite(+key)),
+        },
+    );
+});
