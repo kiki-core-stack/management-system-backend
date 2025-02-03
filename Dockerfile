@@ -32,11 +32,13 @@ ENV NODE_ENV=production \
 
 WORKDIR /app
 
-## Install required runtime dependencies and set timezone in one step
+## Upgrade, install packages and set timezone
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini tzdata && \
     ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && \
     echo $TZ > /etc/timezone && \
+    apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
