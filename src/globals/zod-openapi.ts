@@ -16,7 +16,7 @@ declare global {
     const defineAPIRouteZodOpenAPIConfig: (operationId: string, description: string, config?: APIRouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
     const defineAPIRouteZodOpenAPIJsonRequestConfig: (schema: ReturnType<(typeof z)['object']>, description?: string) => ZodRequestBody;
     const defineAPIRouteZodOpenAPIJsonResponseConfig: (dataSchema?: ReturnType<(typeof z)['object']>, message?: string, isError?: boolean) => ResponseConfig;
-    const numberEnumToZodOpenAPISchema: (enumObject: EnumLike, enumName: string, toTextMap?: Record<number | string, string>) => ZodNativeEnum<EnumLike>;
+    const numberEnumToZodOpenAPISchema: (enumName: string, enumObject: EnumLike, toTextMap?: Record<number | string, string>) => ZodNativeEnum<EnumLike>;
 }
 
 setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonResponseConfig>('defineAPIRouteZodOpenAPIJsonResponseConfig', (dataSchema, message = '成功', isError = false) => ({
@@ -48,7 +48,7 @@ setReadonlyConstantToGlobalThis<typeof defineAPIRouteZodOpenAPIJsonRequestConfig
     description,
 }));
 
-setReadonlyConstantToGlobalThis<typeof numberEnumToZodOpenAPISchema>('numberEnumToZodOpenAPISchema', (enumObject, enumName, toTextMap) => {
+setReadonlyConstantToGlobalThis<typeof numberEnumToZodOpenAPISchema>('numberEnumToZodOpenAPISchema', (enumName, enumObject, toTextMap) => {
     return z.nativeEnum(enumObject).openapi(
         enumName,
         {
