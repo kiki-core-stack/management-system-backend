@@ -17,8 +17,8 @@ COPY ./bun.lock ./package.json ./
 RUN bun i --frozen-lockfile
 
 ## Copy source files and build-related files, then build the app
-COPY ./src ./src
 COPY ./.env.production.local ./eslint.config.mjs ./tsconfig.json ./
+COPY ./src ./src
 RUN bun run lint && \
     bun run type-check && \
     bun run build
