@@ -6,7 +6,7 @@ import {
 } from 'node:path';
 import type {
     Except,
-    Writable,
+    WritableDeep,
 } from 'type-fest';
 
 import { honoApp } from '../app';
@@ -75,5 +75,5 @@ export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaite
     );
 
     honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
-    (allRoutes as Writable<typeof allRoutes>)[routeDefinition.method][routeDefinition.path] = { handlerProperties: routeHandlerOptions?.properties };
+    (allRoutes as WritableDeep<typeof allRoutes>)[routeDefinition.method][routeDefinition.path] = { handlerProperties: routeHandlerOptions?.properties };
 }
