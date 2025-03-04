@@ -6,7 +6,7 @@ docker-run.sh
 Dockerfile
 
 ### Git ###
-.git
+.git/
 .gitignore
 .gitkeep
 
