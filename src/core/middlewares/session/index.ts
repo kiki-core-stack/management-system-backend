@@ -1,4 +1,4 @@
-import { AESCipher } from 'node-ciphers';
+import { AesCipher } from 'node-ciphers';
 import type { BinaryLike } from 'node:crypto';
 import onChange from 'on-change';
 
@@ -18,7 +18,7 @@ import {
 type StoredData = [number, PartialContextSessionData];
 
 export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
-    const cipher = new AESCipher.GCM(
+    const cipher = new AesCipher.Gcm(
         cipherKey,
         {
             authTag: 'base64',
@@ -32,7 +32,7 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
         let sessionData = {};
         const sessionToken = tokenHandler.get(ctx);
         if (sessionToken) {
-            const storedData = cipher.decryptToJSON<StoredData>(sessionToken.substring(40), sessionToken.substring(24, 40), sessionToken.substring(0, 24));
+            const storedData = cipher.decryptToJson<StoredData>(sessionToken.substring(40), sessionToken.substring(24, 40), sessionToken.substring(0, 24));
             if (storedData && storedData[0] + 86400000 > Date.now()) sessionData = storedData[1];
             else tokenHandler.delete(ctx);
         }
@@ -51,7 +51,7 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
         await next();
         if (ctx[sessionClearedSymbol]) return tokenHandler.delete(ctx);
         if (!ctx[sessionChangedSymbol]) return;
-        const encryptResult = cipher.encryptJSON([
+        const encryptResult = cipher.encryptJson([
             Date.now(),
             ctx.session,
         ]);
