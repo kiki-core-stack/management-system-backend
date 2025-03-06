@@ -9,19 +9,19 @@ import type { Except } from 'type-fest';
 import type { z } from 'zod';
 
 declare global {
-    type RouteZodOpenAPIConfig = Except<RouteConfig, 'description' | 'method' | 'path'>;
+    type RouteZodOpenApiConfig = Except<RouteConfig, 'description' | 'method' | 'path'>;
 
-    const defineRouteZodOpenAPIConfig: (operationId: string, description: string, config: RouteZodOpenAPIConfig) => RouteZodOpenAPIConfig;
-    const zodSchemaToOpenAPISchema: (schema: ReturnType<(typeof z)['object']>, description?: string) => SchemaObject;
+    const defineRouteZodOpenApiConfig: (operationId: string, description: string, config: RouteZodOpenApiConfig) => RouteZodOpenApiConfig;
+    const zodSchemaToOpenApiSchema: (schema: ReturnType<(typeof z)['object']>, description?: string) => SchemaObject;
 }
 
-setReadonlyConstantToGlobalThis<typeof defineRouteZodOpenAPIConfig>('defineRouteZodOpenAPIConfig', (operationId, description, config) => ({
+setReadonlyConstantToGlobalThis<typeof defineRouteZodOpenApiConfig>('defineRouteZodOpenApiConfig', (operationId, description, config) => ({
     ...config,
     description,
     operationId,
 }));
 
-setReadonlyConstantToGlobalThis<typeof zodSchemaToOpenAPISchema>('zodSchemaToOpenAPISchema', (schema, description) => {
+setReadonlyConstantToGlobalThis<typeof zodSchemaToOpenApiSchema>('zodSchemaToOpenApiSchema', (schema, description) => {
     const registry = new OpenAPIRegistry();
     registry.register('schema', schema);
     return {
