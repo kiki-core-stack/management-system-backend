@@ -4,12 +4,12 @@ import type { OpenAPIObject } from 'openapi3-ts/oas31';
 import type { ReadonlyDeep } from 'type-fest';
 
 export type Configs = ReadonlyDeep<{
-    openAPI: Except<OpenAPIObject, 'components' | 'paths' | 'webhooks'>;
+    openApi: Except<OpenAPIObject, 'components' | 'paths' | 'webhooks'>;
     sessionCipherKey: string;
 }>;
 
 export const configs: Configs = {
-    openAPI: {
+    openApi: {
         info: {
             title: 'API Document',
             version: '0.1.0',
