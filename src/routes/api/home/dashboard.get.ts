@@ -1,4 +1,4 @@
 export default defaultHonoFactory.createHandlers((ctx) => {
-    const processedQueries = getProcessedAPIRequestQueries(ctx);
-    return ctx.createAPISuccessResponse(processedQueries);
+    const processedQueries = getProcessedApiRequestQueries(ctx);
+    return ctx.createApiSuccessResponse(processedQueries);
 });

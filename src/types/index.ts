@@ -1,7 +1,7 @@
 export type {} from '@kiki-core-stack/pack/types';
 
 declare global {
-    interface ProcessedAPIRequestQueries {
+    interface ProcessedApiRequestQueries {
         filterQuery: Dict<any>;
         limit: number;
         offset: number;

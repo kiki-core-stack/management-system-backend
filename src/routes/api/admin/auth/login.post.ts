@@ -18,17 +18,17 @@ export default defaultHonoFactory.createHandlers(
     ),
     async (ctx) => {
         const data = ctx.req.valid('json');
-        if (data.verCode !== ctx.popSession('verCode')?.toLowerCase()) throwAPIError(400, '驗證碼不正確！', { isVerCodeIncorrect: true });
+        if (data.verCode !== ctx.popSession('verCode')?.toLowerCase()) throwApiError(400, '驗證碼不正確！', { isVerCodeIncorrect: true });
         const admin = await AdminModel.findOne({
             account: data.account,
             enabled: true,
         });
 
-        if (!admin) throwAPIError(404, '帳號不存在，未啟用或密碼不正確！');
-        ctx.session.tempAdminIdForSendEmailOTPCode = admin.id;
-        await requireEmailOTPTwoFactorAuthentication(ctx, admin, 'adminLogin');
-        await requireTOTPTwoFactorAuthentication(ctx, admin);
-        if (!admin.verifyPassword(data.password)) throwAPIError(404, '帳號不存在，未啟用或密碼不正確！');
+        if (!admin) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
+        ctx.session.tempAdminIdForSendEmailOtpCode = admin.id;
+        await requireEmailOtpTwoFactorAuthentication(ctx, admin, 'adminLogin');
+        await requireTotpTwoFactorAuthentication(ctx, admin);
+        if (!admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
         await cleanupAdminCachesAndSession(ctx, admin);
         ctx.session.adminId = admin.id;
         AdminLogModel.create({
@@ -37,6 +37,6 @@ export default defaultHonoFactory.createHandlers(
             type: AdminLogType.LoginSuccess,
         });
 
-        return ctx.createAPISuccessResponse();
+        return ctx.createApiSuccessResponse();
     },
 );

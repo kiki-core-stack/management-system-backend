@@ -6,14 +6,14 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
         AdminModel,
         [
             'enabled',
-            'twoFactorAuthenticationStatus.emailOTP',
+            'twoFactorAuthenticationStatus.emailOtp',
             'twoFactorAuthenticationStatus.totp',
         ],
         null,
         (admin, field) => {
-            if (field === 'enabled' && admin.id === ctx.admin!.id) throwAPIError(400, '無法變更自己的啟用狀態！');
+            if (field === 'enabled' && admin.id === ctx.admin!.id) throwApiError(400, '無法變更自己的啟用狀態！');
         },
     );
 
-    return ctx.createAPISuccessResponse();
+    return ctx.createApiSuccessResponse();
 });

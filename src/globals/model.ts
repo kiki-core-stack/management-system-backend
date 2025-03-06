@@ -34,7 +34,7 @@ declare global {
 
         <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
             model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
-            queries: ProcessedAPIRequestQueries,
+            queries: ProcessedApiRequestQueries,
             paginateOptions?: PaginateOptions
         ): Promise<{ count: number; list: any[] }>;
     };
@@ -53,7 +53,7 @@ setReadonlyConstantToGlobalThis<typeof getModelDocumentByRouteIdAndUpdateBoolean
         field,
         value,
     } = await ctx.req.json<{ field: string; value: boolean }>();
-    if (!allowedFields.includes(field)) throwAPIError(400);
+    if (!allowedFields.includes(field)) throwApiError(400);
     // @ts-expect-error Ignore this error.
     await beforeUpdate?.(document, field, !!value);
     // @ts-expect-error Ignore this error.
@@ -64,17 +64,17 @@ setReadonlyConstantToGlobalThis<typeof modelToPaginatedData>(
     'modelToPaginatedData',
     async <RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
         ctxOrModel: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | Context,
-        modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedAPIRequestQueries,
+        modelOrQueries: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | ProcessedApiRequestQueries,
         paginateOptions?: PaginateOptions,
         filterInFields?: Dict<string>,
         processObjectIdIgnoreFields?: string[],
     ) => {
         let model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
-        let queries: ProcessedAPIRequestQueries;
+        let queries: ProcessedApiRequestQueries;
         if ('json' in ctxOrModel) {
             // @ts-expect-error Ignore this error.
             model = modelOrQueries;
-            queries = getProcessedAPIRequestQueries(ctxOrModel, filterInFields, processObjectIdIgnoreFields);
+            queries = getProcessedApiRequestQueries(ctxOrModel, filterInFields, processObjectIdIgnoreFields);
         } else {
             model = ctxOrModel;
             // @ts-expect-error Ignore this error.

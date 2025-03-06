@@ -2,11 +2,11 @@ export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noL
 
 export default defaultHonoFactory.createHandlers((ctx) => {
     if (ctx.admin) {
-        return ctx.createAPISuccessResponse({
+        return ctx.createApiSuccessResponse({
             id: ctx.session.adminId,
             twoFactorAuthenticationStatus: ctx.admin.twoFactorAuthenticationStatus,
         });
     }
 
-    return ctx.createAPISuccessResponse();
+    return ctx.createApiSuccessResponse();
 });

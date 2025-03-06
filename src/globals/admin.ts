@@ -28,12 +28,12 @@ const _populateCreatedAndEditedByAdminOptions = [
 
 setReadonlyConstantToGlobalThis<typeof populateCreatedAndEditedByAdminOptions>('populateCreatedAndEditedByAdminOptions', _populateCreatedAndEditedByAdminOptions);
 setReadonlyConstantToGlobalThis<typeof cleanupAdminCachesAndSession>('cleanupAdminCachesAndSession', async (ctx, admin) => {
-    const promises = [redisController.tempTOTPSecret.del(admin.id)];
+    const promises = [redisController.tempTotpSecret.del(admin.id)];
     if (admin.email) {
         promises.push(...[
-            redisController.emailOTPCode.del('adminChangePassword', admin.email, admin.id),
-            redisController.emailOTPCode.del('adminLogin', admin.email, admin.id),
-            redisController.emailOTPCode.del('adminToggleTwoFactorAuthenticationStatus', admin.email, admin.id),
+            redisController.emailOtpCode.del('adminChangePassword', admin.email, admin.id),
+            redisController.emailOtpCode.del('adminLogin', admin.email, admin.id),
+            redisController.emailOtpCode.del('adminToggleTwoFactorAuthenticationStatus', admin.email, admin.id),
         ]);
     }
 

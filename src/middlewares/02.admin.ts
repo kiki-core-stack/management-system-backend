@@ -13,5 +13,5 @@ honoApp.use('/api/*', async (ctx, next) => {
     }
 
     if (routeHandler.noLoginRequired || ctx.session.adminId) return await next();
-    throwAPIError(401);
+    throwApiError(401);
 });

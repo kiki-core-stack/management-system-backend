@@ -1,6 +1,6 @@
-import { sendEmailOTPCode } from '@kiki-core-stack/pack/hono-backend/libs/otp';
+import { sendEmailOtpCode } from '@kiki-core-stack/pack/hono-backend/libs/otp';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
-import type { EmailOTPCodeType } from '@kiki-core-stack/pack/types/otp';
+import type { EmailOtpCodeType } from '@kiki-core-stack/pack/types/otp';
 
 const jsonSchema = z.object({
     email: z.string().trim().email().optional(),
@@ -10,7 +10,7 @@ const jsonSchema = z.object({
         'adminLogin',
         'adminToggleTwoFactorAuthenticationStatus',
     ]),
-}) satisfies ZodValidatorType<{ type: EmailOTPCodeType }>;
+}) satisfies ZodValidatorType<{ type: EmailOtpCodeType }>;
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
@@ -24,16 +24,16 @@ export default defaultHonoFactory.createHandlers(
                 email = data.email;
                 break;
             case 'adminLogin':
-                admin = await AdminModel.findById(ctx.session.tempAdminIdForSendEmailOTPCode);
-                if (!admin) throwAPIError(500);
+                admin = await AdminModel.findById(ctx.session.tempAdminIdForSendEmailOtpCode);
+                if (!admin) throwApiError(500);
                 break;
         }
 
         admin ??= ctx.admin;
-        if (!admin) throwAPIError(401);
+        if (!admin) throwApiError(401);
         email ??= admin.email;
-        if (!email) throwAPIError(400, 'Email未綁定，無法發送OTP驗證碼！');
-        await sendEmailOTPCode(data.type, email, admin.id);
-        return ctx.createAPISuccessResponse();
+        if (!email) throwApiError(400, 'Email未綁定，無法發送OTP驗證碼！');
+        await sendEmailOtpCode(data.type, email, admin.id);
+        return ctx.createApiSuccessResponse();
     },
 );

@@ -12,6 +12,6 @@ export default defaultHonoFactory.createHandlers(
         updateQuery.enabled = updateQuery.enabled || admin.id === ctx.admin!.id;
         if (!updateQuery.email) updateQuery.$unset = { email: true };
         await admin.updateOne(updateQuery);
-        return ctx.createAPISuccessResponse();
+        return ctx.createApiSuccessResponse();
     },
 );

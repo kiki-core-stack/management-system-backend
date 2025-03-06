@@ -1,7 +1,7 @@
 import { AdminLogModel } from '@kiki-core-stack/pack/models/admin';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
-    return ctx.createAPISuccessResponse(
+    return ctx.createApiSuccessResponse(
         await modelToPaginatedData(
             ctx,
             AdminLogModel,
