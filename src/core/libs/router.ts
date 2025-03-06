@@ -11,7 +11,7 @@ import {
     allowedRouteHttpMethods,
     allRoutes,
 } from '../constants/route';
-import { zodOpenAPIRegistry } from '../constants/zod-openapi';
+import { zodOpenApiRegistry } from '../constants/zod-openapi';
 import type { RouteHandlerOptions } from '../types/route';
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
@@ -39,7 +39,7 @@ export async function getRouteDefinitions() {
         routeDefinitions.push({
             filePath,
             method: matches[3]! as typeof allowedRouteHttpMethods[number],
-            openAPIPath: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, '{$1}'),
+            openApiPath: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, '{$1}'),
             path: normalizedRoutePath.replaceAll(/\[([^/]+)\]/g, ':$1'),
         });
     }
@@ -53,11 +53,11 @@ export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaite
     const latestHandler = handlers.at(-1);
     const routeHandlerOptions: Undefinedable<RouteHandlerOptions> = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
     Object.assign(latestHandler, routeHandlerOptions?.properties);
-    if (routeModule.zodOpenAPIConfig) {
-        zodOpenAPIRegistry.registerPath({
-            ...routeModule.zodOpenAPIConfig,
+    if (routeModule.zodOpenApiConfig) {
+        zodOpenApiRegistry.registerPath({
+            ...routeModule.zodOpenApiConfig,
             method: routeDefinition.method,
-            path: routeDefinition.openAPIPath,
+            path: routeDefinition.openApiPath,
         });
     }
 
