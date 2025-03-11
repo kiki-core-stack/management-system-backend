@@ -81,5 +81,5 @@ You can clone this repository and modify it as needed. Alternatively, you can fo
 [MIT License](./LICENSE)
 
 <!-- Badges -->
-[license-href]: https://github.com/kiki-kanri/kikiutils-node-classes/blob/main/LICENSE
+[license-href]: https://github.com/kiki-kanri/bun-template/blob/main/LICENSE
 [license-src]: https://img.shields.io/npm/l/@kikiutils/classes.svg?style=flat&colorA=18181B&colorB=28CF8D
