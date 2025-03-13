@@ -1,8 +1,6 @@
 import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
-import {
-    AdminLogModel,
-    AdminModel,
-} from '@kiki-core-stack/pack/models/admin';
+import { AdminModel } from '@kiki-core-stack/pack/models/admin';
+import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     await mongooseConnections.default!.transaction(async (session) => {
