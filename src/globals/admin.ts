@@ -30,11 +30,11 @@ setReadonlyConstantToGlobalThis<typeof populateCreatedAndEditedByAdminOptions>('
 setReadonlyConstantToGlobalThis<typeof cleanupAdminCachesAndSession>('cleanupAdminCachesAndSession', async (ctx, admin) => {
     const promises = [redisController.tempTotpSecret.del(admin.id)];
     if (admin.email) {
-        promises.push(...[
+        promises.push(
             redisController.emailOtpCode.del('adminChangePassword', admin.email, admin.id),
             redisController.emailOtpCode.del('adminLogin', admin.email, admin.id),
             redisController.emailOtpCode.del('adminToggleTwoFactorAuthenticationStatus', admin.email, admin.id),
-        ]);
+        );
     }
 
     await Promise.all(promises);
