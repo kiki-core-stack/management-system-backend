@@ -4,6 +4,7 @@ import {
     resolve,
     sep,
 } from 'node:path';
+
 import type {
     Except,
     WritableDeep,
@@ -27,7 +28,7 @@ function filePathSegmentToRankValue(segment: string, isLast: boolean) {
 
 function filePathToRank(path: string) {
     const segments = path.split('/');
-    return +segments.map((segment, index) => filePathSegmentToRankValue(segment, index === segments.length - 1)).join('');
+    return +segments.map((segment, i) => filePathSegmentToRankValue(segment, i === segments.length - 1)).join('');
 }
 
 export async function getRouteDefinitions() {
@@ -50,7 +51,10 @@ export async function getRouteDefinitions() {
     return routeDefinitions.sort((a, b) => filePathToRank(a.path) - filePathToRank(b.path));
 }
 
-export function loadRouteModule(routeModule: any, routeDefinition: Except<Awaited<ReturnType<typeof getRouteDefinitions>>[number], 'filePath'>) {
+export function loadRouteModule(
+    routeModule: any,
+    routeDefinition: Except<Awaited<ReturnType<typeof getRouteDefinitions>>[number], 'filePath'>,
+) {
     const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
     if (!handlers.length) return;
     const latestHandler = handlers.at(-1);

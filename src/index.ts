@@ -1,5 +1,6 @@
-import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import type { Server } from 'bun';
+
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { z as zod } from 'zod';
 
 import { honoApp } from '@/core/app';
