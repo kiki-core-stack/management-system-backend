@@ -1,5 +1,6 @@
-import { AesCipher } from 'node-ciphers';
 import type { BinaryLike } from 'node:crypto';
+
+import { AesCipher } from 'node-ciphers';
 import onChange from 'on-change';
 
 import {
@@ -32,7 +33,12 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
         let sessionData = {};
         const sessionToken = tokenHandler.get(ctx);
         if (sessionToken) {
-            const storedData = cipher.decryptToJson<StoredData>(sessionToken.substring(40), sessionToken.substring(24, 40), sessionToken.substring(0, 24));
+            const storedData = cipher.decryptToJson<StoredData>(
+                sessionToken.substring(40),
+                sessionToken.substring(24, 40),
+                sessionToken.substring(0, 24),
+            );
+
             if (storedData && storedData[0] + 86400000 > Date.now()) sessionData = storedData[1];
             else tokenHandler.delete(ctx);
         }

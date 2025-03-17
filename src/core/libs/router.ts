@@ -4,6 +4,7 @@ import {
     resolve,
     sep,
 } from 'node:path';
+
 import type { WritableDeep } from 'type-fest';
 
 import { honoApp } from '../app';
