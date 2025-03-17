@@ -1,4 +1,5 @@
 import type { Subprocess } from 'bun';
+
 import { colorize } from 'consola/utils';
 
 import logger from '@/core/utils/logger';

@@ -1,6 +1,7 @@
+import type { Server } from 'bun';
+
 import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
 import { redisInstance } from '@kiki-core-stack/pack/constants/redis';
-import type { Server } from 'bun';
 
 import logger from '@/core/utils/logger';
 
