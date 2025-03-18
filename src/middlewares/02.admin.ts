@@ -5,6 +5,7 @@ import { honoApp } from '@/core/app';
 import type { RouteHandlerProperties } from '@/core/types/route';
 
 honoApp.use('/api/*', async (ctx, next) => {
+    // eslint-disable-next-line style/max-len
     const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as Undefinedable<H & RouteHandlerProperties>;
     if (!routeHandler?.isHandler) return await next();
     if (ctx.session.adminId) {

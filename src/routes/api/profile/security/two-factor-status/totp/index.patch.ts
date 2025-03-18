@@ -7,6 +7,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
     if (!totpSecret) throwApiError(500, '系統錯誤，請重整頁面後再試！');
     await requireEmailOtpTwoFactorAuthentication(ctx, ctx.admin!, 'adminToggleTwoFactorAuthenticationStatus');
     await requireTotpTwoFactorAuthentication(ctx, ctx.admin!, true, totpSecret);
+    // eslint-disable-next-line style/max-len
     const updateQuery: UpdateQuery<AdminDocument> = { 'twoFactorAuthenticationStatus.totp': !ctx.admin!.twoFactorAuthenticationStatus.totp };
     if (!updateQuery['twoFactorAuthenticationStatus.totp']) updateQuery.$unset = { totpSecret: true };
     else updateQuery.totpSecret = totpSecret;
