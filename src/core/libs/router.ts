@@ -34,6 +34,7 @@ function filePathToRank(path: string) {
 export async function getRouteDefinitions() {
     const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
     const environment = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    // eslint-disable-next-line style/max-len
     const filePattern = new RegExp(`^${directoryPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
     const routeDefinitions = [];
     for await (const filePath of glob(`${directoryPath}/**/*.{mj,t}s`, {})) {
@@ -58,6 +59,7 @@ export function loadRouteModule(
     const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
     if (!handlers.length) return;
     const latestHandler = handlers.at(-1);
+    // eslint-disable-next-line style/max-len
     const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
     Object.assign(latestHandler, routeHandlerOptions?.properties);
     if (routeModule.zodOpenApiConfig) {
@@ -79,5 +81,6 @@ export function loadRouteModule(
     );
 
     honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
+    // eslint-disable-next-line style/max-len
     (allRoutes as WritableDeep<typeof allRoutes>)[routeDefinition.method][routeDefinition.path] = { handlerProperties: routeHandlerOptions?.properties };
 }

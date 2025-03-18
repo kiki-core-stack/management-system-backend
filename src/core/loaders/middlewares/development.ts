@@ -13,5 +13,6 @@ export default async function () {
         }
     }
 
+    // eslint-disable-next-line style/max-len
     logger.success(`Successfully loaded ${totalMiddlewareCount} middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
