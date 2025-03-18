@@ -53,6 +53,7 @@ setReadonlyConstantToGlobalThis<typeof defineApiRouteZodOpenApiJsonResponseConfi
     }),
 );
 
+// eslint-disable-next-line style/max-len
 const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze({ 200: defineApiRouteZodOpenApiJsonResponseConfig(undefined, '成功') });
 setReadonlyConstantToGlobalThis<typeof defineApiRouteZodOpenApiConfig>(
     'defineApiRouteZodOpenApiConfig',
