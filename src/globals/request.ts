@@ -57,9 +57,12 @@ setReadonlyConstantToGlobalThis<typeof getProcessedApiRequestQueries>(
                     filterQuery[key.slice(0, -2)] = convertToObjectIdIfValid(value);
                 }
 
-                if (key.endsWith('Ids') && !filterInFields?.[key] && delete filterQueryData[key] && Array.isArray(value) && value.length) {
-                    merge(filterQuery, { [key.slice(0, -3)]: { $in: convertToObjectIdArray(value) } });
-                }
+                if (
+                    key.endsWith('Ids')
+                    && !filterInFields?.[key]
+                    && delete filterQueryData[key]
+                    && Array.isArray(value) && value.length
+                ) merge(filterQuery, { [key.slice(0, -3)]: { $in: convertToObjectIdArray(value) } });
 
                 if (value?.$regex !== undefined && delete filterQueryData[key] && value.$regex) {
                     filterQuery[key] = (value.$regex = processRegexString(value.$regex), value);
@@ -72,9 +75,12 @@ setReadonlyConstantToGlobalThis<typeof getProcessedApiRequestQueries>(
                     toCheckField,
                     filterField,
                 ]) => {
-                    if (key === toCheckField && delete filterQueryData[toCheckField] && Array.isArray(value) && value.length) {
-                        merge(filterQuery, { [filterField]: { $in: convertToObjectIdArray(value) } });
-                    }
+                    if (
+                        key === toCheckField
+                        && delete filterQueryData[toCheckField]
+                        && Array.isArray(value)
+                        && value.length
+                    ) merge(filterQuery, { [filterField]: { $in: convertToObjectIdArray(value) } });
                 });
             });
 
