@@ -2,7 +2,7 @@ import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminDocument } from '@kiki-core-stack/pack/models/admin';
 import type { UpdateQuery } from 'mongoose';
 
-import { jsonSchema } from '../index.put';
+import { jsonSchema } from '../index.post';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),
