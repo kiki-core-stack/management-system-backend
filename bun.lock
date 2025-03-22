@@ -5,12 +5,13 @@
       "dependencies": {
         "@asteasolutions/zod-to-openapi": "^7.3.0",
         "@hono/zod-validator": "^0.4.3",
-        "@kiki-core-stack/pack": "^0.50.0",
+        "@kiki-core-stack/pack": "^0.51.0",
         "@kikiutils/mongoose": "^2.2.0",
         "consola": "^3.4.2",
         "date-fns": "^4.1.0",
         "hono": "^4.7.5",
         "ioredis": "^5.6.0",
+        "nanoid": "^5.1.5",
         "node-ciphers": "^2.0.2",
         "nodemailer": "^6.10.0",
         "on-change": "^5.0.1",
@@ -115,7 +116,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@kiki-core-stack/pack": ["@kiki-core-stack/pack@0.50.0", "", { "dependencies": { "@kikiutils/classes": "^5.0.1", "@kikiutils/node": "^6.0.1", "@kikiutils/types": "^4.0.0", "@types/lodash-es": "^4.17.12", "lodash-es": "^4.17.21" } }, "sha512-CcYM1222soIXhaD2fahS/8qdW3kXT/BnvKRXWHEM/JLP5Gr/0cLyhNhIzY33JzUG6d7PgC4aTA0yC/8OollyKA=="],
+    "@kiki-core-stack/pack": ["@kiki-core-stack/pack@0.51.0", "", { "dependencies": { "@kikiutils/classes": "^5.0.1", "@kikiutils/node": "^6.0.1", "@kikiutils/types": "^4.0.0", "@types/lodash-es": "^4.17.12", "lodash-es": "^4.17.21" } }, "sha512-7Dd+r4tilgvEbSTH6H0Y3DzFB+OSrdmWSvmafTV42+N8Su2yPBhMfzdX0quZK9xf6M1epzlLvLqQFwHQ1/+w6w=="],
 
     "@kikiutils/classes": ["@kikiutils/classes@5.0.1", "", {}, "sha512-pO3dgR3KHIo0jBOCGaPYQarhRUBqRJzDSMHAprogmqJSNUylzsgwocEcPQwNj8T42thHdYnHOl2Omg9uQcUDtA=="],
 
@@ -683,7 +684,7 @@
 
     "mz": ["mz@2.7.0", "", { "dependencies": { "any-promise": "^1.0.0", "object-assign": "^4.0.1", "thenify-all": "^1.0.0" } }, "sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q=="],
 
-    "nanoid": ["nanoid@3.3.11", "", { "bin": { "nanoid": "bin/nanoid.cjs" } }, "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w=="],
+    "nanoid": ["nanoid@5.1.5", "", { "bin": { "nanoid": "bin/nanoid.js" } }, "sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw=="],
 
     "natural-compare": ["natural-compare@1.4.0", "", {}, "sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw=="],
 
@@ -996,6 +997,8 @@
     "mlly/pkg-types": ["pkg-types@1.3.1", "", { "dependencies": { "confbox": "^0.1.8", "mlly": "^1.7.4", "pathe": "^2.0.1" } }, "sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ=="],
 
     "mongoose-lean-virtuals/mpath": ["mpath@0.8.4", "", {}, "sha512-DTxNZomBcTWlrMW76jy1wvV37X/cNNxPW1y2Jzd4DZkAaC5ZGsm8bfGfNOthcDuRJujXLqiuS6o3Tpy0JEoh7g=="],
+
+    "postcss/nanoid": ["nanoid@3.3.11", "", { "bin": { "nanoid": "bin/nanoid.cjs" } }, "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w=="],
 
     "readdirp/picomatch": ["picomatch@2.3.1", "", {}, "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="],
 

@@ -10,11 +10,12 @@ export default defaultHonoFactory.createHandlers(
         }) satisfies ZodValidatorType<ProfileSecurityChangePasswordFormData>,
     ),
     async (ctx) => {
+        const admin = await ctx.getAdmin();
         const data = ctx.req.valid('json');
         if (data.newPassword !== data.conformPassword) throwApiError(400, '確認密碼不符！');
-        if (!ctx.admin!.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確！');
+        if (!admin.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確！');
         if (data.newPassword === data.oldPassword) throwApiError(400, '新密碼不能與舊密碼相同！');
-        await ctx.admin!.updateOne({ password: data.newPassword });
+        await admin.updateOne({ password: data.newPassword });
         return ctx.createApiSuccessResponse();
     },
 );

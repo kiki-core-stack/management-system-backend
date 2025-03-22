@@ -15,8 +15,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(hono@4.7.5)(zod@3.24.2)
       '@kiki-core-stack/pack':
-        specifier: ^0.50.0
-        version: 0.50.0
+        specifier: ^0.51.0
+        version: 0.51.0
       '@kikiutils/mongoose':
         specifier: ^2.2.0
         version: 2.2.0
@@ -32,6 +32,9 @@ importers:
       ioredis:
         specifier: ^5.6.0
         version: 5.6.0
+      nanoid:
+        specifier: ^5.1.5
+        version: 5.1.5
       node-ciphers:
         specifier: ^2.0.2
         version: 2.0.2
@@ -41,9 +44,6 @@ importers:
       on-change:
         specifier: ^5.0.1
         version: 5.0.1
-      otp-io:
-        specifier: ^1.2.7
-        version: 1.2.7
       svg-captcha:
         specifier: ^1.4.0
         version: 1.4.0
@@ -303,8 +303,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kiki-core-stack/pack@0.50.0':
-    resolution: {integrity: sha512-CcYM1222soIXhaD2fahS/8qdW3kXT/BnvKRXWHEM/JLP5Gr/0cLyhNhIzY33JzUG6d7PgC4aTA0yC/8OollyKA==}
+  '@kiki-core-stack/pack@0.51.0':
+    resolution: {integrity: sha512-7Dd+r4tilgvEbSTH6H0Y3DzFB+OSrdmWSvmafTV42+N8Su2yPBhMfzdX0quZK9xf6M1epzlLvLqQFwHQ1/+w6w==}
 
   '@kikiutils/classes@5.0.1':
     resolution: {integrity: sha512-pO3dgR3KHIo0jBOCGaPYQarhRUBqRJzDSMHAprogmqJSNUylzsgwocEcPQwNj8T42thHdYnHOl2Omg9uQcUDtA==}
@@ -1523,6 +1523,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.1.5:
+    resolution: {integrity: sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -1574,10 +1579,6 @@ packages:
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
-
-  otp-io@1.2.7:
-    resolution: {integrity: sha512-UhIZfOtlMBSWGSN/v1i1eY5qsW07V/ZgaSq8bZXK0nfZEcoEitRKmn1dY8Sed8rafai3Ju8BwuxttuC2DJm6sA==}
-    engines: {node: '>=14'}
 
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
@@ -2296,7 +2297,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kiki-core-stack/pack@0.50.0':
+  '@kiki-core-stack/pack@0.51.0':
     dependencies:
       '@kikiutils/classes': 5.0.1
       '@kikiutils/node': 6.0.1
@@ -3776,6 +3777,8 @@ snapshots:
 
   nanoid@3.3.11: {}
 
+  nanoid@5.1.5: {}
+
   natural-compare@1.4.0: {}
 
   natural-orderby@5.0.0: {}
@@ -3822,8 +3825,6 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
-
-  otp-io@1.2.7: {}
 
   p-limit@3.1.0:
     dependencies:
