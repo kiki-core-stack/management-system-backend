@@ -3,7 +3,24 @@ import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 import { zodOpenApiRegistry } from '@/core/constants/zod-openapi';
 
 export default defaultHonoFactory.createHandlers((ctx) => {
-    const generator = new OpenApiGeneratorV31(zodOpenApiRegistry.definitions);
+    const definitions = zodOpenApiRegistry.definitions.toSorted((a, b) => {
+        const isARoute = a.type === 'route';
+        const isBRoute = b.type === 'route';
+        if (isARoute && isBRoute) {
+            const tagA = a.route.tags?.toSorted()[0];
+            const tagB = b.route.tags?.toSorted()[0];
+            if (tagA && tagB) return tagA.localeCompare(tagB);
+            if (!tagA && tagB) return -1;
+            if (tagA && !tagB) return 1;
+            return 0;
+        }
+
+        if (isARoute) return -1;
+        if (isBRoute) return 1;
+        return 0;
+    });
+
+    const generator = new OpenApiGeneratorV31(definitions);
     ctx.header('content-type', 'application/json');
     return ctx.body(
         JSON.stringify(
@@ -12,7 +29,7 @@ export default defaultHonoFactory.createHandlers((ctx) => {
                     title: 'API Document',
                     version: '0.1.0',
                 },
-                openapi: '3.1.0',
+                openapi: '3.1.1',
             }),
             null,
             2,
