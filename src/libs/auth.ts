@@ -27,17 +27,11 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
         userAgent: ctx.req.header('User-Agent'),
     };
 
-    if (!sessionId) updateQuery.loginIP = getXForwardedForHeaderFirstValue(ctx);
-    const adminSession = await AdminSessionModel.findByIdAndUpdate(
-        sessionId,
-        updateQuery,
-        {
-            new: true,
-            upsert: true,
-        },
-    );
-
-    setAuthToken(ctx, adminSession.token);
+    if (!sessionId) {
+        updateQuery.loginIp = getXForwardedForHeaderFirstValue(ctx);
+        await AdminSessionModel.create(updateQuery);
+    } else if (!await AdminSessionModel.findByIdAndUpdate(sessionId, updateQuery)) throwApiError();
+    setAuthToken(ctx, updateQuery.token);
 }
 
 export const deleteAuthToken = (ctx: Context) => deleteCookie(ctx, 'token');
