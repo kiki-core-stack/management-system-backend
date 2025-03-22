@@ -26,11 +26,7 @@ export default defaultHonoFactory.createHandlers(
         });
 
         if (!admin) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
-        ctx.session.tempAdminIdForSendEmailOtpCode = admin.id;
-        await requireEmailOtpTwoFactorAuthentication(ctx, admin, 'adminLogin');
-        await requireTotpTwoFactorAuthentication(ctx, admin);
         if (!admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
-        await cleanupAdminCachesAndSession(ctx, admin);
         ctx.session.adminId = admin.id;
         AdminLogModel.create({
             admin,

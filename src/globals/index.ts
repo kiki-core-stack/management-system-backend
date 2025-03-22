@@ -3,6 +3,5 @@ import './admin';
 import './model';
 import './lodash-es';
 import './request';
-import './two-factor-authentication';
 import './zod-openapi';
 import './zod-validator';

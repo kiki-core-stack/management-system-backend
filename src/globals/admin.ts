@@ -1,12 +1,7 @@
-import { redisController } from '@kiki-core-stack/pack/controllers/redis';
-import type { AdminDocument } from '@kiki-core-stack/pack/models/admin';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
-import type { Context } from 'hono';
 
 declare global {
     const populateCreatedAndEditedByAdminOptions: typeof _populateCreatedAndEditedByAdminOptions;
-
-    const cleanupAdminCachesAndSession: (ctx: Context, admin: AdminDocument) => Promise<void>;
 }
 
 const _populateCreatedAndEditedByAdminOptions = [
@@ -29,21 +24,4 @@ const _populateCreatedAndEditedByAdminOptions = [
 setReadonlyConstantToGlobalThis<typeof populateCreatedAndEditedByAdminOptions>(
     'populateCreatedAndEditedByAdminOptions',
     _populateCreatedAndEditedByAdminOptions,
-);
-
-setReadonlyConstantToGlobalThis<typeof cleanupAdminCachesAndSession>(
-    'cleanupAdminCachesAndSession',
-    async (ctx, admin) => {
-        const promises = [redisController.tempTotpSecret.del(admin.id)];
-        if (admin.email) {
-            promises.push(
-                redisController.emailOtpCode.del('adminChangePassword', admin.email, admin.id),
-                redisController.emailOtpCode.del('adminLogin', admin.email, admin.id),
-                redisController.emailOtpCode.del('adminToggleTwoFactorAuthenticationStatus', admin.email, admin.id),
-            );
-        }
-
-        await Promise.all(promises);
-        ctx.clearSession();
-    },
 );
