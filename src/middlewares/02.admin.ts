@@ -11,8 +11,8 @@ import type { H } from 'hono/types';
 
 import { honoApp } from '@/core/app';
 import type { RouteHandlerProperties } from '@/core/types/route';
+import { createOrUpdateAdminSessionAndSetAuthToken } from '@/libs/admin';
 import {
-    createOrUpdateAdminSessionAndSetAuthToken,
     deleteAuthToken,
     getAuthToken,
 } from '@/libs/auth';

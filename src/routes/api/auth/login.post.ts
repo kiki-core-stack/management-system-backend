@@ -3,7 +3,7 @@ import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { createOrUpdateAdminSessionAndSetAuthToken } from '@/libs/auth';
+import { createOrUpdateAdminSessionAndSetAuthToken } from '@/libs/admin';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
