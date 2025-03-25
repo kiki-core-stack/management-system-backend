@@ -2,9 +2,11 @@ import { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
 import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import type { AdminSession } from '@kiki-core-stack/pack/models/admin/session';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
+import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import type { Context } from 'hono';
 import { random } from 'lodash-es';
 import type {
+    ClientSession,
     Types,
     UpdateQuery,
 } from 'mongoose';
@@ -15,31 +17,56 @@ import { setAuthToken } from '../auth';
 export async function createOrUpdateAdminSessionAndSetAuthToken(
     ctx: Context,
     adminId: string | Types.ObjectId,
-    ip?: string,
-    sessionId?: Types.ObjectId,
+    options?: {
+        ip?: string;
+        mongooseSession?: ClientSession;
+        sessionId?: Types.ObjectId;
+    },
 ) {
-    ip ||= getXForwardedForHeaderFirstValue(ctx);
+    const ip = options?.ip || getXForwardedForHeaderFirstValue(ctx);
     const updateQuery: UpdateQuery<AdminSession> = {
         admin: adminId,
         lastActiveAt: new Date(),
         lastActiveIp: ip,
-        token: nanoid(random(32, 48)),
+        token: nanoid(random(random(48, 64), random(80, 96))),
         userAgent: ctx.req.header('User-Agent'),
     };
 
-    if (!sessionId) {
+    if (!options?.sessionId) {
         updateQuery.loginIp = ip;
-        await AdminSessionModel.create(updateQuery);
-    } else if (!await AdminSessionModel.findByIdAndUpdate(sessionId, updateQuery)) throwApiError();
+        await AdminSessionModel.create([updateQuery], { session: options?.mongooseSession });
+    } else {
+        await assertMongooseUpdateSuccess(
+            AdminSessionModel.updateOne(
+                { _id: options.sessionId },
+                updateQuery,
+                { session: options.mongooseSession },
+            ),
+        );
+    }
+
     setAuthToken(ctx, updateQuery.token);
 }
 
-export async function handleAdminLogin(ctx: Context, adminId: string | Types.ObjectId) {
+export async function handleAdminLogin(ctx: Context, adminId: string | Types.ObjectId, session?: ClientSession) {
     const ip = getXForwardedForHeaderFirstValue(ctx);
-    await createOrUpdateAdminSessionAndSetAuthToken(ctx, adminId, ip);
-    AdminLogModel.create({
-        admin: adminId,
-        ip,
-        type: AdminLogType.LoginSuccess,
-    }).catch(() => {});
+    await createOrUpdateAdminSessionAndSetAuthToken(
+        ctx,
+        adminId,
+        {
+            ip,
+            mongooseSession: session,
+        },
+    );
+
+    await AdminLogModel.create(
+        [
+            {
+                admin: adminId,
+                ip,
+                type: AdminLogType.LoginSuccess,
+            },
+        ],
+        { session },
+    );
 }

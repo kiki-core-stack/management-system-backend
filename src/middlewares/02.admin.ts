@@ -51,7 +51,11 @@ honoApp.use('/api/*', async (ctx, next) => {
                 deleteAuthToken(ctx);
                 delete ctx.adminId;
             } else if (isBefore(adminSession.lastActiveAt, subMinutes(today, 10))) {
-                await createOrUpdateAdminSessionAndSetAuthToken(ctx, adminSession.admin, undefined, adminSession._id);
+                await createOrUpdateAdminSessionAndSetAuthToken(
+                    ctx,
+                    adminSession.admin,
+                    { sessionId: adminSession._id },
+                );
             }
         }
     }
