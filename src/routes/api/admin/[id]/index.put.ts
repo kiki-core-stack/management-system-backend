@@ -2,6 +2,7 @@ import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminDocument } from '@kiki-core-stack/pack/models/admin';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
+import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import type { UpdateQuery } from 'mongoose';
 
 import { jsonSchema } from '../index.post';
@@ -14,7 +15,7 @@ export default defaultHonoFactory.createHandlers(
         updateQuery.enabled = updateQuery.enabled || admin._id === ctx.adminId;
         if (!updateQuery.email) updateQuery.$unset = { email: true };
         return await mongooseConnections.default!.transaction(async (session) => {
-            await admin.updateOne(updateQuery, { session });
+            await assertMongooseUpdateSuccess(admin.updateOne(updateQuery, { session }));
             if (!updateQuery.enabled) await AdminSessionModel.deleteMany({ admin }, { session });
             return ctx.createApiSuccessResponse();
         });

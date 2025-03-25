@@ -1,3 +1,4 @@
+import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
 import type { Context } from 'hono';
 import type {
@@ -68,7 +69,7 @@ setReadonlyConstantToGlobalThis<typeof getModelDocumentByRouteIdAndUpdateBoolean
         // @ts-expect-error Ignore this error.
         await beforeUpdate?.(document, field, !!value);
         // @ts-expect-error Ignore this error.
-        await document.updateOne({ [`${field}`]: !!value });
+        await assertMongooseUpdateSuccess(document.updateOne({ [`${field}`]: !!value }));
     },
 );
 

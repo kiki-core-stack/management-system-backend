@@ -1,6 +1,7 @@
 import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
+import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator(
@@ -18,7 +19,7 @@ export default defaultHonoFactory.createHandlers(
         if (!admin.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確！');
         if (data.newPassword === data.oldPassword) throwApiError(400, '新密碼不能與舊密碼相同！');
         return await mongooseConnections.default!.transaction(async (session) => {
-            await admin.updateOne({ password: data.newPassword }, { session });
+            await assertMongooseUpdateSuccess(admin.updateOne({ password: data.newPassword }, { session }));
             await AdminSessionModel.deleteMany({ admin }, { session });
             return ctx.createApiSuccessResponse();
         });
