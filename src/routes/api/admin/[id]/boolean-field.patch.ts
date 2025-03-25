@@ -11,7 +11,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
             { session },
             async (admin, field) => {
                 if (field === 'enabled') {
-                    if (admin.id === ctx.adminId) throwApiError(400, '無法變更自己的啟用狀態！');
+                    if (admin._id === ctx.adminId) throwApiError(400, '無法變更自己的啟用狀態！');
                     await AdminSessionModel.deleteMany({ admin }, { session });
                 }
             },

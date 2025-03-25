@@ -11,7 +11,7 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const admin = await AdminModel.findByRouteIdOrThrowNotFoundError(ctx);
         const updateQuery: UpdateQuery<AdminDocument> = ctx.req.valid('json');
-        updateQuery.enabled = updateQuery.enabled || admin.id === ctx.adminId;
+        updateQuery.enabled = updateQuery.enabled || admin._id === ctx.adminId;
         if (!updateQuery.email) updateQuery.$unset = { email: true };
         return await mongooseConnections.default!.transaction(async (session) => {
             await admin.updateOne(updateQuery, { session });
