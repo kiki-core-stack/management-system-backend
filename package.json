@@ -13,7 +13,7 @@
     "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@hono/zod-validator": "^0.4.3",
     "@kiki-core-stack/pack": "^0.52.1",
-    "@kikiutils/mongoose": "^2.2.0",
+    "@kikiutils/mongoose": "^2.3.1",
     "consola": "^3.4.2",
     "date-fns": "^4.1.0",
     "hono": "^4.7.5",
