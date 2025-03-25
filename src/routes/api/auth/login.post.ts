@@ -27,8 +27,7 @@ export default defaultHonoFactory.createHandlers(
             enabled: true,
         });
 
-        if (!admin) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
-        if (!admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
+        if (!admin?.enabled || !admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
         await createOrUpdateAdminSessionAndSetAuthToken(ctx, admin.id);
         AdminLogModel.create({
             admin,
