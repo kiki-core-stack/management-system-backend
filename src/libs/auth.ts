@@ -17,18 +17,20 @@ import { nanoid } from 'nanoid';
 export async function createOrUpdateAdminSessionAndSetAuthToken(
     ctx: Context,
     adminId: string | Types.ObjectId,
+    ip?: string,
     sessionId?: Types.ObjectId,
 ) {
+    ip ||= getXForwardedForHeaderFirstValue(ctx);
     const updateQuery: UpdateQuery<AdminSession> = {
         admin: adminId,
         lastActiveAt: new Date(),
-        lastActiveIp: getXForwardedForHeaderFirstValue(ctx),
+        lastActiveIp: ip,
         token: nanoid(random(32, 48)),
         userAgent: ctx.req.header('User-Agent'),
     };
 
     if (!sessionId) {
-        updateQuery.loginIp = getXForwardedForHeaderFirstValue(ctx);
+        updateQuery.loginIp = ip;
         await AdminSessionModel.create(updateQuery);
     } else if (!await AdminSessionModel.findByIdAndUpdate(sessionId, updateQuery)) throwApiError();
     setAuthToken(ctx, updateQuery.token);

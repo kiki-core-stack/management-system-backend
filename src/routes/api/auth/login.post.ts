@@ -28,10 +28,11 @@ export default defaultHonoFactory.createHandlers(
         });
 
         if (!admin?.enabled || !admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
-        await createOrUpdateAdminSessionAndSetAuthToken(ctx, admin.id);
+        const ip = getXForwardedForHeaderFirstValue(ctx);
+        await createOrUpdateAdminSessionAndSetAuthToken(ctx, admin.id, ip);
         AdminLogModel.create({
             admin,
-            ip: getXForwardedForHeaderFirstValue(ctx),
+            ip,
             type: AdminLogType.LoginSuccess,
         });
 
