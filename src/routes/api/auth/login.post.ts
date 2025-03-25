@@ -1,9 +1,7 @@
-import { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
-import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { createOrUpdateAdminSessionAndSetAuthToken } from '@/libs/admin';
+import { handleAdminLogin } from '@/libs/admin';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
@@ -28,14 +26,7 @@ export default defaultHonoFactory.createHandlers(
         });
 
         if (!admin?.enabled || !admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
-        const ip = getXForwardedForHeaderFirstValue(ctx);
-        await createOrUpdateAdminSessionAndSetAuthToken(ctx, admin.id, ip);
-        AdminLogModel.create({
-            admin,
-            ip,
-            type: AdminLogType.LoginSuccess,
-        });
-
+        await handleAdminLogin(ctx, admin.id);
         return ctx.createApiSuccessResponse();
     },
 );
