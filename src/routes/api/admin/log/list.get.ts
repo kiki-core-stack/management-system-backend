@@ -8,7 +8,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
             {
                 options: { readPreference: 'secondaryPreferred' },
                 populate: {
-                    path: 'admin',
+                    path: 'a',
                     select: [
                         '-_id',
                         'account',
