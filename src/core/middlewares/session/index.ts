@@ -37,6 +37,8 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
                 sessionToken.substring(40),
                 sessionToken.substring(24, 40),
                 sessionToken.substring(0, 24),
+                // TODO: Check bun bug ?
+                16,
             );
 
             if (storedData && storedData[0] + 86400000 > Date.now()) sessionData = storedData[1];
@@ -57,10 +59,14 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
         await next();
         if (ctx[sessionClearedSymbol]) return tokenHandler.delete(ctx);
         if (!ctx[sessionChangedSymbol]) return;
-        const encryptResult = cipher.encryptJson([
-            Date.now(),
-            ctx.session,
-        ]);
+        const encryptResult = cipher.encryptJson(
+            [
+                Date.now(),
+                ctx.session,
+            ],
+            // TODO: Check bun bug ?
+            16,
+        );
 
         if (encryptResult) tokenHandler.set(ctx, `${encryptResult.authTag}${encryptResult.iv}${encryptResult.data}`);
     });
