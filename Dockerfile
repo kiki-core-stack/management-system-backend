@@ -45,8 +45,8 @@ RUN apt-get update && \
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
+COPY --from=build-stage /app/node_modules/svg-captcha/fonts ./node_modules/svg-captcha/fonts
 COPY ./.env.production.local ./.env
-COPY ./node_modules/svg-captcha/fonts ./node_modules/svg-captcha/fonts
 
 ## Copy and set the entrypoint script
 COPY ./docker-entrypoint.sh ./
