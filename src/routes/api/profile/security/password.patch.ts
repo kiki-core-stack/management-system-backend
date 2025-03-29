@@ -20,7 +20,7 @@ export default defaultHonoFactory.createHandlers(
         if (data.newPassword === data.oldPassword) throwApiError(400, '新密碼不能與舊密碼相同！');
         return await mongooseConnections.default!.transaction(async (session) => {
             await assertMongooseUpdateSuccess(admin.updateOne({ password: data.newPassword }, { session }));
-            await AdminSessionModel.deleteMany({ admin }, { session });
+            await AdminSessionModel.deleteMany({ a: admin }, { session });
             return ctx.createApiSuccessResponse();
         });
     },
