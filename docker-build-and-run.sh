@@ -1,12 +1,27 @@
 #!/bin/bash
 
 set -e
+
+# Load and set variables
 . ./.env.production.local
-name='auto-hono'
-user='user'
-image_name="$user/$name:latest"
+author='user'
+base_name='auto-hono'
+container_name="$base_name"
+image_tag="$author/$base_name:latest"
+
+# Pull images
 docker pull oven/bun:slim
-docker build "$@" -t "$image_name" --build-arg "NPM_REGISTRY=$NPM_REGISTRY" . || exit 1
-[ "$(docker ps | grep "$name")" ] && docker kill "$name"
-[ "$(docker ps -a | grep "$name")" ] && docker rm "$name"
-docker run -itd --name "$name" --restart=always "$image_name"
+
+# Build and run
+docker build \
+    -t "$image_tag" \
+    --build-arg "NPM_REGISTRY=$NPM_REGISTRY" \
+    .
+
+docker stop "$container_name" || true
+docker rm "$container_name" || true
+docker run \
+    -itd \
+    --name "$container_name" \
+    --restart=always \
+    "$image_tag"
