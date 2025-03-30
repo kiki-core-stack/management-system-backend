@@ -7,8 +7,9 @@ Dockerfile
 
 ### Git ###
 .git/
-.gitignore
+.github/
 .gitkeep
+.gitlab-ci.yml
 
 ### Node ###
 
@@ -166,5 +167,6 @@ fetch-and-merge.sh
 install-dependencies.sh
 LICENSE
 modify-files-permissions.sh
+README.md
 tmux-run-dev.sh
 upgrade-dependencies.sh
