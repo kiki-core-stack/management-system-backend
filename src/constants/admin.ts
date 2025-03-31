@@ -1,4 +1,6 @@
-export const populateCreatedAndEditedByAdminOptions = Object.freeze([
+import type { PopulateOptions } from 'mongoose';
+
+export const populateCreatedAndEditedByAdminOptions: PopulateOptions[] = [
     {
         path: 'createdByAdmin',
         select: [
@@ -13,4 +15,4 @@ export const populateCreatedAndEditedByAdminOptions = Object.freeze([
             'account',
         ],
     },
-]);
+];
