@@ -2,8 +2,8 @@ import type {
     ResponseConfig,
     ZodRequestBody,
 } from '@asteasolutions/zod-to-openapi';
+import { z } from '@kiki-core-stack/pack/constants/zod';
 import type { SetOptional } from 'type-fest';
-import { z } from 'zod';
 
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
