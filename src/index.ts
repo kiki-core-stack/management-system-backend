@@ -14,9 +14,6 @@ process.once('SIGTERM', () => gracefulExit(server));
     // Extend Zod with OpenAPI
     extendZodWithOpenApi(zod);
 
-    // Import global constants and utilities
-    await import('@/core/globals');
-
     // Load middlewares
     await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default();
 
