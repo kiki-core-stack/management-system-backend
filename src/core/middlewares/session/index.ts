@@ -3,6 +3,8 @@ import type { BinaryLike } from 'node:crypto';
 import { AesCipher } from 'node-ciphers';
 import onChange from 'on-change';
 
+import { defaultHonoFactory } from '@/core/constants/hono';
+
 import {
     sessionChangedSymbol,
     sessionClearedSymbol,
