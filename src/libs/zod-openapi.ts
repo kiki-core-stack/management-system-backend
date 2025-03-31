@@ -2,14 +2,8 @@ import type {
     ResponseConfig,
     ZodRequestBody,
 } from '@asteasolutions/zod-to-openapi';
-import { setReadonlyConstantToGlobalThis } from '@kikiutils/node';
-import { getEnumNumberValues } from '@kikiutils/node/enum';
 import type { SetOptional } from 'type-fest';
 import { z } from 'zod';
-import type {
-    EnumLike,
-    ZodNativeEnum,
-} from 'zod';
 
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
@@ -63,20 +57,4 @@ export function defineApiRouteZodOpenApiJsonResponseConfig(
         },
         description: message,
     };
-}
-
-export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
-    enumName: string,
-    enumObject: T,
-    toTextMap?: Record<number | string, string>,
-): ZodNativeEnum<T> {
-    return z.nativeEnum(enumObject).openapi(
-        enumName,
-        {
-            'x-enum-descriptions': toTextMap
-                ? getEnumNumberValues(enumObject).map((key: number) => toTextMap[key])
-                : undefined,
-            'x-enum-varnames': Object.keys(enumObject).filter((key) => !Number.isFinite(+key)),
-        },
-    );
 }
