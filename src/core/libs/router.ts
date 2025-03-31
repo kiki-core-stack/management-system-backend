@@ -5,7 +5,10 @@ import {
     sep,
 } from 'node:path';
 
-import type { WritableDeep } from 'type-fest';
+import type {
+    Except,
+    WritableDeep,
+} from 'type-fest';
 
 import { honoApp } from '../app';
 import {
@@ -57,7 +60,7 @@ export function loadRouteModule(
     if (!handlers.length) return;
     const latestHandler = handlers.at(-1);
     // eslint-disable-next-line style/max-len
-    const routeHandlerOptions: Undefinedable<RouteHandlerOptions> = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
+    const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
     Object.assign(latestHandler, routeHandlerOptions?.properties);
     if (routeModule.zodOpenApiConfig) {
         zodOpenApiRegistry.registerPath({

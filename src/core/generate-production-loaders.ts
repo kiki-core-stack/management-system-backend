@@ -36,7 +36,6 @@ async function generateRoutesLoader() {
             ...routeDefinition
         } of routeDefinitions
     ) fileLines.push(`    loadRouteModule(await import('${filePath}'), ${JSON.stringify(routeDefinition)});`);
-
     fileLines.push('}');
     await Bun.write(join(import.meta.dirname, 'loaders/routes/production.ts'), `${fileLines.join('\n')}\n`);
     // eslint-disable-next-line style/max-len
