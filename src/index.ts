@@ -18,9 +18,6 @@ process.once('SIGTERM', () => gracefulExit(server));
     // Extend Zod with OpenAPI
     extendZodWithOpenApi(zod);
 
-    // Import global constants and utilities
-    await import('@/globals');
-
     // Setup error handling
     setupHonoAppErrorHandling(honoApp);
 
