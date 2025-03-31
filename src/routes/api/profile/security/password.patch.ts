@@ -1,9 +1,9 @@
 import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
+import { z } from '@kiki-core-stack/pack/constants/zod';
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
-import { z } from 'zod';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { apiZValidator } from '@/libs/zod-validator';

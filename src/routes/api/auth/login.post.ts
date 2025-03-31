@@ -1,7 +1,7 @@
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
-import { z } from 'zod';
+import { z } from '@kiki-core-stack/pack/constants/zod';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { defineRouteHandlerOptions } from '@/core/libs/route';
