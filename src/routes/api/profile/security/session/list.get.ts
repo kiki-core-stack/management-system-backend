@@ -1,5 +1,6 @@
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 
+import { defaultHonoFactory } from '@/core/constants/hono';
 import { getAuthToken } from '@/libs/auth';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {

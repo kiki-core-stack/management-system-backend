@@ -12,6 +12,8 @@ import type {
 } from 'mongoose';
 import { nanoid } from 'nanoid';
 
+import { getXForwardedForHeaderFirstValue } from '@/core/utils';
+
 import { setAuthToken } from '../auth';
 
 export async function createOrUpdateAdminSessionAndSetAuthToken(

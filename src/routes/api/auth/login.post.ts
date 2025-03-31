@@ -1,7 +1,12 @@
+import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
+import { z } from 'zod';
 
+import { defaultHonoFactory } from '@/core/constants/hono';
+import { defineRouteHandlerOptions } from '@/core/libs/route';
 import { handleAdminLogin } from '@/libs/admin';
+import { apiZValidator } from '@/libs/zod-validator';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 

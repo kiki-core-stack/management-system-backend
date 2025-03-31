@@ -1,3 +1,4 @@
+import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminDocument } from '@kiki-core-stack/pack/models/admin';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';

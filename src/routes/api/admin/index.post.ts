@@ -1,5 +1,10 @@
+import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
+import { z } from 'zod';
+
+import { defaultHonoFactory } from '@/core/constants/hono';
+import { apiZValidator } from '@/libs/zod-validator';
 
 export const jsonSchema = z.object({
     account: z.string().trim().min(1).max(16),
