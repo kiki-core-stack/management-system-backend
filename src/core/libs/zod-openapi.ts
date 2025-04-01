@@ -14,17 +14,7 @@ import type {
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
-export function defineRouteZodOpenApiConfig(
-    operationId: string,
-    description: string,
-    config: RouteZodOpenApiConfig,
-): RouteZodOpenApiConfig {
-    return {
-        ...config,
-        description,
-        operationId,
-    };
-}
+export const defineRouteZodOpenApiConfig = (config: RouteZodOpenApiConfig) => config;
 
 export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
     enumName: string,
