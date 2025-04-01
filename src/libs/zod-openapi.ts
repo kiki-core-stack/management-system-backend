@@ -1,15 +1,33 @@
-import type {
-    ResponseConfig,
-    ZodRequestBody,
-} from '@asteasolutions/zod-to-openapi';
+import type { ZodRequestBody } from '@asteasolutions/zod-to-openapi';
 import { z } from '@kiki-core-stack/pack/constants/zod';
 import type { SetOptional } from 'type-fest';
 
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
-const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze({
-    200: defineApiRouteZodOpenApiJsonResponseConfig(),
-    500: defineApiRouteZodOpenApiJsonResponseConfig(undefined, '系統錯誤！', true),
+const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze<RouteZodOpenApiConfig['responses']>({
+    200: {
+        content: {
+            'application/json': {
+                schema: z.object({
+                    message: z.string().describe('成功！'),
+                    success: z.literal(true),
+                }),
+            },
+        },
+        description: '成功！',
+    },
+    500: {
+        content: {
+            'application/json': {
+                schema: z.object({
+                    errorCode: z.literal('internalServerError'),
+                    message: z.string().describe('系統錯誤！'),
+                    success: z.literal(false),
+                }),
+            },
+        },
+        description: '系統錯誤！',
+    },
 });
 
 export function defineApiRouteZodOpenApiConfig(
@@ -35,24 +53,5 @@ export function defineApiRouteZodOpenApiJsonRequestConfig(
     return {
         content: { 'application/json': { schema } },
         description,
-    };
-}
-
-export function defineApiRouteZodOpenApiJsonResponseConfig(
-    dataSchema?: ReturnType<(typeof z)['object']>,
-    message: string = '成功',
-    isError: boolean = false,
-): ResponseConfig {
-    return {
-        content: {
-            'application/json': {
-                schema: z.object({
-                    data: dataSchema || z.object({}).optional(),
-                    message: z.string().describe(message),
-                    success: z.literal(!isError),
-                }),
-            },
-        },
-        description: message,
     };
 }
