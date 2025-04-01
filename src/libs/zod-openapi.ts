@@ -7,17 +7,15 @@ import type { SetOptional } from 'type-fest';
 
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
-export type ApiRouteZodOpenApiConfig = SetOptional<RouteZodOpenApiConfig, 'responses'>;
-
 const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze({
-    200: defineApiRouteZodOpenApiJsonResponseConfig(undefined, '成功'),
-    500: defineApiRouteZodOpenApiJsonResponseConfig(undefined, '系統錯誤！'),
+    200: defineApiRouteZodOpenApiJsonResponseConfig(),
+    500: defineApiRouteZodOpenApiJsonResponseConfig(undefined, '系統錯誤！', true),
 });
 
 export function defineApiRouteZodOpenApiConfig(
     operationId: string,
     description: string,
-    config?: ApiRouteZodOpenApiConfig,
+    config?: SetOptional<RouteZodOpenApiConfig, 'responses'>,
 ): RouteZodOpenApiConfig {
     return {
         ...config,
