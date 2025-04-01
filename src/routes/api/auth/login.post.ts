@@ -22,7 +22,7 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const data = ctx.req.valid('json');
         if (data.verCode !== ctx.popSession('verCode')?.toLowerCase()) {
-            throwApiError(400, '驗證碼不正確！', { isVerCodeIncorrect: true });
+            throwApiError(400, '驗證碼不正確！', 'invalidVerificationCode');
         }
 
         const admin = await AdminModel.findOne({

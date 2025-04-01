@@ -15,8 +15,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(hono@4.7.5)(zod@3.24.2)
       '@kiki-core-stack/pack':
-        specifier: ^0.57.2
-        version: 0.57.2
+        specifier: ^0.57.3
+        version: 0.57.3
       '@kikiutils/mongoose':
         specifier: ^2.3.1
         version: 2.3.1
@@ -306,8 +306,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kiki-core-stack/pack@0.57.2':
-    resolution: {integrity: sha512-rBp77aiNhzs+RNFhpkfoAoe56ozJU3QzTBBUrU71+gF4v0qbu56OBLZbWpecgBx5xV9Z7T2H/ixhG8olVyoYLQ==}
+  '@kiki-core-stack/pack@0.57.3':
+    resolution: {integrity: sha512-ToxvYM+AqdtDSoM9359JMJErzmHYOBGUy9OgnTMeigspbd0QT1BnHBhhc3EZJhB8a7y3TRsFwfCvnbRWdNpKHg==}
 
   '@kikiutils/classes@5.0.1':
     resolution: {integrity: sha512-pO3dgR3KHIo0jBOCGaPYQarhRUBqRJzDSMHAprogmqJSNUylzsgwocEcPQwNj8T42thHdYnHOl2Omg9uQcUDtA==}
@@ -2324,7 +2324,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kiki-core-stack/pack@0.57.2':
+  '@kiki-core-stack/pack@0.57.3':
     dependencies:
       '@kikiutils/classes': 5.0.1
       '@kikiutils/node': 6.0.1
