@@ -6,6 +6,7 @@ import { z } from '@kiki-core-stack/pack/constants/zod';
 import { ApiError } from '@kiki-core-stack/pack/hono-backend/libs/api/error';
 import type { SetOptional } from 'type-fest';
 
+import { zodSchemaToOpenApiSchema } from '@/core/libs/zod-openapi';
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
 const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze<RouteZodOpenApiConfig['responses']>({
@@ -15,6 +16,37 @@ const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze<RouteZodOpenApiCo
 
 export function convertApiErrorToApiRouteZodOpenApiResponseConfig(apiError: ApiError<any, any>) {
     return defineApiRouteZodOpenApiResponseConfig(undefined, apiError.message, apiError.errorCode);
+}
+
+export function convertApiErrorsToApiRouteZodOpenApiResponsesConfig(
+    apiErrors: ApiError<any, any>[] | Record<string, ApiError<any, any>>,
+) {
+    const errors = Array.isArray(apiErrors) ? apiErrors : Object.values(apiErrors);
+    const errorsGroup: Record<string, ApiError<any, any>[]> = {};
+    errors.forEach((error) => (errorsGroup[error.statusCode] ||= []).push(error));
+    const responses: RouteZodOpenApiConfig['responses'] = {};
+    // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline
+    Object.entries(errorsGroup).forEach(([statusCode, errors]) => {
+        const descriptions: string[] = [];
+        const schemas = errors.map((error) => {
+            descriptions.push(error.message);
+            return zodSchemaToOpenApiSchema(
+                z.object({
+                    errorCode: z.literal(error.errorCode),
+                    message: z.string().describe(error.message),
+                    success: z.literal(false),
+                }),
+                error.message,
+            );
+        });
+
+        responses[statusCode] = {
+            content: { 'application/json': { schema: schemas.length === 1 ? schemas[0]! : { oneOf: schemas } } },
+            description: descriptions.join('｜'),
+        };
+    });
+
+    return responses;
 }
 
 export function defineApiRouteZodOpenApiConfig(
