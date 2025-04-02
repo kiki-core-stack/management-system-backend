@@ -1,34 +1,21 @@
-import type { ZodRequestBody } from '@asteasolutions/zod-to-openapi';
+import type {
+    ResponseConfig,
+    ZodRequestBody,
+} from '@asteasolutions/zod-to-openapi';
 import { z } from '@kiki-core-stack/pack/constants/zod';
+import { ApiError } from '@kiki-core-stack/pack/hono-backend/libs/api/error';
 import type { SetOptional } from 'type-fest';
 
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
 const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze<RouteZodOpenApiConfig['responses']>({
-    200: {
-        content: {
-            'application/json': {
-                schema: z.object({
-                    message: z.string().describe('成功！'),
-                    success: z.literal(true),
-                }),
-            },
-        },
-        description: '成功！',
-    },
-    500: {
-        content: {
-            'application/json': {
-                schema: z.object({
-                    errorCode: z.literal('internalServerError'),
-                    message: z.string().describe('系統錯誤！'),
-                    success: z.literal(false),
-                }),
-            },
-        },
-        description: '系統錯誤！',
-    },
+    200: defineApiRouteZodOpenApiResponseConfig(),
+    500: convertApiErrorToApiRouteZodOpenApiResponseConfig(new ApiError()),
 });
+
+export function convertApiErrorToApiRouteZodOpenApiResponseConfig(apiError: ApiError<any, any>) {
+    return defineApiRouteZodOpenApiResponseConfig(undefined, apiError.message, apiError.errorCode);
+}
 
 export function defineApiRouteZodOpenApiConfig(
     operationId: string,
@@ -53,5 +40,23 @@ export function defineApiRouteZodOpenApiJsonRequestConfig(
     return {
         content: { 'application/json': { schema } },
         description,
+    };
+}
+
+export function defineApiRouteZodOpenApiResponseConfig(
+    dataSchema?: ReturnType<(typeof z)['object']>,
+    message: string = '成功',
+    errorCode?: string,
+): ResponseConfig {
+    let schema = z.object({
+        message: z.string().describe(message),
+        success: z.literal(!errorCode),
+    });
+
+    if (dataSchema) schema = schema.extend({ data: dataSchema });
+    if (errorCode) schema = schema.extend({ errorCode: z.literal(errorCode) });
+    return {
+        content: { 'application/json': { schema } },
+        description: message,
     };
 }
