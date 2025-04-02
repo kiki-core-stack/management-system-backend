@@ -5,7 +5,7 @@
       "dependencies": {
         "@asteasolutions/zod-to-openapi": "^7.3.0",
         "@hono/zod-validator": "^0.4.3",
-        "@kiki-core-stack/pack": "^0.57.3",
+        "@kiki-core-stack/pack": "^0.60.1",
         "@kikiutils/mongoose": "^2.3.1",
         "consola": "^3.4.2",
         "date-fns": "^4.1.0",
@@ -116,7 +116,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@kiki-core-stack/pack": ["@kiki-core-stack/pack@0.57.3", "", { "dependencies": { "@kikiutils/classes": "^5.0.1", "@kikiutils/node": "^6.0.1", "@kikiutils/types": "^4.0.0", "@types/lodash-es": "^4.17.12", "lodash-es": "^4.17.21", "type-fest": "^4.38.0" } }, "sha512-ToxvYM+AqdtDSoM9359JMJErzmHYOBGUy9OgnTMeigspbd0QT1BnHBhhc3EZJhB8a7y3TRsFwfCvnbRWdNpKHg=="],
+    "@kiki-core-stack/pack": ["@kiki-core-stack/pack@0.60.1", "", { "dependencies": { "@kikiutils/classes": "^5.0.1", "@kikiutils/node": "^6.0.1", "@kikiutils/types": "^4.0.0", "@types/lodash-es": "^4.17.12", "lodash-es": "^4.17.21", "type-fest": "^4.38.0" } }, "sha512-E5sfMZ7P90Wg2d+ka5yWlq/0Dj8zRJP9y6uOUS6IR+ioSIi23NmVBz7ajQ0pO8U54zF/IL06/eMsyS0SRwxOMQ=="],
 
     "@kikiutils/classes": ["@kikiutils/classes@5.0.1", "", {}, "sha512-pO3dgR3KHIo0jBOCGaPYQarhRUBqRJzDSMHAprogmqJSNUylzsgwocEcPQwNj8T42thHdYnHOl2Omg9uQcUDtA=="],
 

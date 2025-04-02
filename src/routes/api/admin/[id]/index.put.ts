@@ -1,4 +1,5 @@
 import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
+import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-validator';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { Admin } from '@kiki-core-stack/pack/models/admin';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
@@ -6,7 +7,6 @@ import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import type { UpdateQuery } from 'mongoose';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { apiZValidator } from '@/libs/zod-validator';
 
 import { jsonSchema } from '../index.post';
 
