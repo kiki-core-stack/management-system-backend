@@ -53,6 +53,7 @@ export function defineApiRouteZodOpenApiConfig(
     operationId: string,
     description: string,
     config?: SetOptional<RouteZodOpenApiConfig, 'responses'>,
+    apiErrors?: ApiError<any, any>[] | Record<string, ApiError<any, any>>,
 ): RouteZodOpenApiConfig {
     return {
         ...config,
@@ -61,6 +62,7 @@ export function defineApiRouteZodOpenApiConfig(
         responses: {
             ...defaultApiRouteZodOpenApiResponsesConfig,
             ...config?.responses,
+            ...apiErrors && convertApiErrorsToApiRouteZodOpenApiResponsesConfig(apiErrors),
         },
     };
 }
