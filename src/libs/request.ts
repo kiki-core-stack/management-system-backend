@@ -36,10 +36,8 @@ export function getProcessedApiRequestQueries(
         let filterQueryData = JSON.parse(queries.filterQuery);
         if (filterQueryData.endAt) merge(filterQuery, { createdAt: { $lt: new Date(filterQueryData.endAt) } });
         if (filterQueryData.startAt) merge(filterQuery, { createdAt: { $gte: new Date(filterQueryData.startAt) } });
-        Object.entries(filterQueryData = omit(filterQueryData, 'endAt', 'startAt')).forEach(([
-            key,
-            value,
-        ]) => {
+        // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline
+        Object.entries(filterQueryData = omit(filterQueryData, 'endAt', 'startAt')).forEach(([key, value]) => {
             if (key.endsWith('Id') && !processObjectIdIgnoreFields?.includes(key) && delete filterQueryData[key]) {
                 filterQuery[key.slice(0, -2)] = convertToObjectIdIfValid(value);
             }
@@ -55,13 +53,9 @@ export function getProcessedApiRequestQueries(
                 filterQuery[key] = (value.$regex = processRegexString(value.$regex), value);
             }
 
-            Object.entries({
-                ...baseFilterInFields,
-                ...filterInFields,
-            }).forEach(([
-                toCheckField,
-                filterField,
-            ]) => {
+            // eslint-disable-next-line style/max-len
+            // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline, style/object-curly-newline
+            Object.entries({ ...baseFilterInFields, ...filterInFields }).forEach(([toCheckField, filterField]) => {
                 if (
                     key === toCheckField
                     && delete filterQueryData[toCheckField]

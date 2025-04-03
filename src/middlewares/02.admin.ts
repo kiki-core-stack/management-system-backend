@@ -32,7 +32,7 @@ async function getAdmin(this: Context) {
 
 honoApp.use('/api/*', async (ctx, next) => {
     // eslint-disable-next-line style/max-len
-    const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as Undefinedable<H & RouteHandlerProperties>;
+    const routeHandler = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler as (H & RouteHandlerProperties) | undefined;
     if (!routeHandler?.isHandler) return await next();
     const token = getAuthToken(ctx);
     if (token) {
