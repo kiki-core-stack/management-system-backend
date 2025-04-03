@@ -47,10 +47,8 @@ import logger from '@/core/utils/logger';
         isShuttingDown = true;
         logger.info('Shutting down all workers...');
         await Promise.all(
-            workerProcesses.map(async ({
-                logPrefix,
-                subprocess,
-            }) => {
+            // eslint-disable-next-line style/object-curly-newline
+            workerProcesses.map(async ({ logPrefix, subprocess }) => {
                 logger.info(logPrefix, 'Killing...');
                 subprocess.kill(exitCode);
                 await subprocess.exited;
