@@ -30,12 +30,11 @@ async function generateRoutesLoader() {
     const startTime = performance.now();
     logger.info('Starting to generate production routes...');
     const routeDefinitions = await getRouteDefinitions();
-    for (
-        const {
-            filePath,
-            ...routeDefinition
-        } of routeDefinitions
-    ) fileLines.push(`    loadRouteModule(await import('${filePath}'), ${JSON.stringify(routeDefinition)});`);
+    // eslint-disable-next-line style/object-curly-newline
+    for (const { filePath, ...routeDefinition } of routeDefinitions) {
+        fileLines.push(`    loadRouteModule(await import('${filePath}'), ${JSON.stringify(routeDefinition)});`);
+    }
+
     fileLines.push('}');
     await Bun.write(join(import.meta.dirname, 'loaders/routes/production.ts'), `${fileLines.join('\n')}\n`);
     // eslint-disable-next-line style/max-len
