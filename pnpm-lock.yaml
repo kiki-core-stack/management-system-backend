@@ -11,9 +11,6 @@ importers:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.3.0
         version: 7.3.0(zod@3.24.2)
-      '@hono/zod-validator':
-        specifier: ^0.4.3
-        version: 0.4.3(hono@4.7.5)(zod@3.24.2)
       '@kiki-core-stack/pack':
         specifier: ^0.61.0
         version: 0.61.0
@@ -243,12 +240,6 @@ packages:
     resolution: {integrity: sha512-XpUCfszLJ9b1rtFdzqOSHfdg9pfBiC2J5piEjuSanYpDDTIwpMz0ciiv5N3WWUaQpz9fEgH8lttQqL41vIFuDA==}
     peerDependencies:
       hono: '*'
-
-  '@hono/zod-validator@0.4.3':
-    resolution: {integrity: sha512-xIgMYXDyJ4Hj6ekm9T9Y27s080Nl9NXHcJkOvkXPhubOLj8hZkOL8pDnnXfvCf5xEE8Q4oMFenQUZZREUY2gqQ==}
-    peerDependencies:
-      hono: '>=3.9.0'
-      zod: ^3.19.1
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2249,11 +2240,6 @@ snapshots:
   '@hono/swagger-ui@0.5.1(hono@4.7.5)':
     dependencies:
       hono: 4.7.5
-
-  '@hono/zod-validator@0.4.3(hono@4.7.5)(zod@3.24.2)':
-    dependencies:
-      hono: 4.7.5
-      zod: 3.24.2
 
   '@humanfs/core@0.19.1': {}
 
