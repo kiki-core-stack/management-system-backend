@@ -12,7 +12,7 @@
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@hono/zod-validator": "^0.4.3",
-    "@kiki-core-stack/pack": "^0.57.2",
+    "@kiki-core-stack/pack": "^0.61.0",
     "@kikiutils/mongoose": "^2.3.1",
     "consola": "^3.4.2",
     "hono": "^4.7.5",
@@ -24,7 +24,7 @@
     "@hono/swagger-ui": "^0.5.1",
     "@kikiutils/eslint-config": "^0.12.0",
     "@kikiutils/tsconfigs": "^3.0.3",
-    "@scalar/hono-api-reference": "^0.7.4",
+    "@scalar/hono-api-reference": "^0.7.5",
     "@types/bun": "^1.2.8",
     "openapi3-ts": "^4.4.0",
     "typescript": "^5.8.2"
