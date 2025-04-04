@@ -19,7 +19,7 @@ process.once('SIGTERM', () => gracefulExit(server));
     extendZodWithOpenApi(zod);
 
     // Setup error handling
-    setupHonoAppErrorHandling(honoApp);
+    setupHonoAppErrorHandling(honoApp, logger);
 
     // Load middlewares
     await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default();
