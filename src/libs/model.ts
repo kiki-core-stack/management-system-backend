@@ -87,19 +87,19 @@ export async function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMet
         queries = modelOrQueries;
     }
 
-    if (paginateOptions?.populate && queries.selectFields.length) {
+    if (paginateOptions?.populate && queries.fields.length) {
         paginateOptions.populate = [paginateOptions.populate].flat().filter((item) => {
-            return queries.selectFields.includes(typeof item === 'object' ? item.path : item);
+            return queries.fields.includes(typeof item === 'object' ? item.path : item);
         }) as PopulateOptions[] | string[];
     }
 
     const paginateResult = await model.paginate(
-        queries.filterQuery as FilterQuery<RawDocType>,
+        queries.filter as FilterQuery<RawDocType>,
         {
             ...paginateOptions,
             limit: queries.limit,
             page: queries.page,
-            select: queries.selectFields,
+            select: queries.fields,
             sort: paginateOptions?.sort || { _id: -1 },
         },
     );
