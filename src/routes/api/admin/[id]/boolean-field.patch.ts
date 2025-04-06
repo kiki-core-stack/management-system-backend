@@ -12,6 +12,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
             ctx,
             AdminModel,
             ['enabled'],
+            undefined,
             { session },
             async (admin, field) => {
                 if (field === 'enabled') {

@@ -6,6 +6,7 @@ import type {
     PaginateOptions,
     PopulateOptions,
     QueryOptions,
+    RootFilterQuery,
 } from 'mongoose';
 
 import { getProcessedApiRequestQueries } from './request';
@@ -13,12 +14,13 @@ import { getProcessedApiRequestQueries } from './request';
 export async function getModelDocumentByRouteIdAndDelete<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
     ctx: Context,
     model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+    filter?: RootFilterQuery<RawDocType>,
     options?: Nullable<QueryOptions<RawDocType>>,
     beforeDelete?: (
         document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>
     ) => any,
 ) {
-    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, undefined, null, options);
+    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, null, options);
     // @ts-expect-error Ignore this error.
     await beforeDelete?.(document);
     await document.deleteOne(options || undefined);
@@ -32,6 +34,7 @@ export async function getModelDocumentByRouteIdAndUpdateBooleanField<
     ctx: Context,
     model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
     allowedFields: string[],
+    filter?: RootFilterQuery<RawDocType>,
     options?: Nullable<QueryOptions<RawDocType>>,
     beforeUpdate?: (
         document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>,
@@ -39,7 +42,7 @@ export async function getModelDocumentByRouteIdAndUpdateBooleanField<
         value: boolean
     ) => any,
 ) {
-    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, undefined, null, options);
+    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, null, options);
     // eslint-disable-next-line style/object-curly-newline
     const { field, value } = await ctx.req.json<{ field: string; value: boolean }>();
     if (!allowedFields.includes(field)) throwApiError(400);
