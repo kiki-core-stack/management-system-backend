@@ -3,8 +3,8 @@ import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import type { AdminSession } from '@kiki-core-stack/pack/models/admin/session';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
+import { generateWithNestedRandomLength } from '@kikiutils/node/random';
 import type { Context } from 'hono';
-import { random } from 'lodash-es';
 import type {
     ClientSession,
     Types,
@@ -30,7 +30,7 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
         a: adminId,
         lastActiveAt: new Date(),
         lastActiveIp: ip,
-        token: nanoid(random(random(48, 64), random(80, 96))),
+        token: generateWithNestedRandomLength(nanoid, 48, 64, 80, 96),
         userAgent: ctx.req.header('User-Agent'),
     };
 
