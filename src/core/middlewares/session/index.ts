@@ -20,7 +20,7 @@ import {
 
 type StoredData = [number, PartialContextSessionData];
 
-export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
+export function session(cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) {
     const cipher = new Gcm(
         cipherKey,
         {
@@ -66,4 +66,4 @@ export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
 
         if (encryptResult) tokenHandler.set(ctx, `${encryptResult.authTag}${encryptResult.iv}${encryptResult.data}`);
     });
-};
+}
