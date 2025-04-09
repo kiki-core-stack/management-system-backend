@@ -30,6 +30,7 @@
     "@kikiutils/tsconfigs": "^4.0.0",
     "@scalar/hono-api-reference": "^0.8.0",
     "@types/bun": "^1.2.8",
+    "@types/lodash-es": "^4.17.12",
     "openapi3-ts": "^4.4.0",
     "typescript": "^5.8.3"
   }
