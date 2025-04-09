@@ -1,6 +1,6 @@
 import type { BinaryLike } from 'node:crypto';
 
-import { AesCipher } from 'node-ciphers';
+import { Gcm } from 'node-ciphers/ciphers/aes';
 import onChange from 'on-change';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
@@ -21,7 +21,7 @@ import {
 type StoredData = [number, PartialContextSessionData];
 
 export default (cipherKey: BinaryLike, tokenHandler: SessionTokenHandler) => {
-    const cipher = new AesCipher.Gcm(
+    const cipher = new Gcm(
         cipherKey,
         {
             authTag: 'base64',

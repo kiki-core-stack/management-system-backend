@@ -22,10 +22,10 @@ process.once('SIGTERM', () => gracefulExit(server));
     setupHonoAppErrorHandling(honoApp, logger);
 
     // Load middlewares
-    await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default();
+    await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default?.();
 
     // Load routes
-    await (await import(`@/core/loaders/routes/${process.env.NODE_ENV}`)).default();
+    await (await import(`@/core/loaders/routes/${process.env.NODE_ENV}`)).default?.();
 
     // Start server
     server = Bun.serve({
