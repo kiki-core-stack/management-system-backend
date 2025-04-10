@@ -132,7 +132,7 @@
 
     "@kikiutils/tsconfigs": ["@kikiutils/tsconfigs@4.0.1", "", {}, "sha512-cLrgdKuEfjTVAbMfGofr3jwqs3CX2a8B6SAMw+x08cthZ/HVBW5fua3EjLbQq1B1VDAvNaMuUPMphneVhnxRVA=="],
 
-    "@kikiutils/types": ["@kikiutils/types@4.0.0", "", { "dependencies": { "bson": "^6.10.3", "type-fest": "^4.37.0" } }, "sha512-FbNLJUkHlrorJVJjgcxJ7dNnQP8pyhAVIidbCzGGs7PKoddxUhUSPZr13qWhn/WRTNhEjY4POAzc6fd0cK4idA=="],
+    "@kikiutils/types": ["@kikiutils/types@4.1.0", "", { "dependencies": { "bson": "^6.10.3", "type-fest": "^4.39.1" } }, "sha512-WfzysUuy3iRJYAxyLsVvBAJwqS6cxXJAtOHQuaPujKAoh5ClehnY8XAqQu0fzbX/yCzthjbZw2pa8C/mcbRPxw=="],
 
     "@mongodb-js/saslprep": ["@mongodb-js/saslprep@1.2.2", "", { "dependencies": { "sparse-bitfield": "^3.0.3" } }, "sha512-EB0O3SCSNRUFk66iRCpI+cXzIjdswfCs7F6nOC3RAGJ7xr5YhaicvsRwJ9eyzYvYRlCSDUO/c7g4yNulxKC1WA=="],
 

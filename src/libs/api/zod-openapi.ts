@@ -4,7 +4,6 @@ import type {
 } from '@asteasolutions/zod-to-openapi';
 import { z } from '@kiki-core-stack/pack/constants/zod';
 import { ApiError } from '@kiki-core-stack/pack/hono-backend/libs/api/error';
-import type { SetOptional } from 'type-fest';
 
 import { zodSchemaToOpenApiSchema } from '@/core/libs/zod-openapi';
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
