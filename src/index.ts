@@ -8,7 +8,7 @@ import { z } from '@kiki-core-stack/pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kiki-core-stack/pack/hono-backend/setups/error-handling';
 
 import { honoApp } from '@/core/app';
-import logger from '@/core/utils/logger';
+import { logger } from '@/core/utils/logger';
 import { gracefulExit } from '@/graceful-exit';
 
 let server: Server | undefined;
