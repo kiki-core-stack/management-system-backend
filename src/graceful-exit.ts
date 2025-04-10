@@ -3,7 +3,7 @@ import type { Server } from 'bun';
 import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
 import { redisInstance } from '@kiki-core-stack/pack/constants/redis';
 
-import logger from '@/core/utils/logger';
+import { logger } from '@/core/utils/logger';
 
 export async function gracefulExit(server?: Server) {
     logger.info('Starting graceful shutdown...');

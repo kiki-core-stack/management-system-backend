@@ -19,5 +19,3 @@ export const logger = {
     success: (...args: any[]) => consola.success(createLogDateTimePrefix(), logPrefix, ...args),
     warn: (...args: any[]) => consola.warn(createLogDateTimePrefix(), logPrefix, ...args),
 };
-
-export default logger;

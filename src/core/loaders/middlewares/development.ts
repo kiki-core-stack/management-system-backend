@@ -1,5 +1,5 @@
 import { getMiddlewareFilePaths } from '../../libs/middleware';
-import logger from '../../utils/logger';
+import { logger } from '../../utils/logger';
 
 export default async function () {
     const startTime = performance.now();
