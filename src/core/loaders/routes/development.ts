@@ -2,7 +2,7 @@ import {
     getRouteDefinitions,
     loadRouteModule,
 } from '../../libs/router';
-import logger from '../../utils/logger';
+import { logger } from '../../utils/logger';
 
 export default async function () {
     const startTime = performance.now();

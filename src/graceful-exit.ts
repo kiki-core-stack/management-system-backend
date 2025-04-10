@@ -1,6 +1,6 @@
 import type { Server } from 'bun';
 
-import logger from '@/core/utils/logger';
+import { logger } from '@/core/utils/logger';
 
 export async function gracefulExit(server?: Server) {
     logger.info('Starting graceful shutdown...');

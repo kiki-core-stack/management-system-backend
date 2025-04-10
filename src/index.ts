@@ -4,7 +4,7 @@ import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { z as zod } from 'zod';
 
 import { honoApp } from '@/core/app';
-import logger from '@/core/utils/logger';
+import { logger } from '@/core/utils/logger';
 import { gracefulExit } from '@/graceful-exit';
 
 let server: Server | undefined;
