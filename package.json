@@ -23,7 +23,7 @@
   "devDependencies": {
     "@hono/swagger-ui": "^0.5.1",
     "@kikiutils/eslint-config": "^0.12.2",
-    "@kikiutils/tsconfigs": "^4.0.0",
+    "@kikiutils/tsconfigs": "^4.0.1",
     "@scalar/hono-api-reference": "^0.8.0",
     "@types/bun": "^1.2.9",
     "openapi3-ts": "^4.4.0",
