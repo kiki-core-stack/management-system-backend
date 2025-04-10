@@ -27,5 +27,3 @@ export const configs: Configs = {
         return sessionCipherKey;
     })(),
 };
-
-export default configs;

@@ -1,6 +1,6 @@
 import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 
-import configs from '@/configs';
+import { configs } from '@/configs';
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { zodOpenApiRegistry } from '@/core/constants/zod-openapi';
 
