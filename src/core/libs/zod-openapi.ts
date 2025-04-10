@@ -7,10 +7,7 @@ import { getEnumNumberValues } from '@kikiutils/node/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
 import { z } from 'zod';
-import type {
-    EnumLike,
-    ZodNativeEnum,
-} from 'zod';
+import type { EnumLike } from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
@@ -20,7 +17,7 @@ export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
     enumName: string,
     enumObject: T,
     toTextMap?: Record<number | string, string>,
-): ZodNativeEnum<T> {
+) {
     return z.nativeEnum(enumObject).openapi(
         enumName,
         {
