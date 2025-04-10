@@ -21,7 +21,7 @@
       "devDependencies": {
         "@hono/swagger-ui": "^0.5.1",
         "@kikiutils/eslint-config": "^0.12.2",
-        "@kikiutils/tsconfigs": "^4.0.0",
+        "@kikiutils/tsconfigs": "^4.0.1",
         "@scalar/hono-api-reference": "^0.8.0",
         "@types/bun": "^1.2.9",
         "@types/lodash-es": "^4.17.12",
@@ -130,7 +130,7 @@
 
     "@kikiutils/node": ["@kikiutils/node@8.0.1", "", {}, "sha512-sfABifBgA3dJUBhbkEZNimUBxLrdQ7QTmwRl+NJECNWyxml2GvW0iwPHaFieVSihuZeoSqnC/Ux0E5p69RLz6Q=="],
 
-    "@kikiutils/tsconfigs": ["@kikiutils/tsconfigs@4.0.0", "", {}, "sha512-NqBBx/3ezEkla7SgYPPMKMcPFR6dAvLqmFJvBwfC0kmNZumIFnKY5srNtBZIJGy/3V8KMsf6jDC91YpAukQrDA=="],
+    "@kikiutils/tsconfigs": ["@kikiutils/tsconfigs@4.0.1", "", {}, "sha512-cLrgdKuEfjTVAbMfGofr3jwqs3CX2a8B6SAMw+x08cthZ/HVBW5fua3EjLbQq1B1VDAvNaMuUPMphneVhnxRVA=="],
 
     "@kikiutils/types": ["@kikiutils/types@4.0.0", "", { "dependencies": { "bson": "^6.10.3", "type-fest": "^4.37.0" } }, "sha512-FbNLJUkHlrorJVJjgcxJ7dNnQP8pyhAVIidbCzGGs7PKoddxUhUSPZr13qWhn/WRTNhEjY4POAzc6fd0cK4idA=="],
 
@@ -976,7 +976,7 @@
 
     "eslint-plugin-es-x/eslint-compat-utils": ["eslint-compat-utils@0.5.1", "", { "dependencies": { "semver": "^7.5.4" }, "peerDependencies": { "eslint": ">=6.0.0" } }, "sha512-3z3vFexKIEnjHE3zCMRo6fn/e44U7T1khUjg+Hp0ZQMCigh28rALD0nPFBcGZuiLC5rLZa2ubQHDRln09JfU2Q=="],
 
-    "eslint-plugin-import-x/minimatch": ["minimatch@9.0.5", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="],
+    "eslint-plugin-import-x/minimatch": ["minimatch@10.0.1", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-ethXTt3SGGR+95gudmqJ1eNhRO7eGEGIgYA9vnPatK4/etz2MEVDno5GMCibdMTuBMyElzIlgxMna3K94XDIDQ=="],
 
     "eslint-plugin-jsdoc/@es-joy/jsdoccomment": ["@es-joy/jsdoccomment@0.49.0", "", { "dependencies": { "comment-parser": "1.4.1", "esquery": "^1.6.0", "jsdoc-type-pratt-parser": "~4.1.0" } }, "sha512-xjZTSFgECpb9Ohuk5yMX5RhUEbfeQcuOp8IF60e+wyzWEF0M5xeSgqsfLtvPEX8BIyOX9saZqzuGPmZ8oWc+5Q=="],
 
