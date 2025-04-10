@@ -7,8 +7,8 @@ import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { getModelDocumentByRouteIdAndDelete } from '@/libs/model';
 
-export default defaultHonoFactory.createHandlers(async (ctx) => {
-    return await mongooseConnections.default!.transaction(async (session) => {
+export default defaultHonoFactory.createHandlers((ctx) => {
+    return mongooseConnections.default!.transaction(async (session) => {
         await getModelDocumentByRouteIdAndDelete(
             ctx,
             AdminModel,
