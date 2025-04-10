@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "NODE_ENV=production bun run build:internal",
-    "build:internal": "bun run ./src/core/generate-production-loaders.ts && bun --env-file=./.env.production.local build ./src/index.ts ./src/production-entrypoint.ts --minify --outdir=./dist --splitting --target bun",
+    "build:internal": "bun run ./src/core/generate-production-loaders.ts && rimraf ./dist && bun --env-file=./.env.production.local build ./src/index.ts ./src/production-entrypoint.ts --minify --outdir=./dist --splitting --target bun",
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -13,7 +13,7 @@
     "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@hono/zod-validator": "^0.4.3",
     "@kiki-core-stack/pack": "^0.63.2",
-    "@kikiutils/mongoose": "^3.0.2",
+    "@kikiutils/mongoose": "^3.0.3",
     "@kikiutils/node": "^8.0.1",
     "consola": "^3.4.2",
     "date-fns": "^4.1.0",
@@ -33,6 +33,7 @@
     "@types/bun": "^1.2.9",
     "@types/lodash-es": "^4.17.12",
     "openapi3-ts": "^4.4.0",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   }
 }
