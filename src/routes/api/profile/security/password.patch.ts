@@ -8,14 +8,13 @@ import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 
+const jsonSchema = z.object({
+    newPassword: z.string().trim().length(128),
+    oldPassword: z.string().trim().length(128),
+}) satisfies ZodValidatorType<AdminChangePasswordData>;
+
 export default defaultHonoFactory.createHandlers(
-    apiZValidator(
-        'json',
-        z.object({
-            newPassword: z.string().trim().length(128),
-            oldPassword: z.string().trim().length(128),
-        }) satisfies ZodValidatorType<AdminChangePasswordData>,
-    ),
+    apiZValidator('json', jsonSchema),
     async (ctx) => {
         const admin = await ctx.getAdmin();
         const data = ctx.req.valid('json');

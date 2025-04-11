@@ -8,17 +8,16 @@ import { defaultHonoFactory } from '@/core/constants/hono';
 import { defineRouteHandlerOptions } from '@/core/libs/route';
 import { handleAdminLogin } from '@/libs/admin';
 
+const jsonSchema = z.object({
+    account: z.string().trim().min(1),
+    password: z.string().trim().min(1),
+    verCode: z.string().trim().min(1).toLowerCase(),
+}) satisfies ZodValidatorType<AdminLoginFormData>;
+
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
 export default defaultHonoFactory.createHandlers(
-    apiZValidator(
-        'json',
-        z.object({
-            account: z.string().trim().min(1),
-            password: z.string().trim().min(1),
-            verCode: z.string().trim().min(1).toLowerCase(),
-        }) satisfies ZodValidatorType<AdminLoginFormData>,
-    ),
+    apiZValidator('json', jsonSchema),
     async (ctx) => {
         const data = ctx.req.valid('json');
         if (data.verCode !== ctx.popSession('verCode')?.toLowerCase()) {
