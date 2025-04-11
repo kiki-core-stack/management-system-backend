@@ -56,7 +56,7 @@ export function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMethodsAn
     ctx: Context,
     model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
     paginateOptions?: PaginateOptions,
-    filterInFields?: Dict<string>,
+    filterInFields?: Record<string, string>,
     processObjectIdIgnoreFields?: string[]
 ): Promise<{ count: number; list: any[] }>;
 export function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
@@ -72,7 +72,7 @@ export async function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMet
         InstanceMethodsAndOverrides
     > | ProcessedApiRequestQueries,
     paginateOptions?: PaginateOptions,
-    filterInFields?: Dict<string>,
+    filterInFields?: Record<string, string>,
     processObjectIdIgnoreFields?: string[],
 ) {
     let model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;

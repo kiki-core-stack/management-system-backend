@@ -19,10 +19,10 @@ function convertToObjectIdIfValid(value: any) {
 
 export function getProcessedApiRequestQueries(
     ctx: Context,
-    filterInFields?: Dict<string>,
+    filterInFields?: Record<string, string>,
     processObjectIdIgnoreFields?: string[],
 ): ProcessedApiRequestQueries {
-    const filter: Dict<any> = {};
+    const filter: Record<string, any> = {};
     const queries: {
         fields?: string;
         filter?: string;
