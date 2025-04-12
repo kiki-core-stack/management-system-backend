@@ -14,7 +14,7 @@ import { nanoid } from 'nanoid';
 
 import { getXForwardedForHeaderFirstValue } from '@/core/utils';
 
-import { setAuthToken } from '../auth';
+import { setAuthToken } from './auth';
 
 export async function createOrUpdateAdminSessionAndSetAuthToken(
     ctx: Context,
