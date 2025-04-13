@@ -11,12 +11,10 @@ export const allowedRouteHttpMethods = [
     'put',
 ] as const;
 
-export const allRoutes = Object.freeze<
-    Record<
-        typeof allowedRouteHttpMethods[number],
-        Readonly<Record<string, { handlerProperties?: RouteHandlerProperties }>>
-    >
->({
+export const allRoutes: ReadonlyRecord<
+    typeof allowedRouteHttpMethods[number],
+    ReadonlyRecord<string, { handlerProperties?: RouteHandlerProperties }>
+> = {
     delete: {},
     get: {},
     head: {},
@@ -25,4 +23,4 @@ export const allRoutes = Object.freeze<
     post: {},
     purge: {},
     put: {},
-});
+};

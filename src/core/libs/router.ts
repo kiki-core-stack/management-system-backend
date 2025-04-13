@@ -58,7 +58,7 @@ export function loadRouteModule(
 ) {
     const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
     if (!handlers.length) return;
-    const latestHandler = handlers.at(-1);
+    const latestHandler = handlers[handlers.length - 1];
     // eslint-disable-next-line style/max-len
     const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
     Object.assign(latestHandler, routeHandlerOptions?.properties);

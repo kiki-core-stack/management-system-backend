@@ -8,10 +8,10 @@ import { ApiError } from '@kiki-core-stack/pack/hono-backend/libs/api/error';
 import { zodSchemaToOpenApiSchema } from '@/core/libs/zod-openapi';
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
 
-const defaultApiRouteZodOpenApiResponsesConfig = Object.freeze<RouteZodOpenApiConfig['responses']>({
+const defaultApiRouteZodOpenApiResponsesConfig = {
     200: defineApiRouteZodOpenApiResponseConfig(),
     500: convertApiErrorToApiRouteZodOpenApiResponseConfig(new ApiError()),
-});
+} as const;
 
 export function convertApiErrorToApiRouteZodOpenApiResponseConfig(apiError: ApiError<any, any>) {
     return defineApiRouteZodOpenApiResponseConfig(undefined, apiError.message, apiError.errorCode);
