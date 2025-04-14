@@ -2,7 +2,6 @@ import { Buffer } from 'node:buffer';
 
 import { checkAndGetEnvValue } from '@kikiutils/node/env';
 import type { OpenAPIObject } from 'openapi3-ts/oas31';
-import type { ReadonlyDeep } from 'type-fest';
 
 export type Configs = ReadonlyDeep<{
     openApi: Except<OpenAPIObject, 'components' | 'paths' | 'webhooks'>;
