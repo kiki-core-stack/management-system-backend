@@ -5,7 +5,7 @@
       "dependencies": {
         "@asteasolutions/zod-to-openapi": "^7.3.0",
         "@hono/zod-validator": "^0.4.3",
-        "@kiki-core-stack/pack": "^0.65.0",
+        "@kiki-core-stack/pack": "^0.65.1",
         "@kikiutils/mongoose": "^3.1.0",
         "@kikiutils/node": "^8.0.1",
         "consola": "^3.4.2",
@@ -168,7 +168,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@kiki-core-stack/pack": ["@kiki-core-stack/pack@0.65.0", "", { "dependencies": { "@kikiutils/types": "^5.0.1" } }, "sha512-Kqf9O5fQDohU+ln/fSR/4PC5Jb3eLp5aGQVW6jp06lN1LbY37yYbY6GyBPkbImnoLrfCqs0i81BDLscrI2hrmQ=="],
+    "@kiki-core-stack/pack": ["@kiki-core-stack/pack@0.65.1", "", { "dependencies": { "@kikiutils/types": "^5.0.1" } }, "sha512-DLN505VUCaPjLTGt7SrVXBquuvNN1qU5TROLoPsJoCUS980TUxID6K6PCYVE5fRWjYFcOZadEtzIfDH1rTq8rg=="],
 
     "@kikiutils/eslint-config": ["@kikiutils/eslint-config@0.12.2", "", { "dependencies": { "@antfu/eslint-config": "^4.11.0", "@kikiutils/eslint-plugin-tailwindcss": "^3.19.0", "@kikiutils/eslint-plugin-vue": "^10.1.2", "eslint": "^9.24.0", "eslint-plugin-format": "^1.0.1" } }, "sha512-SV7zjj7aEtRTRtEwn04fMfxi0DBcpxv0v0CjHZ/D0DaEOF49cWYp5l0zjLwIx/PlIWYtbwhAR3rbm5aGRU3MQQ=="],
 

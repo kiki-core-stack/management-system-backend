@@ -27,7 +27,7 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
 ) {
     const ip = options?.ip || getXForwardedForHeaderFirstValue(ctx);
     const updateQuery: UpdateQuery<AdminSession> = {
-        admin: adminId,
+        a: adminId,
         lastActiveAt: new Date(),
         lastActiveIp: ip,
         token: generateWithNestedRandomLength(nanoid, 48, 64, 80, 96),
@@ -64,7 +64,7 @@ export async function handleAdminLogin(ctx: Context, adminId: string | Types.Obj
     await AdminLogModel.create(
         [
             {
-                admin: adminId,
+                a: adminId,
                 ip,
                 type: AdminLogType.LoginSuccess,
             },
