@@ -11,20 +11,20 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
-    "@hono/zod-validator": "^0.4.3",
     "@kikiutils/node": "^8.0.1",
     "consola": "^3.4.2",
-    "hono": "^4.7.6"
+    "hono": "^4.7.7",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@hono/swagger-ui": "^0.5.1",
     "@kikiutils/eslint-config": "^0.12.2",
-    "@kikiutils/tsconfigs": "^4.0.0",
-    "@scalar/hono-api-reference": "^0.8.0",
-    "@types/bun": "^1.2.9",
+    "@kikiutils/tsconfigs": "^4.1.1",
+    "@scalar/hono-api-reference": "^0.8.2",
+    "@types/bun": "^1.2.10",
     "openapi3-ts": "^4.4.0",
     "rimraf": "^6.0.1",
-    "type-fest": "^4.39.1",
+    "type-fest": "^4.40.0",
     "typescript": "^5.8.3"
   }
 }
