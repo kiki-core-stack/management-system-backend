@@ -4,7 +4,7 @@ import '@/configs';
 import type { Server } from 'bun';
 
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import { z } from '@kiki-core-stack/pack/constants/zod';
+import * as z from '@kiki-core-stack/pack/constants/zod';
 import { setupHonoAppErrorHandling } from '@kiki-core-stack/pack/hono-backend/setups/error-handling';
 
 import { honoApp } from '@/core/app';
