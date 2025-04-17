@@ -2,8 +2,8 @@ import type {
     ResponseConfig,
     ZodRequestBody,
 } from '@asteasolutions/zod-to-openapi';
-import { z } from '@kiki-core-stack/pack/constants/zod';
 import { ApiError } from '@kiki-core-stack/pack/hono-backend/libs/api/error';
+import * as z from '@kiki-core-stack/pack/libs/zod';
 
 import { zodSchemaToOpenApiSchema } from '@/core/libs/zod-openapi';
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
