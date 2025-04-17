@@ -21,7 +21,7 @@ export default defaultHonoFactory.createHandlers(
         if (!admin.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確！');
         return await mongooseConnections.default!.transaction(async (session) => {
             await assertMongooseUpdateSuccess(admin.updateOne({ password: data.newPassword }, { session }));
-            await AdminSessionModel.deleteMany({ a: admin }, { session });
+            await AdminSessionModel.deleteMany({ admin }, { session });
             return ctx.createApiSuccessResponse();
         });
     },
