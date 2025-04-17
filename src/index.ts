@@ -1,7 +1,7 @@
 import type { Server } from 'bun';
 
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import { z as zod } from 'zod';
+import * as z from 'zod';
 
 import { honoApp } from '@/core/app';
 import { logger } from '@/core/utils/logger';
@@ -12,7 +12,7 @@ process.once('SIGINT', () => gracefulExit(server));
 process.once('SIGTERM', () => gracefulExit(server));
 (async () => {
     // Extend Zod with OpenAPI
-    extendZodWithOpenApi(zod);
+    extendZodWithOpenApi(z);
 
     // Load middlewares
     await (await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`)).default?.();
