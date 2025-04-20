@@ -1,6 +1,6 @@
 import type { BinaryLike } from 'node:crypto';
 
-import { Gcm } from 'node-ciphers/ciphers/aes';
+import { Gcm } from 'node-ciphers/aes';
 import onChange from 'on-change';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
@@ -35,14 +35,15 @@ export function session(cipherKey: BinaryLike, tokenHandler: SessionTokenHandler
         let sessionData = {};
         const sessionToken = tokenHandler.get(ctx);
         if (sessionToken) {
-            const storedData = cipher.decryptToJson<StoredData>(
+            const decryptedResult = cipher.decryptToJson<StoredData>(
                 sessionToken.substring(40),
                 sessionToken.substring(24, 40),
                 sessionToken.substring(0, 24),
             );
 
-            if (storedData && storedData[0] + 86400000 > Date.now()) sessionData = storedData[1];
-            else tokenHandler.delete(ctx);
+            if (decryptedResult.ok && decryptedResult.value[0] + 86400000 > Date.now()) {
+                sessionData = decryptedResult.value[1];
+            } else tokenHandler.delete(ctx);
         }
 
         ctx.clearSession = clearSession.bind(ctx);
@@ -64,6 +65,7 @@ export function session(cipherKey: BinaryLike, tokenHandler: SessionTokenHandler
             ctx.session,
         ]);
 
-        if (encryptResult) tokenHandler.set(ctx, `${encryptResult.authTag}${encryptResult.iv}${encryptResult.data}`);
+        if (!encryptResult.ok) return;
+        tokenHandler.set(ctx, `${encryptResult.value.authTag}${encryptResult.value.iv}${encryptResult.value.data}`);
     });
 }
