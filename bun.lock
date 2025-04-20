@@ -5,7 +5,7 @@
       "dependencies": {
         "@asteasolutions/zod-to-openapi": "^7.3.0",
         "@hono/zod-validator": "^0.4.3",
-        "@kiki-core-stack/pack": "^0.66.1",
+        "@kiki-core-stack/pack": "^0.66.2",
         "@kikiutils/mongoose": "^3.1.0",
         "@kikiutils/node": "^8.0.1",
         "consola": "^3.4.2",
@@ -701,7 +701,7 @@
 
     "nanoid": ["nanoid@5.1.5", "", { "bin": { "nanoid": "bin/nanoid.js" } }, "sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw=="],
 
-    "napi-postinstall": ["napi-postinstall@0.1.2", "", { "dependencies": { "tslib": "^2.8.1" }, "bin": { "napi-postinstall": "lib/cli.js" } }, "sha512-w9rKLLJe3kgiZLBkPwy16k2FLSjTgDXDJ1Il5QF2Qp+gN80S/Ct2OUUgJ+CUqABVHhauqolx4s86Po+OGWxVNg=="],
+    "napi-postinstall": ["napi-postinstall@0.1.3", "", { "bin": { "napi-postinstall": "lib/cli.js" } }, "sha512-ptBVijaEaVBGdSR8SXy4eUnmlMJkup6Bltbh5hL1DCtMP/14nxkwMtxtCdoNv1qlOo5ABe/4Fd98AZZBhlu/Ew=="],
 
     "natural-compare": ["natural-compare@1.4.0", "", {}, "sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw=="],
 
