@@ -12,16 +12,17 @@
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
     "@hono/zod-validator": "^0.4.3",
-    "@kiki-core-stack/pack": "^0.65.1",
+    "@kiki-core-stack/pack": "^0.66.2",
     "@kikiutils/mongoose": "^3.1.0",
     "@kikiutils/node": "^8.0.1",
     "consola": "^3.4.2",
     "date-fns": "^4.1.0",
+    "file-type": "^20.4.1",
     "hono": "^4.7.7",
     "lodash-es": "^4.17.21",
     "mongoose": "^8.13.2",
     "nanoid": "^5.1.5",
-    "node-ciphers": "^3.0.2",
+    "node-ciphers": "^4.0.1",
     "on-change": "^5.0.1",
     "svg-captcha": "^1.4.0",
     "zod": "^3.24.3"
@@ -29,7 +30,7 @@
   "devDependencies": {
     "@hono/swagger-ui": "^0.5.1",
     "@kikiutils/eslint-config": "^0.12.2",
-    "@kikiutils/tsconfigs": "^4.1.1",
+    "@kikiutils/tsconfigs": "^5.0.1",
     "@scalar/hono-api-reference": "^0.8.2",
     "@types/bun": "^1.2.10",
     "@types/lodash-es": "^4.17.12",
