@@ -20,7 +20,7 @@ RUN bun i --frozen-lockfile
 COPY ./.env.production.local ./.gitignore ./eslint.config.mjs ./tsconfig.json ./
 COPY ./src ./src
 RUN bun run lint && \
-    bun run type-check && \
+    bun run typecheck && \
     bun run build
 
 # Runtime stage
