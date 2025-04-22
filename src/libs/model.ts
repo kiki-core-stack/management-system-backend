@@ -2,7 +2,6 @@ import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import type { Context } from 'hono';
 import type {
-    FilterQuery,
     PaginateOptions,
     PopulateOptions,
     QueryOptions,
@@ -93,8 +92,8 @@ export async function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMet
         }) as PopulateOptions[] | string[];
     }
 
-    const paginateResult = await model.paginate(
-        queries.filter as FilterQuery<RawDocType>,
+    const paginatedResult = await model.paginate(
+        queries.filter,
         {
             ...paginateOptions,
             limit: queries.limit,
@@ -105,7 +104,7 @@ export async function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMet
     );
 
     return {
-        count: paginateResult.totalDocs,
-        list: paginateResult.docs,
+        count: paginatedResult.totalDocs,
+        list: paginatedResult.docs,
     };
 }
