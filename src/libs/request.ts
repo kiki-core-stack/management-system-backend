@@ -35,7 +35,6 @@ export function getProcessedApiRequestQueries(
         let filterData = JSON.parse(queries.filter);
         if (filterData.endAt) merge(filter, { createdAt: { $lt: new Date(filterData.endAt) } });
         if (filterData.startAt) merge(filter, { createdAt: { $gte: new Date(filterData.startAt) } });
-        // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline
         Object.entries(filterData = omit(filterData, 'endAt', 'startAt')).forEach(([key, value]) => {
             if (key.endsWith('Id') && !processObjectIdIgnoreFields?.includes(key) && delete filterData[key]) {
                 filter[key.slice(0, -2)] = convertToObjectIdIfValid(value);
@@ -52,8 +51,7 @@ export function getProcessedApiRequestQueries(
                 filter[key] = (value.$regex = processRegexString(value.$regex), value);
             }
 
-            // eslint-disable-next-line style/max-len
-            // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline, style/object-curly-newline
+            // eslint-disable-next-line style/object-curly-newline
             Object.entries({ ...baseFilterInFields, ...filterInFields }).forEach(([toCheckField, filterField]) => {
                 if (
                     key === toCheckField
