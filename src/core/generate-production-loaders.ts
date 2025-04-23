@@ -39,7 +39,6 @@ async function generateRoutesLoader() {
 
     fileLines.push('');
     for (let i = 0; i < routeDefinitions.length; i++) {
-        // eslint-disable-next-line style/object-curly-newline
         const { filePath, ...routeDefinition } = routeDefinitions[i]!;
         fileLines.push(`loadRouteModule(route${i}, ${JSON.stringify(routeDefinition)});`);
     }

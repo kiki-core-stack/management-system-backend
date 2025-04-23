@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
-    "@kiki-core-stack/pack": "^0.66.2",
+    "@kiki-core-stack/pack": "^0.67.0",
     "@kikiutils/mongoose": "^3.1.0",
-    "@kikiutils/node": "^8.0.1",
+    "@kikiutils/node": "^8.0.2",
     "consola": "^3.4.2",
     "hono": "^4.7.7",
     "node-ciphers": "^4.0.1",
@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@hono/swagger-ui": "^0.5.1",
-    "@kikiutils/eslint-config": "^0.12.2",
+    "@kikiutils/eslint-config": "^0.12.4",
     "@kikiutils/tsconfigs": "^5.0.1",
-    "@scalar/hono-api-reference": "^0.8.2",
+    "@scalar/hono-api-reference": "^0.8.3",
     "@types/bun": "^1.2.10",
     "openapi3-ts": "^4.4.0",
     "rimraf": "^6.0.1",
