@@ -10,7 +10,6 @@ export const jsonSchema = z.object({
     account: z.string().trim().min(1).max(16),
     email: z.string().trim().email().toLowerCase().optional(),
     enabled: z.boolean(),
-    name: z.string().trim().min(1).max(16),
     password: z.string().trim().length(128).optional(),
 }) satisfies ZodValidatorType<AdminData>;
 
