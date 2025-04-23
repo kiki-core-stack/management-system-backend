@@ -24,7 +24,6 @@ export function convertApiErrorsToApiRouteZodOpenApiResponsesConfig(
     const errorsGroup: Record<string, ApiError<any, any>[]> = {};
     errors.forEach((error) => (errorsGroup[error.statusCode] ||= []).push(error));
     const responses: RouteZodOpenApiConfig['responses'] = {};
-    // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline
     Object.entries(errorsGroup).forEach(([statusCode, errors]) => {
         const descriptions: string[] = [];
         const schemas = errors.map((error) => {
