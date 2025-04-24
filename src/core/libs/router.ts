@@ -1,10 +1,6 @@
 import { glob } from 'node:fs/promises';
-import {
-    join,
-    resolve,
-    sep,
-} from 'node:path';
 
+import { routesDirPath } from '../constants/paths';
 import { allowedRouteHttpMethods } from '../constants/route';
 import type { RouteDefinition } from '../types/route';
 
@@ -22,14 +18,13 @@ function filePathToRank(path: string) {
 }
 
 export async function getRouteDefinitions(): Promise<RouteDefinition[]> {
-    const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
     const envSuffix = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     const filePattern = new RegExp(
-        `^${directoryPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${envSuffix})?\\.(mj|t)s$`,
+        `^${routesDirPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${envSuffix})?\\.(mj|t)s$`,
     );
 
     const routeDefinitions = [];
-    for await (const filePath of glob(`${directoryPath}/**/*.{mj,t}s`, {})) {
+    for await (const filePath of glob(`${routesDirPath}/**/*.{mj,t}s`, {})) {
         const matches = filePath.match(filePattern);
         if (!matches) continue;
         const normalizedRoutePath = matches[1]!.replaceAll(/\/+/g, '/');
