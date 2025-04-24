@@ -5,18 +5,8 @@ import {
     sep,
 } from 'node:path';
 
-import type {
-    Except,
-    WritableDeep,
-} from 'type-fest';
-
-import { honoApp } from '../app';
-import {
-    allowedRouteHttpMethods,
-    allRoutes,
-} from '../constants/route';
-import { zodOpenApiRegistry } from '../constants/zod-openapi';
-import type { RouteHandlerOptions } from '../types/route';
+import { allowedRouteHttpMethods } from '../constants/route';
+import type { RouteDefinition } from '../types/route';
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
@@ -31,7 +21,7 @@ function filePathToRank(path: string) {
     return +segments.map((segment, i) => filePathSegmentToRankValue(segment, i === segments.length - 1)).join('');
 }
 
-export async function getRouteDefinitions() {
+export async function getRouteDefinitions(): Promise<RouteDefinition[]> {
     const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
     const envSuffix = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     const filePattern = new RegExp(
@@ -52,37 +42,4 @@ export async function getRouteDefinitions() {
     }
 
     return routeDefinitions.sort((a, b) => filePathToRank(a.path) - filePathToRank(b.path));
-}
-
-export function loadRouteModule(
-    routeModule: any,
-    routeDefinition: Except<Awaited<ReturnType<typeof getRouteDefinitions>>[number], 'filePath'>,
-) {
-    const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
-    if (!handlers.length) return;
-    const latestHandler = handlers[handlers.length - 1];
-    // eslint-disable-next-line style/max-len
-    const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
-    Object.assign(latestHandler, routeHandlerOptions?.properties);
-    if (routeModule.zodOpenApiConfig) {
-        zodOpenApiRegistry.registerPath({
-            ...routeModule.zodOpenApiConfig,
-            method: routeDefinition.method,
-            path: routeDefinition.openApiPath,
-        });
-    }
-
-    Object.defineProperty(
-        latestHandler,
-        'isHandler',
-        {
-            configurable: false,
-            value: true,
-            writable: false,
-        },
-    );
-
-    honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
-    // eslint-disable-next-line style/max-len
-    (allRoutes as WritableDeep<typeof allRoutes>)[routeDefinition.method][routeDefinition.path] = { handlerProperties: routeHandlerOptions?.properties };
 }
