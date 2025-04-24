@@ -12,7 +12,11 @@ import { logger } from '../../utils/logger';
 
 function registerRouteModule({ module, ...routeDefinition }: RouteDefinition & { module: any }) {
     const handlers = [module.default].flat().filter(Boolean);
-    if (!handlers.length) return false;
+    if (!handlers.length) {
+        logger.warn(`No handler found for route: ${routeDefinition.filePath}.`);
+        return false;
+    }
+
     const latestHandler = handlers[handlers.length - 1];
     const routeOptions: RouteHandlerOptions | undefined = module.routeHandlerOptions;
     Object.assign(latestHandler, routeOptions?.properties);
