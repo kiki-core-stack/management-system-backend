@@ -46,8 +46,9 @@ async function generateRoutesLoader() {
     }
 
     await Bun.write(productionRoutesLoaderPath, `${fileLines.join('\n')}\n`);
-    // eslint-disable-next-line style/max-len
-    logger.success(`Generated production ${routeDefinitions.length} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
+    logger.success(
+        `Generated production ${routeDefinitions.length} routes in ${(performance.now() - startTime).toFixed(2)}ms.`,
+    );
 }
 
 (async () => await Promise.all([
