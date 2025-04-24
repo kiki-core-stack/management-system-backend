@@ -1,5 +1,9 @@
 import type { Except } from 'type-fest';
 
+export interface Route {
+    handlerProperties?: RouteHandlerProperties;
+}
+
 export interface RouteHandlerOptions {
     properties?: Except<RouteHandlerProperties, 'isHandler'>;
 }
