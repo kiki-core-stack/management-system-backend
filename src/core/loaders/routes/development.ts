@@ -44,26 +44,25 @@ function registerRouteModule({ module, ...routeDefinition }: RouteDefinition & {
     return true;
 }
 
-export default async function () {
-    const startTime = performance.now();
-    let loadedRouteCount = 0;
-    const routeDefinitions = await getRouteDefinitions();
-    const loadedRouteModules = await Promise.all(
-        routeDefinitions.map(async (routeDefinition) => {
-            try {
-                return {
-                    ...routeDefinition,
-                    module: await import(routeDefinition.filePath),
-                };
-            } catch (error) {
-                logger.error(`Failed to import route: ${routeDefinition.filePath}.`, error);
-            }
-        }),
-    );
+// Entrypoint
+const startTime = performance.now();
+let loadedRouteCount = 0;
+const routeDefinitions = await getRouteDefinitions();
+const loadedRouteModules = await Promise.all(
+    routeDefinitions.map(async (routeDefinition) => {
+        try {
+            return {
+                ...routeDefinition,
+                module: await import(routeDefinition.filePath),
+            };
+        } catch (error) {
+            logger.error(`Failed to import route: ${routeDefinition.filePath}.`, error);
+        }
+    }),
+);
 
-    for (const routeEntry of loadedRouteModules.filter(Boolean)) {
-        if (registerRouteModule(routeEntry!)) loadedRouteCount++;
-    }
-
-    logger.success(`Registered ${loadedRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
+for (const routeEntry of loadedRouteModules.filter(Boolean)) {
+    if (registerRouteModule(routeEntry!)) loadedRouteCount++;
 }
+
+logger.success(`Registered ${loadedRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
