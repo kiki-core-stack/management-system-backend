@@ -1,8 +1,5 @@
 import type { Server } from 'bun';
 
-import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import { z } from 'zod';
-
 import { honoApp } from '@/core/app';
 import { logger } from '@/core/utils/logger';
 import { gracefulExit } from '@/graceful-exit';
@@ -11,8 +8,9 @@ let server: Server | undefined;
 process.once('SIGINT', () => gracefulExit(server));
 process.once('SIGTERM', () => gracefulExit(server));
 
-// Extend Zod with OpenAPI
-extendZodWithOpenApi(z);
+// Import environment-specific runtime initializers.
+// Used for applying side effects like dev-only tooling, schema extensions, etc.
+await import(`@/core/runtime-inits/${process.env.NODE_ENV}`);
 
 // Load middlewares
 await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`);
