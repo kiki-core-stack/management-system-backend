@@ -1,5 +1,6 @@
 import {
     getRouteDefinitions,
+    processRouteHandlers,
     registerRoute,
 } from '../../libs/router';
 import { logger } from '../../utils/logger';
@@ -22,7 +23,7 @@ const loadedRouteModules = await Promise.all(
 
 let loadedRouteCount = 0;
 for (const routeEntry of loadedRouteModules.filter(Boolean)) {
-    const handlers = [routeEntry?.module.default].flat().filter(Boolean);
+    const handlers = processRouteHandlers(routeEntry?.module.default);
     if (!handlers.length) {
         logger.warn(`No handler found for route: ${routeEntry!.filePath}.`);
         continue;

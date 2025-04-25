@@ -11,7 +11,7 @@ const importLines: string[] = [];
 const stringConstantLines: string[] = [];
 const fileLines = [
     '// @ts-nocheck',
-    `import { registerRoute } from '../../libs/router';`,
+    `import { processRouteHandlers, registerRoute } from '../../libs/router';`,
     '',
     importLines,
     '',
@@ -29,7 +29,7 @@ async function generateRouteCode(routeDefinition: RouteDefinition, index: number
     let line = `registerRoute(`;
     line += `${getOrGenerateStringConstantName(routeDefinition.method)},`;
     line += ` ${getOrGenerateStringConstantName(routeDefinition.path)},`;
-    line += ` [${importName}.default].flat().filter(Boolean),`;
+    line += ` processRouteHandlers(${importName}.default),`;
     if (moduleExports.includes('routeHandlerOptions')) line += ` ${importName}.routeHandlerOptions,`;
     // Remove false if you need OpenAPI metadata in production
     if (false && moduleExports.includes('zodOpenApiConfig')) {

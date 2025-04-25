@@ -15,6 +15,8 @@ import type {
 
 import type { RouteZodOpenApiConfig } from './zod-openapi';
 
+export const processRouteHandlers = (handlers: any) => [handlers].flat().filter(Boolean);
+
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
     if (segment === '*') return 1e10;
