@@ -35,8 +35,8 @@ for (const routeEntry of loadedRouteModules.filter(Boolean)) {
         routeEntry!.module.routeHandlerOptions,
         routeEntry!.module.zodOpenApiConfig
             ? {
-                openApiPath: routeEntry!.openApiPath,
-                zodOpenApiConfig: routeEntry!.module.zodOpenApiConfig,
+                config: routeEntry!.module.zodOpenApiConfig,
+                path: routeEntry!.openApiPath,
             }
             : undefined,
     );

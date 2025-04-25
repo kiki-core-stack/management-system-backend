@@ -13,6 +13,8 @@ import type {
     RouteHandlerOptions,
 } from '../types/route';
 
+import type { RouteZodOpenApiConfig } from './zod-openapi';
+
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
     if (segment === '*') return 1e10;
@@ -53,7 +55,7 @@ export async function registerRoute(
     path: string,
     handlers: any[],
     handlerOptions?: RouteHandlerOptions,
-    zodOpenApiOptions?: { openApiPath: string; zodOpenApiConfig: any },
+    zodOpenApiOptions?: { config: RouteZodOpenApiConfig; path: string },
 ) {
     const latestHandler = handlers[handlers.length - 1];
     Object.assign(latestHandler, handlerOptions?.properties);
@@ -74,9 +76,9 @@ export async function registerRoute(
     if (process.env.NODE_ENV === 'development' && zodOpenApiOptions) {
         const { zodOpenApiRegistry } = await import('../constants/zod-openapi');
         zodOpenApiRegistry.registerPath({
-            ...zodOpenApiOptions.zodOpenApiConfig,
+            ...zodOpenApiOptions.config,
             method,
-            path: zodOpenApiOptions.openApiPath,
+            path: zodOpenApiOptions.path,
         });
     }
 }
