@@ -1,5 +1,3 @@
-import { writeFile } from 'node:fs/promises';
-
 import { resolveModuleExportNames } from 'mlly';
 
 import { productionRoutesLoaderPath } from '../constants/paths';
@@ -7,54 +5,56 @@ import { getRouteDefinitions } from '../libs/router';
 import type { RouteDefinition } from '../types/route';
 import { logger } from '../utils/logger';
 
-const importLines: string[] = [];
-const stringConstantLines: string[] = [];
-const fileLines = [
-    '// @ts-nocheck',
-    `import { processRouteHandlers, registerRoute } from '../../libs/router';`,
-    '',
-    importLines,
-    '',
-    stringConstantLines,
-    '',
-];
+const importStatements: string[] = [];
+const constantDeclarations: string[] = [];
+const valueToConstMap = new Map<string, string>();
+const usedConstNames = new Set<string>();
 
-const valueToVariableNameMap = new Map<string, string>();
-
-async function generateRouteCode(routeDefinition: RouteDefinition, index: number) {
+async function applyRouteFragments(routeDefinition: RouteDefinition, index: number) {
     const moduleExports = await resolveModuleExportNames(routeDefinition.filePath);
     if (!moduleExports.includes('default')) throw new Error(`No default export found in ${routeDefinition.filePath}.`);
-    const importName = `route${index}`;
-    importLines.push(`import * as ${importName} from '${routeDefinition.filePath}';`);
-    let line = `registerRoute(`;
-    line += `${getOrGenerateStringConstantName(routeDefinition.method)},`;
-    line += ` ${getOrGenerateStringConstantName(routeDefinition.path)},`;
-    line += ` processRouteHandlers(${importName}.default),`;
-    if (moduleExports.includes('routeHandlerOptions')) line += ` ${importName}.routeHandlerOptions,`;
-    // Remove false if you need OpenAPI metadata in production
+    const importAlias = `route${index}`;
+    importStatements.push(`import * as ${importAlias} from '${routeDefinition.filePath}';`);
+    const methodConstName = getOrCreateConstName(routeDefinition.method);
+    const pathConstName = getOrCreateConstName(routeDefinition.path);
+    // eslint-disable-next-line style/max-len
+    let registration = `registerRoute(${methodConstName}, ${pathConstName}, processRouteHandlers(${importAlias}.default),`;
+    if (moduleExports.includes('routeHandlerOptions')) registration += ` ${importAlias}.routeHandlerOptions,`;
+    // Enable if OpenAPI support is required in production
     if (false && moduleExports.includes('zodOpenApiConfig')) {
         // eslint-disable-next-line style/max-len
-        line += ` { config: ${importName}.zodOpenApiConfig, path: ${getOrGenerateStringConstantName(routeDefinition.openApiPath)} }`;
+        registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
     }
 
-    return `${line.replace(/,$/, '')});`;
+    return `${registration.replace(/,\s*$/, '')});`;
 }
 
-function getOrGenerateStringConstantName(value: string) {
-    if (!valueToVariableNameMap.has(value)) {
-        const variableName = `v${Math.random().toString(36).slice(2, 10)}`;
-        stringConstantLines.push(`const ${variableName} = '${value}';`);
-        valueToVariableNameMap.set(value, variableName);
-    }
-
-    return valueToVariableNameMap.get(value)!;
+function getOrCreateConstName(value: string) {
+    if (valueToConstMap.has(value)) return valueToConstMap.get(value)!;
+    let constName: string;
+    do constName = `v${Math.random().toString(36).slice(2, 10)}`;
+    while (usedConstNames.has(constName));
+    constantDeclarations.push(`const ${constName} = '${value}';`);
+    usedConstNames.add(constName);
+    valueToConstMap.set(value, constName);
+    return constName;
 }
 
 const startTime = performance.now();
-logger.info('Starting to generate production routes...');
-const generatedCodes = await Promise.all((await getRouteDefinitions()).map(generateRouteCode));
-fileLines.push(...generatedCodes);
-await writeFile(productionRoutesLoaderPath, `${fileLines.flat().join('\n')}\n`);
+logger.info('Generating production routes loader...');
+const registrationLines = await Promise.all((await getRouteDefinitions()).map(applyRouteFragments));
+const outputLines = [
+    '// @ts-nocheck',
+    `import { processRouteHandlers, registerRoute } from '../../libs/router';`,
+    '',
+    ...importStatements,
+    '',
+    ...constantDeclarations,
+    '',
+    ...registrationLines,
+];
+
+await Bun.write(productionRoutesLoaderPath, `${outputLines.join('\n').trim()}\n`);
 logger.success(
-    `Generated production ${generatedCodes.length} routes in ${(performance.now() - startTime).toFixed(2)}ms.`,
+    `Generated ${registrationLines.length} production routes in ${(performance.now() - startTime).toFixed(2)}ms.`,
 );
