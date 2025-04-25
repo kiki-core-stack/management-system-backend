@@ -1,8 +1,17 @@
 import { glob } from 'node:fs/promises';
 
+import type { WritableDeep } from 'type-fest';
+
+import { honoApp } from '../app';
 import { routesDirPath } from '../constants/paths';
-import { allowedRouteHttpMethods } from '../constants/route';
-import type { RouteDefinition } from '../types/route';
+import {
+    allowedRouteHttpMethods,
+    allRoutes,
+} from '../constants/route';
+import type {
+    RouteDefinition,
+    RouteHandlerOptions,
+} from '../types/route';
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
@@ -37,4 +46,37 @@ export async function getRouteDefinitions(): Promise<RouteDefinition[]> {
     }
 
     return routeDefinitions.sort((a, b) => filePathToRank(a.path) - filePathToRank(b.path));
+}
+
+export async function registerRoute(
+    method: typeof allowedRouteHttpMethods[number],
+    path: string,
+    handlers: any[],
+    handlerOptions?: RouteHandlerOptions,
+    zodOpenApiOptions?: { openApiPath: string; zodOpenApiConfig: any },
+) {
+    const latestHandler = handlers[handlers.length - 1];
+    Object.assign(latestHandler, handlerOptions?.properties);
+    Object.defineProperty(
+        latestHandler,
+        'isHandler',
+        {
+            configurable: false,
+            value: true,
+            writable: false,
+        },
+    );
+
+    honoApp.on(method, path, ...handlers);
+    (allRoutes as WritableDeep<typeof allRoutes>)[method][path] = { handlerProperties: handlerOptions?.properties };
+    // Registers OpenAPI paths for documentation generation in development only.
+    // Remove the NODE_ENV check if you need OpenAPI metadata in production.
+    if (process.env.NODE_ENV === 'development' && zodOpenApiOptions) {
+        const { zodOpenApiRegistry } = await import('../constants/zod-openapi');
+        zodOpenApiRegistry.registerPath({
+            ...zodOpenApiOptions.zodOpenApiConfig,
+            method,
+            path: zodOpenApiOptions.openApiPath,
+        });
+    }
 }
