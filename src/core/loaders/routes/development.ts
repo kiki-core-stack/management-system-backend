@@ -1,20 +1,48 @@
 import {
     getRouteDefinitions,
-    loadRouteModule,
+    processRouteHandlers,
+    registerRoute,
 } from '../../libs/router';
 import { logger } from '../../utils/logger';
 
-export default async function () {
-    const startTime = performance.now();
-    let totalRouteCount = 0;
-    for (const routeDefinition of await getRouteDefinitions()) {
+// Entrypoint
+const startTime = performance.now();
+const routeDefinitions = await getRouteDefinitions();
+const loadedRouteModules = await Promise.all(
+    routeDefinitions.map(async (routeDefinition) => {
         try {
-            loadRouteModule(await import(routeDefinition.filePath), routeDefinition);
-            totalRouteCount++;
+            return {
+                ...routeDefinition,
+                module: await import(routeDefinition.filePath),
+            };
         } catch (error) {
-            logger.error(`Failed to load route file ${routeDefinition.filePath}. Error:`, (error as Error).message);
+            logger.error(`Failed to import route at ${routeDefinition.filePath}.`, error);
         }
+    }),
+);
+
+let loadedRouteCount = 0;
+for (const routeEntry of loadedRouteModules.filter(Boolean)) {
+    const handlers = processRouteHandlers(routeEntry?.module.default);
+    if (!handlers.length) {
+        logger.warn(`No handler found for route at ${routeEntry!.filePath}.`);
+        continue;
     }
 
-    logger.success(`Successfully loaded ${totalRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
+    await registerRoute(
+        routeEntry!.method,
+        routeEntry!.path,
+        handlers,
+        routeEntry!.module.routeHandlerOptions,
+        routeEntry!.module.zodOpenApiConfig
+            ? {
+                config: routeEntry!.module.zodOpenApiConfig,
+                path: routeEntry!.openApiPath,
+            }
+            : undefined,
+    );
+
+    loadedRouteCount++;
 }
+
+logger.success(`Registered ${loadedRouteCount} routes in ${(performance.now() - startTime).toFixed(2)}ms.`);
