@@ -1,3 +1,3 @@
-declare module '../core/middlewares/session/types' {}
+declare module '../libs/middlewares/session/types' {}
 
 export {};
