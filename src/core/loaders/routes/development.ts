@@ -16,7 +16,7 @@ const loadedRouteModules = await Promise.all(
                 module: await import(routeDefinition.filePath),
             };
         } catch (error) {
-            logger.error(`Failed to import route: ${routeDefinition.filePath}.`, error);
+            logger.error(`Failed to import route at ${routeDefinition.filePath}.`, error);
         }
     }),
 );
@@ -25,7 +25,7 @@ let loadedRouteCount = 0;
 for (const routeEntry of loadedRouteModules.filter(Boolean)) {
     const handlers = processRouteHandlers(routeEntry?.module.default);
     if (!handlers.length) {
-        logger.warn(`No handler found for route: ${routeEntry!.filePath}.`);
+        logger.warn(`No handler found for route at ${routeEntry!.filePath}.`);
         continue;
     }
 

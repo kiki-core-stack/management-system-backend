@@ -12,7 +12,10 @@ const usedConstNames = new Set<string>();
 
 async function applyRouteFragments(routeDefinition: RouteDefinition, index: number) {
     const moduleExports = await resolveModuleExportNames(routeDefinition.filePath);
-    if (!moduleExports.includes('default')) throw new Error(`No default export found in ${routeDefinition.filePath}.`);
+    if (!moduleExports.includes('default')) {
+        throw new Error(`No default export found in route at ${routeDefinition.filePath}.`);
+    }
+
     const importAlias = `route${index}`;
     importStatements.push(`import * as ${importAlias} from '${routeDefinition.filePath}';`);
     const methodConstName = getOrCreateConstName(routeDefinition.method);
