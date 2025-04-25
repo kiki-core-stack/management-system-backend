@@ -1,18 +1,16 @@
 import { getMiddlewareFilePaths } from '../../libs/middleware';
 import { logger } from '../../utils/logger';
 
-export default async function () {
-    const startTime = performance.now();
-    let totalMiddlewareCount = 0;
-    for (const middlewareFilePath of await getMiddlewareFilePaths()) {
-        try {
-            await import(middlewareFilePath);
-            totalMiddlewareCount++;
-        } catch (error) {
-            logger.error(`Failed to load middleware file ${middlewareFilePath}. Error:`, (error as Error).message);
-        }
+// Entrypoint
+const startTime = performance.now();
+let loadedMiddlewareCount = 0;
+for (const middlewareFilePath of await getMiddlewareFilePaths()) {
+    try {
+        await import(middlewareFilePath);
+        loadedMiddlewareCount++;
+    } catch (error) {
+        logger.error(`Failed to load middleware at ${middlewareFilePath}.`, error);
     }
-
-    // eslint-disable-next-line style/max-len
-    logger.success(`Successfully loaded ${totalMiddlewareCount} middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`);
 }
+
+logger.success(`Loaded ${loadedMiddlewareCount} middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`);
