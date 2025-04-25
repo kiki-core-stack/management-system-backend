@@ -82,4 +82,4 @@ You can clone this repository and modify it as needed. Alternatively, you can fo
 
 <!-- Badges -->
 [license-href]: https://github.com/kiki-kanri/bun-template/blob/main/LICENSE
-[license-src]: https://img.shields.io/npm/l/@kikiutils/classes.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-src]: https://img.shields.io/github/license/kiki-kanri%2Fbun-template?colorA=18181b&colorB=28cf8d&style=flat
