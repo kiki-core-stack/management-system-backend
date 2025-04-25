@@ -9,7 +9,6 @@ export const allowedRouteHttpMethods = [
     'options',
     'patch',
     'post',
-    'purge',
     'put',
 ] as const;
 
@@ -20,6 +19,5 @@ export const allRoutes: ReadonlyDeep<Record<typeof allowedRouteHttpMethods[numbe
     options: {},
     patch: {},
     post: {},
-    purge: {},
     put: {},
 };
