@@ -3,16 +3,14 @@ import { logger } from '../../utils/logger';
 
 // Entrypoint
 const startTime = performance.now();
-let totalMiddlewareCount = 0;
+let loadedMiddlewareCount = 0;
 for (const middlewareFilePath of await getMiddlewareFilePaths()) {
     try {
         await import(middlewareFilePath);
-        totalMiddlewareCount++;
+        loadedMiddlewareCount++;
     } catch (error) {
-        logger.error(`Failed to load middleware file ${middlewareFilePath}. Error:`, (error as Error).message);
+        logger.error(`Failed to load middleware: ${middlewareFilePath}.`, error);
     }
 }
 
-logger.success(
-    `Successfully loaded ${totalMiddlewareCount} middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`,
-);
+logger.success(`Loaded ${loadedMiddlewareCount} middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`);
