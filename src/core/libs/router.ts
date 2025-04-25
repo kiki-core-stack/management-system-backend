@@ -1,22 +1,21 @@
 import { glob } from 'node:fs/promises';
-import {
-    join,
-    resolve,
-    sep,
-} from 'node:path';
 
-import type {
-    Except,
-    WritableDeep,
-} from 'type-fest';
+import type { WritableDeep } from 'type-fest';
 
 import { honoApp } from '../app';
+import { routesDirPath } from '../constants/paths';
 import {
     allowedRouteHttpMethods,
     allRoutes,
 } from '../constants/route';
-import { zodOpenApiRegistry } from '../constants/zod-openapi';
-import type { RouteHandlerOptions } from '../types/route';
+import type {
+    RouteDefinition,
+    RouteHandlerOptions,
+} from '../types/route';
+
+import type { RouteZodOpenApiConfig } from './zod-openapi';
+
+export const processRouteHandlers = (handlers: any) => [handlers].flat().filter(Boolean);
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
@@ -31,13 +30,14 @@ function filePathToRank(path: string) {
     return +segments.map((segment, i) => filePathSegmentToRankValue(segment, i === segments.length - 1)).join('');
 }
 
-export async function getRouteDefinitions() {
-    const directoryPath = resolve(join(import.meta.dirname, '../../routes')).replaceAll(sep, '/');
-    const environment = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
-    // eslint-disable-next-line style/max-len
-    const filePattern = new RegExp(`^${directoryPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${environment})?\\.(mj|t)s$`);
+export async function getRouteDefinitions(): Promise<RouteDefinition[]> {
+    const envSuffix = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    const filePattern = new RegExp(
+        `^${routesDirPath}(.*?)(/index)?\\.(${allowedRouteHttpMethods.join('|')})(\\.${envSuffix})?\\.(mj|t)s$`,
+    );
+
     const routeDefinitions = [];
-    for await (const filePath of glob(`${directoryPath}/**/*.{mj,t}s`, {})) {
+    for await (const filePath of glob(`${routesDirPath}/**/*.{mj,t}s`, {})) {
         const matches = filePath.match(filePattern);
         if (!matches) continue;
         const normalizedRoutePath = matches[1]!.replaceAll(/\/+/g, '/');
@@ -52,24 +52,15 @@ export async function getRouteDefinitions() {
     return routeDefinitions.sort((a, b) => filePathToRank(a.path) - filePathToRank(b.path));
 }
 
-export function loadRouteModule(
-    routeModule: any,
-    routeDefinition: Except<Awaited<ReturnType<typeof getRouteDefinitions>>[number], 'filePath'>,
+export async function registerRoute(
+    method: typeof allowedRouteHttpMethods[number],
+    path: string,
+    handlers: any[],
+    handlerOptions?: RouteHandlerOptions,
+    zodOpenApiOptions?: { config: RouteZodOpenApiConfig; path: string },
 ) {
-    const handlers = [routeModule.default].flat().filter((handler) => handler !== undefined);
-    if (!handlers.length) return;
     const latestHandler = handlers[handlers.length - 1];
-    // eslint-disable-next-line style/max-len
-    const routeHandlerOptions: RouteHandlerOptions | undefined = routeModule.handlerOptions || routeModule.options || routeModule.routeHandlerOptions;
-    Object.assign(latestHandler, routeHandlerOptions?.properties);
-    if (routeModule.zodOpenApiConfig) {
-        zodOpenApiRegistry.registerPath({
-            ...routeModule.zodOpenApiConfig,
-            method: routeDefinition.method,
-            path: routeDefinition.openApiPath,
-        });
-    }
-
+    Object.assign(latestHandler, handlerOptions?.properties);
     Object.defineProperty(
         latestHandler,
         'isHandler',
@@ -80,7 +71,16 @@ export function loadRouteModule(
         },
     );
 
-    honoApp.on(routeDefinition.method, routeDefinition.path, ...handlers);
-    // eslint-disable-next-line style/max-len
-    (allRoutes as WritableDeep<typeof allRoutes>)[routeDefinition.method][routeDefinition.path] = { handlerProperties: routeHandlerOptions?.properties };
+    honoApp.on(method, path, ...handlers);
+    (allRoutes as WritableDeep<typeof allRoutes>)[method][path] = { handlerProperties: handlerOptions?.properties };
+    // Registers OpenAPI paths for documentation generation in development only.
+    // Remove the NODE_ENV check if you need OpenAPI metadata in production.
+    if (process.env.NODE_ENV === 'development' && zodOpenApiOptions) {
+        const { zodOpenApiRegistry } = await import('../constants/zod-openapi');
+        zodOpenApiRegistry.registerPath({
+            ...zodOpenApiOptions.config,
+            method,
+            path: zodOpenApiOptions.path,
+        });
+    }
 }
