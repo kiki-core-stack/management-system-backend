@@ -4,9 +4,14 @@ import { colorize } from 'consola/utils';
 
 import { logger } from '@/core/utils/logger';
 
+interface WorkerProcess {
+    logPrefix: string;
+    subprocess: Subprocess<'inherit', 'inherit', 'inherit'>;
+}
+
 let isShuttingDown = false;
 const workersCount = Number(process.env.SERVER_WORKERS) || 4;
-const workerProcesses: { logPrefix: string; subprocess: Subprocess }[] = Array.from({ length: workersCount });
+const workerProcesses: WorkerProcess[] = Array.from({ length: workersCount });
 
 function createAndSetWorker(index: number) {
     const subprocess = Bun.spawn({
