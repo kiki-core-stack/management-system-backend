@@ -1,6 +1,5 @@
 import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 
-import { configs } from '@/configs';
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { zodOpenApiRegistry } from '@/core/constants/zod-openapi';
 
@@ -23,6 +22,18 @@ export default defaultHonoFactory.createHandlers((ctx) => {
     });
 
     const generator = new OpenApiGeneratorV31(definitions);
-    const document = generator.generateDocument(configs.openApi as Parameters<typeof generator.generateDocument>[0]);
-    return ctx.body(JSON.stringify(document, null, 2), 200, { 'Content-Type': 'application/json' });
+    ctx.header('content-type', 'application/json');
+    return ctx.body(
+        JSON.stringify(
+            generator.generateDocument({
+                info: {
+                    title: 'API Document',
+                    version: '0.1.0',
+                },
+                openapi: '3.1.1',
+            }),
+            null,
+            2,
+        ),
+    );
 });

@@ -1,5 +1,4 @@
 import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics';
-import '@/configs';
 
 import type { Server } from 'bun';
 
