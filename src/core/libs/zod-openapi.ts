@@ -11,7 +11,7 @@ import type { EnumLike } from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
-export const defineRouteZodOpenApiConfig = (config: RouteZodOpenApiConfig) => config;
+export const defineRouteZodOpenApiConfig = (config: RouteZodOpenApiConfig): RouteZodOpenApiConfig => config;
 
 export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
     enumName: string,
