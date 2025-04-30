@@ -1,3 +1,5 @@
-declare module '../libs/middlewares/session/types' {}
+declare module '@/libs/middlewares/session/types' {
+    interface ContextSessionData {}
+}
 
 export {};
