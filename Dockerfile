@@ -48,5 +48,6 @@ COPY ./.env.production.local ./.env
 
 ## Copy and set the entrypoint script
 COPY ./docker-entrypoint.sh ./
+RUN chmod 700 ./docker-entrypoint.sh
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
