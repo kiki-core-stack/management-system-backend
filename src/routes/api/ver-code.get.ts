@@ -5,7 +5,7 @@ import { defineRouteHandlerOptions } from '@/core/libs/route';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
 
-export default defaultHonoFactory.createHandlers(async (ctx) => {
+export default defaultHonoFactory.createHandlers((ctx) => {
     const captcha = create({
         background: 'transparent',
         noise: Math.floor(Math.random() * 3) + 2,
