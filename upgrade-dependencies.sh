@@ -6,9 +6,7 @@ export NPM_CONFIG_REGISTRY
 
 set -e
 
-if [[ " $@ " =~ ' -c ' ]]; then
-    rm -rf ./bun.lock ./node_modules ./pnpm-lock.yaml
-fi
+[[ " $@ " =~ ' -c ' ]] && rm -rf ./bun.lock ./node_modules ./pnpm-lock.yaml
 
 pnpm upgrade -L --lockfile-only
 bun i
