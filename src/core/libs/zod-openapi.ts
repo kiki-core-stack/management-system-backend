@@ -11,14 +11,17 @@ import type { EnumLike } from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
-export const defineRouteZodOpenApiConfig = (config: RouteZodOpenApiConfig) => config;
+export const defineRouteZodOpenApiConfig = (config: RouteZodOpenApiConfig): RouteZodOpenApiConfig => config;
 
 export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
     enumName: string,
     enumObject: T,
     toTextMap?: Record<number | string, string>,
 ) {
-    return z.nativeEnum(enumObject).openapi(
+    const schema = z.nativeEnum(enumObject);
+    // Remove it if you need OpenAPI metadata in production
+    if (process.env.NODE_ENV === 'production') return schema;
+    return schema.openapi(
         enumName,
         {
             'x-enum-descriptions': toTextMap
