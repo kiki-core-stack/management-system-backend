@@ -29,14 +29,20 @@ for (const routeEntry of loadedRouteModules.filter(Boolean)) {
         continue;
     }
 
+    if (routeEntry!.module.zodOpenApiConfig && routeEntry!.module.getZodOpenApiConfig) {
+        // eslint-disable-next-line style/max-len
+        logger.warn(`Both zodOpenApiConfig and getZodOpenApiConfig found for route at ${routeEntry!.filePath}, using zodOpenApiConfig.`);
+    }
+
+    const zodOpenApiConfig = routeEntry!.module.zodOpenApiConfig ?? routeEntry!.module.getZodOpenApiConfig?.();
     await registerRoute(
         routeEntry!.method,
         routeEntry!.path,
         handlers,
         routeEntry!.module.routeHandlerOptions,
-        routeEntry!.module.zodOpenApiConfig
+        zodOpenApiConfig
             ? {
-                config: routeEntry!.module.zodOpenApiConfig,
+                config: zodOpenApiConfig,
                 path: routeEntry!.openApiPath,
             }
             : undefined,
