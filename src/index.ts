@@ -1,6 +1,5 @@
 import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics/find-by-route-id-or-throw-not-found-error';
 import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics';
-import '@/configs';
 
 import type { Server } from 'bun';
 
