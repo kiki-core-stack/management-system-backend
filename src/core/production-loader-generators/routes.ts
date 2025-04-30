@@ -32,6 +32,8 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
 
         if (moduleExports.includes('zodOpenApiConfig')) {
             // eslint-disable-next-line style/max-len
+            logger.warn(`To optimize tree shaking in production, it is recommended to use getZodOpenApiConfig instead of zodOpenApiConfig at ${routeDefinition.filePath}.`);
+            // eslint-disable-next-line style/max-len
             registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
         } else if (moduleExports.includes('getZodOpenApiConfig')) {
             // eslint-disable-next-line style/max-len
