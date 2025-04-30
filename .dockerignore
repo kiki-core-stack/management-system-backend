@@ -1,15 +1,5 @@
-### Docker ###
-.dockerignore
-docker-build.sh
-docker-build-and-run.sh
-docker-run.sh
-Dockerfile
-
-### Git ###
-.git/
-.github/
-.gitkeep
-.gitlab-ci.yml
+# Created by https://www.toptal.com/developers/gitignore/api/node
+# Edit at https://www.toptal.com/developers/gitignore?templates=node
 
 ### Node ###
 
@@ -161,7 +151,24 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+# End of https://www.toptal.com/developers/gitignore/api/node
+
 ### Other ###
+
+# Docker
+.dockerignore
+docker-build.sh
+docker-build-and-run.sh
+docker-run.sh
+Dockerfile
+
+# Git
+.git/
+.github/
+.gitkeep
+.gitlab-ci.yml
+
+# Other
 .vscode/
 fetch-and-merge.sh
 install-dependencies.sh

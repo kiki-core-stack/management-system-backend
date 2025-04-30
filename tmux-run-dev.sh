@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$(realpath "$(dirname "$(readlink -f "$0")")")" || exit 1
+
 name='bun-project'
 
 if ! tmux ls | grep -q "^$name:"; then
