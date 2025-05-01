@@ -8,4 +8,4 @@
 
 <!-- Badges -->
 [license-href]: https://github.com/kiki-kanri/auto-hono/blob/main/LICENSE
-[license-src]: https://img.shields.io/github/license/kiki-kanri%2Fauto-hono?colorA=18181b&colorB=28cf8d&style=flat
+[license-src]: https://img.shields.io/github/license/kiki-kanri/auto-hono?colorA=18181b&colorB=28cf8d&style=flat
