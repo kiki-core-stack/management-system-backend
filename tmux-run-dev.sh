@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd "$(realpath "$(dirname "$(readlink -f "$0")")")" || exit 1
+set -e
+
+cd "$(realpath "$(dirname "$(readlink -f "$0")")")"
 
 name='bun-project'
 
