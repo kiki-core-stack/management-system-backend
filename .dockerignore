@@ -162,10 +162,6 @@ docker-build-and-run.sh
 docker-run.sh
 Dockerfile
 
-# Generated production loaders
-src/core/loaders/middlewares/production.ts
-src/core/loaders/routes/production.ts
-
 # Git
 .git/
 .github/
@@ -181,3 +177,9 @@ modify-files-permissions.sh
 README.md
 tmux-run-dev.sh
 upgrade-dependencies.sh
+
+### Custom ###
+
+# Generated production loaders
+src/core/loaders/middlewares/production.ts
+src/core/loaders/routes/production.ts
