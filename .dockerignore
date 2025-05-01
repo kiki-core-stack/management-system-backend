@@ -177,3 +177,5 @@ modify-files-permissions.sh
 README.md
 tmux-run-dev.sh
 upgrade-dependencies.sh
+
+### Custom ###
