@@ -2,6 +2,8 @@
 
 set -e
 
+cd "$(realpath "$(dirname "$(readlink -f "$0")")")"
+
 # Load and set variables
 . ./.env.production.local
 author='user'
