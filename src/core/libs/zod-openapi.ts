@@ -3,7 +3,7 @@ import {
     OpenAPIRegistry,
 } from '@asteasolutions/zod-to-openapi';
 import type { RouteConfig } from '@asteasolutions/zod-to-openapi';
-import { getEnumNumberValues } from '@kikiutils/node/enum';
+import { getEnumNumberValues } from '@kikiutils/shared/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
 import * as z from 'zod';
