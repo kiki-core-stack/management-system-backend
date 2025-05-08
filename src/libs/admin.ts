@@ -3,7 +3,7 @@ import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import type { AdminSession } from '@kiki-core-stack/pack/models/admin/session';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
-import { generateWithNestedRandomLength } from '@kikiutils/node/random';
+import { generateWithNestedRandomLength } from '@kikiutils/shared/random';
 import type { Context } from 'hono';
 import type {
     ClientSession,
