@@ -16,7 +16,7 @@ const loadedRouteModules = await Promise.all(
                 module: await import(routeDefinition.filePath),
             };
         } catch (error) {
-            logger.error(`Failed to import route at ${routeDefinition.filePath}.`, error);
+            logger.error(`Failed to import route at ${routeDefinition.filePath}: ${(error as Error).message}.`);
         }
     }),
 );
