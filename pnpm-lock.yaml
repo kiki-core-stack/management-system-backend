@@ -13,7 +13,7 @@ importers:
         version: 7.3.0(zod@3.24.4)
       '@hono/zod-validator':
         specifier: ^0.5.0
-        version: 0.5.0(hono@4.7.8)(zod@3.24.4)
+        version: 0.5.0(hono@4.7.9)(zod@3.24.4)
       '@kiki-core-stack/pack':
         specifier: ^0.68.0
         version: 0.68.0
@@ -21,8 +21,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       '@kikiutils/shared':
-        specifier: ^10.0.0
-        version: 10.0.0
+        specifier: ^10.1.0
+        version: 10.1.0
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -33,14 +33,14 @@ importers:
         specifier: ^20.5.0
         version: 20.5.0
       hono:
-        specifier: ^4.7.8
-        version: 4.7.8
+        specifier: ^4.7.9
+        version: 4.7.9
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
       mongoose:
-        specifier: ^8.14.1
-        version: 8.14.1
+        specifier: ^8.14.2
+        version: 8.14.2
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
@@ -59,7 +59,7 @@ importers:
     devDependencies:
       '@hono/swagger-ui':
         specifier: ^0.5.1
-        version: 0.5.1(hono@4.7.8)
+        version: 0.5.1(hono@4.7.9)
       '@kikiutils/eslint-config':
         specifier: ^1.0.2
         version: 1.0.2(@typescript-eslint/utils@8.32.0(eslint@9.26.0(jiti@1.21.7))(typescript@5.8.3))(@vue/compiler-sfc@3.5.13)(jiti@1.21.7)(tailwindcss@3.4.17)(typescript@5.8.3)(vue-eslint-parser@10.1.3(eslint@9.26.0(jiti@1.21.7)))
@@ -68,7 +68,7 @@ importers:
         version: 5.0.1
       '@scalar/hono-api-reference':
         specifier: ^0.8.8
-        version: 0.8.8(hono@4.7.8)
+        version: 0.8.8(hono@4.7.9)
       '@types/bun':
         specifier: ^1.2.12
         version: 1.2.12
@@ -341,18 +341,18 @@ packages:
     resolution: {integrity: sha512-fm44WYFDJZvV6DdIJ9lqWuQRYvWArRHJImgU/vvdLc7DJ58qcBIbpECLnNwcxjyfRTxWls9HDHODiqLH3tX8nQ==}
     engines: {node: '>=18.12.1'}
 
-  '@kikiutils/shared@10.0.0':
-    resolution: {integrity: sha512-0rKTNp1IWxa1ia65Nbjng04FRb/AxEBpcS52zTifThaQ4yFYMDdbqXMlwP7Fy34r/Lc+bAS5K12LEfTvG0tAQg==}
+  '@kikiutils/shared@10.1.0':
+    resolution: {integrity: sha512-qvub3lD59rhbfcBOB3iEtLbzODQVybD63FwmXo2AnwVR7rWxn1a90IqKZNg7waGZtPuavYShS0s+PSc2RSqobg==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/tsconfigs@5.0.1':
     resolution: {integrity: sha512-9u/zCFsuXDYnAtmooywyUvm63iktHszbd+rVpg3hNeCSZTMC3vBOv01wrFEQln8P0IcpgEZCg0RBN0SNBRvEbg==}
 
-  '@kikiutils/types@5.2.0':
-    resolution: {integrity: sha512-bUeC8opJPbAR3BfrflWeKiT3PEyNrJLX2yhh1UfDw6ole0bOzt3lNRadZo/f7J6B/6Osfe6IwhTBQXquw5ybZw==}
+  '@kikiutils/types@5.3.0':
+    resolution: {integrity: sha512-dQArYNd9Q2H/d+GtvqUtlkfuWhf/36T6gZ9pz3cWgJLHMPEAiqnIC38Nga2Zxxg86NJcopVihVEoONXzdXaBuQ==}
 
-  '@modelcontextprotocol/sdk@1.11.0':
-    resolution: {integrity: sha512-k/1pb70eD638anoi0e8wUGAlbMJXyvdV4p62Ko+EZ7eBe1xMx8Uhak1R5DgfoofsK5IBBnRwsYGTaLZl+6/+RQ==}
+  '@modelcontextprotocol/sdk@1.11.1':
+    resolution: {integrity: sha512-9LfmxKTb1v+vUS1/emSk1f5ePmTLkb9Le9AxOB5T0XM59EUumwcS45z05h7aiZx3GI0Bl7mjb3FMEglYj+acuQ==}
     engines: {node: '>=18'}
 
   '@mongodb-js/saslprep@1.2.2':
@@ -446,8 +446,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@22.15.16':
-    resolution: {integrity: sha512-3pr+KjwpVujqWqOKT8mNR+rd09FqhBLwg+5L/4t0cNYBzm/yEiYGCxWttjaPBsLtAo+WFNoXzGJfolM1JuRXoA==}
+  '@types/node@22.15.17':
+    resolution: {integrity: sha512-wIX2aSZL5FE+MR0JlvF87BNVrtFWf6AE6rxSE9X7OwnVvoyCQjpzSRJ+M87se/4QCkCiebQAqrJ0y6fwIyi7nw==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1015,8 +1015,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  eslint-plugin-n@17.17.0:
-    resolution: {integrity: sha512-2VvPK7Mo73z1rDFb6pTvkH6kFibAmnTubFq5l83vePxu0WiY1s0LOtj2WHb6Sa40R3w4mnh8GFYbHBQyMlotKw==}
+  eslint-plugin-n@17.18.0:
+    resolution: {integrity: sha512-hvZ/HusueqTJ7VDLoCpjN0hx4N4+jHIWTXD4TMLHy9F23XkDagR9v+xQWRWR57yY55GPF8NnD4ox9iGTxirY8A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.23.0'
@@ -1318,8 +1318,8 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  hono@4.7.8:
-    resolution: {integrity: sha512-PCibtFdxa7/Ldud9yddl1G81GjYaeMYYTq4ywSaNsYbB1Lug4mwtOMJf2WXykL0pntYwmpRJeOI3NmoDgD+Jxw==}
+  hono@4.7.9:
+    resolution: {integrity: sha512-/EsCoR5h7N4yu01TDu9GMCCJa6ZLk5ZJIWFFGNawAXmd1Tp53+Wir4xm0D2X19bbykWUlzQG0+BvPAji6p9E8Q==}
     engines: {node: '>=16.9.0'}
 
   http-errors@2.0.0:
@@ -1703,8 +1703,8 @@ packages:
     resolution: {integrity: sha512-al4rsqadzg4TXcJVWI5WSaNUuSpzdtcPbabwXxbA7Euh6swuLkrrHrBmlGI6d3I4RMStdRAoD7k6wvB/x5zvaw==}
     engines: {node: '>=4.0.0'}
 
-  mongoose@8.14.1:
-    resolution: {integrity: sha512-ijd12vjqUBr5Btqqflu0c/o8Oed5JpdaE0AKO9TjGxCgywYwnzt6ynR1ySjhgxGxrYVeXC0t1P11f1zlRiE93Q==}
+  mongoose@8.14.2:
+    resolution: {integrity: sha512-LPLZiN6M8ap4GlXmaaG7yrHIkK45dSO3NZ0qgERJl2CfcL5eP7MA9umn4zGhKiWkMLbnHM4jhebIYbUhvuwWvQ==}
     engines: {node: '>=16.20.1'}
 
   mpath@0.8.4:
@@ -2374,7 +2374,7 @@ snapshots:
       eslint-plugin-import-x: 4.11.0(eslint@9.26.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-jsdoc: 50.6.11(eslint@9.26.0(jiti@1.21.7))
       eslint-plugin-jsonc: 2.20.0(eslint@9.26.0(jiti@1.21.7))
-      eslint-plugin-n: 17.17.0(eslint@9.26.0(jiti@1.21.7))
+      eslint-plugin-n: 17.18.0(eslint@9.26.0(jiti@1.21.7))
       eslint-plugin-no-only-tests: 3.3.0
       eslint-plugin-perfectionist: 4.12.3(eslint@9.26.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-plugin-pnpm: 0.3.1(eslint@9.26.0(jiti@1.21.7))
@@ -2543,13 +2543,13 @@ snapshots:
       '@eslint/core': 0.13.0
       levn: 0.4.1
 
-  '@hono/swagger-ui@0.5.1(hono@4.7.8)':
+  '@hono/swagger-ui@0.5.1(hono@4.7.9)':
     dependencies:
-      hono: 4.7.8
+      hono: 4.7.9
 
-  '@hono/zod-validator@0.5.0(hono@4.7.8)(zod@3.24.4)':
+  '@hono/zod-validator@0.5.0(hono@4.7.9)(zod@3.24.4)':
     dependencies:
-      hono: 4.7.8
+      hono: 4.7.9
       zod: 3.24.4
 
   '@humanfs/core@0.19.1': {}
@@ -2593,7 +2593,7 @@ snapshots:
 
   '@kiki-core-stack/pack@0.68.0':
     dependencies:
-      '@kikiutils/types': 5.2.0
+      '@kikiutils/types': 5.3.0
 
   '@kikiutils/eslint-config@1.0.2(@typescript-eslint/utils@8.32.0(eslint@9.26.0(jiti@1.21.7))(typescript@5.8.3))(@vue/compiler-sfc@3.5.13)(jiti@1.21.7)(tailwindcss@3.4.17)(typescript@5.8.3)(vue-eslint-parser@10.1.3(eslint@9.26.0(jiti@1.21.7)))':
     dependencies:
@@ -2649,9 +2649,9 @@ snapshots:
     dependencies:
       decimal.js: 10.5.0
       lodash: 4.17.21
-      mongoose: 8.14.1
+      mongoose: 8.14.2
       mongoose-aggregate-paginate-v2: 1.1.4
-      mongoose-paginate-v2: 1.9.0(mongoose@8.14.1)
+      mongoose-paginate-v2: 1.9.0(mongoose@8.14.2)
       type-fest: 4.41.0
     transitivePeerDependencies:
       - '@aws-sdk/credential-providers'
@@ -2663,16 +2663,16 @@ snapshots:
       - socks
       - supports-color
 
-  '@kikiutils/shared@10.0.0': {}
+  '@kikiutils/shared@10.1.0': {}
 
   '@kikiutils/tsconfigs@5.0.1': {}
 
-  '@kikiutils/types@5.2.0':
+  '@kikiutils/types@5.3.0':
     dependencies:
       bson: 6.10.3
       type-fest: 4.41.0
 
-  '@modelcontextprotocol/sdk@1.11.0':
+  '@modelcontextprotocol/sdk@1.11.1':
     dependencies:
       content-type: 1.0.5
       cors: 2.8.5
@@ -2721,10 +2721,10 @@ snapshots:
     dependencies:
       '@scalar/types': 0.1.14
 
-  '@scalar/hono-api-reference@0.8.8(hono@4.7.8)':
+  '@scalar/hono-api-reference@0.8.8(hono@4.7.9)':
     dependencies:
       '@scalar/core': 0.2.14
-      hono: 4.7.8
+      hono: 4.7.9
 
   '@scalar/openapi-types@0.2.2':
     dependencies:
@@ -2792,7 +2792,7 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@22.15.16':
+  '@types/node@22.15.17':
     dependencies:
       undici-types: 6.21.0
 
@@ -3062,7 +3062,7 @@ snapshots:
 
   bun-types@1.2.12:
     dependencies:
-      '@types/node': 22.15.16
+      '@types/node': 22.15.17
 
   bytes@3.1.2: {}
 
@@ -3348,7 +3348,7 @@ snapshots:
     transitivePeerDependencies:
       - '@eslint/json'
 
-  eslint-plugin-n@17.17.0(eslint@9.26.0(jiti@1.21.7)):
+  eslint-plugin-n@17.18.0(eslint@9.26.0(jiti@1.21.7)):
     dependencies:
       '@eslint-community/eslint-utils': 4.7.0(eslint@9.26.0(jiti@1.21.7))
       enhanced-resolve: 5.18.1
@@ -3490,7 +3490,7 @@ snapshots:
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.3
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/sdk': 1.11.1
       '@types/estree': 1.0.7
       '@types/json-schema': 7.0.15
       ajv: 6.12.6
@@ -3749,7 +3749,7 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  hono@4.7.8: {}
+  hono@4.7.9: {}
 
   http-errors@2.0.0:
     dependencies:
@@ -4252,18 +4252,18 @@ snapshots:
 
   mongoose-aggregate-paginate-v2@1.1.4: {}
 
-  mongoose-lean-virtuals@1.1.0(mongoose@8.14.1):
+  mongoose-lean-virtuals@1.1.0(mongoose@8.14.2):
     dependencies:
-      mongoose: 8.14.1
+      mongoose: 8.14.2
       mpath: 0.8.4
 
-  mongoose-paginate-v2@1.9.0(mongoose@8.14.1):
+  mongoose-paginate-v2@1.9.0(mongoose@8.14.2):
     dependencies:
-      mongoose-lean-virtuals: 1.1.0(mongoose@8.14.1)
+      mongoose-lean-virtuals: 1.1.0(mongoose@8.14.2)
     transitivePeerDependencies:
       - mongoose
 
-  mongoose@8.14.1:
+  mongoose@8.14.2:
     dependencies:
       bson: 6.10.3
       kareem: 2.6.3

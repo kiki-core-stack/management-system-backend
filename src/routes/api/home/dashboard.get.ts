@@ -1,7 +1,7 @@
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { getProcessedApiRequestQueries } from '@/libs/request';
+import { parseApiRequestQueryParams } from '@/libs/request';
 
 export default defaultHonoFactory.createHandlers((ctx) => {
-    const processedQueries = getProcessedApiRequestQueries(ctx);
-    return ctx.createApiSuccessResponse(processedQueries);
+    const parsedApiRequestQueryParams = parseApiRequestQueryParams(ctx);
+    return ctx.createApiSuccessResponse(parsedApiRequestQueryParams);
 });

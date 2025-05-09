@@ -3,12 +3,11 @@ import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import type { Context } from 'hono';
 import type {
     PaginateOptions,
-    PopulateOptions,
     QueryOptions,
     RootFilterQuery,
 } from 'mongoose';
 
-import { getProcessedApiRequestQueries } from './request';
+import { parseApiRequestQueryParams } from './request';
 
 export async function getModelDocumentByRouteIdAndDelete<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
     ctx: Context,
@@ -50,54 +49,30 @@ export async function getModelDocumentByRouteIdAndUpdateBooleanField<
     await assertMongooseUpdateSuccess(document.updateOne({ [`${field}`]: !!value }));
 }
 
-export function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
+export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
     ctx: Context,
     model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
+    queryParams?: ParsedApiRequestQueryParams,
     paginateOptions?: PaginateOptions,
-    filterInFields?: Record<string, string>,
-    processObjectIdIgnoreFields?: string[]
-): Promise<{ count: number; list: any[] }>;
-export function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
-    model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
-    queries: ProcessedApiRequestQueries,
-    paginateOptions?: PaginateOptions
-): Promise<{ count: number; list: any[] }>;
-export async function modelToPaginatedData<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
-    ctxOrModel: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> | Context,
-    modelOrQueries: BaseMongoosePaginateModel<
-        RawDocType,
-        QueryHelpers,
-        InstanceMethodsAndOverrides
-    > | ProcessedApiRequestQueries,
-    paginateOptions?: PaginateOptions,
-    filterInFields?: Record<string, string>,
-    processObjectIdIgnoreFields?: string[],
 ) {
-    let model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
-    let queries: ProcessedApiRequestQueries;
-    if ('json' in ctxOrModel) {
-        // @ts-expect-error Ignore this error.
-        model = modelOrQueries;
-        queries = getProcessedApiRequestQueries(ctxOrModel, filterInFields, processObjectIdIgnoreFields);
-    } else {
-        model = ctxOrModel;
-        // @ts-expect-error Ignore this error.
-        queries = modelOrQueries;
-    }
+    if (!queryParams) queryParams = parseApiRequestQueryParams(ctx);
+    if (paginateOptions?.populate && queryParams.fields.length) {
+        const populates = Array.isArray(paginateOptions.populate)
+            ? paginateOptions.populate
+            : [paginateOptions.populate];
 
-    if (paginateOptions?.populate && queries.fields.length) {
-        paginateOptions.populate = [paginateOptions.populate].flat().filter((item) => {
-            return queries.fields.includes(typeof item === 'object' ? item.path : item);
-        }) as PopulateOptions[] | string[];
+        paginateOptions.populate = populates.filter((item) => {
+            return queryParams.fields.includes(typeof item === 'object' ? item.path : item);
+        }) as typeof paginateOptions.populate;
     }
 
     const paginatedResult = await model.paginate(
-        queries.filter,
+        queryParams.filters,
         {
             ...paginateOptions,
-            limit: queries.limit,
-            page: queries.page,
-            select: queries.fields,
+            limit: queryParams.limit,
+            page: queryParams.page,
+            select: queryParams.fields,
             sort: paginateOptions?.sort || { _id: -1 },
         },
     );

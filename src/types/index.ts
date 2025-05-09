@@ -1,12 +1,10 @@
 export type {} from '@kiki-core-stack/pack/types';
 
 declare global {
-    interface ProcessedApiRequestQueries {
+    interface ParsedApiRequestQueryParams {
         fields: string[];
-        filter: Record<string, any>;
+        filters: AnyRecord;
         limit: number;
-        offset: number;
         page: number;
-        skip: number;
     }
 }
