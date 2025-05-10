@@ -70,6 +70,7 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
     const limit = Math.min(Math.abs(Number(queries.limit?.[0]) || 10), 1000);
     const page = Math.abs(Number(queries.page?.[0]) || 1);
     return {
+        endIndex: limit * page,
         fields: queries.fields || [],
         filters,
         limit,
