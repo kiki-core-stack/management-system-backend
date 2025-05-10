@@ -67,11 +67,14 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
         } catch {}
     }
 
+    const limit = Math.min(Math.abs(Number(queries.limit?.[0]) || 10), 1000);
+    const page = Math.abs(Number(queries.page?.[0]) || 1);
     return {
         fields: queries.fields || [],
         filters,
-        limit: Math.min(Math.abs(Number(queries.limit?.[0]) || 10), 1000),
-        page: Math.abs(Number(queries.page?.[0]) || 1),
+        limit,
+        page,
+        skip: (page - 1) * limit,
     };
 }
 

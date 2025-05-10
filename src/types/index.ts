@@ -6,5 +6,6 @@ declare global {
         filters: AnyRecord;
         limit: number;
         page: number;
+        skip: number;
     }
 }
