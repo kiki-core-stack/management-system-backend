@@ -1,8 +1,6 @@
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { paginateModelData } from '@/libs/model';
+import { paginateModelDataWithApiResponse } from '@/libs/response';
 
-export default defaultHonoFactory.createHandlers(async (ctx) => {
-    return ctx.createApiSuccessResponse(await paginateModelData(ctx, AdminModel));
-});
+export default defaultHonoFactory.createHandlers((ctx) => paginateModelDataWithApiResponse(ctx, AdminModel));
