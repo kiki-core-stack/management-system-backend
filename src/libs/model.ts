@@ -67,7 +67,7 @@ export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethod
     }
 
     const paginatedResult = await model.paginate(
-        queryParams.filters,
+        queryParams.filter,
         {
             ...paginateOptions,
             limit: queryParams.limit,

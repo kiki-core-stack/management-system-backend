@@ -45,25 +45,25 @@ function normalizeApiRequestQueryTypedCondition(condition: any, type?: 'date' | 
     return normalizedCondition;
 }
 
-function normalizeApiRequestQueryFilters(filters: AnyRecord) {
-    const normalizedFilters: AnyRecord = {};
-    Object.entries(filters).forEach(([field, condition]) => {
+function normalizeApiRequestQueryFilter(filter: AnyRecord) {
+    const normalizedFilter: AnyRecord = {};
+    Object.entries(filter).forEach(([field, condition]) => {
         if (field.endsWith('At')) {
-            normalizedFilters[field] = normalizeApiRequestQueryTypedCondition(condition, 'date');
+            normalizedFilter[field] = normalizeApiRequestQueryTypedCondition(condition, 'date');
         } else if (field.endsWith('ObjectId')) {
-            normalizedFilters[field.slice(0, -8)] = normalizeApiRequestQueryTypedCondition(condition, 'objectId');
-        } else normalizedFilters[field] = normalizeApiRequestQueryTypedCondition(condition);
+            normalizedFilter[field.slice(0, -8)] = normalizeApiRequestQueryTypedCondition(condition, 'objectId');
+        } else normalizedFilter[field] = normalizeApiRequestQueryTypedCondition(condition);
     });
 
-    return normalizedFilters;
+    return normalizedFilter;
 }
 
 export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryParams {
     const queries = ctx.req.queries();
-    let filters = {};
-    if (queries.filters?.[0]) {
+    let filter = {};
+    if (queries.filter?.[0]) {
         try {
-            filters = normalizeApiRequestQueryFilters(JSON.parse(queries.filters[0]));
+            filter = normalizeApiRequestQueryFilter(JSON.parse(queries.filter[0]));
         } catch {}
     }
 
@@ -72,7 +72,7 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
     return {
         endIndex: limit * page,
         fields: queries.fields || [],
-        filters,
+        filter,
         limit,
         page,
         skip: (page - 1) * limit,

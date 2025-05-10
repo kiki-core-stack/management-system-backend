@@ -2,7 +2,7 @@ declare global {
     interface ParsedApiRequestQueryParams {
         endIndex: number;
         fields: string[];
-        filters: AnyRecord;
+        filter: AnyRecord;
         limit: number;
         page: number;
         skip: number;
