@@ -1,4 +1,4 @@
-# kiki-core-stack-base-backend
+# @kiki-core-stack/base-backend
 
 [![License][license-src]][license-href]
 
