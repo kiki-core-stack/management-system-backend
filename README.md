@@ -1,4 +1,4 @@
-# kiki-core-stack-admin-backend
+# @kiki-core-stack/admin-backend
 
 [![License][license-src]][license-href]
 
