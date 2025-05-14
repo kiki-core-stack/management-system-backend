@@ -60,6 +60,7 @@ function normalizeApiRequestQueryFilter(filter: AnyRecord) {
 
 export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryParams {
     const queries = ctx.req.queries();
+    const fields = queries.fields || [];
     let filter = {};
     if (queries.filter?.[0]) {
         try {
@@ -69,12 +70,19 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
 
     const limit = Math.min(Math.abs(Number(queries.limit?.[0]) || 10), 1000);
     const page = Math.abs(Number(queries.page?.[0]) || 1);
+    const projection: Record<string, boolean> = {};
+    fields.forEach((field) => {
+        if (field.startsWith('-')) projection[field.slice(1)] = false;
+        else projection[field] = true;
+    });
+
     return {
         endIndex: limit * page,
-        fields: queries.fields || [],
+        fields,
         filter,
         limit,
         page,
+        projection,
         skip: (page - 1) * limit,
     };
 }

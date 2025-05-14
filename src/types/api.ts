@@ -5,6 +5,7 @@ declare global {
         filter: AnyRecord;
         limit: number;
         page: number;
+        projection: Record<string, boolean>;
         skip: number;
     }
 }
