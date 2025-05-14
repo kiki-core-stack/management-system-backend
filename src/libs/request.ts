@@ -76,6 +76,12 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
         else projection[field] = true;
     });
 
+    const sort: Record<string, -1 | 1> = {};
+    for (const field of queries.sort?.[0]?.split(',') || []) {
+        if (field.startsWith('-')) sort[field.slice(1)] = -1;
+        else sort[field] = 1;
+    }
+
     return {
         endIndex: limit * page,
         fields,
@@ -84,6 +90,7 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
         page,
         projection,
         skip: (page - 1) * limit,
+        sort,
     };
 }
 

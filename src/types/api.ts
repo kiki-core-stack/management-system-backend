@@ -7,6 +7,7 @@ declare global {
         page: number;
         projection: Record<string, boolean>;
         skip: number;
+        sort: Record<string, -1 | 1>;
     }
 }
 
