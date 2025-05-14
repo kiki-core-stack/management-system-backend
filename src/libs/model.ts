@@ -73,7 +73,7 @@ export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethod
             limit: queryParams.limit,
             page: queryParams.page,
             select: queryParams.fields,
-            sort: paginateOptions?.sort || { _id: -1 },
+            sort: Object.keys(queryParams.sort).length ? queryParams.sort : paginateOptions?.sort || { _id: -1 },
         },
     );
 
