@@ -66,6 +66,18 @@ export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethod
         }) as typeof paginateOptions.populate;
     }
 
+    let finalSort;
+    const rawSort = Object.keys(queryParams.sort).length ? queryParams.sort : paginateOptions?.sort;
+    if (rawSort === undefined) finalSort = { _id: -1 };
+    else {
+        if (typeof rawSort === 'object') {
+            finalSort = {
+                ...rawSort,
+                _id: -1,
+            };
+        } else if (/\b-?_id\b/.test(rawSort)) finalSort = `${rawSort.trim()} -_id`;
+    }
+
     const paginatedResult = await model.paginate(
         queryParams.filter,
         {
@@ -73,7 +85,7 @@ export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethod
             limit: queryParams.limit,
             page: queryParams.page,
             select: queryParams.fields,
-            sort: Object.keys(queryParams.sort).length ? queryParams.sort : paginateOptions?.sort || { _id: -1 },
+            sort: finalSort,
         },
     );
 
