@@ -9,8 +9,8 @@ import { logger } from '@/core/utils/logger';
 import { gracefulExit } from '@/graceful-exit';
 
 let server: Server | undefined;
-process.once('SIGINT', () => gracefulExit(server));
-process.once('SIGTERM', () => gracefulExit(server));
+process.on('SIGINT', () => gracefulExit(server));
+process.on('SIGTERM', () => gracefulExit(server));
 
 // Setup error handling
 setupHonoAppErrorHandling(honoApp, logger);
