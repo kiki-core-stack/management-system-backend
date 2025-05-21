@@ -1,8 +1,8 @@
-import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
+import { mongooseConnections } from '@kikiutils/mongoose/constants';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { getModelDocumentByRouteIdAndDelete } from '@/libs/model';
