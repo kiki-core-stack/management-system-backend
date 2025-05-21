@@ -1,6 +1,6 @@
 import type { Server } from 'bun';
 
-import { mongooseConnections } from '@kiki-core-stack/pack/constants/mongoose';
+import { mongooseConnections } from '@kikiutils/mongoose/constants';
 
 import { logger } from '@/core/utils/logger';
 
