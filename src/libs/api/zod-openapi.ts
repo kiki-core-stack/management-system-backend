@@ -13,10 +13,6 @@ const defaultApiRouteZodOpenApiResponsesConfig = {
     500: convertApiErrorToApiRouteZodOpenApiResponseConfig(new ApiError()),
 } as const;
 
-export function convertApiErrorToApiRouteZodOpenApiResponseConfig(apiError: ApiError<any, any>) {
-    return defineApiRouteZodOpenApiResponseConfig(undefined, apiError.message, apiError.errorCode);
-}
-
 export function convertApiErrorsToApiRouteZodOpenApiResponsesConfig(
     apiErrors: ApiError<any, any>[] | Record<string, ApiError<any, any>>,
 ) {
@@ -45,6 +41,10 @@ export function convertApiErrorsToApiRouteZodOpenApiResponsesConfig(
     });
 
     return responses;
+}
+
+export function convertApiErrorToApiRouteZodOpenApiResponseConfig(apiError: ApiError<any, any>) {
+    return defineApiRouteZodOpenApiResponseConfig(undefined, apiError.message, apiError.errorCode);
 }
 
 export function defineApiRouteZodOpenApiConfig(

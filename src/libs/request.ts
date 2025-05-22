@@ -17,6 +17,19 @@ function isValidRegexPattern(pattern: string) {
     }
 }
 
+function normalizeApiRequestQueryFilter(filter: AnyRecord) {
+    const normalizedFilter: AnyRecord = {};
+    Object.entries(filter).forEach(([field, condition]) => {
+        if (field.endsWith('At')) {
+            normalizedFilter[field] = normalizeApiRequestQueryTypedCondition(condition, 'date');
+        } else if (field.endsWith('ObjectId')) {
+            normalizedFilter[field.slice(0, -8)] = normalizeApiRequestQueryTypedCondition(condition, 'objectId');
+        } else normalizedFilter[field] = normalizeApiRequestQueryTypedCondition(condition);
+    });
+
+    return normalizedFilter;
+}
+
 function normalizeApiRequestQueryTypedCondition(condition: any, type?: 'date' | 'objectId') {
     if (!isPlainObject(condition)) return parseTypedValue(condition, type);
     const normalizedCondition: AnyRecord = {};
@@ -43,19 +56,6 @@ function normalizeApiRequestQueryTypedCondition(condition: any, type?: 'date' | 
     }
 
     return normalizedCondition;
-}
-
-function normalizeApiRequestQueryFilter(filter: AnyRecord) {
-    const normalizedFilter: AnyRecord = {};
-    Object.entries(filter).forEach(([field, condition]) => {
-        if (field.endsWith('At')) {
-            normalizedFilter[field] = normalizeApiRequestQueryTypedCondition(condition, 'date');
-        } else if (field.endsWith('ObjectId')) {
-            normalizedFilter[field.slice(0, -8)] = normalizeApiRequestQueryTypedCondition(condition, 'objectId');
-        } else normalizedFilter[field] = normalizeApiRequestQueryTypedCondition(condition);
-    });
-
-    return normalizedFilter;
 }
 
 export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryParams {
