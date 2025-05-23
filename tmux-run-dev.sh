@@ -3,11 +3,11 @@
 set -e
 
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-cd "$SCRIPT_DIR"
+cd "${SCRIPT_DIR}"
 
-name='auto-hono'
+SESSION_NAME='auto-hono'
 
-if ! tmux ls | grep -q "^$name:"; then
-    tmux new-session -ds "$name"
-    tmux send-keys -t "$name" 'bun run dev' C-m
+if ! tmux ls | grep -q "^${SESSION_NAME}:"; then
+    tmux new-session -ds "${SESSION_NAME}"
+    tmux send-keys -t "${SESSION_NAME}" 'bun run dev' C-m
 fi
