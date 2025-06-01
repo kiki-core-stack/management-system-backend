@@ -2,6 +2,7 @@ import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
+import type { Types } from 'mongoose';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { getModelDocumentByRouteIdAndUpdateBooleanField } from '@/libs/model';
@@ -16,7 +17,11 @@ export default defaultHonoFactory.createHandlers((ctx) => {
             { session },
             async (admin, field) => {
                 if (field === 'enabled') {
-                    if (admin._id === ctx.adminId) throwApiError(400, '無法變更自己的啟用狀態！');
+                    // TODO 解決unknown
+                    if ((admin._id as Types.ObjectId).toHexString() === ctx.adminId?.toHexString()) {
+                        throwApiError(400, '無法變更自己的啟用狀態！');
+                    }
+
                     await AdminSessionModel.deleteMany({ a: admin }, { session });
                 }
             },
