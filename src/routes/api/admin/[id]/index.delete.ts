@@ -1,6 +1,5 @@
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
-import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
 import type { Types } from 'mongoose';
@@ -22,7 +21,6 @@ export default defaultHonoFactory.createHandlers((ctx) => {
                 }
 
                 if (await AdminModel.countDocuments() === 1) throwApiError(409, '無法刪除最後一位管理員！');
-                await AdminLogModel.deleteMany({ a: admin }, { session });
                 await AdminSessionModel.deleteMany({ a: admin }, { session });
             },
         );
