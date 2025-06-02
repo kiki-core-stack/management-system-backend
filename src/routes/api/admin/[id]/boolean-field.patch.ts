@@ -22,7 +22,7 @@ export default defaultHonoFactory.createHandlers((ctx) => {
                         throwApiError(400, '無法變更自己的啟用狀態！');
                     }
 
-                    await AdminSessionModel.deleteMany({ a: admin }, { session });
+                    await AdminSessionModel.deleteMany({ admin }, { session });
                 }
             },
         );

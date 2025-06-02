@@ -21,7 +21,7 @@ export default defaultHonoFactory.createHandlers((ctx) => {
                 }
 
                 if (await AdminModel.countDocuments() === 1) throwApiError(409, '無法刪除最後一位管理員！');
-                await AdminSessionModel.deleteMany({ a: admin }, { session });
+                await AdminSessionModel.deleteMany({ admin }, { session });
             },
         );
 

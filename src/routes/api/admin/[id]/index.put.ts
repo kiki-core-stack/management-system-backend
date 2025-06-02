@@ -19,7 +19,7 @@ export default defaultHonoFactory.createHandlers(
         if (!updateQuery.email) updateQuery.$unset = { email: true };
         return await mongooseConnections.default!.transaction(async (session) => {
             await assertMongooseUpdateSuccess(admin.updateOne(updateQuery, { session }));
-            if (!updateQuery.enabled) await AdminSessionModel.deleteMany({ a: admin }, { session });
+            if (!updateQuery.enabled) await AdminSessionModel.deleteMany({ admin }, { session });
             return ctx.createApiSuccessResponse();
         });
     },
