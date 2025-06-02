@@ -18,7 +18,12 @@ export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
     enumObject: T,
     toTextMap?: Record<number | string, string>,
 ) {
-    const schema = z.nativeEnum(enumObject);
+    const baseSchema = z.nativeEnum(enumObject);
+    const schema = z.preprocess(
+        (value) => typeof value === 'number' || typeof value === 'string' ? +value : value,
+        baseSchema,
+    );
+
     // Remove it if you need OpenAPI metadata in production
     if (process.env.NODE_ENV === 'production') return schema;
     return schema.openapi(
