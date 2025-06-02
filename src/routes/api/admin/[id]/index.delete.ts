@@ -16,7 +16,7 @@ export default defaultHonoFactory.createHandlers((ctx) => {
             { session },
             async (admin) => {
                 // TODO 解決unknown
-                if ((admin._id as Types.ObjectId).toHexString() === ctx.adminId?.toHexString()) {
+                if ((admin._id as Types.ObjectId).toHexString() === ctx.adminId) {
                     throwApiError(409, '無法刪除自己！');
                 }
 

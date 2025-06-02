@@ -45,7 +45,7 @@ honoApp.use('/api/*', async (ctx, next) => {
 
         if (!adminSession) deleteAuthToken(ctx);
         else {
-            ctx.adminId = adminSession.admin;
+            ctx.adminId = adminSession.admin.toHexString();
             const today = new Date();
             if (isBefore(adminSession.lastActiveAt, subDays(today, 7))) {
                 await adminSession.deleteOne();
