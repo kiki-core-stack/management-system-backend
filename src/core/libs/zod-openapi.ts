@@ -7,7 +7,11 @@ import { getEnumNumberValues } from '@kikiutils/shared/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
 import * as z from 'zod';
-import type { EnumLike } from 'zod';
+import type {
+    EnumLike,
+    ZodEffects,
+    ZodNativeEnum,
+} from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
@@ -18,9 +22,14 @@ export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
     enumObject: T,
     toTextMap?: Record<number | string, string>,
 ) {
-    const schema = z.nativeEnum(enumObject);
+    const baseSchema = z.nativeEnum(enumObject);
+    const schema = z.preprocess(
+        (value) => typeof value === 'number' || typeof value === 'string' ? +value : value,
+        baseSchema,
+    );
+
     // Remove it if you need OpenAPI metadata in production
-    if (process.env.NODE_ENV === 'production') return schema;
+    if (process.env.NODE_ENV === 'production') return schema as ZodEffects<ZodNativeEnum<T>>;
     return schema.openapi(
         enumName,
         {
@@ -29,7 +38,7 @@ export function numberEnumToZodOpenApiSchema<T extends EnumLike>(
                 : undefined,
             'x-enum-varnames': Object.keys(enumObject).filter((key) => !Number.isFinite(+key)),
         },
-    );
+    ) as ZodEffects<ZodNativeEnum<T>>;
 }
 
 export function zodSchemaToOpenApiSchema(schema: ReturnType<(typeof z)['object']>, description?: string): SchemaObject {
