@@ -50,7 +50,7 @@ export function convertApiErrorToApiRouteZodOpenApiResponseConfig(apiError: ApiE
 export function defineApiRouteZodOpenApiConfig(
     operationId: string,
     description: string,
-    tags: string[],
+    tags: Arrayable<string>,
     config?: Except<SetOptional<RouteZodOpenApiConfig, 'responses'>, 'description' | 'operationId' | 'tags'>,
     apiErrors?: ApiError<any, any>[] | Record<string, ApiError<any, any>>,
 ): RouteZodOpenApiConfig {
@@ -63,7 +63,7 @@ export function defineApiRouteZodOpenApiConfig(
             ...config?.responses,
             ...apiErrors && convertApiErrorsToApiRouteZodOpenApiResponsesConfig(apiErrors),
         },
-        tags,
+        tags: Array.isArray(tags) ? tags : [tags],
     };
 }
 
