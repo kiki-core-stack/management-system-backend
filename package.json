@@ -10,7 +10,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^7.3.4",
+    "@asteasolutions/zod-to-openapi": "^8.0.0-beta.4",
     "@kiki-core-stack/pack": "^0.71.0",
     "@kikiutils/mongoose": "^3.1.1",
     "@kikiutils/shared": "^10.1.2",

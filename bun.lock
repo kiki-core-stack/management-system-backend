@@ -3,7 +3,7 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "@asteasolutions/zod-to-openapi": "^7.3.4",
+        "@asteasolutions/zod-to-openapi": "^8.0.0-beta.4",
         "@kiki-core-stack/pack": "^0.71.0",
         "@kikiutils/mongoose": "^3.1.1",
         "@kikiutils/shared": "^10.1.2",
@@ -34,7 +34,7 @@
 
     "@antfu/install-pkg": ["@antfu/install-pkg@1.1.0", "", { "dependencies": { "package-manager-detector": "^1.3.0", "tinyexec": "^1.0.1" } }, "sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ=="],
 
-    "@asteasolutions/zod-to-openapi": ["@asteasolutions/zod-to-openapi@7.3.4", "", { "dependencies": { "openapi3-ts": "^4.1.2" }, "peerDependencies": { "zod": "^3.20.2" } }, "sha512-/2rThQ5zPi9OzVwes6U7lK1+Yvug0iXu25olp7S0XsYmOqnyMfxH7gdSQjn/+DSOHRg7wnotwGJSyL+fBKdnEA=="],
+    "@asteasolutions/zod-to-openapi": ["@asteasolutions/zod-to-openapi@8.0.0-beta.4", "", { "dependencies": { "openapi3-ts": "^4.1.2" }, "peerDependencies": { "zod": "~3.25.1" } }, "sha512-om7KH4B6/Rd/jjrxUjV3yC7vUwKKQcM1m7R8jd12uZyBqYd4ihqa1mMHp9MG3Hau8M/ha6teNJLouDUvwZXpNg=="],
 
     "@babel/helper-string-parser": ["@babel/helper-string-parser@7.27.1", "", {}, "sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA=="],
 
