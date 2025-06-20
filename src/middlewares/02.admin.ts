@@ -8,6 +8,7 @@ import {
     subMinutes,
 } from 'date-fns';
 import type { Context } from 'hono';
+import { matchedRoutes } from 'hono/route';
 import type { H } from 'hono/types';
 
 import { honoApp } from '@/core/app';
@@ -31,8 +32,8 @@ async function getAdmin(this: Context) {
 }
 
 honoApp.use('/api/*', async (ctx, next) => {
-    // eslint-disable-next-line style/max-len
-    const routeHandler: (H & RouteHandlerProperties) | undefined = ctx.req.matchedRoutes[ctx.req.matchedRoutes.length - 1]?.handler;
+    const routerRoutes = matchedRoutes(ctx);
+    const routeHandler: (H & RouteHandlerProperties) | undefined = routerRoutes[routerRoutes.length - 1]?.handler;
     if (!routeHandler?.isHandler) return await next();
     const token = getAuthToken(ctx);
     if (token) {
