@@ -7,11 +7,23 @@ import { getEnumNumberValues } from '@kikiutils/shared/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
 import * as z from 'zod/v4';
-import type { core } from 'zod/v4';
+import type {
+    core,
+    ZodType,
+} from 'zod/v4';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
 export const defineRouteZodOpenApiConfig = (config: RouteZodOpenApiConfig): RouteZodOpenApiConfig => config;
+
+export function markZodSchemaAsBinaryUploadForOpenApi<T extends ZodType>(schema: T) {
+    // Remove it if you need OpenAPI metadata in production
+    if (process.env.NODE_ENV === 'production') return schema;
+    return schema.openapi({
+        format: 'binary',
+        type: 'string',
+    });
+}
 
 export function numberEnumToZodOpenApiSchema<T extends core.util.EnumLike>(
     enumName: string,
