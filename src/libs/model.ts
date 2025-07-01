@@ -18,7 +18,7 @@ export async function getModelDocumentByRouteIdAndDelete<RawDocType, QueryHelper
         document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>
     ) => any,
 ) {
-    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, null, options);
+    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, undefined, options);
     // @ts-expect-error Ignore this error.
     await beforeDelete?.(document);
     await document.deleteOne(options || undefined);
@@ -40,7 +40,7 @@ export async function getModelDocumentByRouteIdAndUpdateBooleanField<
         value: boolean
     ) => any,
 ) {
-    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, null, options);
+    const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, undefined, options);
     const { field, value } = await ctx.req.json<{ field: string; value: boolean }>();
     if (!allowedFields.includes(field)) throwApiError(400);
     // @ts-expect-error Ignore this error.
