@@ -1,4 +1,3 @@
-import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-validator';
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
@@ -15,10 +14,5 @@ export const jsonSchema = z.object({
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),
-    async (ctx) => {
-        const data = ctx.req.valid('json');
-        if (data.password!.length !== 128) throwApiError(400);
-        await AdminModel.create(data);
-        return ctx.createApiSuccessResponse();
-    },
+    async (ctx) => ctx.createApiSuccessResponse(await AdminModel.create(ctx.req.valid('json'))),
 );
