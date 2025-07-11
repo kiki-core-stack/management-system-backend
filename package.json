@@ -9,8 +9,8 @@
     "dev": "cross-env NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix --max-warnings 0",
-    "unused-exports": "ts-unused-exports ./tsconfig.json",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "unused-exports": "ts-unused-exports ./tsconfig.json"
   },
   "dependencies": {},
   "devDependencies": {
