@@ -7,7 +7,10 @@ import { getEnumNumberValues } from '@kikiutils/shared/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
 import * as z from 'zod';
-import type { core } from 'zod';
+import type {
+    core,
+    ZodObject,
+} from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
@@ -36,7 +39,7 @@ export function numberEnumToZodOpenApiSchema<T extends core.util.EnumLike>(
     );
 }
 
-export function zodSchemaToOpenApiSchema(schema: ReturnType<(typeof z)['object']>, description?: string): SchemaObject {
+export function zodSchemaToOpenApiSchema(schema: ZodObject, description?: string): SchemaObject {
     const registry = new OpenAPIRegistry();
     registry.register('schema', schema);
     return {
