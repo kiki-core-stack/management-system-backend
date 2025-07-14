@@ -13,5 +13,5 @@ const middlewarePaths = await getMiddlewareFilePaths();
 middlewarePaths.forEach((path) => outputLines.push(`export {} from '${path}';`));
 await Bun.write(productionMiddlewaresLoaderPath, `${outputLines.join('\n')}\n`);
 logger.success(
-    `Generated ${middlewarePaths.length} production middlewares in ${(performance.now() - startTime).toFixed(2)}ms.`,
+    `Generated ${middlewarePaths.length} production middlewares in ${(performance.now() - startTime).toFixed(2)}ms`,
 );

@@ -13,7 +13,7 @@ const usedConstNames = new Set<string>();
 async function applyRouteFragments(routeDefinition: RouteDefinition, index: number) {
     const moduleExports = await resolveModuleExportNames(routeDefinition.filePath);
     if (!moduleExports.includes('default')) {
-        throw new Error(`No default export found in route at ${routeDefinition.filePath}.`);
+        throw new Error(`No default export found in route at ${routeDefinition.filePath}`);
     }
 
     const importAlias = `route${index}`;
@@ -23,22 +23,24 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
     // eslint-disable-next-line style/max-len
     let registration = `registerRoute(${methodConstName}, ${pathConstName}, processRouteHandlers(${importAlias}.default),`;
     if (moduleExports.includes('routeHandlerOptions')) registration += ` ${importAlias}.routeHandlerOptions,`;
-    // Enable if OpenAPI support is required in production
-    if (false) {
-        if (moduleExports.includes('zodOpenApiConfig') && moduleExports.includes('getZodOpenApiConfig')) {
-            // eslint-disable-next-line style/max-len
-            throw new Error(`Both zodOpenApiConfig and getZodOpenApiConfig found for route at ${routeDefinition.filePath}.`);
-        }
 
-        if (moduleExports.includes('zodOpenApiConfig')) {
-            // eslint-disable-next-line style/max-len
-            logger.warn(`To optimize tree shaking in production, it is recommended to use getZodOpenApiConfig instead of zodOpenApiConfig at ${routeDefinition.filePath}.`);
-            // eslint-disable-next-line style/max-len
-            registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
-        } else if (moduleExports.includes('getZodOpenApiConfig')) {
-            // eslint-disable-next-line style/max-len
-            registration += ` { config: ${importAlias}.getZodOpenApiConfig(), path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
-        }
+    // Remove the next line if you need OpenAPI metadata in production.
+    if (process.env.NODE_ENV === 'production') return `${registration.replace(/,\s*$/, '')});`;
+
+    const hasGetZodOpenApiConfig = moduleExports.includes('getZodOpenApiConfig');
+    const hasZodOpenApiConfig = moduleExports.includes('zodOpenApiConfig');
+    if (hasGetZodOpenApiConfig && hasZodOpenApiConfig) {
+        throw new Error(`Both getZodOpenApiConfig and zodOpenApiConfig found for route at ${routeDefinition.filePath}`);
+    }
+
+    if (hasGetZodOpenApiConfig) {
+        // eslint-disable-next-line style/max-len
+        registration += ` { config: ${importAlias}.getZodOpenApiConfig(), path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
+    } else if (hasZodOpenApiConfig) {
+        // eslint-disable-next-line style/max-len
+        logger.warn(`To optimize tree shaking in production, it is recommended to use getZodOpenApiConfig instead of zodOpenApiConfig at ${routeDefinition.filePath}`);
+        // eslint-disable-next-line style/max-len
+        registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
     }
 
     return `${registration.replace(/,\s*$/, '')});`;
@@ -71,5 +73,5 @@ const outputLines = [
 
 await Bun.write(productionRoutesLoaderPath, `${outputLines.join('\n').trim()}\n`);
 logger.success(
-    `Generated ${registrationLines.length} production routes in ${(performance.now() - startTime).toFixed(2)}ms.`,
+    `Generated ${registrationLines.length} production routes in ${(performance.now() - startTime).toFixed(2)}ms`,
 );
