@@ -6,8 +6,8 @@ import type { RouteConfig } from '@asteasolutions/zod-to-openapi';
 import { getEnumNumberValues } from '@kikiutils/shared/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
-import * as z from 'zod/v4';
-import type { core } from 'zod/v4';
+import * as z from 'zod';
+import type { core } from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
