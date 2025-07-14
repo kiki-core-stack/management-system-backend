@@ -3,8 +3,8 @@ FROM oven/bun:slim AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
-ENV NODE_ENV=production \
-    NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
+ENV NODE_ENV='production' \
+    NPM_CONFIG_REGISTRY="${NPM_CONFIG_REGISTRY}"
 
 WORKDIR /app
 
@@ -27,9 +27,10 @@ RUN bun run lint && \
 FROM oven/bun:slim
 
 ## Set envs and workdir
-ENV NODE_ENV=production \
-    SERVER_HOST=0.0.0.0 \
-    TZ=UTC
+ENV NODE_ENV='production' \
+    SERVER_HOST='0.0.0.0' \
+    SERVER_PORT=8000 \
+    TZ='UTC'
 
 WORKDIR /app
 
@@ -38,7 +39,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini tzdata && \
     ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime && \
-    echo ${TZ} > /etc/timezone && \
+    echo "${TZ}" >/etc/timezone && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*

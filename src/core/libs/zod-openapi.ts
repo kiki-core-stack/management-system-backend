@@ -6,8 +6,8 @@ import type { RouteConfig } from '@asteasolutions/zod-to-openapi';
 import { getEnumNumberValues } from '@kikiutils/shared/enum';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { Except } from 'type-fest';
-import * as z from 'zod/v4';
-import type { core } from 'zod/v4';
+import * as z from 'zod';
+import type { core } from 'zod';
 
 export type RouteZodOpenApiConfig = Except<RouteConfig, 'method' | 'path'>;
 
@@ -18,13 +18,12 @@ export function numberEnumToZodOpenApiSchema<T extends core.util.EnumLike>(
     enumObject: T,
     toTextMap?: Record<number | string, string>,
 ) {
-    const baseSchema = z.enum(enumObject);
     const schema = z.preprocess(
         (value) => typeof value === 'number' || typeof value === 'string' ? +value : value,
-        baseSchema,
+        z.enum(enumObject),
     );
 
-    // Remove it if you need OpenAPI metadata in production
+    // Remove the next line if you need OpenAPI metadata in production.
     if (process.env.NODE_ENV === 'production') return schema;
     return schema.openapi(
         enumName,
