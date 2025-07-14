@@ -34,9 +34,11 @@
     "@scalar/hono-api-reference": "^0.9.10",
     "@types/bun": "^1.2.18",
     "@types/lodash-es": "^4.17.12",
+    "depcheck": "^1.4.7",
     "mlly": "^1.7.4",
     "openapi3-ts": "^4.5.0",
     "rimraf": "^6.0.1",
+    "ts-unused-exports": "^11.0.1",
     "type-fest": "^4.41.0",
     "typescript": "^5.8.3"
   }
