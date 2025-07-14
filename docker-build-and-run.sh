@@ -21,6 +21,7 @@ docker stop "${DOCKER_CONTAINER_NAME}" || true
 docker rm "${DOCKER_CONTAINER_NAME}" || true
 docker run \
     -d \
+    -p "${SERVER_DOCKER_EXPOSE_HOST}:${SERVER_DOCKER_EXPOSE_PORT}:8000" \
     --name "${DOCKER_CONTAINER_NAME}" \
     --restart=always \
     "${DOCKER_IMAGE_TAG}"
