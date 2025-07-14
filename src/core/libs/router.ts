@@ -73,9 +73,10 @@ export async function registerRoute(
 
     honoApp.on(method, path, ...handlers);
     (allRoutes as WritableDeep<typeof allRoutes>)[method][path] = { handlerProperties: handlerOptions?.properties };
-    // Registers OpenAPI paths for documentation generation in development only.
-    // Remove the NODE_ENV check if you need OpenAPI metadata in production.
-    if (process.env.NODE_ENV === 'development' && zodOpenApiOptions) {
+
+    // Remove the next line if you need OpenAPI metadata in production.
+    if (process.env.NODE_ENV === 'production') return;
+    if (zodOpenApiOptions) {
         const { zodOpenApiRegistry } = await import('../constants/zod-openapi');
         zodOpenApiRegistry.registerPath({
             ...zodOpenApiOptions.config,
