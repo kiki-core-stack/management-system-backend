@@ -25,10 +25,10 @@ function createAndSetWorker(index: number) {
         onExit(_subprocess, exitCode, signalCode, error) {
             const logPrefix = workerProcesses[index]!.logPrefix;
             if (error) logger.error(logPrefix, 'Exited due to error:', error);
-            else if (exitCode !== null) logger.info(logPrefix, `Exited with code: ${exitCode}.`);
-            else if (signalCode !== null) logger.info(logPrefix, `Exited with signal: ${signalCode}.`);
-            else logger.info(logPrefix, 'Exited with unknown reason.');
-            if (isShuttingDown) return logger.info(logPrefix, 'Main process shutting down. Do not restart.');
+            else if (exitCode !== null) logger.info(logPrefix, `Exited with code ${exitCode}`);
+            else if (signalCode !== null) logger.info(logPrefix, `Exited with signal ${signalCode}`);
+            else logger.info(logPrefix, 'Exited with unknown reason');
+            if (isShuttingDown) return logger.info(logPrefix, 'Main process shutting down... do not restart');
             logger.info(logPrefix, 'Restarting in 1 second...');
             setTimeout(() => !isShuttingDown && createAndSetWorker(index), 1000);
         },
@@ -54,11 +54,11 @@ async function shutdown(exitCode?: NodeJS.Signals | number) {
             logger.info(logPrefix, 'Killing process...');
             subprocess.kill(exitCode);
             await subprocess.exited;
-            logger.success(logPrefix, 'Process exited.');
+            logger.success(logPrefix, 'Process exited');
         }),
     );
 
-    logger.info('All workers shut down.');
+    logger.info('All workers shut down');
 }
 
 // Entrypoint
