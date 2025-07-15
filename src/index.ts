@@ -19,6 +19,7 @@ await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`);
 await import(`@/core/loaders/routes/${process.env.NODE_ENV}`);
 
 // Start server
+logger.info('Starting server...');
 server = Bun.serve({
     fetch: honoApp.fetch,
     hostname: process.env.SERVER_HOST || '127.0.0.1',
@@ -26,4 +27,4 @@ server = Bun.serve({
     reusePort: true,
 });
 
-logger.success(`Server started at http://${server.hostname}:${server.port}.`);
+logger.success(`Server started at http://${server.hostname}:${server.port}`);
