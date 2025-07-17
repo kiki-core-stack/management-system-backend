@@ -33,7 +33,7 @@ async function getAdmin(this: Context) {
 
 honoApp.use('/api/*', async (ctx, next) => {
     const routerRoutes = matchedRoutes(ctx);
-    const routeHandler: (H & RouteHandlerProperties) | undefined = routerRoutes[routerRoutes.length - 1]?.handler;
+    const routeHandler: H & RouteHandlerProperties | undefined = routerRoutes[routerRoutes.length - 1]?.handler;
     if (!routeHandler?.isHandler) return await next();
     const token = getAuthToken(ctx);
     if (token) {
