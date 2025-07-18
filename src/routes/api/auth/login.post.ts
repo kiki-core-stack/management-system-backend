@@ -21,7 +21,7 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const data = ctx.req.valid('json');
         if (data.verCode !== ctx.popSession('verCode')?.toLowerCase()) {
-            throwApiError(400, '驗證碼不正確！', 'invalidVerificationCode');
+            throwApiError(400, '驗證碼不正確', 'invalidVerificationCode');
         }
 
         const admin = await AdminModel.findOne({
@@ -29,7 +29,7 @@ export default defaultHonoFactory.createHandlers(
             enabled: true,
         });
 
-        if (!admin?.enabled || !admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確！');
+        if (!admin?.enabled || !admin.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確');
         await handleAdminLogin(ctx, admin.id);
         return ctx.createApiSuccessResponse();
     },

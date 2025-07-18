@@ -16,11 +16,8 @@ export default defaultHonoFactory.createHandlers((ctx) => {
             { session },
             async (admin) => {
                 // TODO 解決unknown
-                if ((admin._id as Types.ObjectId).equals(ctx.adminId)) {
-                    throwApiError(409, '無法刪除自己！');
-                }
-
-                if (await AdminModel.countDocuments() === 1) throwApiError(409, '無法刪除最後一位管理員！');
+                if ((admin._id as Types.ObjectId).equals(ctx.adminId)) throwApiError(409, '無法刪除自己');
+                if (await AdminModel.countDocuments() === 1) throwApiError(409, '無法刪除最後一位管理員');
                 await AdminSessionModel.deleteMany({ admin }, { session });
             },
         );

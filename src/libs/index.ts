@@ -5,6 +5,6 @@ export function assertNotModifiedAndStripData<T extends { updatedAt: string }>(
     document: { updatedAt: Date },
 ) {
     const { updatedAt, ...data } = payload;
-    if (updatedAt !== document.updatedAt.toISOString()) throwApiError(409, '該資料已被修改！請重新整理。');
+    if (updatedAt !== document.updatedAt.toISOString()) throwApiError(409, '該資料已被修改');
     return data;
 }
