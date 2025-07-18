@@ -33,14 +33,13 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
         throw new Error(`Both getZodOpenApiConfig and zodOpenApiConfig found for route at ${routeDefinition.filePath}`);
     }
 
+    const openApiPathConstName = getOrCreateConstName(routeDefinition.openApiPath);
     if (hasGetZodOpenApiConfig) {
-        // eslint-disable-next-line style/max-len
-        registration += ` { config: ${importAlias}.getZodOpenApiConfig(), path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
+        registration += ` { config: ${importAlias}.getZodOpenApiConfig(), path: ${openApiPathConstName} },`;
     } else if (hasZodOpenApiConfig) {
         // eslint-disable-next-line style/max-len
         logger.warn(`To optimize tree shaking in production, it is recommended to use getZodOpenApiConfig instead of zodOpenApiConfig at ${routeDefinition.filePath}`);
-        // eslint-disable-next-line style/max-len
-        registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
+        registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${openApiPathConstName} },`;
     }
 
     return `${registration.replace(/,\s*$/, '')});`;
