@@ -24,7 +24,7 @@ function createAndSetWorker(index: number) {
         ],
         onExit(_subprocess, exitCode, signalCode, error) {
             const logPrefix = workerProcesses[index]!.logPrefix;
-            if (error) logger.error(logPrefix, 'Exited due to error:', error);
+            if (error) logger.error(logPrefix, `Exited due to error: ${error.message}\n`, error);
             else if (exitCode !== null) logger.info(logPrefix, `Exited with code ${exitCode}`);
             else if (signalCode !== null) logger.info(logPrefix, `Exited with signal ${signalCode}`);
             else logger.info(logPrefix, 'Exited with unknown reason');

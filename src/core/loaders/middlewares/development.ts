@@ -9,7 +9,7 @@ for (const middlewareFilePath of await getMiddlewareFilePaths()) {
         await import(middlewareFilePath);
         loadedMiddlewareCount++;
     } catch (error) {
-        logger.error(`Failed to load middleware at ${middlewareFilePath}`, error);
+        logger.error(`Failed to load middleware at ${middlewareFilePath}: ${(error as Error).message}\n`, error);
     }
 }
 
