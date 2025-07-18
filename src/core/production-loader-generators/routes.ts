@@ -7,8 +7,8 @@ import { logger } from '../utils/logger';
 
 const importStatements: string[] = [];
 const constantDeclarations: string[] = [];
-const valueToConstMap = new Map<string, string>();
 const usedConstNames = new Set<string>();
+const valueToConstMap = new Map<string, string>();
 
 async function applyRouteFragments(routeDefinition: RouteDefinition, index: number) {
     const moduleExports = await resolveModuleExportNames(routeDefinition.filePath);
@@ -48,12 +48,15 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
 
 function getOrCreateConstName(value: string) {
     if (valueToConstMap.has(value)) return valueToConstMap.get(value)!;
+
     let constName: string;
-    do constName = `v${Math.random().toString(36).slice(2, 10)}`;
+    do constName = `v${Math.random().toString(36).substring(2)}`;
     while (usedConstNames.has(constName));
+
     constantDeclarations.push(`const ${constName} = '${value}';`);
     usedConstNames.add(constName);
     valueToConstMap.set(value, constName);
+
     return constName;
 }
 
