@@ -65,7 +65,8 @@ export function session(cipherKey: BinaryLike, tokenHandler: SessionTokenHandler
             ctx.session,
         ]);
 
-        if (!encryptResult.ok) return;
-        tokenHandler.set(ctx, `${encryptResult.value.authTag}${encryptResult.value.iv}${encryptResult.value.data}`);
+        if (encryptResult.ok) {
+            tokenHandler.set(ctx, `${encryptResult.value.authTag}${encryptResult.value.iv}${encryptResult.value.data}`);
+        }
     });
 }
