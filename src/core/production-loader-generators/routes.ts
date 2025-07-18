@@ -7,8 +7,8 @@ import { logger } from '../utils/logger';
 
 const importStatements: string[] = [];
 const constantDeclarations: string[] = [];
-const valueToConstMap = new Map<string, string>();
 const usedConstNames = new Set<string>();
+const valueToConstMap = new Map<string, string>();
 
 async function applyRouteFragments(routeDefinition: RouteDefinition, index: number) {
     const moduleExports = await resolveModuleExportNames(routeDefinition.filePath);
@@ -33,14 +33,13 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
         throw new Error(`Both getZodOpenApiConfig and zodOpenApiConfig found for route at ${routeDefinition.filePath}`);
     }
 
+    const openApiPathConstName = getOrCreateConstName(routeDefinition.openApiPath);
     if (hasGetZodOpenApiConfig) {
-        // eslint-disable-next-line style/max-len
-        registration += ` { config: ${importAlias}.getZodOpenApiConfig(), path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
+        registration += ` { config: ${importAlias}.getZodOpenApiConfig(), path: ${openApiPathConstName} },`;
     } else if (hasZodOpenApiConfig) {
         // eslint-disable-next-line style/max-len
         logger.warn(`To optimize tree shaking in production, it is recommended to use getZodOpenApiConfig instead of zodOpenApiConfig at ${routeDefinition.filePath}`);
-        // eslint-disable-next-line style/max-len
-        registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${getOrCreateConstName(routeDefinition.openApiPath)} },`;
+        registration += ` { config: ${importAlias}.zodOpenApiConfig, path: ${openApiPathConstName} },`;
     }
 
     return `${registration.replace(/,\s*$/, '')});`;
@@ -48,12 +47,15 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
 
 function getOrCreateConstName(value: string) {
     if (valueToConstMap.has(value)) return valueToConstMap.get(value)!;
+
     let constName: string;
-    do constName = `v${Math.random().toString(36).slice(2, 10)}`;
+    do constName = `v${Math.random().toString(36).substring(2)}`;
     while (usedConstNames.has(constName));
+
     constantDeclarations.push(`const ${constName} = '${value}';`);
     usedConstNames.add(constName);
     valueToConstMap.set(value, constName);
+
     return constName;
 }
 
