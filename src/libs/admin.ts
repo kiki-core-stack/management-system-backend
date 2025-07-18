@@ -12,7 +12,7 @@ import type {
 } from 'mongoose';
 import { nanoid } from 'nanoid';
 
-import { getXForwardedForHeaderFirstValue } from '@/core/utils';
+import { getClientIpFromXForwardedFor } from '@/core/utils/request';
 
 import { setAuthToken } from './auth';
 
@@ -25,7 +25,7 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
         sessionId?: Types.ObjectId;
     },
 ) {
-    const ip = options?.ip || getXForwardedForHeaderFirstValue(ctx);
+    const ip = options?.ip || getClientIpFromXForwardedFor(ctx);
     const updateQuery: UpdateQuery<AdminSession> = {
         admin: adminId,
         lastActiveAt: new Date(),
@@ -51,7 +51,7 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
 }
 
 export async function handleAdminLogin(ctx: Context, adminId: string | Types.ObjectId, session?: ClientSession) {
-    const ip = getXForwardedForHeaderFirstValue(ctx);
+    const ip = getClientIpFromXForwardedFor(ctx);
     await createOrUpdateAdminSessionAndSetAuthToken(
         ctx,
         adminId,
