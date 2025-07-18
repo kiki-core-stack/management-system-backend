@@ -95,11 +95,17 @@ export function parseApiRequestQueryParams(ctx: Context): ParsedApiRequestQueryP
 }
 
 function parseTypedValue(value: any, type?: 'date' | 'objectId') {
-    if (type === 'date') {
-        const date = new Date(value);
-        if (!Number.isNaN(date.getTime())) return date;
-    } else if (type === 'objectId') {
-        if (typeof value === 'string' && Types.ObjectId.isValid(value)) return new Types.ObjectId(value);
+    switch (type) {
+        case 'date': {
+            const date = new Date(value);
+            if (!Number.isNaN(date.getTime())) return date;
+            break;
+        }
+
+        case 'objectId': {
+            if (Types.ObjectId.isValid(value)) return new Types.ObjectId(value);
+            break;
+        }
     }
 
     return value;

@@ -34,10 +34,7 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
         userAgent: ctx.req.header('User-Agent'),
     };
 
-    if (!options?.sessionId) {
-        updateQuery.loginIp = ip;
-        await AdminSessionModel.create([updateQuery], { session: options?.mongooseSession });
-    } else {
+    if (options?.sessionId) {
         await assertMongooseUpdateSuccess(
             AdminSessionModel.updateOne(
                 { _id: options.sessionId },
@@ -45,6 +42,9 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
                 { session: options.mongooseSession },
             ),
         );
+    } else {
+        updateQuery.loginIp = ip;
+        await AdminSessionModel.create([updateQuery], { session: options?.mongooseSession });
     }
 
     setAuthToken(ctx, updateQuery.token);
