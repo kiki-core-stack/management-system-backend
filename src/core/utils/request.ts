@@ -1,6 +1,6 @@
 import type { Context } from 'hono';
 
-export function getXForwardedForHeaderFirstValue(ctx: Context) {
+export function getClientIpFromXForwardedFor(ctx: Context) {
     const xForwardedFor = ctx.req.header('x-forwarded-for');
     if (!xForwardedFor) return;
     const firstCommaIndex = xForwardedFor.indexOf(',');
