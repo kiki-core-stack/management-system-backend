@@ -14,9 +14,7 @@ export async function getModelDocumentByRouteIdAndDelete<RawDocType, QueryHelper
     model: BaseMongoosePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>,
     filter?: RootFilterQuery<RawDocType>,
     options?: Nullable<QueryOptions<RawDocType>>,
-    beforeDelete?: (
-        document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>
-    ) => any,
+    beforeDelete?: (document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>) => any,
 ) {
     const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, undefined, options);
     // @ts-expect-error Ignore this error.
