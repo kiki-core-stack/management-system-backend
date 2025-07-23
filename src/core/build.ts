@@ -34,7 +34,10 @@ const subprocess = Bun.spawn({
         '--target=bun',
     ],
     cwd: projectRoot,
-    env: { NODE_ENV: 'production' },
+    env: {
+        ...process.env,
+        NODE_ENV: 'production',
+    },
     stdio: [
         'ignore',
         'inherit',
