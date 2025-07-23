@@ -9,6 +9,7 @@ import {
 } from 'node:path';
 
 export const projectRoot = /* @__PURE__ */ resolve(import.meta.dirname, '../../../').replaceAll(sep, '/');
+export const projectDistDirPath = /* @__PURE__ */ join(projectRoot, 'dist');
 export const projectSrcDirPath = /* @__PURE__ */ join(projectRoot, 'src');
 export const middlewaresDirPath = /* @__PURE__ */ join(projectSrcDirPath, 'middlewares');
 export const productionMiddlewaresLoaderPath = /* @__PURE__ */ join(
