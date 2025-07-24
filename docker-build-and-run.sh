@@ -12,8 +12,9 @@ cd "${SCRIPT_DIR}"
 docker pull oven/bun:slim
 
 # Build and run
+DOCKER_IMAGE_REF="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}"
 docker build \
-    -t "${DOCKER_IMAGE_TAG}" \
+    -t "${DOCKER_IMAGE_REF}" \
     --build-arg "NPM_REGISTRY=${NPM_REGISTRY}" \
     .
 
@@ -23,4 +24,4 @@ docker run \
     -d \
     --name "${DOCKER_CONTAINER_NAME}" \
     --restart=always \
-    "${DOCKER_IMAGE_TAG}"
+    "${DOCKER_IMAGE_REF}"
