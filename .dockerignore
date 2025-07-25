@@ -175,6 +175,7 @@ install-dependencies.sh
 LICENSE
 modify-files-permissions.sh
 README.md
+release.config.mjs
 tmux-run-dev.sh
 upgrade-dependencies.sh
 
