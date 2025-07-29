@@ -105,7 +105,11 @@ export default {
             },
         ],
         '@semantic-release/changelog',
-        '@semantic-release/git',
+        [
+            '@semantic-release/git',
+            // eslint-disable-next-line no-template-curly-in-string
+            { message: 'chore(release): ${nextRelease.version} [skip ci]' },
+        ],
         '@semantic-release/gitlab',
     ],
 };
