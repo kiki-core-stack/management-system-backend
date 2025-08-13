@@ -29,6 +29,12 @@ for (const routeEntry of loadedRouteModules.filter((loadedRouteModule) => loaded
         continue;
     }
 
+    if (!routeEntry.module.routeHandlerOptions) {
+        throw new Error(`No routeHandlerOptions found for route at ${routeEntry.filePath}`);
+    } else if (!routeEntry.module.routeHandlerOptions.properties.permission) {
+        throw new Error(`No permission found for route at ${routeEntry.filePath}`);
+    }
+
     if (routeEntry.module.zodOpenApiConfig && routeEntry.module.getZodOpenApiConfig) {
         // eslint-disable-next-line style/max-len
         logger.warn(`Both getZodOpenApiConfig and zodOpenApiConfig found for route at ${routeEntry.filePath}, using zodOpenApiConfig`);

@@ -1,6 +1,7 @@
-declare module '../core/types/route' {
+declare module '@/core/types/route' {
     interface RouteHandlerProperties {
         noLoginRequired?: boolean;
+        permission: 'ignore' | (string & {});
     }
 }
 

@@ -2,6 +2,8 @@ import { glob } from 'node:fs/promises';
 
 import type { WritableDeep } from 'type-fest';
 
+import { allAdminPermissions } from '@/constants/admin';
+
 import { honoApp } from '../app';
 import { routesDirPath } from '../constants/paths';
 import {
@@ -70,6 +72,10 @@ export async function registerRoute(
             writable: false,
         },
     );
+
+    if (handlerOptions?.properties?.permission && handlerOptions.properties.permission !== 'ignore') {
+        allAdminPermissions.add(handlerOptions.properties.permission);
+    }
 
     honoApp.on(method, path, ...handlers);
     (allRoutes as WritableDeep<typeof allRoutes>)[method][path] = { handlerProperties: handlerOptions?.properties };

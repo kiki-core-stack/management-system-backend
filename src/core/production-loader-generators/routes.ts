@@ -16,6 +16,10 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
         throw new Error(`No default export found in route at ${routeDefinition.filePath}`);
     }
 
+    if (!moduleExports.includes('routeHandlerOptions')) {
+        throw new Error(`No routeHandlerOptions found in route at ${routeDefinition.filePath}`);
+    }
+
     const importAlias = `route${index}`;
     importStatements.push(`import * as ${importAlias} from '${routeDefinition.filePath}';`);
     const methodConstName = getOrCreateConstName(routeDefinition.method);

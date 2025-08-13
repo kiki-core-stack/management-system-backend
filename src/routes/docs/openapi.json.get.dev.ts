@@ -2,6 +2,9 @@ import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { zodOpenApiRegistry } from '@/core/constants/zod-openapi';
+import { defineRouteHandlerOptions } from '@/core/libs/route';
+
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'ignore' } });
 
 export default defaultHonoFactory.createHandlers((ctx) => {
     const definitions = zodOpenApiRegistry.definitions.toSorted((a, b) => {

@@ -7,7 +7,12 @@ import {
     getAuthToken,
 } from '@/libs/auth';
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
+export const routeHandlerOptions = defineRouteHandlerOptions({
+    properties: {
+        noLoginRequired: true,
+        permission: 'ignore',
+    },
+});
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     ctx.clearSession();

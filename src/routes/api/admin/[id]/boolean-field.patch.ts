@@ -5,7 +5,10 @@ import { mongooseConnections } from '@kikiutils/mongoose/constants';
 import type { Types } from 'mongoose';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
+import { defineRouteHandlerOptions } from '@/core/libs/route';
 import { getModelDocumentByRouteIdAndUpdateBooleanField } from '@/libs/model';
+
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.toggle' } });
 
 export default defaultHonoFactory.createHandlers((ctx) => {
     return mongooseConnections.default!.transaction(async (session) => {
