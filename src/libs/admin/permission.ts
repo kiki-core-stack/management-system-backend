@@ -26,14 +26,17 @@ export async function getAdminPermission(adminId: string | Types.ObjectId) {
                 permissions: [],
             };
         } else {
-            const populatedAdmin = await admin.populate<{ roles: AdminRoleDocument[] }>('roles', [
-                '-_id',
-                'permissions',
-            ]);
+            const populatedAdmin = await admin.populate<{ roles: AdminRoleDocument[] }>(
+                'roles',
+                [
+                    '-_id',
+                    'permissions',
+                ],
+            );
 
             adminPermission = {
                 isSuperAdmin: false,
-                permissions: populatedAdmin.roles.map((role) => role.permissions).flat(),
+                permissions: [...new Set(populatedAdmin.roles.map((role) => role.permissions).flat())],
             };
         }
 

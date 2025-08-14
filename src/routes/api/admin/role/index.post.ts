@@ -12,7 +12,11 @@ export const jsonSchema = z.object({
     name: z.string().trim().min(1).max(16),
     permissions: z
         .array(z.string().trim())
-        .refine((permissions) => !micromatch.some([...allAdminPermissions], permissions)),
+        .refine((permissions) => {
+            const allPermissions = [...allAdminPermissions];
+            for (const permission of permissions) if (!micromatch.some(allPermissions, permission)) return false;
+            return true;
+        }),
 }) satisfies ZodValidatorType<AdminRole>;
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.role.create' } });
