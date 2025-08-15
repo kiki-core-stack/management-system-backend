@@ -17,6 +17,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
         if (admin._id.equals(ctx.adminId)) throwApiError(409, '無法刪除自己');
         if (await AdminModel.countDocuments(undefined, { session }) === 1) throwApiError(409, '無法刪除最後一位管理員');
         await AdminSessionModel.deleteMany({ admin }, { session });
+        await admin.deleteOne({ session });
     });
 
     if (admin) enhancedRedisStore.adminPermission.removeItem(admin._id.toHexString()).catch(() => {});
