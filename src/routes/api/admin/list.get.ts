@@ -6,4 +6,16 @@ import { paginateModelDataWithApiResponse } from '@/libs/response';
 
 export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.list' } });
 
-export default defaultHonoFactory.createHandlers((ctx) => paginateModelDataWithApiResponse(ctx, AdminModel));
+export default defaultHonoFactory.createHandlers((ctx) => {
+    return paginateModelDataWithApiResponse(
+        ctx,
+        AdminModel,
+        undefined,
+        {
+            populate: {
+                path: 'roles',
+                select: 'name',
+            },
+        },
+    );
+});
