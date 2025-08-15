@@ -11,7 +11,7 @@ import { clearAllAdminPermissionCache } from '@/libs/admin/permission';
 
 import { jsonSchema } from '../index.post';
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.update' } });
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.role.update' } });
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema.extend({ updatedAt: z.strictIsoDateString() })),

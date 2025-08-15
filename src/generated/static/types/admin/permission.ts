@@ -5,6 +5,7 @@ export type AdminPermission =
   | 'admin.log.list'
   | 'admin.role.create'
   | 'admin.role.list'
+  | 'admin.role.update'
   | 'admin.toggle'
   | 'admin.update'
   | 'home.dashboard.view';
