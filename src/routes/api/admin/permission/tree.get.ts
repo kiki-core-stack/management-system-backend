@@ -1,25 +1,34 @@
 import { unflatten } from 'flat';
 
-import { allAdminPermissions } from '@/constants/admin';
+import {
+    adminPermissionToLabelMap,
+    allAdminPermissions,
+} from '@/constants/admin';
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { defineRouteHandlerOptions } from '@/core/libs/route';
+import type {
+    AdminPermission,
+    AdminPermissionGroup,
+} from '@/generated/static/types/admin/permission';
 
 interface TreeNode {
     children?: TreeNode[];
-    label: null;
+    label: string;
     value: string;
 }
+
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'ignore' } });
 
 function convertToTreeNode(object: any, prefix: string): TreeNode {
     return {
         children: Object.entries(object).map(([key, value]) => {
             if (typeof value === 'object') return convertToTreeNode(value, `${prefix}.${key}`);
             return {
-                label: null,
+                label: adminPermissionToLabelMap[`${prefix}.${key}` as AdminPermission | AdminPermissionGroup],
                 value: `${prefix}.${key}`,
             };
         }),
-        label: null,
+        label: adminPermissionToLabelMap[prefix as AdminPermission | AdminPermissionGroup],
         value: prefix,
     };
 }
@@ -38,8 +47,6 @@ function sortTreeNodes(treeNodes: TreeNode[]): TreeNode[] {
             return 0;
         });
 }
-
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'ignore' } });
 
 export default defaultHonoFactory.createHandlers((ctx) => {
     const nestedPermissions: any = unflatten(

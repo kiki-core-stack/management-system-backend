@@ -13,7 +13,7 @@
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^8.1.0",
     "@hono/zod-validator": "^0.7.2",
-    "@kiki-core-stack/pack": "^0.77.2",
+    "@kiki-core-stack/pack": "^0.78.0",
     "@kikiutils/mongoose": "^4.0.0",
     "@kikiutils/shared": "^11.0.0",
     "consola": "^3.4.2",

@@ -2,6 +2,7 @@ import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics/find-by
 import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics';
 
 import type { Server } from 'bun';
+import { join } from 'node:path';
 
 import { setupHonoAppErrorHandling } from '@kiki-core-stack/pack/hono-backend/setups/error-handling';
 
@@ -25,6 +26,21 @@ await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`);
 
 // Load routes
 await import(`@/core/loaders/routes/${process.env.NODE_ENV}`);
+
+// Generate admin permission files
+if (process.env.NODE_ENV === 'development') {
+    await (await import('@kiki-core-stack/pack/libs/admin')).writeAdminPermissionTypesFile(
+        [...(await import('@/constants/admin')).allAdminPermissions],
+        join(
+            (await import('@/core/constants/paths')).projectSrcDirPath,
+            'generated',
+            'static',
+            'types',
+            'admin',
+            'permission.ts',
+        ),
+    );
+}
 
 // Start server
 logger.info('Starting server...');
