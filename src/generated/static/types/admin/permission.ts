@@ -4,6 +4,7 @@ export type AdminPermission =
   | 'admin.list'
   | 'admin.log.list'
   | 'admin.role.create'
+  | 'admin.role.delete'
   | 'admin.role.list'
   | 'admin.role.update'
   | 'admin.toggle'

@@ -15,6 +15,7 @@ export const adminPermissionToLabelMap: ReadonlyRecord<AdminPermission | AdminPe
     'admin.log.list': '獲取管理員日誌列表',
     'admin.role': '管理員身分組',
     'admin.role.create': '建立管理員身分組',
+    'admin.role.delete': '刪除管理員身分組',
     'admin.role.list': '獲取管理員身分組列表',
     'admin.role.update': '更新管理員身分組',
     'admin.toggle': '切換管理員狀態',
