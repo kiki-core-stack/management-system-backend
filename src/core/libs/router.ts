@@ -14,10 +14,11 @@ import type {
     RouteDefinition,
     RouteHandlerOptions,
 } from '../types/route';
+import { logger } from '../utils/logger';
 
 import type { RouteZodOpenApiConfig } from './zod-openapi';
 
-export const processRouteHandlers = (handlers: any) => [handlers].flat().filter(Boolean);
+export const processRouteHandlers = (handlers: any) => [handlers].flat().filter((handler) => handler !== undefined);
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
@@ -58,11 +59,16 @@ export async function registerRoute(
     method: typeof allowedRouteHttpMethods[number],
     path: string,
     handlers: any[],
+    permission: string,
     handlerOptions?: RouteHandlerOptions,
     zodOpenApiOptions?: { config: RouteZodOpenApiConfig; path: string },
 ) {
+    if (permission !== 'ignore') {
+        if (allAdminPermissions.has(permission)) logger.warn(`Duplicate permission: ${permission}`);
+        else allAdminPermissions.add(permission);
+    }
+
     const latestHandler = handlers[handlers.length - 1];
-    Object.assign(latestHandler, handlerOptions?.properties);
     Object.defineProperty(
         latestHandler,
         'isHandler',
@@ -73,9 +79,13 @@ export async function registerRoute(
         },
     );
 
-    if (handlerOptions?.properties?.permission && handlerOptions.properties.permission !== 'ignore') {
-        allAdminPermissions.add(handlerOptions.properties.permission);
-    }
+    Object.assign(
+        latestHandler,
+        {
+            ...handlerOptions?.properties,
+            permission,
+        },
+    );
 
     honoApp.on(method, path, ...handlers);
     (allRoutes as WritableDeep<typeof allRoutes>)[method][path] = { handlerProperties: handlerOptions?.properties };

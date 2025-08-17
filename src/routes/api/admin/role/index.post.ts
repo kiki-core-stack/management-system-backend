@@ -5,7 +5,6 @@ import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
 
 import { allAdminPermissions } from '@/constants/admin';
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 import { micromatch } from '@/utils/micromatch';
 
 export const jsonSchema = z.object({
@@ -19,7 +18,7 @@ export const jsonSchema = z.object({
         }),
 }) satisfies ZodValidatorType<AdminRole>;
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.role.create' } });
+export const routePermission = 'admin.role.create';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),

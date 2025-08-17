@@ -5,13 +5,12 @@ import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import { isEqual } from 'lodash-es';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 import { assertNotModifiedAndStripData } from '@/libs';
 import { clearAllAdminPermissionCache } from '@/libs/admin/permission';
 
 import { jsonSchema } from '../index.post';
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.role.update' } });
+export const routePermission = 'admin.role.update';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema.extend({ updatedAt: z.strictIsoDateString() })),

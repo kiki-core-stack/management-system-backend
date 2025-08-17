@@ -29,10 +29,8 @@ for (const routeEntry of loadedRouteModules.filter((loadedRouteModule) => loaded
         continue;
     }
 
-    if (!routeEntry.module.routeHandlerOptions) {
-        throw new Error(`No routeHandlerOptions found for route at ${routeEntry.filePath}`);
-    } else if (!routeEntry.module.routeHandlerOptions.properties.permission) {
-        throw new Error(`No permission found for route at ${routeEntry.filePath}`);
+    if (!routeEntry.module.routePermission) {
+        throw new Error(`No routePermission found for route at ${routeEntry.filePath}`);
     }
 
     if (routeEntry.module.zodOpenApiConfig && routeEntry.module.getZodOpenApiConfig) {
@@ -57,6 +55,7 @@ for (const routeEntry of loadedRouteModules.filter((loadedRouteModule) => loaded
         routeEntry.method,
         routeEntry.path,
         handlers,
+        routeEntry.module.routePermission,
         routeEntry.module.routeHandlerOptions,
         zodOpenApiConfig
             ? {

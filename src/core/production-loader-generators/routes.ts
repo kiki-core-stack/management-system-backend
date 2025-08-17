@@ -16,8 +16,8 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
         throw new Error(`No default export found in route at ${routeDefinition.filePath}`);
     }
 
-    if (!moduleExports.includes('routeHandlerOptions')) {
-        throw new Error(`No routeHandlerOptions found in route at ${routeDefinition.filePath}`);
+    if (!moduleExports.includes('routePermission')) {
+        throw new Error(`No routePermission found in route at ${routeDefinition.filePath}`);
     }
 
     const importAlias = `route${index}`;
@@ -25,7 +25,7 @@ async function applyRouteFragments(routeDefinition: RouteDefinition, index: numb
     const methodConstName = getOrCreateConstName(routeDefinition.method);
     const pathConstName = getOrCreateConstName(routeDefinition.path);
     // eslint-disable-next-line style/max-len
-    let registration = `registerRoute(${methodConstName}, ${pathConstName}, processRouteHandlers(${importAlias}.default),`;
+    let registration = `registerRoute(${methodConstName}, ${pathConstName}, processRouteHandlers(${importAlias}.default), ${importAlias}.routePermission,`;
     if (moduleExports.includes('routeHandlerOptions')) registration += ` ${importAlias}.routeHandlerOptions,`;
 
     // Remove the next line if you need OpenAPI metadata in production.

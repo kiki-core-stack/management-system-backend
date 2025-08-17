@@ -7,14 +7,13 @@ import { mongooseConnections } from '@kikiutils/mongoose/constants';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 
 const jsonSchema = z.object({
     newPassword: z.string().trim().length(128),
     oldPassword: z.string().trim().length(128),
 }) satisfies ZodValidatorType<AdminChangePasswordData>;
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'ignore' } });
+export const routePermission = 'ignore';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),

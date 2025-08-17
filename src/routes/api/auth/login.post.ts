@@ -14,12 +14,8 @@ const jsonSchema = z.object({
     verCode: z.string().trim().min(1).toLowerCase(),
 }) satisfies ZodValidatorType<AdminLoginFormData>;
 
-export const routeHandlerOptions = defineRouteHandlerOptions({
-    properties: {
-        noLoginRequired: true,
-        permission: 'ignore',
-    },
-});
+export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { noLoginRequired: true } });
+export const routePermission = 'ignore';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),

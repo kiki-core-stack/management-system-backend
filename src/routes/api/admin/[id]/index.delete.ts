@@ -6,9 +6,8 @@ import * as enhancedRedisStore from '@kiki-core-stack/pack/stores/enhanced/redis
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.delete' } });
+export const routePermission = 'admin.delete';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     let admin: AdminDocument | undefined;

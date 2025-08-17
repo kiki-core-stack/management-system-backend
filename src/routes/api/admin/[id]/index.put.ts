@@ -13,12 +13,11 @@ import { isEqual } from 'lodash-es';
 import type { UpdateQuery } from 'mongoose';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 import { assertNotModifiedAndStripData } from '@/libs';
 
 import { jsonSchema } from '../index.post';
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.update' } });
+export const routePermission = 'admin.update';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema.extend({ updatedAt: z.strictIsoDateString() })),

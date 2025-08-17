@@ -5,7 +5,6 @@ import type { Admin } from '@kiki-core-stack/pack/models/admin';
 import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 
 export const jsonSchema = z.object({
     account: z.string().trim().min(1).max(16),
@@ -15,7 +14,7 @@ export const jsonSchema = z.object({
     roles: z.array(z.objectId().refine(async (id) => await AdminRoleModel.exists({ _id: id }) !== null)),
 }) satisfies ZodValidatorType<Admin, 'isSuperAdmin'>;
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'admin.create' } });
+export const routePermission = 'admin.create';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),

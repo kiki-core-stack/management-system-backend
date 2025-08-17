@@ -5,7 +5,6 @@ import {
     allAdminPermissions,
 } from '@/constants/admin';
 import { defaultHonoFactory } from '@/core/constants/hono';
-import { defineRouteHandlerOptions } from '@/core/libs/route';
 import type {
     AdminPermission,
     AdminPermissionGroup,
@@ -17,7 +16,7 @@ interface TreeNode {
     value: string;
 }
 
-export const routeHandlerOptions = defineRouteHandlerOptions({ properties: { permission: 'ignore' } });
+export const routePermission = 'ignore';
 
 function convertToTreeNode(object: any, prefix: string): TreeNode {
     return {
