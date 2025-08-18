@@ -6,6 +6,6 @@ import type { RouteHandlerProperties } from '@/core/types/route';
 declare module 'hono' {
     interface Context {
         adminId?: Types.ObjectId;
-        routeHandler?: H & RouteHandlerProperties;
+        routeHandler?: H & RouteHandlerProperties & { permission: 'ignore' | (string & {}) };
     }
 }
