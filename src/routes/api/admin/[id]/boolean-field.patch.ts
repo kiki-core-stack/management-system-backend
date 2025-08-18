@@ -1,21 +1,28 @@
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
+import type { Admin } from '@kiki-core-stack/pack/models/admin';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
-import type { Types } from 'mongoose';
+import type {
+    FilterQuery,
+    Types,
+} from 'mongoose';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
+import { getAdminPermission } from '@/libs/admin/permission';
 import { getModelDocumentByRouteIdAndUpdateBooleanField } from '@/libs/model';
 
 export const routePermission = 'admin.toggle';
 
-export default defaultHonoFactory.createHandlers((ctx) => {
+export default defaultHonoFactory.createHandlers(async (ctx) => {
+    const filter: FilterQuery<Admin> = {};
+    if (!(await getAdminPermission(ctx.adminId!)).isSuperAdmin) filter.isSuperAdmin = false;
     return mongooseConnections.default!.transaction(async (session) => {
         await getModelDocumentByRouteIdAndUpdateBooleanField(
             ctx,
             AdminModel,
             ['enabled'],
-            undefined,
+            filter,
             { session },
             async (admin, field) => {
                 if (field === 'enabled') {
