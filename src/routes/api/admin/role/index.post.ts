@@ -13,8 +13,7 @@ export const jsonSchema = z.object({
         .array(z.string().trim())
         .refine((permissions) => {
             const allPermissions = [...allAdminPermissions];
-            for (const permission of permissions) if (!micromatch.some(allPermissions, permission)) return false;
-            return true;
+            return permissions.every((permission) => micromatch(allPermissions, permission).length);
         }),
 }) satisfies ZodValidatorType<AdminRole>;
 

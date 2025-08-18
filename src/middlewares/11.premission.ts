@@ -12,7 +12,7 @@ honoApp.use('/api/*', async (ctx, next) => {
     ) return await next();
 
     const { isSuperAdmin, permissions } = await getAdminPermission(ctx.adminId!);
-    if (isSuperAdmin || micromatch.some(permissions, ctx.routeHandler.permission)) return await next();
+    if (isSuperAdmin || micromatch(permissions, ctx.routeHandler.permission).length) return await next();
 
     throwApiError(403);
 });
