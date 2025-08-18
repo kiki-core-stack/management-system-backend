@@ -17,6 +17,9 @@ importers:
       '@kiki-core-stack/pack':
         specifier: ^0.78.0
         version: 0.78.0
+      '@kikiutils/micromatch':
+        specifier: ^4.0.9
+        version: 4.0.9
       '@kikiutils/mongoose':
         specifier: ^4.0.0
         version: 4.0.0
@@ -44,9 +47,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      micromatch:
-        specifier: ^4.0.8
-        version: 4.0.8
       mongoose:
         specifier: ^8.17.1
         version: 8.17.1
@@ -369,6 +369,10 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
       vue-eslint-parser: ^10.0.0
+
+  '@kikiutils/micromatch@4.0.9':
+    resolution: {integrity: sha512-yS56laGkQx7Cz9RZjlRoDnSIkBdL6Y5ZtV8I9QbWIhi9+twikzG7ghK5Hyom2pYA3EsPgyphA0XJoUPzCgeoUQ==}
+    engines: {node: '>=8.6'}
 
   '@kikiutils/mongoose@4.0.0':
     resolution: {integrity: sha512-jH3V3B/j0acepLNJXW1GCQKCih5JDHMSJPiqwkgS9hmV9QVWuEss48sUnc8HomQdasH0F5Sh2rT+r4930YAo+g==}
@@ -1721,6 +1725,10 @@ packages:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
 
+  object-inspect@1.13.4:
+    resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
+    engines: {node: '>= 0.4'}
+
   on-change@5.0.1:
     resolution: {integrity: sha512-n7THCP7RkyReRSLkJb8kUWoNsxUIBxTkIp3JKno+sEz6o/9AJ3w3P9fzQkITEkMwyTKJjZciF3v/pVoouxZZMg==}
     engines: {node: '>=18'}
@@ -2575,6 +2583,12 @@ snapshots:
       semver: 7.7.2
       vue-eslint-parser: 10.2.0(eslint@9.33.0(jiti@1.21.7))
       xml-name-validator: 4.0.0
+
+  '@kikiutils/micromatch@4.0.9':
+    dependencies:
+      braces: 3.0.3
+      object-inspect: 1.13.4
+      picomatch: 4.0.3
 
   '@kikiutils/mongoose@4.0.0':
     dependencies:
@@ -4165,6 +4179,8 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-hash@3.0.0: {}
+
+  object-inspect@1.13.4: {}
 
   on-change@5.0.1: {}
 
