@@ -49,7 +49,6 @@ COPY --from=build-stage /app/dist ./
 COPY ./.env.production.local ./.env
 
 ## Copy and set the entrypoint script
-COPY ./docker-entrypoint.sh ./
-RUN chmod 700 ./docker-entrypoint.sh
+ADD --chmod=700 ./docker-entrypoint.sh ./
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
