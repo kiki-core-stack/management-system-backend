@@ -50,7 +50,12 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
     setAuthToken(ctx, updateQuery.token);
 }
 
-export async function handleAdminLogin(ctx: Context, adminId: string | Types.ObjectId, session?: ClientSession) {
+export async function handleAdminLogin(
+    ctx: Context,
+    adminId: string | Types.ObjectId,
+    session?: ClientSession,
+    logNote?: string,
+) {
     const ip = getClientIpFromXForwardedFor(ctx);
     await createOrUpdateAdminSessionAndSetAuthToken(
         ctx,
@@ -66,6 +71,7 @@ export async function handleAdminLogin(ctx: Context, adminId: string | Types.Obj
             {
                 admin: adminId,
                 ip,
+                note: logNote,
                 type: AdminLogType.LoginSuccess,
             },
         ],
