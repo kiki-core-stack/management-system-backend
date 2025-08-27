@@ -13,11 +13,13 @@ export async function clearAllAdminPermissionCache() {
 export async function getAdminPermission(adminId: string | Types.ObjectId) {
     let adminPermission = await enhancedRedisStore.adminPermission.getItem(toObjectIdHexString(adminId));
     if (!adminPermission) {
-        const admin = await AdminModel.findById(adminId).select([
-            '-_id',
-            'isSuperAdmin',
-            'roles',
-        ]);
+        const admin = await AdminModel
+            .findById(adminId)
+            .select([
+                '-_id',
+                'isSuperAdmin',
+                'roles',
+            ]);
 
         if (!admin) throw new Error('Admin not found');
         if (admin?.isSuperAdmin) {
