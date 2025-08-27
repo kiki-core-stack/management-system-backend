@@ -15,7 +15,7 @@ export default defaultHonoFactory.createHandlers(
         const adminQrCodeLoginData = await enhancedRedisStore.adminQrCodeLoginData.getItem(token);
         if (adminQrCodeLoginData?.status !== 'pending') throwApiError(410);
         await enhancedRedisStore.adminQrCodeLoginData.setItemWithTtl(
-            3,
+            2,
             {
                 ...adminQrCodeLoginData,
                 adminId: ctx.adminId!.toHexString(),
