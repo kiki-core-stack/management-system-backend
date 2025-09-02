@@ -17,7 +17,7 @@ export default defaultHonoFactory.createHandlers(async (ctx) => {
         {
             populate: {
                 path: 'roles',
-                select: 'name',
+                select: ['name'],
             },
         },
     );
