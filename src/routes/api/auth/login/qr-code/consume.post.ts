@@ -16,10 +16,10 @@ export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),
     async (ctx) => {
         const { token } = ctx.req.valid('json');
-        const abortSignal = ctx.req.raw.signal;
         const pollingStartAt = Date.now();
         while (Date.now() - pollingStartAt < 20000) {
-            if (abortSignal.aborted) return ctx.createApiSuccessResponse();
+            // @ts-expect-error Ignore this error.
+            if (ctx.req.raw.signal.aborted) return ctx.createApiSuccessResponse();
             const adminQrCodeLoginData = await enhancedRedisStore.adminQrCodeLoginData.getItem(token);
             if (!adminQrCodeLoginData) throwApiError(410);
             if (adminQrCodeLoginData.adminId) {
