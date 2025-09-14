@@ -16,7 +16,7 @@ importers:
         version: 0.7.2(hono@4.9.7)(zod@4.1.8)
       '@kiki-core-stack/pack':
         specifier: ^0.79.4
-        version: 0.79.4(@hono/zod-validator@0.7.2(hono@4.9.7)(zod@4.1.8))(@kikiutils/mongoose@5.1.5)(@kikiutils/shared@13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(superjson@2.2.2))(file-type@21.0.0)(hono@4.9.7)(mongodb@6.18.0)(mongoose@8.18.1)(type-fest@5.0.0)(zod@4.1.8)
+        version: 0.79.4(@hono/zod-validator@0.7.2(hono@4.9.7)(zod@4.1.8))(@kikiutils/mongoose@5.1.5)(@kikiutils/shared@13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(lru-cache@11.2.1)(superjson@2.2.2))(file-type@21.0.0)(hono@4.9.7)(lru-cache@11.2.1)(mongodb@6.18.0)(mongoose@8.18.1)(type-fest@5.0.0)(zod@4.1.8)
       '@kikiutils/micromatch':
         specifier: ^4.0.9
         version: 4.0.9
@@ -25,7 +25,7 @@ importers:
         version: 5.1.5
       '@kikiutils/shared':
         specifier: ^13.0.1
-        version: 13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(superjson@2.2.2)
+        version: 13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(lru-cache@11.2.1)(superjson@2.2.2)
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -47,6 +47,9 @@ importers:
       ioredis:
         specifier: ^5.7.0
         version: 5.7.0
+      lru-cache:
+        specifier: ^11.2.1
+        version: 11.2.1
       mongoose:
         specifier: ^8.18.1
         version: 8.18.1
@@ -1464,6 +1467,10 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
+  lru-cache@11.2.1:
+    resolution: {integrity: sha512-r8LA6i4LP4EeWOhqBaZZjDWwehd1xUJPCJd9Sv300H0ZmcUER4+JPh7bqqZeqs1o5pgtgvXm+d9UGrB5zZGDiQ==}
+    engines: {node: 20 || >=22}
+
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
 
@@ -2432,15 +2439,16 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@kiki-core-stack/pack@0.79.4(@hono/zod-validator@0.7.2(hono@4.9.7)(zod@4.1.8))(@kikiutils/mongoose@5.1.5)(@kikiutils/shared@13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(superjson@2.2.2))(file-type@21.0.0)(hono@4.9.7)(mongodb@6.18.0)(mongoose@8.18.1)(type-fest@5.0.0)(zod@4.1.8)':
+  '@kiki-core-stack/pack@0.79.4(@hono/zod-validator@0.7.2(hono@4.9.7)(zod@4.1.8))(@kikiutils/mongoose@5.1.5)(@kikiutils/shared@13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(lru-cache@11.2.1)(superjson@2.2.2))(file-type@21.0.0)(hono@4.9.7)(lru-cache@11.2.1)(mongodb@6.18.0)(mongoose@8.18.1)(type-fest@5.0.0)(zod@4.1.8)':
     dependencies:
       '@kikiutils/types': 7.0.2
     optionalDependencies:
       '@hono/zod-validator': 0.7.2(hono@4.9.7)(zod@4.1.8)
       '@kikiutils/mongoose': 5.1.5
-      '@kikiutils/shared': 13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(superjson@2.2.2)
+      '@kikiutils/shared': 13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(lru-cache@11.2.1)(superjson@2.2.2)
       file-type: 21.0.0
       hono: 4.9.7
+      lru-cache: 11.2.1
       mongodb: 6.18.0
       mongoose: 8.18.1
       type-fest: 5.0.0
@@ -2524,12 +2532,13 @@ snapshots:
       - socks
       - supports-color
 
-  '@kikiutils/shared@13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(superjson@2.2.2)':
+  '@kikiutils/shared@13.0.1(consola@3.4.2)(date-fns@4.1.0)(decimal.js@10.6.0)(ioredis@5.7.0)(lru-cache@11.2.1)(superjson@2.2.2)':
     optionalDependencies:
       consola: 3.4.2
       date-fns: 4.1.0
       decimal.js: 10.6.0
       ioredis: 5.7.0
+      lru-cache: 11.2.1
       superjson: 2.2.2
 
   '@kikiutils/tsconfigs@5.0.5': {}
@@ -3586,6 +3595,8 @@ snapshots:
   lodash@4.17.21: {}
 
   longest-streak@3.1.0: {}
+
+  lru-cache@11.2.1: {}
 
   magic-string@0.30.19:
     dependencies:

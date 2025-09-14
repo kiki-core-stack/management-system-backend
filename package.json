@@ -24,6 +24,7 @@
     "flat": "^6.0.1",
     "hono": "^4.9.7",
     "ioredis": "^5.7.0",
+    "lru-cache": "^11.2.1",
     "mongoose": "^8.18.1",
     "nanoid": "^5.1.5",
     "node-ciphers": "^6.1.2",
