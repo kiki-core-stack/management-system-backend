@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+set -euo pipefail
 
 # Load secrets to environment
 if [ -d /run/secrets ]; then
