@@ -3,6 +3,7 @@ import type {
     ZodRequestBody,
 } from '@asteasolutions/zod-to-openapi';
 import * as z from '@kiki-core-stack/pack/libs/zod';
+import type { Except } from 'type-fest';
 import type { ZodObject } from 'zod';
 
 import type { RouteZodOpenApiConfig } from '@/core/libs/zod-openapi';
