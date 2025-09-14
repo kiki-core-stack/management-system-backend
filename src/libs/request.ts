@@ -1,8 +1,8 @@
-import type { Context } from 'hono';
 import {
     escapeRegExp,
     isPlainObject,
-} from 'lodash-es';
+} from 'es-toolkit';
+import type { Context } from 'hono';
 import { Types } from 'mongoose';
 
 const isValidRegexFlags = (flags: string) => /^[gimsuy]*$/.test(flags);

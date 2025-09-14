@@ -2,7 +2,7 @@ import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-v
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { assertNotModifiedAndStripData } from '@/libs';

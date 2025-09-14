@@ -9,7 +9,7 @@ import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import * as enhancedRedisStore from '@kiki-core-stack/pack/stores/enhanced/redis';
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'es-toolkit';
 import type {
     FilterQuery,
     UpdateQuery,
