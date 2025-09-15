@@ -18,7 +18,6 @@ export default defaultHonoFactory.createHandlers(
         const { token } = ctx.req.valid('json');
         const pollingStartAt = Date.now();
         while (Date.now() - pollingStartAt < 20000) {
-            // @ts-expect-error Ignore this error.
             if (ctx.req.raw.signal.aborted) return ctx.createApiSuccessResponse();
             const adminQrCodeLoginData = await enhancedRedisStore.adminQrCodeLoginData.getItem(token);
             if (!adminQrCodeLoginData) throwApiError(410);
