@@ -13,7 +13,10 @@ function createApiSuccessResponse<D extends object | undefined = undefined>(this
     return this.json(createApiSuccessResponseData(data, message));
 }
 
-honoApp.use('/api/*', (ctx, next) => {
-    ctx.createApiSuccessResponse = createApiSuccessResponse.bind(ctx);
-    return next();
-});
+honoApp.use(
+    '/api/*',
+    (ctx, next) => {
+        ctx.createApiSuccessResponse = createApiSuccessResponse.bind(ctx);
+        return next();
+    },
+);
