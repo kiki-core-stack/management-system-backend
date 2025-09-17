@@ -12,10 +12,7 @@ import type { FilterQuery } from 'mongoose';
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { getAdminPermission } from '@/libs/admin/permission';
 
-export const routePermission = {
-    key: 'admin.delete',
-    type: 'admin',
-};
+export const routePermission = 'admin admin.delete';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     let admin: AdminDocument | undefined;

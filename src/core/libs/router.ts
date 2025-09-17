@@ -59,21 +59,19 @@ export async function registerRoute(
     method: typeof allowedRouteHttpMethods[number],
     path: string,
     handlers: any[],
-    permission: 'ignore' | (string & {}) | { key: string; type: ManagementSystemType },
+    permission: 'ignore' | (string & {}),
     handlerOptions?: RouteHandlerOptions,
     zodOpenApiOptions?: { config: RouteZodOpenApiConfig; path: string },
 ) {
     if (permission !== 'ignore') {
-        if (typeof permission === 'string') {
-            // TODO
-        } else {
-            switch (permission.type) {
-                case 'admin':
-                    if (!allAdminPermissions.has(permission.key)) allAdminPermissions.add(permission.key);
-                    else logger.warn(`Duplicate admin permission: ${permission.key}`);
-                    break;
-                default: throw new Error(`Unknown permission type: ${permission.type}`);
-            }
+        const [systemType, permissionKey] = permission.split(/\s+/);
+        if (!permissionKey) throw new Error(`Permission parsing failed at path ${path}: missing permission key`);
+        switch (systemType) {
+            case 'admin':
+                if (!allAdminPermissions.has(permissionKey)) allAdminPermissions.add(permissionKey);
+                else logger.warn(`Duplicate admin permission ${permissionKey} at path ${path}`);
+                break;
+            default: throw new Error(`Unsupported system type ${systemType} at path ${path}`);
         }
     }
 

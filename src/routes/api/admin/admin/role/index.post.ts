@@ -17,10 +17,7 @@ export const jsonSchema = z.object({
         }),
 }) satisfies ZodValidatorType<AdminRole>;
 
-export const routePermission = {
-    key: 'admin.role.create',
-    type: 'admin',
-};
+export const routePermission = 'admin admin.role.create';
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),
