@@ -47,7 +47,7 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
         await AdminSessionModel.create([updateQuery], { session: options?.mongooseSession });
     }
 
-    setAuthToken(ctx, updateQuery.token);
+    setAuthToken(ctx, 'admin', updateQuery.token);
 }
 
 export async function handleAdminLogin(
