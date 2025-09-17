@@ -59,13 +59,22 @@ export async function registerRoute(
     method: typeof allowedRouteHttpMethods[number],
     path: string,
     handlers: any[],
-    permission: string,
+    permission: 'ignore' | (string & {}) | { key: string; type: ManagementSystemType },
     handlerOptions?: RouteHandlerOptions,
     zodOpenApiOptions?: { config: RouteZodOpenApiConfig; path: string },
 ) {
     if (permission !== 'ignore') {
-        if (allAdminPermissions.has(permission)) logger.warn(`Duplicate permission: ${permission}`);
-        else allAdminPermissions.add(permission);
+        if (typeof permission === 'string') {
+            // TODO
+        } else {
+            switch (permission.type) {
+                case 'admin':
+                    if (!allAdminPermissions.has(permission.key)) allAdminPermissions.add(permission.key);
+                    else logger.warn(`Duplicate admin permission: ${permission.key}`);
+                    break;
+                default: throw new Error(`Unknown permission type: ${permission.type}`);
+            }
+        }
     }
 
     const latestHandler = handlers[handlers.length - 1];

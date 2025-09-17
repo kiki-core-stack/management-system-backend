@@ -5,7 +5,10 @@ import { getAdminPermission } from '@/libs/admin/permission';
 import { parseApiRequestQueryParams } from '@/libs/request';
 import { paginateModelDataWithApiResponse } from '@/libs/response';
 
-export const routePermission = 'admin.list';
+export const routePermission = {
+    key: 'admin.list',
+    type: 'admin',
+};
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     const parsedQueryParams = parseApiRequestQueryParams(ctx);

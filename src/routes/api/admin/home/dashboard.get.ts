@@ -1,7 +1,10 @@
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { parseApiRequestQueryParams } from '@/libs/request';
 
-export const routePermission = 'home.dashboard.view';
+export const routePermission = {
+    key: 'home.dashboard.view',
+    type: 'admin',
+};
 
 export default defaultHonoFactory.createHandlers((ctx) => {
     const parsedApiRequestQueryParams = parseApiRequestQueryParams(ctx);

@@ -21,7 +21,10 @@ import { getAdminPermission } from '@/libs/admin/permission';
 
 import { jsonSchema } from '../index.post';
 
-export const routePermission = 'admin.update';
+export const routePermission = {
+    key: 'admin.update',
+    type: 'admin',
+};
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema.extend({ updatedAt: z.strictIsoDateString() })),

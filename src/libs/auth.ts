@@ -6,13 +6,13 @@ import {
     setCookie,
 } from 'hono/cookie';
 
-export const deleteAuthToken = (ctx: Context) => deleteCookie(ctx, 'token');
-export const getAuthToken = (ctx: Context) => getCookie(ctx, 'token');
+export const deleteAuthToken = (ctx: Context, type: 'admin') => deleteCookie(ctx, `${type}-token`);
+export const getAuthToken = (ctx: Context, type: 'admin') => getCookie(ctx, `${type}-token`);
 
-export function setAuthToken(ctx: Context, token: string) {
+export function setAuthToken(ctx: Context, type: 'admin', token: string) {
     setCookie(
         ctx,
-        'token',
+        `${type}-token`,
         token,
         {
             ...baseSetCookieOptions,

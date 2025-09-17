@@ -9,7 +9,10 @@ import { defaultHonoFactory } from '@/core/constants/hono';
 import { getAdminPermission } from '@/libs/admin/permission';
 import { getModelDocumentByRouteIdAndUpdateBooleanField } from '@/libs/model';
 
-export const routePermission = 'admin.toggle';
+export const routePermission = {
+    key: 'admin.toggle',
+    type: 'admin',
+};
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     const filter: FilterQuery<Admin> = {};

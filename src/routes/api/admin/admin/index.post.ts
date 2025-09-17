@@ -14,7 +14,10 @@ export const jsonSchema = z.object({
     roles: z.array(z.objectId().refine(async (id) => await AdminRoleModel.exists({ _id: id }) !== null)),
 }) satisfies ZodValidatorType<Admin, 'isSuperAdmin'>;
 
-export const routePermission = 'admin.create';
+export const routePermission = {
+    key: 'admin.create',
+    type: 'admin',
+};
 
 export default defaultHonoFactory.createHandlers(
     apiZValidator('json', jsonSchema),

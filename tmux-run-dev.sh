@@ -5,7 +5,7 @@ set -euo pipefail
 SCRIPTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 cd "${SCRIPTS_DIR}"
 
-SESSION_NAME='kiki-core-stack-admin-backend'
+SESSION_NAME='kiki-core-stack-management-system-backend'
 
 if ! tmux ls | grep -q "^${SESSION_NAME}:"; then
     tmux new-session -ds "${SESSION_NAME}"

@@ -28,36 +28,39 @@ async function getAdmin(this: Context) {
     return admin;
 }
 
-honoApp.use('/api/*', async (ctx, next) => {
-    if (!ctx.routeHandler?.isHandler) return await next();
-    const token = getAuthToken(ctx);
-    if (token) {
-        const adminSession = await AdminSessionModel
-            .findOne({ token })
-            .select([
-                'admin',
-                'lastActiveAt',
-            ]);
+honoApp.use(
+    '/api/admin/*',
+    async (ctx, next) => {
+        if (!ctx.routeHandler?.isHandler) return await next();
+        const token = getAuthToken(ctx, 'admin');
+        if (token) {
+            const adminSession = await AdminSessionModel
+                .findOne({ token })
+                .select([
+                    'admin',
+                    'lastActiveAt',
+                ]);
 
-        if (!adminSession) deleteAuthToken(ctx);
-        else {
-            ctx.adminId = adminSession.admin;
-            const today = new Date();
-            if (isBefore(adminSession.lastActiveAt, subDays(today, 7))) {
-                await adminSession.deleteOne();
-                deleteAuthToken(ctx);
-                delete ctx.adminId;
-            } else if (isBefore(adminSession.lastActiveAt, subMinutes(today, 10))) {
-                await createOrUpdateAdminSessionAndSetAuthToken(
-                    ctx,
-                    adminSession.admin,
-                    { sessionId: adminSession._id },
-                );
+            if (!adminSession) deleteAuthToken(ctx, 'admin');
+            else {
+                ctx.adminId = adminSession.admin;
+                const today = new Date();
+                if (isBefore(adminSession.lastActiveAt, subDays(today, 7))) {
+                    await adminSession.deleteOne();
+                    deleteAuthToken(ctx, 'admin');
+                    delete ctx.adminId;
+                } else if (isBefore(adminSession.lastActiveAt, subMinutes(today, 10))) {
+                    await createOrUpdateAdminSessionAndSetAuthToken(
+                        ctx,
+                        adminSession.admin,
+                        { sessionId: adminSession._id },
+                    );
+                }
             }
         }
-    }
 
-    ctx.getAdmin = getAdmin.bind(ctx);
-    if (ctx.routeHandler.noLoginRequired || ctx.adminId) return await next();
-    throwApiError(401);
-});
+        ctx.getAdmin = getAdmin.bind(ctx);
+        if (ctx.routeHandler.noLoginRequired || ctx.adminId) return await next();
+        throwApiError(401);
+    },
+);

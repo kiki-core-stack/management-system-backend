@@ -5,7 +5,10 @@ import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
 import { defaultHonoFactory } from '@/core/constants/hono';
 import { getModelDocumentByRouteIdAndDelete } from '@/libs/model';
 
-export const routePermission = 'admin.role.delete';
+export const routePermission = {
+    key: 'admin.role.delete',
+    type: 'admin',
+};
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     await getModelDocumentByRouteIdAndDelete(
