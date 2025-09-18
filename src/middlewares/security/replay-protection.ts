@@ -4,5 +4,7 @@ import { honoApp } from '@/core/app';
 
 honoApp.use(
     '/api/*',
-    createReplayProtectionMiddleware((ctx) => !!ctx.routeHandler?.isHandler),
+    createReplayProtectionMiddleware((ctx) => {
+        return !!ctx.routeHandler?.isHandler && !ctx.routeHandler.disableReplayProtection;
+    }),
 );
