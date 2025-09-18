@@ -1,6 +1,7 @@
 declare module '@/core/types/route' {
     interface RouteHandlerProperties {
-        noLoginRequired?: boolean;
+        disableReplayProtection?: true;
+        noLoginRequired?: true;
     }
 }
 
