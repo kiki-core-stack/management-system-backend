@@ -63,8 +63,10 @@ export async function registerRoute(
     handlerOptions?: RouteHandlerOptions,
     zodOpenApiOptions?: { config: RouteZodOpenApiConfig; path: string },
 ) {
+    let permissionKey: 'ignore' | (string & {}) | undefined = 'ignore';
+    let systemType;
     if (permission !== 'ignore') {
-        const [systemType, permissionKey] = permission.split(/\s+/);
+        [systemType, permissionKey] = permission.split(/\s+/);
         if (!permissionKey) throw new Error(`Permission parsing failed at path ${path}: missing permission key`);
         switch (systemType) {
             case 'admin':
@@ -91,7 +93,7 @@ export async function registerRoute(
         latestHandler,
         {
             ...handlerOptions?.properties,
-            permission,
+            permission: permissionKey,
         },
     );
 
