@@ -2,10 +2,8 @@ import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics/find-by
 import '@kiki-core-stack/pack/hono-backend/setups/mongoose-model-statics';
 
 import type { Server } from 'bun';
-import { join } from 'node:path';
 
 import { setupHonoAppErrorHandling } from '@kiki-core-stack/pack/hono-backend/setups/error-handling';
-import { capitalize } from 'es-toolkit';
 
 import { honoApp } from '@/core/app';
 import { logger } from '@/core/utils/logger';
@@ -28,32 +26,8 @@ await import('@/middlewares');
 // Load routes
 await import(`@/core/loaders/routes/${process.env.NODE_ENV}`);
 
-// Generate admin permission files
-if (process.env.NODE_ENV === 'development') {
-    const { writeManagementSystemPermissionTypesFile } = await import('@kiki-core-stack/pack/libs/management-system');
-    const baseGeneratedStaticTypesDirPath = join(
-        (await import('@/core/constants/paths')).projectSrcDirPath,
-        'generated',
-        'static',
-        'types',
-    );
-
-    const managementSystemTypes: ManagementSystemType[] = ['admin'];
-    await Promise.all(
-        managementSystemTypes.map(async (managementSystemType) => {
-            logger.info(`Generating ${managementSystemType} permission types...`);
-            const module = await await import(`@/constants/${managementSystemType}`);
-            const allPermissions: Set<string> = module[`all${capitalize(managementSystemType)}Permissions`];
-            await writeManagementSystemPermissionTypesFile(
-                managementSystemType,
-                [...allPermissions],
-                join(baseGeneratedStaticTypesDirPath, managementSystemType, 'permission.ts'),
-            );
-
-            logger.success(`Generated ${managementSystemType} permission types`);
-        }),
-    );
-}
+// Generate permission files
+if (process.env.NODE_ENV === 'development') await import('@/generate-permission-files');
 
 // Start server
 logger.info('Starting server...');
