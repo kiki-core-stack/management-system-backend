@@ -15,10 +15,7 @@ await rm(
     },
 );
 
-await Promise.all([
-    import('./production-loader-generators/middlewares'),
-    import('./production-loader-generators/routes'),
-]);
+await import('./production-loader-generators/routes');
 
 logger.info('Starting build...');
 const subprocess = Bun.spawn({

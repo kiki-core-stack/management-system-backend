@@ -187,5 +187,4 @@ upgrade-dependencies.sh
 ### Custom ###
 
 # Generated production loaders
-src/core/loaders/middlewares/production.ts
 src/core/loaders/routes/production.ts

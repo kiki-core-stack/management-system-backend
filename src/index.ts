@@ -13,7 +13,7 @@ process.on('SIGTERM', () => gracefulExit(server));
 await import(`@/core/runtime-inits/${process.env.NODE_ENV}`);
 
 // Load middlewares
-await import(`@/core/loaders/middlewares/${process.env.NODE_ENV}`);
+await import('@/middlewares');
 
 // Load routes
 await import(`@/core/loaders/routes/${process.env.NODE_ENV}`);
