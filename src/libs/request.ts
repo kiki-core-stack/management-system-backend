@@ -1,3 +1,4 @@
+import type { AnyRecord } from '@kikiutils/types';
 import {
     escapeRegExp,
     isPlainObject,

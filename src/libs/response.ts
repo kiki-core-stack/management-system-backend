@@ -1,5 +1,6 @@
+import type { BaseMongoosePaginateModel } from '@kikiutils/mongoose/types';
+import type { PaginateOptions } from '@kikiutils/mongoose/types/paginate';
 import type { Context } from 'hono';
-import type { PaginateOptions } from 'mongoose';
 
 import { paginateModelData } from './model';
 

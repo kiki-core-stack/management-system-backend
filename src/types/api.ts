@@ -1,3 +1,5 @@
+import type { AnyRecord } from '@kikiutils/types';
+
 declare global {
     interface ParsedApiRequestQueryParams {
         endIndex: number;

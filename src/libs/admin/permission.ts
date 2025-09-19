@@ -2,7 +2,7 @@ import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { AdminRoleDocument } from '@kiki-core-stack/pack/models/admin/role';
 import { enhancedRedisStorage } from '@kiki-core-stack/pack/storages/enhanced/redis';
 import * as enhancedRedisStore from '@kiki-core-stack/pack/stores/enhanced/redis';
-import { toObjectIdHexString } from '@kikiutils/mongoose/utils';
+import { toObjectIdHexString } from '@kikiutils/mongoose/helpers';
 import type { Types } from 'mongoose';
 
 export async function clearAllAdminPermissionCache() {

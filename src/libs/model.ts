@@ -1,8 +1,13 @@
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
+import type {
+    BaseMongoosePaginateModel,
+    MongooseHydratedDocument,
+} from '@kikiutils/mongoose/types';
+import type { PaginateOptions } from '@kikiutils/mongoose/types/paginate';
 import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
+import type { Nullable } from '@kikiutils/types';
 import type { Context } from 'hono';
 import type {
-    PaginateOptions,
     QueryOptions,
     RootFilterQuery,
 } from 'mongoose';
