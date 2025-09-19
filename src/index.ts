@@ -20,6 +20,9 @@ setupHonoAppErrorHandling(honoApp, logger);
 // Used for applying side effects like dev-only tooling, schema extensions, etc.
 await import(`@/core/runtime-inits/${process.env.NODE_ENV}`);
 
+// Initialize system defaults
+await (await import('@kiki-core-stack/pack/init')).initializeSystemDefaults();
+
 // Load middlewares
 await import('@/middlewares');
 
