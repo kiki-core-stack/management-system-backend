@@ -2,6 +2,7 @@ import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-validator';
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
+import type { ZodValidatorType } from '@kiki-core-stack/pack/types';
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
 import { defaultHonoFactory } from '@/core/constants/hono';

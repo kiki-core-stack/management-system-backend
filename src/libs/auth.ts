@@ -1,4 +1,5 @@
 import { baseSetCookieOptions } from '@kiki-core-stack/pack/hono-backend/constants/cookie';
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
 import type { Context } from 'hono';
 import {
     deleteCookie,

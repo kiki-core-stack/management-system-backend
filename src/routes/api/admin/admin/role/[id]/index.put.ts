@@ -1,7 +1,6 @@
 import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-validator';
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
-import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import { isEqual } from 'es-toolkit';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
@@ -17,12 +16,10 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const adminRole = await AdminRoleModel.findByRouteIdOrThrowNotFoundError(ctx);
         const data = assertNotModifiedAndStripData(ctx.req.valid('json'), adminRole);
-        await assertMongooseUpdateSuccess(
-            adminRole.updateOne({
-                ...data,
-                updatedByAdmin: ctx.adminId,
-            }),
-        );
+        await adminRole.assertUpdateSuccess({
+            ...data,
+            updatedByAdmin: ctx.adminId,
+        });
 
         if (!isEqual(adminRole.permissions.toSorted(), data.permissions.toSorted())) {
             clearAllAdminPermissionCache().catch(() => {});

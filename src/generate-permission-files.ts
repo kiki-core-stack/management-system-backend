@@ -1,5 +1,6 @@
 import { join } from 'node:path';
 
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
 import { capitalize } from 'es-toolkit';
 
 import { logger } from '@/core/utils/logger';

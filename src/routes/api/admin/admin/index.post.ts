@@ -3,6 +3,7 @@ import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type { Admin } from '@kiki-core-stack/pack/models/admin';
 import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
+import type { ZodValidatorType } from '@kiki-core-stack/pack/types';
 
 import { defaultHonoFactory } from '@/core/constants/hono';
 

@@ -8,7 +8,6 @@ import type {
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import * as enhancedRedisStore from '@kiki-core-stack/pack/stores/enhanced/redis';
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
-import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import { isEqual } from 'es-toolkit';
 import type {
     FilterQuery,
@@ -29,13 +28,13 @@ export default defaultHonoFactory.createHandlers(
         let admin: AdminDocument | undefined;
         const filter: FilterQuery<Admin> = {};
         if (!(await getAdminPermission(ctx.adminId!)).isSuperAdmin) filter.isSuperAdmin = false;
-        let updateQuery: UpdateQuery<Admin> = {};
+        let updateQuery: UpdateQuery<AdminDocument> = {};
         await mongooseConnections.default!.transaction(async (session) => {
             admin = await AdminModel.findByRouteIdOrThrowNotFoundError(ctx, filter, undefined, { session });
             updateQuery = assertNotModifiedAndStripData(ctx.req.valid('json'), admin);
             updateQuery.enabled = updateQuery.enabled || admin._id.equals(ctx.adminId);
             if (!updateQuery.email) updateQuery.$unset = { email: true };
-            await assertMongooseUpdateSuccess(admin.updateOne(updateQuery, { session }));
+            await admin.assertUpdateSuccess(updateQuery, { session });
             if (!updateQuery.enabled) await AdminSessionModel.deleteMany({ admin }, { session });
         });
 

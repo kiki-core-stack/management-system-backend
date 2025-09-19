@@ -2,7 +2,6 @@ import { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
 import { AdminLogModel } from '@kiki-core-stack/pack/models/admin/log';
 import type { AdminSession } from '@kiki-core-stack/pack/models/admin/session';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
-import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import { generateWithNestedRandomLength } from '@kikiutils/shared/random';
 import type { Context } from 'hono';
 import type {
@@ -35,12 +34,10 @@ export async function createOrUpdateAdminSessionAndSetAuthToken(
     };
 
     if (options?.sessionId) {
-        await assertMongooseUpdateSuccess(
-            AdminSessionModel.updateOne(
-                { _id: options.sessionId },
-                updateQuery,
-                { session: options.mongooseSession },
-            ),
+        await AdminSessionModel.assertUpdateSuccess(
+            { _id: options.sessionId },
+            updateQuery,
+            { session: options.mongooseSession },
         );
     } else {
         updateQuery.loginIp = ip;

@@ -2,6 +2,7 @@ import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-v
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import type { AdminRole } from '@kiki-core-stack/pack/models/admin/role';
 import { AdminRoleModel } from '@kiki-core-stack/pack/models/admin/role';
+import type { ZodValidatorType } from '@kiki-core-stack/pack/types';
 
 import { allAdminPermissions } from '@/constants/admin';
 import { defaultHonoFactory } from '@/core/constants/hono';

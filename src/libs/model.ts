@@ -4,7 +4,6 @@ import type {
     MongooseHydratedDocument,
 } from '@kikiutils/mongoose/types';
 import type { PaginateOptions } from '@kikiutils/mongoose/types/paginate';
-import { assertMongooseUpdateSuccess } from '@kikiutils/mongoose/utils';
 import type { Nullable } from '@kikiutils/types';
 import type { Context } from 'hono';
 import type {
@@ -48,8 +47,7 @@ export async function getModelDocumentByRouteIdAndUpdateBooleanField<
     if (!allowedFields.includes(field)) throwApiError(400);
     // @ts-expect-error Ignore this error.
     await beforeUpdate?.(document, field, !!value);
-    // @ts-expect-error Ignore this error.
-    await assertMongooseUpdateSuccess(document.updateOne({ [`${field}`]: !!value }));
+    await document.assertUpdateSuccess({ [`${field}`]: !!value });
 }
 
 export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>(
