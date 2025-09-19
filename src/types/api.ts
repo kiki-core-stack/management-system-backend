@@ -1,4 +1,4 @@
-import type { AnyRecord } from '@kikiutils/types';
+import type { AnyRecord } from '@kikiutils/shared/types';
 
 declare global {
     interface ParsedApiRequestQueryParams {

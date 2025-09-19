@@ -4,7 +4,7 @@ import type {
     MongooseHydratedDocument,
 } from '@kikiutils/mongoose/types';
 import type { PaginateOptions } from '@kikiutils/mongoose/types/paginate';
-import type { Nullable } from '@kikiutils/types';
+import type { Nullable } from '@kikiutils/shared/types';
 import type { Context } from 'hono';
 import type {
     QueryOptions,
