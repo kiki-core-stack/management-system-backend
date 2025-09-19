@@ -1,4 +1,5 @@
 import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-validator';
+import { argon2HashPassword } from '@kiki-core-stack/pack/libs/password-argon2';
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminModel } from '@kiki-core-stack/pack/models/admin';
 import type {
@@ -31,10 +32,13 @@ export default defaultHonoFactory.createHandlers(
         let updateQuery: UpdateQuery<AdminDocument> = {};
         await mongooseConnections.default!.transaction(async (session) => {
             admin = await AdminModel.findByRouteIdOrThrowNotFoundError(ctx, filter, undefined, { session });
+
             updateQuery = assertNotModifiedAndStripData(ctx.req.valid('json'), admin);
             updateQuery.enabled = updateQuery.enabled || admin._id.equals(ctx.adminId);
             if (!updateQuery.email) updateQuery.$unset = { email: true };
+            if (updateQuery.password) updateQuery.password = await argon2HashPassword(updateQuery.password);
             await admin.assertUpdateSuccess(updateQuery, { session });
+
             if (!updateQuery.enabled) await AdminSessionModel.deleteMany({ admin }, { session });
         });
 

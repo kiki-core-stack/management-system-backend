@@ -1,5 +1,6 @@
 import { throwApiError } from '@kiki-core-stack/pack/hono-backend/libs/api';
 import { apiZValidator } from '@kiki-core-stack/pack/hono-backend/libs/api/zod-validator';
+import { argon2HashPassword } from '@kiki-core-stack/pack/libs/password-argon2';
 import * as z from '@kiki-core-stack/pack/libs/zod';
 import { AdminSessionModel } from '@kiki-core-stack/pack/models/admin/session';
 import type { ZodValidatorType } from '@kiki-core-stack/pack/types';
@@ -9,8 +10,8 @@ import { mongooseConnections } from '@kikiutils/mongoose/constants';
 import { defaultHonoFactory } from '@/core/constants/hono';
 
 const jsonSchema = z.object({
-    newPassword: z.string().trim().length(128),
-    oldPassword: z.string().trim().length(128),
+    newPassword: z.string().trim().min(1),
+    oldPassword: z.string().trim().min(1),
 }) satisfies ZodValidatorType<AdminChangePasswordData>;
 
 export const routePermission = 'ignore';
@@ -22,7 +23,7 @@ export default defaultHonoFactory.createHandlers(
         const data = ctx.req.valid('json');
         if (!admin.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確');
         return await mongooseConnections.default!.transaction(async (session) => {
-            await admin.assertUpdateSuccess({ password: data.newPassword }, { session });
+            await admin.assertUpdateSuccess({ password: await argon2HashPassword(data.newPassword) }, { session });
             await AdminSessionModel.deleteMany({ admin }, { session });
             return ctx.createApiSuccessResponse();
         });
