@@ -44,6 +44,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
+## Install argon2 dependency
+RUN bun add argon2
+
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
 COPY --from=build-stage /app/node_modules/svg-captcha/fonts ./node_modules/svg-captcha/fonts
