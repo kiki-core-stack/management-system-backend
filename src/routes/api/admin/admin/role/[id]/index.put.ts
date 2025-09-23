@@ -18,7 +18,7 @@ export default defaultHonoFactory.createHandlers(
         const data = assertNotModifiedAndStripData(ctx.req.valid('json'), adminRole);
         await adminRole.assertUpdateSuccess({
             ...data,
-            updatedByAdmin: ctx.adminId,
+            editedByAdmin: ctx.adminId,
         });
 
         if (!isEqual(adminRole.permissions.toSorted(), data.permissions.toSorted())) {
