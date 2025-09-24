@@ -50,8 +50,9 @@ build:
 # release:
 #   <<: *base-job
 #   stage: release
-#   image: kikikanri/bun:alpine
+#   image: oven/bun:alpine
 #   script:
+#     - apk update && apk upgrade && apk add git
 #     - |
 #       bun i -fg \
 #         semantic-release@latest \
