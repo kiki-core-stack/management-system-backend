@@ -28,7 +28,7 @@ export default defaultHonoFactory.createHandlers(
                 });
 
                 if (!admin) throwApiError(410);
-                await handleAdminLogin(ctx, admin.id, undefined, 'QR Code 登入');
+                await handleAdminLogin(ctx, admin._id, undefined, 'QR Code 登入');
                 enhancedRedisStore.adminQrCodeLoginData.removeItem(token).catch(() => {});
                 return ctx.createApiSuccessResponse({ status: 'success' });
             }

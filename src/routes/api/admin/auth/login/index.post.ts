@@ -32,7 +32,7 @@ export default defaultHonoFactory.createHandlers(
         });
 
         if (!admin?.verifyPassword(data.password)) throwApiError(404, '帳號不存在，未啟用或密碼不正確');
-        await handleAdminLogin(ctx, admin.id);
+        await handleAdminLogin(ctx, admin._id);
         return ctx.createApiSuccessResponse();
     },
 );
