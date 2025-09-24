@@ -1,4 +1,5 @@
 import { baseSetCookieOptions } from '@kiki-core-stack/pack/hono-backend/constants/cookie';
+import { getManagementSystemTypeFromRoutePath } from '@kiki-core-stack/pack/libs/management-system';
 import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
 import type { Context } from 'hono';
 import {
@@ -7,13 +8,24 @@ import {
     setCookie,
 } from 'hono/cookie';
 
-export const deleteAuthToken = (ctx: Context, type: ManagementSystemType) => deleteCookie(ctx, `${type}-token`);
-export const getAuthToken = (ctx: Context, type: ManagementSystemType) => getCookie(ctx, `${type}-token`);
+export function deleteAuthToken(ctx: Context, systemType?: ManagementSystemType) {
+    return deleteCookie(ctx, resolveAuthTokenName(ctx, systemType));
+}
 
-export function setAuthToken(ctx: Context, type: ManagementSystemType, token: string) {
+export function getAuthToken(ctx: Context, systemType?: ManagementSystemType) {
+    return getCookie(ctx, resolveAuthTokenName(ctx, systemType));
+}
+
+function resolveAuthTokenName(ctx: Context, systemType?: ManagementSystemType) {
+    systemType ??= getManagementSystemTypeFromRoutePath(ctx.req.path);
+    if (!systemType) throw new Error('No management system type found');
+    return `${systemType}-token`;
+}
+
+export function setAuthToken(ctx: Context, token: string, systemType?: ManagementSystemType) {
     setCookie(
         ctx,
-        `${type}-token`,
+        resolveAuthTokenName(ctx, systemType),
         token,
         {
             ...baseSetCookieOptions,

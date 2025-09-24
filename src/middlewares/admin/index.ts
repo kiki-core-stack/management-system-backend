@@ -32,7 +32,7 @@ honoApp.use(
     '/api/admin/*',
     async (ctx, next) => {
         if (!ctx.routeHandler?.isHandler) return await next();
-        const token = getAuthToken(ctx, 'admin');
+        const token = getAuthToken(ctx);
         if (token) {
             const adminSession = await AdminSessionModel
                 .findOne({ token })
@@ -41,13 +41,13 @@ honoApp.use(
                     'lastActiveAt',
                 ]);
 
-            if (!adminSession) deleteAuthToken(ctx, 'admin');
+            if (!adminSession) deleteAuthToken(ctx);
             else {
                 ctx.adminId = adminSession.admin;
                 const today = new Date();
                 if (isBefore(adminSession.lastActiveAt, subDays(today, 7))) {
                     await adminSession.deleteOne();
-                    deleteAuthToken(ctx, 'admin');
+                    deleteAuthToken(ctx);
                     delete ctx.adminId;
                 } else if (isBefore(adminSession.lastActiveAt, subMinutes(today, 10))) {
                     await createOrUpdateAdminSessionAndSetAuthToken(

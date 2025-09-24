@@ -7,7 +7,7 @@ export const routePermission = 'ignore';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     const adminSessions = await AdminSessionModel.find({ admin: ctx.adminId }).sort({ lastActiveAt: -1 });
-    const token = getAuthToken(ctx, 'admin');
+    const token = getAuthToken(ctx);
     const adminSessionList = [];
     for (const adminSession of adminSessions) {
         if (adminSession.token === token) adminSessionList.unshift(adminSession.toJSON());

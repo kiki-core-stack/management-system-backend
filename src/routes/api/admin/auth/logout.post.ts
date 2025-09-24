@@ -12,10 +12,10 @@ export const routePermission = 'ignore';
 
 export default defaultHonoFactory.createHandlers(async (ctx) => {
     ctx.clearSession();
-    const token = getAuthToken(ctx, 'admin');
+    const token = getAuthToken(ctx);
     if (token) {
         await AdminSessionModel.deleteOne({ token });
-        deleteAuthToken(ctx, 'admin');
+        deleteAuthToken(ctx);
     }
 
     return ctx.createApiSuccessResponse();
