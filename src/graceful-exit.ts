@@ -1,5 +1,6 @@
 import type { Server } from 'bun';
 
+import { redisInstance } from '@kiki-core-stack/pack/constants/redis';
 import { mongooseConnections } from '@kikiutils/mongoose/constants';
 
 import { logger } from '@/core/utils/logger';
@@ -13,6 +14,7 @@ export async function gracefulExit(server?: Server) {
     await server?.stop(true);
 
     // Perform operations such as closing the database connection here.
+    await redisInstance.quit();
     await mongooseConnections.default?.close();
 
     logger.success('Graceful shutdown completed');
