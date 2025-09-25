@@ -21,7 +21,7 @@ export default defaultHonoFactory.createHandlers(
     async (ctx) => {
         const admin = await ctx.getAdmin();
         const data = ctx.req.valid('json');
-        if (!admin.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確');
+        if (!await admin.verifyPassword(data.oldPassword)) throwApiError(400, '舊密碼不正確');
         return await mongooseConnections.default!.transaction(async (session) => {
             await admin.assertUpdateSuccess({ password: await argon2HashPassword(data.newPassword) }, { session });
             await AdminSessionModel.deleteMany({ admin }, { session });
