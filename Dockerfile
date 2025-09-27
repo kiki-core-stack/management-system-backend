@@ -14,7 +14,8 @@ RUN apt-get update && \
 
 ## Copy package-related files and install dependencies
 COPY ./bun.lock ./package.json ./
-RUN bun i --frozen-lockfile
+RUN --mount=id=bun-cache,target=/root/.bun/install/cache,type=cache \
+    bun i --frozen-lockfile
 
 ## Copy source files and build-related files, then build the app
 COPY ./.env.production.local ./.gitignore ./eslint.config.mjs ./tsconfig.json ./
