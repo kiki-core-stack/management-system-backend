@@ -9,7 +9,7 @@ before_script:
 # Anchors
 
 .base-job: &base-job
-  image: oven/bun:slim
+  image: oven/bun:alpine
   cache:
     key: bun-cache
     paths:
@@ -50,7 +50,6 @@ build:
 # release:
 #   <<: *base-job
 #   stage: release
-#   image: oven/bun:alpine
 #   script:
 #     - apk update && apk upgrade && apk add git
 #     - |
