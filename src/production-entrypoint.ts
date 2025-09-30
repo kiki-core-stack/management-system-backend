@@ -21,6 +21,7 @@ function createAndSetWorker(index: number) {
             './index.js',
             index.toString(),
             '--is-subprocess',
+            `--worker-index=${index}`,
         ],
         onExit(_subprocess, exitCode, signalCode, error) {
             const logPrefix = workerProcesses[index]!.logPrefix;

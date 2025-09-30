@@ -11,7 +11,7 @@ export async function gracefulExit(server?: Server) {
     if (isGracefulExitStarted) return;
     isGracefulExitStarted = true;
     logger.info('Starting graceful shutdown...');
-    await server?.stop(true);
+    await server?.stop();
 
     // Perform operations such as closing the database connection here.
     await redisInstance.quit();
