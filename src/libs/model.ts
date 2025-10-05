@@ -63,7 +63,7 @@ export async function paginateModelData<RawDocType, QueryHelpers, InstanceMethod
             : [paginateOptions.populate];
 
         paginateOptions.populate = populates.filter(
-            (item) => queryParams.fields.includes(typeof item === 'object' ? item.path : item),
+            (populate) => queryParams.fields.includes(typeof populate === 'object' ? populate.path : populate),
         ) as typeof paginateOptions.populate;
     }
 
