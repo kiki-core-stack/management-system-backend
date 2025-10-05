@@ -51,11 +51,11 @@ async function shutdown(exitCode?: NodeJS.Signals | number) {
     isShuttingDown = true;
     logger.info('Shutting down all workers...');
     await Promise.all(
-        workerProcesses.map(async ({ logPrefix, subprocess }) => {
-            logger.info(logPrefix, 'Killing process...');
-            subprocess.kill(exitCode);
-            await subprocess.exited;
-            logger.success(logPrefix, 'Process exited');
+        workerProcesses.map(async (workerProcess) => {
+            logger.info(workerProcess.logPrefix, 'Killing process...');
+            workerProcess.subprocess.kill(exitCode);
+            await workerProcess.subprocess.exited;
+            logger.success(workerProcess.logPrefix, 'Process exited');
         }),
     );
 
