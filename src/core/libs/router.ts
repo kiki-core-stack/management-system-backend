@@ -15,7 +15,7 @@ import type {
 
 import type { RouteZodOpenApiConfig } from './zod-openapi';
 
-export const processRouteHandlers = (handlers: any) => [handlers].flat().filter((item) => item !== undefined);
+export const processRouteHandlers = (handlers: any) => [handlers].flat().filter((handler) => handler !== undefined);
 
 function filePathSegmentToRankValue(segment: string, isLast: boolean) {
     if (segment === '*' && isLast) return 1e12;
@@ -27,7 +27,7 @@ function filePathSegmentToRankValue(segment: string, isLast: boolean) {
 
 function filePathToRank(path: string) {
     const segments = path.split('/');
-    return +segments.map((item, i) => filePathSegmentToRankValue(item, i === segments.length - 1)).join('');
+    return +segments.map((segment, i) => filePathSegmentToRankValue(segment, i === segments.length - 1)).join('');
 }
 
 export async function getRouteDefinitions(): Promise<RouteDefinition[]> {

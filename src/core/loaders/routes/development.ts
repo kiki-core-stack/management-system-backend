@@ -9,20 +9,20 @@ import { logger } from '../../utils/logger';
 const startTime = performance.now();
 const routeDefinitions = await getRouteDefinitions();
 const loadedRouteModules = await Promise.all(
-    routeDefinitions.map(async (item) => {
+    routeDefinitions.map(async (routeDefinition) => {
         try {
             return {
-                ...item,
-                module: await import(item.filePath),
+                ...routeDefinition,
+                module: await import(routeDefinition.filePath),
             };
         } catch (error) {
-            logger.error(`Failed to import route at ${item.filePath}: ${(error as Error).message}\n`, error);
+            logger.error(`Failed to import route at ${routeDefinition.filePath}: ${(error as Error).message}\n`, error);
         }
     }),
 );
 
 let loadedRouteCount = 0;
-for (const routeEntry of loadedRouteModules.filter((item) => item !== undefined)) {
+for (const routeEntry of loadedRouteModules.filter((loadedRouteModule) => loadedRouteModule !== undefined)) {
     const handlers = processRouteHandlers(routeEntry.module.default);
     if (!handlers.length) {
         logger.warn(`No handler found for route at ${routeEntry.filePath}`);
