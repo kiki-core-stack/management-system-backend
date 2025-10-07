@@ -1,11 +1,12 @@
 import { join } from 'node:path';
 
+// eslint-disable-next-line style/max-len
+import { writeManagementSystemPermissionTypesFile } from '@kiki-core-stack/pack/libs/management-system/permission-types-file';
 import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
 import { capitalize } from 'es-toolkit';
 
 import { logger } from '@/core/utils/logger';
 
-const { writeManagementSystemPermissionTypesFile } = await import('@kiki-core-stack/pack/libs/management-system');
 const baseGeneratedStaticTypesDirPath = join(
     (await import('@/core/constants/paths')).projectSrcDirPath,
     'generated/static/types',
