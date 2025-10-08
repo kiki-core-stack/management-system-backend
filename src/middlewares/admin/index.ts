@@ -59,8 +59,8 @@ honoApp.use(
             }
         }
 
+        if (!ctx.routeHandler.noLoginRequired && !ctx.adminId) throwApiError(401);
         ctx.getAdmin = getAdmin.bind(ctx);
-        if (ctx.routeHandler.noLoginRequired || ctx.adminId) return await next();
-        throwApiError(401);
+        await next();
     },
 );
