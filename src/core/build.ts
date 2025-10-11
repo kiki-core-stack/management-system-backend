@@ -27,6 +27,7 @@ const subprocess = Bun.spawn({
         './src/production-entrypoint.ts',
         '--minify',
         '--outdir=./dist',
+        '--production',
         '--splitting',
         '--target=bun',
     ],
