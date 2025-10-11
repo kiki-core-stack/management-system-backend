@@ -44,7 +44,7 @@ RUN apt-get update && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
-    useradd --create-home --gid 10001 --shell /usr/sbin/nologin --system --uid 10001 user
+    useradd -mr -g nogroup -s /usr/sbin/nologin -u 10001 user
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
@@ -52,7 +52,7 @@ COPY ./.env.production.local ./.env
 
 ## Copy and set the entrypoint script
 COPY --chmod=700 ./docker-entrypoint.sh ./
-RUN chown -R user:user /app
-USER user
+RUN chown -R 10001:nogroup /app
+USER 10001
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
