@@ -36,6 +36,7 @@ ENV NODE_ENV='production' \
 WORKDIR /app
 
 ## Upgrade, install packages and set timezone, then create user
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini tzdata && \
@@ -44,10 +45,9 @@ RUN apt-get update && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
-    useradd -mr -g nogroup -s /usr/sbin/nologin -u 10001 user
-
-## Install argon2 dependency
-RUN bun add argon2
+    useradd -mr -g nogroup -s /usr/sbin/nologin -u 10001 user && \
+    ## Install argon2 dependency
+    bun add argon2
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist ./
