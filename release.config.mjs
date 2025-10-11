@@ -1,3 +1,26 @@
+const releaseNoteConfigTypesAndSections = {
+    '*': '📌 Others',
+    'build': '📦 Build',
+    'chore': '🏡 Chore',
+    'ci': '🤖 CI',
+    'docs': '📖 Documentation',
+    'examples': '🏀 Examples',
+    'feat': '� Enhancements',
+    'fix': '🩹 Fixes',
+    'perf': '🔥 Performance',
+    'refactor': '💅 Refactors',
+    'style': '🎨 Styles',
+    'test': '✅ Tests',
+    'types': '🌊 Types',
+};
+
+const releasePatchRuleTypes = [
+    'build',
+    'chore',
+    'refactor',
+    'style',
+];
+
 /**
  * @type {import('semantic-release').GlobalConfig}
  */
@@ -8,24 +31,10 @@ export default {
             '@semantic-release/commit-analyzer',
             {
                 preset: 'conventionalcommits',
-                releaseRules: [
-                    {
-                        release: 'patch',
-                        type: 'build',
-                    },
-                    {
-                        release: 'patch',
-                        type: 'chore',
-                    },
-                    {
-                        release: 'patch',
-                        type: 'refactor',
-                    },
-                    {
-                        release: 'patch',
-                        type: 'style',
-                    },
-                ],
+                releaseRules: releasePatchRuleTypes.map((type) => ({
+                    release: 'patch',
+                    type,
+                })),
             },
         ],
         [
@@ -33,74 +42,11 @@ export default {
             {
                 preset: 'conventionalcommits',
                 presetConfig: {
-                    types: [
-                        {
-                            hidden: false,
-                            section: '✅ Tests',
-                            type: 'test',
-                        },
-                        {
-                            hidden: false,
-                            section: '🌊 Types',
-                            type: 'types',
-                        },
-                        {
-                            hidden: false,
-                            section: '🎨 Styles',
-                            type: 'style',
-                        },
-
-                        {
-                            hidden: false,
-                            section: '🏀 Examples',
-                            type: 'examples',
-                        },
-                        {
-                            hidden: false,
-                            section: '🏡 Chore',
-                            type: 'chore',
-                        },
-                        {
-                            hidden: false,
-                            section: '💅 Refactors',
-                            type: 'refactor',
-                        },
-                        {
-                            hidden: false,
-                            section: '📖 Documentation',
-                            type: 'docs',
-                        },
-                        {
-                            hidden: false,
-                            section: '📦 Build',
-                            type: 'build',
-                        },
-                        {
-                            hidden: false,
-                            section: '🔥 Performance',
-                            type: 'perf',
-                        },
-                        {
-                            hidden: false,
-                            section: '🤖 CI',
-                            type: 'ci',
-                        },
-                        {
-                            hidden: false,
-                            section: '🩹 Fixes',
-                            type: 'fix',
-                        },
-                        {
-                            hidden: false,
-                            section: '🚀 Enhancements',
-                            type: 'feat',
-                        },
-                        {
-                            hidden: false,
-                            section: '📌 Others',
-                            type: '*',
-                        },
-                    ],
+                    types: Object.entries(releaseNoteConfigTypesAndSections).map(([type, section]) => ({
+                        hidden: false,
+                        section,
+                        type,
+                    })),
                 },
             },
         ],
