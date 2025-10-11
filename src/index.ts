@@ -4,7 +4,7 @@ import { honoApp } from '@/core/app';
 import { logger } from '@/core/utils/logger';
 import { gracefulExit } from '@/graceful-exit';
 
-let server: Server | undefined;
+let server: Server<any> | undefined;
 process.on('SIGINT', () => gracefulExit(server));
 process.on('SIGTERM', () => gracefulExit(server));
 
