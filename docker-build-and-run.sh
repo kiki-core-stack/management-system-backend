@@ -15,7 +15,7 @@ docker pull oven/bun:slim
 DOCKER_IMAGE_REF="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}"
 docker build \
     -t "${DOCKER_IMAGE_REF}" \
-    --build-arg "NPM_REGISTRY=${NPM_REGISTRY}" \
+    --build-arg "NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}" \
     .
 
 docker stop "${DOCKER_CONTAINER_NAME}" || true
