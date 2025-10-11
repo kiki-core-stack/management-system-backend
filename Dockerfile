@@ -35,7 +35,7 @@ ENV NODE_ENV='production' \
 
 WORKDIR /app
 
-## Upgrade, install packages and set timezone
+## Upgrade, install packages and set timezone, then create user
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini tzdata && \
@@ -43,7 +43,8 @@ RUN apt-get update && \
     echo "${TZ}" >/etc/timezone && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
+    useradd --create-home --gid 10001 --shell /usr/sbin/nologin --system --uid 10001 user
 
 ## Install argon2 dependency
 RUN bun add argon2
@@ -55,5 +56,7 @@ COPY ./.env.production.local ./.env
 
 ## Copy and set the entrypoint script
 COPY --chmod=700 ./docker-entrypoint.sh ./
+RUN chown -R user:user /app
+USER user
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
