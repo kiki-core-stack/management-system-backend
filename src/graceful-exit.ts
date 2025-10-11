@@ -7,7 +7,7 @@ import { logger } from '@/core/utils/logger';
 
 let isGracefulExitStarted = false;
 
-export async function gracefulExit(server?: Server) {
+export async function gracefulExit(server?: Server<any>) {
     if (isGracefulExitStarted) return;
     isGracefulExitStarted = true;
     logger.info('Starting graceful shutdown...');
