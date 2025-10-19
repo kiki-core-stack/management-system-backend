@@ -39,7 +39,7 @@ export async function getModelDocumentByRouteIdAndUpdateBooleanField<
     beforeUpdate?: (
         document: MongooseHydratedDocument<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>,
         field: string,
-        value: boolean
+        value: boolean,
     ) => any,
 ) {
     const document = await model.findByRouteIdOrThrowNotFoundError(ctx, filter, undefined, options);
