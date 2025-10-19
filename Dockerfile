@@ -55,7 +55,7 @@ COPY ./.env.production.local ./.env
 
 ## Copy and set the entrypoint script
 COPY --chmod=700 ./docker-entrypoint.sh ./
-RUN chown -R user:nogroup /app
-USER user
+RUN chown -R 10001:nogroup /app
+USER 10001
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
