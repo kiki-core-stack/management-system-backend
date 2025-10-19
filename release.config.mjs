@@ -5,7 +5,7 @@ const releaseNoteConfigTypesAndSections = {
     'ci': '🤖 CI',
     'docs': '📖 Documentation',
     'examples': '🏀 Examples',
-    'feat': '� Enhancements',
+    'feat': '🚀 Enhancements',
     'fix': '🩹 Fixes',
     'perf': '🔥 Performance',
     'refactor': '💅 Refactors',
